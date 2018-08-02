@@ -1,4 +1,4 @@
-# vue-agnostic-admin
+# vue-admin
 
 ## Project setup
 ```
@@ -18,4 +18,9 @@ npm run build
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+### E2e Tests
+```
+npm run test:e2e
 ```
