@@ -1,15 +1,16 @@
 <template>
     <div>
         <Core v-bind:appLayout="appLayout"></Core>
+        <slot></slot>
     </div>
 </template>
 
 <script>
-import Core from '../../Core';
-import Ui from '../../Ui';
+import Core from "../../Core";
+import Ui from "../../Ui";
 
 export default {
-  name: 'Admin',
+  name: "Admin",
   props: {
     appLayout: {
       default: () => Ui
@@ -19,8 +20,7 @@ export default {
     Core,
     Ui
   }
-
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
