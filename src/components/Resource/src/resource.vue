@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <h1>Resource component</h1>   
-  </div>
+  
 </template>
 
 <script>
 import List from "../../List";
+import createCrudModule from "vuex-crud";
+import Vuex from "vuex";
 
 export default {
   name: "Resource",
@@ -17,7 +17,13 @@ export default {
       fullRoute: null
     };
   },
-
+  created: function() {
+    let module = createCrudModule({
+      resource: this.name,
+      urlRoot: "http://localhost:8080/api/" + this.name
+    });
+    this.$store.registerModule(this.name, module);
+  },
   methods: {
     loadRoutes() {
       this.fullRoute = "/" + this.name + "/list";
