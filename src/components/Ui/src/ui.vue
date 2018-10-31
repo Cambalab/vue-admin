@@ -96,6 +96,7 @@
     <main>
       <v-content>
         <v-container fluid>
+          <slot></slot>
         </v-container>
       </v-content>
     </main>
@@ -104,44 +105,40 @@
 
 <script>
 export default {
-  name: 'Ui',
+  name: "Ui",
   props: {
     msg: String
   },
-  data () {
+  data() {
     return {
-      selectedLocale: 'EN',
-      locales: [
-        'EN', 'ID'
-      ],
+      selectedLocale: "EN",
+      locales: ["EN", "ID"],
       drawer: false,
       menuItems: [
-        { icon: 'settings', title: 'Example Form', link: '/example-form' },
+        { icon: "settings", title: "Example Form", link: "/example-form" },
         {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          title: 'Crud',
+          icon: "keyboard_arrow_up",
+          "icon-alt": "keyboard_arrow_down",
+          title: "Crud",
           model: true,
           children: [
-            { icon: 'home', title: 'Party', link: '/party' },
-            { icon: 'home', title: 'Notes', link: '/notes' },
-            { icon: 'announcement', title: 'Notes2', link: '/notes2' }
+            { icon: "home", title: "Party", link: "/party" },
+            { icon: "home", title: "Notes", link: "/notes" },
+            { icon: "announcement", title: "Notes2", link: "/notes2" }
           ]
         }
       ]
-    }
+    };
   },
-  created () {
-  },
-  computed: {
-  },
+  created() {},
+  computed: {},
   methods: {
-    onLogout () {
+    onLogout() {
       // eslint-disable-next-line
-      console.log('logout');
+      console.log("logout");
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

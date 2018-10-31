@@ -1,8 +1,7 @@
 <template>
     <Admin>
       <Resource name='articles'></Resource>
-      <router-link to="/articles/list"><button>Testing resource</button></router-link>
-      <router-view></router-view>     
+      <router-link to="/articles/list"><button>Click here to test resource</button></router-link>    
     </Admin>
 </template>
 

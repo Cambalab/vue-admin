@@ -1,7 +1,10 @@
 <template>
     <div>
-        <Core v-bind:appLayout="appLayout"></Core>
+        <Core v-bind:appLayout="appLayout">
+        <router-view></router-view> 
+        </Core>
         <slot></slot>
+        
     </div>
 </template>
 
@@ -24,5 +27,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 </style>

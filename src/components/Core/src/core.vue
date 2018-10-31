@@ -1,19 +1,19 @@
 <template>
     <div>
-        <component :is="appLayout"></component>
+        <component :is="appLayout">
+          <slot></slot>
+        </component>
     </div>
 </template>
 
 <script>
-
 export default {
-  name: 'Core',
+  name: "Core",
   props: {
     appLayout: {}
   },
-  components: {
-  }
-}
+  components: {}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
