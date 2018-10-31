@@ -5,7 +5,6 @@
 <script>
 import List from "../../List";
 import createCrudModule from "vuex-crud";
-import Vuex from "vuex";
 
 export default {
   name: "Resource",
