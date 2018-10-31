@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1> {{showProp}} resource: list operation </h1> 
+    <h1> {{name}} resource: list operation </h1> 
     <div v-for="resource in resourceList" :key="resource.id">
       <h1>{{ resource.id }}</h1>
       <h1>{{ resource.title }}</h1>
@@ -24,10 +24,6 @@ export default {
   },
 
   computed: {
-    showProp: function() {
-      return this.name;
-    },
-
     resourceList: function() {
       const resourceName = this.name + "/list";
       return this.$store.getters[resourceName];
