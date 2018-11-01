@@ -1,7 +1,6 @@
 <template>
     <Admin>
       <Resource name='articles'></Resource>
-      <router-link to="/articles/list"><button>Click here to test resource</button></router-link>    
     </Admin>
 </template>
 

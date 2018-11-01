@@ -122,15 +122,20 @@ export default {
           title: "Crud",
           model: true,
           children: [
-            { icon: "home", title: "Party", link: "/party" },
-            { icon: "home", title: "Notes", link: "/notes" },
-            { icon: "announcement", title: "Notes2", link: "/notes2" }
           ]
         }
       ]
     };
   },
-  created() {},
+  mounted() {
+    // Listen to addRoutes mutations
+    let whitelist = ['resources/addRoute'];
+    this.$store.subscribe((mutation) => {
+      if (whitelist.includes(mutation.type)) {
+        this.menuItems[1].children.push({icon: "home", title: mutation.payload.name, link: mutation.payload.path })
+      }
+    });
+  },
   computed: {},
   methods: {
     onLogout() {
