@@ -121,18 +121,21 @@ export default {
           "icon-alt": "keyboard_arrow_down",
           title: "Crud",
           model: true,
-          children: [
-          ]
+          children: []
         }
       ]
     };
   },
   mounted() {
     // Listen to addRoutes mutations
-    let whitelist = ['resources/addRoute'];
-    this.$store.subscribe((mutation) => {
+    let whitelist = ["resources/addRoute"];
+    this.$store.subscribe(mutation => {
       if (whitelist.includes(mutation.type)) {
-        this.menuItems[1].children.push({icon: "home", title: mutation.payload.name, link: mutation.payload.path })
+        this.menuItems[1].children.push({
+          icon: "home",
+          title: mutation.payload.name,
+          link: mutation.payload.path
+        });
       }
     });
   },
