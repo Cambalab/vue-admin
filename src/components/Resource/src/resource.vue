@@ -24,9 +24,13 @@ export default {
     this.$store.registerModule(this.name, module);
   },
   methods: {
+    addRoute: function() {
+      const resourceName = "resources/addRoute";
+      this.$store.commit(resourceName, { path: this.fullRoute, name: this.name });
+    },
     loadRoutes() {
       this.fullRoute = "/" + this.name + "/list";
-
+      this.addRoute();
       this.$router.addRoutes([
         { path: this.fullRoute, component: List, props: { name: this.name } }
       ]);

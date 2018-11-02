@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1> {{name}} resource: list operation </h1> 
+    <h1> {{name}} resource: list operation </h1>
     <div v-for="resource in resourceList" :key="resource.id">
       <h1>{{ resource.id }}</h1>
       <h1>{{ resource.title }}</h1>
       <p>{{ resource.content }}</p>
-    </div>   
+    </div>
   </div>
 </template>
 

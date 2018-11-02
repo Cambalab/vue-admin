@@ -10,6 +10,9 @@ const router = new VueRouter(routes);
 import App from "./App.vue";
 import store from "./store";
 
+import resources from "./store/resources";
+store.registerModule('resources', resources);
+
 Vue.config.productionTip = false;
 
 new Vue({
