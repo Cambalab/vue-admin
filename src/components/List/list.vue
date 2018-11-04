@@ -2,7 +2,10 @@
   <div>
     <h1> {{name}} resource: list operation </h1>
     <div v-for="resource in resourceList" :key="resource.id">
-      <h1>{{ resource.id }}</h1>
+      <router-link v-if="hasShow" :to="{ name: `${name}/show`, params: { id: resource.id } }">
+        <h1>{{ resource.id }}</h1>
+      </router-link>
+      <h1 v-else>{{ resource.id }}</h1>
       <h1>{{ resource.title }}</h1>
       <p>{{ resource.content }}</p>
     </div>
@@ -20,6 +23,9 @@ export default {
     name: {
       type: String,
       default: null
+    },
+    hasShow: {
+      type: Boolean
     }
   },
 
@@ -54,7 +60,3 @@ export default {
   }
 };
 </script>
-
-
-
-
