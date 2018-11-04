@@ -1,6 +1,9 @@
 <template>
     <Admin>
-      <Resource name='articles'></Resource>
+      <Resource
+        name='articles'
+        v-bind:views="['list', 'show']">
+      </Resource>
     </Admin>
 </template>
 
