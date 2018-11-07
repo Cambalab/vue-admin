@@ -5,6 +5,7 @@
 <script>
 import List from "../../List";
 import Show from "../../Show";
+import Create from "../../Create";
 import createCrudModule from "vuex-crud";
 
 export default {
@@ -22,7 +23,7 @@ export default {
     let module = createCrudModule({
       resource: this.name,
       customUrlFn(id) {
-        const rootUrl = 'http://localhost:8081/api/articles/' // TODO: usar una constante para http://localhost:8081 - santiago
+        const rootUrl = 'http://localhost:8080/api/articles/' // TODO: usar una constante para http://localhost:8081 - santiago
         return id ? `${rootUrl}${id}` : rootUrl
       }
     });
@@ -37,12 +38,13 @@ export default {
       this.fullRoute = "/" + this.name;
       const path = this.fullRoute;
       const hasShow = this.views.some(v => v === 'show');
+      const hasCreate = this.views.some(v => v === 'create')
       const routes = [];
       this.views.forEach((view) => {
         switch(view) {
           case "list":
             this.addRoute(path, this.name);
-            routes.push({ path: path, name: `${this.name}/list`, component: List, props: { name: this.name, hasShow }});
+            routes.push({ path: path, name: `${this.name}/list`, component: List, props: { name: this.name, hasShow, hasCreate }});
             break;
           case "show":
             // Es solo un ejemplo que agrega un link al Drawer para obtener el article con id '1'. Solamente la list debería agregarse por ahora. - santiago
@@ -50,6 +52,9 @@ export default {
 
             // Agrega una ruta para Ver un articulo
             routes.push({ path: `${path}/:id`, name: `${this.name}/show`, component: Show, props: { name: this.name }});
+            break;
+          case "create":
+            routes.push({ path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name }});
             break;
           default:
             break;
