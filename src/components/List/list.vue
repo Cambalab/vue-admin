@@ -1,6 +1,11 @@
 <template>
   <div>
     <h1> {{name}} resource: list operation </h1>
+    <div>
+      <router-link v-if="hasCreate" :to="{ name: `${name}/create` }">
+        <button>Create {{name}}</button>
+      </router-link>
+    </div>
     <div v-for="resource in resourceList" :key="resource.id">
       <router-link v-if="hasShow" :to="{ name: `${name}/show`, params: { id: resource.id } }">
         <h1>{{ resource.id }}</h1>
@@ -25,6 +30,9 @@ export default {
       default: null
     },
     hasShow: {
+      type: Boolean
+    },
+    hasCreate: {
       type: Boolean
     }
   },
