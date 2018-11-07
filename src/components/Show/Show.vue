@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1> {{name}} resource: list operation </h1>
+    <h1> {{name}} resource: show operation </h1>
     <div>
       <h1>{{ resourceShow.id }}</h1>
       <h1>{{ resourceShow.title }}</h1>
