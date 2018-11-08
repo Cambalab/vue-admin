@@ -12,7 +12,8 @@ export default {
   name: "Resource",
   props: {
     name: String,
-    views: Array
+    views: Array,
+    fields: Array
   },
   data() {
     return {
@@ -44,7 +45,7 @@ export default {
         switch(view) {
           case "list":
             this.addRoute(path, this.name);
-            routes.push({ path: path, name: `${this.name}/list`, component: List, props: { name: this.name, hasShow, hasCreate }});
+            routes.push({ path: path, name: `${this.name}/list`, component: List, props: { name: this.name, fields: this.fields, hasShow, hasCreate }});
             break;
           case "show":
             // Es solo un ejemplo que agrega un link al Drawer para obtener el article con id '1'. Solamente la list debería agregarse por ahora. - santiago

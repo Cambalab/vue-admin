@@ -11,8 +11,9 @@
         <h1>{{ resource.id }}</h1>
       </router-link>
       <h1 v-else>{{ resource.id }}</h1>
-      <h1>{{ resource.title }}</h1>
-      <p>{{ resource.content }}</p>
+      <div v-for="field in fields" :key="field">
+        <p>{{ resource[field] }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -34,6 +35,9 @@ export default {
     },
     hasCreate: {
       type: Boolean
+    },
+    fields: {
+      type: Array
     }
   },
 
