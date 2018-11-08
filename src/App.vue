@@ -2,7 +2,8 @@
     <Admin>
       <Resource
         name='articles'
-        v-bind:views="['list', 'show', 'create']">
+        v-bind:views="['list', 'show', 'create']"
+        v-bind:fields="['title', 'content']">
       </Resource>
     </Admin>
 </template>
