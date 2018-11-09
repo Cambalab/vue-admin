@@ -22,7 +22,6 @@
 <script>
 import Admin from "./components/Admin";
 import Resource from "./components/Resource";
-import TextField from "./components/TextField"
 
 export default {
   name: "App",

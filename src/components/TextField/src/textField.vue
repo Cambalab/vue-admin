@@ -1,12 +1,13 @@
 <template>
-  <div>{{ label }}</div>
+  <div>{{ content }}</div>
 </template>
 
 <script>
 export default {
   name: "TextField",
   props:{
-    content: String
+    content: String,
+    label: String
   },
   data() {
     return {}
