@@ -11,9 +11,14 @@
         <h1>{{ resource.id }}</h1>
       </router-link>
       <h1 v-else>{{ resource.id }}</h1>
-      <div v-for="field in fields" :key="field">
-        <p>{{ resource[field] }}</p>
-      </div>
+      <component
+        :name="field.label"
+        v-for="field in fields"
+        :key="field.id"
+        :is="field.type"
+        v-bind:content="resource[field.label]"
+        v-bind="field">
+      </component>
     </div>
   </div>
 </template>
@@ -21,6 +26,7 @@
 
 <script>
 import { mapState } from "vuex";
+import TextField from "../TextField";
 
 export default {
   name: "List",
@@ -50,6 +56,10 @@ export default {
     ...mapState([
       "route" // vuex-router-sync
     ])
+  },
+
+  components: {
+    TextField: TextField
   },
 
   methods: {

@@ -3,7 +3,18 @@
       <Resource
         name='articles'
         v-bind:views="['list', 'show', 'create']"
-        v-bind:fields="['title', 'content']">
+        v-bind:fields="[
+        {
+          'id':1,
+          'label':'title',
+          'type':'TextField'
+        },
+        {
+          'id':2,
+          'label':'content',
+          'type':'TextField'
+        }]"
+        >
       </Resource>
     </Admin>
 </template>
@@ -11,6 +22,7 @@
 <script>
 import Admin from "./components/Admin";
 import Resource from "./components/Resource";
+import TextField from "./components/TextField"
 
 export default {
   name: "App",
