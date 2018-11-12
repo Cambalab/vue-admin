@@ -7,12 +7,14 @@
         {
           'id':1,
           'label':'title',
-          'type':'TextField'
+          'type':'TextField',
+          'tag':'h1'
         },
         {
           'id':2,
           'label':'content',
-          'type':'TextField'
+          'type':'TextField',
+          'tag':'p'
         }]"
         >
       </Resource>
