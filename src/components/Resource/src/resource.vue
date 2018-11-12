@@ -52,7 +52,7 @@ export default {
             // this.addRoute(`${path}/1`, this.name);
 
             // Agrega una ruta para Ver un articulo
-            routes.push({ path: `${path}/:id`, name: `${this.name}/show`, component: Show, props: { name: this.name }});
+            routes.push({ path: `${path}/:id`, name: `${this.name}/show`, component: Show, props: { name: this.name, fields: this.fields }});
             break;
           case "create":
             routes.push({ path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name }});

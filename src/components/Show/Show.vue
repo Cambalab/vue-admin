@@ -2,9 +2,14 @@
   <div>
     <h1> {{name}} resource: show operation </h1>
     <div>
-      <h1>{{ resourceShow.id }}</h1>
-      <h1>{{ resourceShow.title }}</h1>
-      <p>{{ resourceShow.content }}</p>
+      <component
+        :name="field.label"
+        v-for="field in fields"
+        :key="field.id"
+        :is="field.type"
+        v-bind:content="resourceShow[field.label]"
+        v-bind="field">
+      </component>
     </div>
   </div>
 </template>
@@ -12,6 +17,7 @@
 
 <script>
 import { mapState } from "vuex";
+import TextField from "../TextField"
 
 export default {
   name: "Show",
@@ -20,6 +26,9 @@ export default {
     name: {
       type: String,
       default: null
+    },
+    fields: {
+      type: Array
     }
   },
 
@@ -32,6 +41,10 @@ export default {
     ...mapState([
       "route" // vuex-router-sync
     ])
+  },
+
+  components: {
+    TextField: TextField
   },
 
   methods: {
