@@ -23,9 +23,24 @@ export default {
   created: function() {
     let module = createCrudModule({
       resource: this.name,
+      idAttribute: 'id',
       customUrlFn(id) {
-        const rootUrl = 'http://localhost:8080/api/articles/' // TODO: usar una constante para http://localhost:8081 - santiago
+        // TODO: usar una constante para http://localhost:8080 - santiago
+        // TODO: verificar que el puerto sea el que esté usando feathers
+        const rootUrl = 'http://localhost:8080/api/articles/'
         return id ? `${rootUrl}${id}` : rootUrl
+      },
+      parseList(response) {
+        const { data } = response;
+        return Object.assign({}, response, {
+          data: data.data // expecting array of objects with IDs
+        });
+      },
+      parseSingle(response) {
+        const { data } = response;
+        return Object.assign({}, response, {
+          data // expecting object with ID
+        });
       }
     });
     this.$store.registerModule(this.name, module);
