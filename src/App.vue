@@ -2,20 +2,9 @@
     <Admin>
       <Resource
         name='articles'
-        v-bind:views="['list', 'show', 'create']"
-        v-bind:fields="[
-        {
-          'id':1,
-          'label':'title',
-          'type':'TextField',
-          'tag':'h1'
-        },
-        {
-          'id':2,
-          'label':'content',
-          'type':'TextField',
-          'tag':'p'
-        }]"
+        v-bind:list='articlesList'
+        v-bind:show='articlesShow'
+        v-bind:create='true'
         >
       </Resource>
     </Admin>
@@ -25,6 +14,34 @@
 import Admin from "./components/Admin";
 import Resource from "./components/Resource";
 
+const articlesList = [
+{
+  'id':1,
+  'label':'title',
+  'type':'TextField',
+  'tag':'h2'
+}]
+
+const articlesShow =[
+{
+  'id':1,
+  'label':'id',
+  'type':'TextField',
+  'tag':'h2'
+},
+{
+  'id':2,
+  'label':'title',
+  'type':'TextField',
+  'tag':'h1'
+},
+{
+  'id':3,
+  'label':'content',
+  'type':'TextField',
+  'tag':'p'
+}]
+
 export default {
   name: "App",
   components: {
@@ -32,7 +49,10 @@ export default {
     Resource: Resource
   },
   data() {
-    return {};
+    return {
+      articlesList,
+      articlesShow
+    };
   }
 };
 </script>
