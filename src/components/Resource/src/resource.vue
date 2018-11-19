@@ -12,8 +12,9 @@ export default {
   name: "Resource",
   props: {
     name: String,
-    views: Array,
-    fields: Array
+    list: Array,
+    show: Array,
+    create: Boolean
   },
   data() {
     return {
@@ -38,31 +39,30 @@ export default {
     loadRoutes() {
       this.fullRoute = "/" + this.name;
       const path = this.fullRoute;
-      const hasShow = this.views.some(v => v === 'show');
-      const hasCreate = this.views.some(v => v === 'create')
       const routes = [];
-      this.views.forEach((view) => {
-        switch(view) {
-          case "list":
-            this.addRoute(path, this.name);
-            routes.push({ path: path, name: `${this.name}/list`, component: List, props: { name: this.name, fields: this.fields, hasShow, hasCreate }});
-            break;
-          case "show":
-            // Es solo un ejemplo que agrega un link al Drawer para obtener el article con id '1'. Solamente la list debería agregarse por ahora. - santiago
-            // this.addRoute(`${path}/1`, this.name);
 
-            // Agrega una ruta para Ver un articulo
-            routes.push({ path: `${path}/:id`, name: `${this.name}/show`, component: Show, props: { name: this.name, fields: this.fields }});
-            break;
-          case "create":
-            routes.push({ path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name }});
-            break;
-          default:
-            break;
-        }
-      });
+      this.addRoute(path, this.name);
+
+      routes.push(this.bindList(routes, path));
+      routes.push(this.bindShow(routes, path));
+      routes.push(this.bindCreate(routes, path));
 
       this.$router.addRoutes(routes);
+    },
+
+    bindList(routes, path) {
+      const hasShow = this.show;
+      const hasCreate = this.create;
+
+      return this.list ? { path: path, name: `${this.name}/list`, component: List, props: { name: this.name, fields: this.list, hasShow, hasCreate }} : []
+    },
+
+    bindShow(routes, path) {
+      return this.show ? { path: `${path}/:id`, name: `${this.name}/show`, component: Show, props: { name: this.name, fields: this.show }} : []
+    },
+
+    bindCreate(routes, path) {
+      return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name }} : []
     }
   },
   mounted: function() {
