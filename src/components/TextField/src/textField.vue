@@ -11,7 +11,7 @@
 export default {
   name: "TextField",
   props:{
-    content: String,
+    content: [String, Number],
     label: String,
     tag: String
   },
