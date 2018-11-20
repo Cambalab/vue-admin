@@ -2,9 +2,9 @@
     <Admin>
       <Resource
         name='articles'
-        v-bind:list='articlesList'
-        v-bind:show='articlesShow'
-        v-bind:create='true'
+        :list='articlesList'
+        :show='articlesShow'
+        :create='fieldsArticleCreate'
         >
       </Resource>
     </Admin>
@@ -42,6 +42,20 @@ const articlesShow =[
   'tag':'p'
 }]
 
+const fieldsArticleCreate =[
+{
+  'id':1,
+  'label':'title',
+  'type':'Input',
+  'placeHolder':'Title'
+},
+{
+  'id':2,
+  'label':'content',
+  'type':'Input',
+  'placeHolder':'Content'
+}]
+
 export default {
   name: "App",
   components: {
@@ -51,7 +65,8 @@ export default {
   data() {
     return {
       articlesList,
-      articlesShow
+      articlesShow,
+      fieldsArticleCreate
     };
   }
 };
