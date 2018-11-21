@@ -14,7 +14,7 @@ export default {
     name: String,
     list: Array,
     show: Array,
-    create: Boolean
+    create: Array
   },
   data() {
     return {
@@ -51,8 +51,8 @@ export default {
     },
 
     bindList(routes, path) {
-      const hasShow = this.show;
-      const hasCreate = this.create;
+      const hasShow = this.show.length !== 0;
+      const hasCreate = this.create.length !== 0;
 
       return this.list ? { path: path, name: `${this.name}/list`, component: List, props: { name: this.name, fields: this.list, hasShow, hasCreate }} : []
     },
@@ -62,7 +62,7 @@ export default {
     },
 
     bindCreate(routes, path) {
-      return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name }} : []
+      return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create }} : []
     }
   },
   mounted: function() {

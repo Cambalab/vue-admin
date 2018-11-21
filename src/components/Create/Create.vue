@@ -2,8 +2,14 @@
   <div>
     <h1> {{name}} resource: create operation </h1>
     <div>
-      <input v-model="article.title" placeholder="edit title" />
-      <input v-model="article.content" placeholder="edit content" />
+      <component
+        :name="field.label"
+        v-for="field in fields"
+        :key="field.id"
+        :is="field.type"
+        v-bind="field"
+        v-on:change="saveValue($event, field.label)">
+      </component>
       <button v-on:click="submit">Save</button>
     </div>
   </div>
@@ -11,6 +17,7 @@
 
 <script>
 import { mapState } from "vuex";
+import Input from "../Input"
 
 export default {
   name: "Create",
@@ -19,14 +26,14 @@ export default {
     name: {
       type: String,
       default: null
+    },
+    fields: {
+      type: Array
     }
   },
   data() {
     return {
-      article: {
-        title: '',
-        content: ''
-      }
+      resource: {}
     }
   },
   computed: {
@@ -35,14 +42,18 @@ export default {
     ])
   },
 
+  components: {
+    Input: Input
+  },
+
   methods: {
+    saveValue(event, field) {
+      this.resource[field] = event.target.value;
+    },
+
     submit() {
       const resourceName = this.name + "/create";
-      const article = {
-        title: this.article.title,
-        content: this.article.content
-      }
-      return this.$store.dispatch(resourceName, { data: article });
+      return this.$store.dispatch(resourceName, { data: this.resource });
     }
   },
 
