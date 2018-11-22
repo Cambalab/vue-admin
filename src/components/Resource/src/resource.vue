@@ -43,25 +43,25 @@ export default {
 
       this.addRoute(path, this.name);
 
-      routes.push(this.bindList(routes, path));
-      routes.push(this.bindShow(routes, path));
-      routes.push(this.bindCreate(routes, path));
+      routes.push(this.bindList(path));
+      routes.push(this.bindShow(path));
+      routes.push(this.bindCreate(path));
 
       this.$router.addRoutes(routes);
     },
 
-    bindList(routes, path) {
+    bindList(path) {
       const hasShow = this.show.length !== 0;
       const hasCreate = this.create.length !== 0;
 
       return this.list ? { path: path, name: `${this.name}/list`, component: List, props: { name: this.name, fields: this.list, hasShow, hasCreate }} : []
     },
 
-    bindShow(routes, path) {
+    bindShow(path) {
       return this.show ? { path: `${path}/:id`, name: `${this.name}/show`, component: Show, props: { name: this.name, fields: this.show }} : []
     },
 
-    bindCreate(routes, path) {
+    bindCreate(path) {
       return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create }} : []
     }
   },
