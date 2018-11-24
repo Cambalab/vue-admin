@@ -31,7 +31,11 @@ export default {
       type: Array
     },
     redirect: {
-      type: Object
+      type: Object,
+      default: () => ({
+        idField: 'id',
+        view: 'show'
+      })
     },
   },
   data() {
@@ -59,7 +63,7 @@ export default {
       this.$store.dispatch(resourceName, { data: this.resource })
         .then((res) => {
           if (this.redirect && res.status === 200) {
-            this.redirectRouter(res.data[this.redirect.idField])
+            this.redirectRouter(this.redirect.view, res.data[this.redirect.idField])
             return res
           }
         })
@@ -69,15 +73,11 @@ export default {
         })
     },
 
-    redirectRouter(id) {
-      switch (this.redirect.view) {
-        case 'list':
-          this.$router.push({ name: `${this.name}/${this.redirect.view}` })
-          break
-        case 'show':
-          this.$router.push({ name: `${this.name}/${this.redirect.view}`, params: { id } })
-          break
-      }
+    redirectRouter(view, id) {
+      ({
+        list: () => { this.$router.push({ name: `${this.name}/${view}` }) },
+        show: () => { this.$router.push({ name: `${this.name}/${view}`, params: { id } }) }
+      })[view]()
     }
   },
 

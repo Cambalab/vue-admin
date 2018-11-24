@@ -19,7 +19,10 @@ export default {
       type: Object,
       default: () => ({
         idField: 'id',
-        view: 'show'
+        views: {
+          create: 'list',
+          update: 'show'
+        }
       })
     }
   },
@@ -69,7 +72,8 @@ export default {
     },
 
     bindCreate(routes, path) {
-      return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create, redirect: { view: this.redirect.view, idField: this.redirect.idField } }} : []
+      const redirect = { idField: this.redirect.idField, view: this.redirect.views.create }
+      return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create, redirect }} : []
     }
   },
   mounted: function() {
