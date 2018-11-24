@@ -14,7 +14,14 @@ export default {
     name: String,
     list: Array,
     show: Array,
-    create: Array
+    create: Array,
+    redirect: {
+      type: Object,
+      default: () => ({
+        idField: 'id',
+        view: 'show'
+      })
+    }
   },
   data() {
     return {
@@ -62,7 +69,7 @@ export default {
     },
 
     bindCreate(routes, path) {
-      return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create }} : []
+      return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create, redirect: { view: this.redirect.view, idField: this.redirect.idField } }} : []
     }
   },
   mounted: function() {

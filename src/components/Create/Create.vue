@@ -29,7 +29,10 @@ export default {
     },
     fields: {
       type: Array
-    }
+    },
+    redirect: {
+      type: Object
+    },
   },
   data() {
     return {
@@ -53,7 +56,28 @@ export default {
 
     submit() {
       const resourceName = this.name + "/create";
-      return this.$store.dispatch(resourceName, { data: this.resource });
+      this.$store.dispatch(resourceName, { data: this.resource })
+        .then((res) => {
+          if (this.redirect && res.status === 200) {
+            this.redirectRouter(res.data[this.redirect.idField])
+            return res
+          }
+        })
+        .catch((err) => {
+          console.error(err)
+          return err
+        })
+    },
+
+    redirectRouter(id) {
+      switch (this.redirect.view) {
+        case 'list':
+          this.$router.push({ name: `${this.name}/${this.redirect.view}` })
+          break
+        case 'show':
+          this.$router.push({ name: `${this.name}/${this.redirect.view}`, params: { id } })
+          break
+      }
     }
   },
 
