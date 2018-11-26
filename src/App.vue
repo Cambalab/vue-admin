@@ -5,6 +5,7 @@
         :list='articlesList'
         :show='articlesShow'
         :create='fieldsArticleCreate'
+        :resourceId='resourceId'
         >
       </Resource>
     </Admin>
@@ -56,6 +57,8 @@ const fieldsArticleCreate =[
   'placeHolder':'Content'
 }]
 
+const resourceId = "id"
+
 export default {
   name: "App",
   components: {
@@ -66,7 +69,8 @@ export default {
     return {
       articlesList,
       articlesShow,
-      fieldsArticleCreate
+      fieldsArticleCreate,
+      resourceId
     };
   }
 };

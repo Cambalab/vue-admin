@@ -14,7 +14,8 @@ export default {
     name: String,
     list: Array,
     show: Array,
-    create: Array
+    create: Array,
+    resourceId: String
   },
   data() {
     return {
@@ -54,7 +55,7 @@ export default {
       const hasShow = this.show.length !== 0;
       const hasCreate = this.create.length !== 0;
 
-      return this.list ? { path: path, name: `${this.name}/list`, component: List, props: { name: this.name, fields: this.list, hasShow, hasCreate }} : []
+      return this.list ? { path: path, name: `${this.name}/list`, component: List, props: { name: this.name, fields: this.list, hasShow, hasCreate, resourceId: this.resourceId }} : []
     },
 
     bindShow(path) {
@@ -64,6 +65,7 @@ export default {
     bindCreate(path) {
       return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create }} : []
     }
+
   },
   mounted: function() {
     this.loadRoutes();
