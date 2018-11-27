@@ -11,6 +11,10 @@
         <h1>{{ resource.id }}</h1>
       </router-link>
       <h1 v-else>{{ resource.id }}</h1>
+      <Delete
+      :resourceId="resource[resourceId]"
+      :resourceName="name">
+      </Delete>
       <component
         :name="field.label"
         v-for="field in fields"
@@ -27,6 +31,7 @@
 <script>
 import { mapState } from "vuex";
 import TextField from "../TextField";
+import Delete from "../Delete";
 
 export default {
   name: "List",
@@ -44,6 +49,9 @@ export default {
     },
     fields: {
       type: Array
+    },
+    resourceId:{
+      type: String
     }
   },
 
@@ -59,7 +67,8 @@ export default {
   },
 
   components: {
-    TextField: TextField
+    TextField: TextField,
+    Delete: Delete
   },
 
   methods: {
