@@ -6,6 +6,7 @@
 import List from "../../List";
 import Show from "../../Show";
 import Create from "../../Create";
+import Edit from "../../Edit";
 import createCrudModule from "vuex-crud";
 
 export default {
@@ -15,6 +16,7 @@ export default {
     list: Array,
     show: Array,
     create: Array,
+    edit: Array,
     resourceId: String
   },
   data() {
@@ -47,6 +49,7 @@ export default {
       routes.push(this.bindList(path));
       routes.push(this.bindShow(path));
       routes.push(this.bindCreate(path));
+      routes.push(this.bindEdit(path));
 
       this.$router.addRoutes(routes);
     },
@@ -59,11 +62,15 @@ export default {
     },
 
     bindShow(path) {
-      return this.show ? { path: `${path}/:id`, name: `${this.name}/show`, component: Show, props: { name: this.name, fields: this.show }} : []
+      return this.show ? { path: `${path}/show/:id`, name: `${this.name}/show`, component: Show, props: { name: this.name, fields: this.show }} : []
     },
 
     bindCreate(path) {
       return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create }} : []
+    },
+
+    bindEdit(path) {
+      return this.edit ? { path: `${path}/edit/:id`, name: `${this.name}/edit`, component: Edit, props: { name: this.name, fields: this.edit }} : []
     }
 
   },

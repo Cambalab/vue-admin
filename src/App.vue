@@ -5,6 +5,7 @@
         :list='articlesList'
         :show='articlesShow'
         :create='fieldsArticleCreate'
+        :edit='fieldsArticleEdit'
         :resourceId='resourceId'
         >
       </Resource>
@@ -23,7 +24,7 @@ const articlesList = [
   'tag':'h2'
 }]
 
-const articlesShow =[
+const articlesShow = [
 {
   'id':1,
   'label':'id',
@@ -57,6 +58,8 @@ const fieldsArticleCreate =[
   'placeHolder':'Content'
 }]
 
+const fieldsArticleEdit = fieldsArticleCreate
+
 const resourceId = "id"
 
 export default {
@@ -70,6 +73,7 @@ export default {
       articlesList,
       articlesShow,
       fieldsArticleCreate,
+      fieldsArticleEdit,
       resourceId
     };
   }
