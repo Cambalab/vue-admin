@@ -1,34 +1,45 @@
 <template>
-  <div>
-    <h1> {{name}} resource: list operation </h1>
-    <div>
+  <v-card>
+    <v-card-title primary-title>
+      <h3 class="headline mb-0 text-capitalize">{{name}}</h3>
+    </v-card-title>
+    <v-card-actions>
       <router-link v-if="hasCreate" :to="{ name: `${name}/create` }">
-        <button>Create {{name}}</button>
+        <v-btn icon="true" absolute  right color="success" style="top:30px !important;">+</v-btn>
       </router-link>
-    </div>
-    <div v-for="resource in resourceList" :key="resource[resourceId]">
-      <router-link v-if="hasShow" :to="{ name: `${name}/show`, params: { id: resource.id } }">
-        <h3>{{ resource.id }}</h3>
-      </router-link>
-      <h3 v-else>{{ resource.id }}</h3>
-      <Delete
-      :resourceId="resource[resourceId]"
-      :resourceName="name">
-      </Delete>
-      <EditButton
-        :resourceId="resource[resourceId]"
-        :resourceName="name">
-      </EditButton>
-      <component
-        :name="label(field)"
-        v-for="field in fields"
-        :key="key(label(field))"
-        :is="type(field.type)"
-        v-bind:content="resource[label(field)]"
-        v-bind="args(field)">
-      </component>
-    </div>
-  </div>
+    </v-card-actions>
+    <v-data-table
+      :headers="headers"
+      :items="resourceList"
+      class="elevation-1">
+      <template slot="items" slot-scope="props">
+        <td>{{ props.item[resourceId] }}</td>
+        <td class="text-xs-left"
+          v-for="field in fields"
+          v-bind="field">
+          <component
+            :name="label(field)"
+            :is="type(field.type)"
+            :key="key(label(field))"
+            v-bind:content="props.item[label(field)]"
+            v-bind="args(field)">
+          </component>
+        </td>
+        <td>
+          <EditButton
+            :resourceId="resource[resourceId]"
+            :resourceName="name">
+          </EditButton>
+        </td>
+        <td class="text-xs-right">
+          <Delete
+            :resourceId="resource[resourceId]"
+            :resourceName="name">
+          </Delete>
+        </td>
+      </template>
+    </v-data-table>
+  </v-card>
 </template>
 
 
