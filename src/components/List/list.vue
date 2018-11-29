@@ -15,6 +15,10 @@
       :resourceId="resource[resourceId]"
       :resourceName="name">
       </Delete>
+      <EditButton
+        :resourceId="resource[resourceId]"
+        :resourceName="name">
+      </EditButton>
       <component
         :name="field.label"
         v-for="field in fields"
@@ -32,6 +36,7 @@
 import { mapState } from "vuex";
 import TextField from "../TextField";
 import Delete from "../Delete";
+import EditButton from "../EditButton";
 
 export default {
   name: "List",
@@ -68,7 +73,8 @@ export default {
 
   components: {
     TextField: TextField,
-    Delete: Delete
+    Delete: Delete,
+    EditButton: EditButton
   },
 
   methods: {
