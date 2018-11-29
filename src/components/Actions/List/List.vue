@@ -71,6 +71,28 @@ export default {
   },
 
   computed: {
+    headers: function () {
+      let newHeaders = [
+        {
+          text: "ID",
+          align: 'left',
+          sortable: true,
+        }
+      ];
+      this.fields.forEach((field) => {
+        newHeaders.push({
+          text: field.label,
+          align: field.align || 'left',
+          sortable: field.sortable || false,
+        })
+      })
+      newHeaders.push({
+        text: "Delete",
+        align: 'right',
+        sortable: false,
+      });
+      return newHeaders;
+    },
     resourceList: function() {
       const resourceName = this.name + "/list";
       return this.$store.getters[resourceName];
