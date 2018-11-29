@@ -3,12 +3,12 @@
     <h1> {{name}} resource: show operation </h1>
     <div>
       <component
-        :name="field.label"
+        :name="label(field)"
         v-for="field in fields"
-        :key="field.id"
-        :is="field.type"
-        v-bind:content="resourceShow[field.label]"
-        v-bind="field">
+        :key="key(field)"
+        :is="type(field.type)"
+        v-bind:content="resourceShow[label(field)]"
+        v-bind="args(field)">
       </component>
     </div>
   </div>
@@ -55,6 +55,23 @@ export default {
 
     fetchData() {
       return this.fetchResource();
+    },
+
+    type(type) {
+      return type || 'TextField'
+    },
+
+    key() {
+      return Math.random()
+    },
+
+    label(field) {
+      return field.label || field
+    },
+
+    args(field) {
+      const args = typeof(field) === 'string' ? { 'label': field } : field
+      return args
     }
   },
 

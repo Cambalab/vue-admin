@@ -17,7 +17,10 @@ export default {
     show: Array,
     create: Array,
     edit: Array,
-    resourceId: String
+    resourceId: {
+      type: String,
+      default: 'id'
+    }
   },
   data() {
     return {

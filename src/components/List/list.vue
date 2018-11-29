@@ -6,11 +6,11 @@
         <button>Create {{name}}</button>
       </router-link>
     </div>
-    <div v-for="resource in resourceList" :key="resource.id">
+    <div v-for="resource in resourceList" :key="resource[resourceId]">
       <router-link v-if="hasShow" :to="{ name: `${name}/show`, params: { id: resource.id } }">
-        <h1>{{ resource.id }}</h1>
+        <h3>{{ resource.id }}</h3>
       </router-link>
-      <h1 v-else>{{ resource.id }}</h1>
+      <h3 v-else>{{ resource.id }}</h3>
       <Delete
       :resourceId="resource[resourceId]"
       :resourceName="name">
@@ -20,12 +20,12 @@
         :resourceName="name">
       </EditButton>
       <component
-        :name="field.label"
+        :name="label(field)"
         v-for="field in fields"
-        :key="field.id"
-        :is="field.type"
-        v-bind:content="resource[field.label]"
-        v-bind="field">
+        :key="key(field)"
+        :is="type(field.type)"
+        v-bind:content="resource[label(field)]"
+        v-bind="args(field)">
       </component>
     </div>
   </div>
@@ -85,7 +85,25 @@ export default {
 
     fetchData() {
       return this.fetchResource();
+    },
+
+    type(type) {
+      return type || 'TextField'
+    },
+
+    key() {
+      return Math.random()
+    },
+
+    label(field) {
+      return field.label || field
+    },
+
+    args(field) {
+      const args = typeof(field) === 'string' ? { 'label': field } : field
+      return args
     }
+
   },
 
   watch: {
