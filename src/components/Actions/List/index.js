@@ -1,4 +1,4 @@
-import List from "./list";
+import List from "./List";
 
 List.install = function(Vue) {
   Vue.component(List.name, List);
