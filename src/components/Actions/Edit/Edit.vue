@@ -3,7 +3,7 @@
     <v-card-title primary-title>
       <h3 class="headline mb-0 text-capitalize">{{name}}</h3>
     </v-card-title>
-    <v-form v-model="valid">
+    <v-form>
       <v-card-text>
         <v-layout wrap>
           <v-flex xs8>
@@ -13,7 +13,6 @@
               :key="key(label(field))"
               :is="type(field.type)"
               v-bind="args(field)"
-              :content="resource[label(field)]"
               :value="resource[label(field)]"
               v-on:change="saveValue($event, label(field))">
             </component>
@@ -69,8 +68,8 @@ export default {
   },
 
   methods: {
-    saveValue(event, fieldName) {
-      this.resource[fieldName] = event.target.value;
+    saveValue(newValue, fieldName) {
+      this.resource[fieldName] = newValue;
     },
 
     submit() {
