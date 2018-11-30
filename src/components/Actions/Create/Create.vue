@@ -18,6 +18,7 @@
 <script>
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents"
+import Router from '../../../router'
 
 export default {
   name: "Create",
@@ -32,7 +33,14 @@ export default {
     },
     fields: {
       type: Array
-    }
+    },
+    redirect: {
+      type: Object,
+      default: () => ({
+        idField: 'id',
+        view: 'show'
+      })
+    },
   },
   data() {
     return {
@@ -52,7 +60,17 @@ export default {
 
     submit() {
       const resourceName = this.name + "/create";
-      return this.$store.dispatch(resourceName, { data: this.resource });
+      // TODO: The then, catch could possibly be moved to the store using vuex-crud callbacks. Read #34 for docs - sgobotta
+      this.$store.dispatch(resourceName, { data: this.resource })
+        .then((res) => {
+          if (this.redirect && res.status === 200) {
+            Router.redirect({ resource: this.name, view: this.redirect.view, id: res.data[this.redirect.idField] })
+            return res
+          }
+        })
+        .catch((err) => {
+          console.error(err)
+        })
     }
   },
 
