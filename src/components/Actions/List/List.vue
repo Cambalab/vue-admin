@@ -17,7 +17,14 @@
       :items="resourceList"
       class="elevation-1">
       <template slot="items" slot-scope="props">
-        <td>{{ props.item[resourceId] }}</td>
+        <td>
+          <router-link v-if="hasShow" :to="{ name: `${name}/show`, params: { id: props.item[resourceId] } }">
+            {{ props.item[resourceId] }}
+          </router-link>
+          <span v-else>
+            {{ props.item[resourceId] }}
+          </span>
+        </td>
         <td class="text-xs-left"
           v-for="field in fields"
           v-bind="field">
