@@ -37,7 +37,8 @@ export default {
   methods: {
     onDelete() {
       const resourceName = this.resourceName + "/destroy";
-      return this.$store.dispatch(resourceName, { id: this.resourceId });
+      this.$store.dispatch(resourceName, { id: this.resourceId });
+      return this.$router.push({ path: `/${this.resourceName}`});
     }
   },
 };
