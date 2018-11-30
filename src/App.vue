@@ -17,46 +17,33 @@ import Admin from "./components/Admin";
 import Resource from "./components/Resource";
 
 const articlesList = [
-{
-  'id':1,
-  'label':'title',
-  'type':'TextField',
-  'tag':'h2'
-}]
+  {
+    'label':'title',
+    'type':'TextField',
+    'tag':'h2'
+  },
+  'content'
+]
 
 const articlesShow = [
-{
-  'id':1,
-  'label':'id',
-  'type':'TextField',
-  'tag':'h2'
-},
-{
-  'id':2,
-  'label':'title',
-  'type':'TextField',
-  'tag':'h1'
-},
-{
-  'id':3,
-  'label':'content',
-  'type':'TextField',
-  'tag':'p'
-}]
+  'id',
+  {
+    'label':'title',
+    'type': 'TextField',
+    'tag': 'h1'
+  },
+  'content',
+  'campoQueNoExiste'
+]
 
 const fieldsArticleCreate =[
-{
-  'id':1,
-  'label':'title',
-  'type':'Input',
-  'placeHolder':'Title'
-},
-{
-  'id':2,
-  'label':'content',
-  'type':'Input',
-  'placeHolder':'Content'
-}]
+  {
+    'label':'title',
+    'type':'Input',
+    'placeHolder': 'title'
+  },
+  'content'
+]
 
 const fieldsArticleEdit = fieldsArticleCreate
 

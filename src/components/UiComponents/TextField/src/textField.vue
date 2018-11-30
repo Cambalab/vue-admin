@@ -11,14 +11,17 @@
 export default {
   name: "TextField",
   props:{
-    content: [String, Number],
-    label: String,
-    tag: String
+    content: {
+      type: [String, Number],
+      default: 'This is a default content'
+    },
+      tag: {
+        type: String,
+        default: 'p'
+      }
   },
   data() {
     return {}
-  },
-  computed:{
   }
 };
 </script>

@@ -3,12 +3,12 @@
     <h1> {{name}} resource: create operation </h1>
     <div>
       <component
-        :name="field.label"
+        :name="label(field)"
         v-for="field in fields"
-        :key="field.id"
-        :is="field.type"
-        v-bind="field"
-        v-on:change="saveValue($event, field.label)">
+        :key="key(label(field))"
+        :is="type(field.type)"
+        v-bind="args(field)"
+        v-on:change="saveValue($event, label(field))">
       </component>
       <button v-on:click="submit">Save</button>
     </div>
@@ -71,6 +71,24 @@ export default {
         .catch((err) => {
           console.error(err)
         })
+      return this.$store.dispatch(resourceName, { data: this.resource });
+    },
+
+    type(type) {
+      return type || 'Input'
+    },
+
+    key(label) {
+      return `${this.name}_${label}`
+    },
+
+    label(field) {
+      return field.label || field
+    },
+
+    args(field) {
+      const args = typeof(field) === 'string' ? { 'label': field } : field
+      return args
     }
   },
 

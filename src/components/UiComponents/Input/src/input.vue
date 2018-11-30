@@ -6,7 +6,10 @@
 export default {
   name: "Input",
   props:{
-    placeHolder: String
+    placeHolder: {
+      type:String,
+      default:"Input"
+    }
   },
   data() {
     return {}

@@ -1,13 +1,13 @@
 <template>
   <div>
     <component
-      :name="field.label"
+      :name="label(field)"
       v-for="field in fields"
-      :key="field.id"
-      :is="field.type"
-      v-bind="field"
-      :value="resource[field.label]"
-      v-on:change="saveValue($event, field.label)">
+      :key="key(label(field))"
+      :is="type(field.type)"
+      v-bind="args(field)"
+      :value="resource[label(field)]"
+      v-on:change="saveValue($event, label(field))">
     </component>
     <button v-on:click="submit">Save</button>
   </div>
@@ -58,6 +58,7 @@ export default {
     saveValue(event, fieldName) {
       this.resource[fieldName] = event.target.value;
     },
+
     submit() {
       const resourceName = this.name + "/update";
       // TODO: The then, catch could possibly be moved to the store using vuex-crud callbacks. Read #34 for docs - sgobotta
@@ -71,6 +72,24 @@ export default {
         .catch((err) => {
           console.error(err)
         })
+      return this.$store.dispatch(resourceName, { id: this.$route.params.id , data: this.resource });
+    },
+
+    type(type) {
+      return type || 'Input'
+    },
+
+    key(label) {
+      return `${this.name}_${label}`
+    },
+
+    label(field) {
+      return field.label || field
+    },
+
+    args(field) {
+      const args = typeof(field) === 'string' ? { 'label': field } : field
+      return args
     }
   }
 
