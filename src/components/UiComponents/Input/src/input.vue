@@ -1,5 +1,10 @@
 <template>
-  <input :placeholder="placeHolder" @input="onChange"/>
+  <v-text-field
+      v-model="content"
+      :label=placeHolder
+      @input="onChange"
+      required>
+  </v-text-field>
 </template>
 
 <script>
@@ -10,6 +15,7 @@ export default {
       type:String,
       default:"Input"
     }
+    content: [String, Number]
   },
   data() {
     return {}
