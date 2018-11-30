@@ -33,7 +33,6 @@ const articlesShow = [
     'tag': 'h1'
   },
   'content',
-  'content',
   'campoQueNoExiste'
 ]
 
