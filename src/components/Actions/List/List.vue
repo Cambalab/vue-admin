@@ -3,7 +3,7 @@
     <div class="text-xs-center d-flex right">
         <router-link v-if="hasCreate" :to="{ name: `${name}/create` }">
           <v-tooltip bottom>
-            <v-btn icon="true" slot="activator" absolute  right color="success" style="top:20px;">+</v-btn>
+            <v-btn icon slot="activator" absolute  right color="success" style="top:20px;">+</v-btn>
             <span>Create {{name}}</span>
           </v-tooltip>
         </router-link>

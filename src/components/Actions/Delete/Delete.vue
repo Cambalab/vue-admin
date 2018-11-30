@@ -4,7 +4,7 @@
       <v-btn
         @click="onDelete()"
         slot="activator"
-        icon="true">
+        icon>
         <i class="v-icon material-icons">delete</i>
       </v-btn>
       <span>Delete</span>
