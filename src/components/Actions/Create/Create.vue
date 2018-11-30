@@ -100,10 +100,6 @@ export default {
       const args = typeof(field) === 'string' ? { 'label': field } : field
       return args
     }
-  },
-
-  created() {
-
   }
 };
 </script>
