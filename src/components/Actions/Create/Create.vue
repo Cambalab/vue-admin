@@ -71,7 +71,6 @@ export default {
         .catch((err) => {
           console.error(err)
         })
-      return this.$store.dispatch(resourceName, { data: this.resource });
     },
 
     type(type) {

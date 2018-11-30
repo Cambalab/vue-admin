@@ -72,7 +72,6 @@ export default {
         .catch((err) => {
           console.error(err)
         })
-      return this.$store.dispatch(resourceName, { id: this.$route.params.id , data: this.resource });
     },
 
     type(type) {
