@@ -1,8 +1,14 @@
 <template>
   <div>
-    <button @click="onDelete()">
-      <i class="v-icon material-icons">delete</i>
-    </button>
+    <v-tooltip bottom>
+      <v-btn
+        @click="onDelete()"
+        slot="activator"
+        icon="true">
+        <i class="v-icon material-icons">delete</i>
+      </v-btn>
+      <span>Delete</span>
+    </v-tooltip>
   </div>
 </template>
 
