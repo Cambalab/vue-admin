@@ -1,16 +1,30 @@
 <template>
-  <div>
-    <component
-      :name="label(field)"
-      v-for="field in fields"
-      :key="key(label(field))"
-      :is="type(field.type)"
-      v-bind="args(field)"
-      :value="resource[label(field)]"
-      v-on:change="saveValue($event, label(field))">
-    </component>
-    <button v-on:click="submit">Save</button>
-  </div>
+  <v-card>
+    <v-card-title primary-title>
+      <h3 class="headline mb-0 text-capitalize">{{name}}</h3>
+    </v-card-title>
+    <v-form v-model="valid">
+      <v-card-text>
+        <v-layout wrap>
+          <v-flex xs8>
+            <component
+              :name="label(field)"
+              v-for="field in fields"
+              :key="key(label(field))"
+              :is="type(field.type)"
+              v-bind="args(field)"
+              :content="resource[label(field)]"
+              :value="resource[label(field)]"
+              v-on:change="saveValue($event, label(field))">
+            </component>
+          </v-flex>
+          <v-flex xs12>
+            <v-btn color="success" v-on:click="submit">Save</v-btn>
+          </v-flex>
+        </v-layout>
+      </v-card-text>
+    </v-form>
+  </v-card>
 </template>
 
 <script>
