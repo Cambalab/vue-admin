@@ -106,7 +106,7 @@ export default {
       });
       newHeaders.push({
         text: "Delete",
-        align: 'right',
+        align: 'center',
         sortable: false,
         width: 10
       });
