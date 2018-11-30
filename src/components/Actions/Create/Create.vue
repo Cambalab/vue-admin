@@ -5,7 +5,7 @@
       <component
         :name="label(field)"
         v-for="field in fields"
-        :key="key(field)"
+        :key="key(label(field))"
         :is="type(field.type)"
         v-bind="args(field)"
         v-on:change="saveValue($event, label(field))">
@@ -59,8 +59,8 @@ export default {
       return type || 'Input'
     },
 
-    key() {
-      return Math.random()
+    key(label) {
+      return `${this.name}_${label}`
     },
 
     label(field) {
