@@ -1,27 +1,25 @@
 <template>
   <div>
-    <h1> {{name}} resource: create operation </h1>
-    <div>
-      <component
-        :name="field.label"
-        v-for="field in fields"
-        :key="field.id"
-        :is="field.type"
-        v-bind="field"
-        v-on:change="saveValue($event, field.label)">
-      </component>
-      <button v-on:click="submit">Save</button>
-    </div>
+    <component
+      :name="field.label"
+      v-for="field in fields"
+      :key="field.id"
+      :is="field.type"
+      v-bind="field"
+      :value="resource[field.label]"
+      v-on:change="saveValue($event, field.label)">
+    </component>
+    <button v-on:click="submit">Save</button>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import Input from "../Input"
-import Router from '../../router'
+import Router from "../../router"
 
 export default {
-  name: "Create",
+  name: "Edit",
 
   props: {
     name: {
@@ -40,14 +38,17 @@ export default {
     },
   },
   data() {
+    const resourceName = this.name + "/byId";
+    const resource = JSON.parse(JSON.stringify(this.$store.getters[resourceName](this.$route.params.id)))
     return {
-      resource: {}
+      resource
     }
   },
   computed: {
     ...mapState([
       "route" // vuex-router-sync
     ])
+
   },
 
   components: {
@@ -55,14 +56,13 @@ export default {
   },
 
   methods: {
-    saveValue(event, field) {
-      this.resource[field] = event.target.value;
+    saveValue(event, fieldName) {
+      this.resource[fieldName] = event.target.value;
     },
-
     submit() {
-      const resourceName = this.name + "/create";
+      const resourceName = this.name + "/update";
       // TODO: The then, catch could possibly be moved to the store using vuex-crud callbacks. Read #34 for docs - sgobotta
-      this.$store.dispatch(resourceName, { data: this.resource })
+      this.$store.dispatch(resourceName, { id: this.$route.params.id , data: this.resource })
         .then((res) => {
           if (this.redirect && res.status === 200) {
             Router.redirect({ resource: this.name, view: this.redirect.view, id: res.data[this.redirect.idField] })
@@ -74,10 +74,7 @@ export default {
           return err
         })
     }
-  },
-
-  created() {
-
   }
+
 };
 </script>

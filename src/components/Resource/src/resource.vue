@@ -6,6 +6,7 @@
 import List from "../../List";
 import Show from "../../Show";
 import Create from "../../Create";
+import Edit from "../../Edit";
 import createCrudModule from "vuex-crud";
 
 export default {
@@ -15,13 +16,13 @@ export default {
     list: Array,
     show: Array,
     create: Array,
+    edit: Array,
+    resourceId: String,
     redirect: {
       type: Object,
       default: () => ({
-        idField: 'id',
         views: {
-          create: 'list',
-          update: 'show'
+          create: 'list'
         }
       })
     }
@@ -53,28 +54,34 @@ export default {
 
       this.addRoute(path, this.name);
 
-      routes.push(this.bindList(routes, path));
-      routes.push(this.bindShow(routes, path));
-      routes.push(this.bindCreate(routes, path));
+      routes.push(this.bindList(path));
+      routes.push(this.bindShow(path));
+      routes.push(this.bindCreate(path));
+      routes.push(this.bindEdit(path));
 
       this.$router.addRoutes(routes);
     },
 
-    bindList(routes, path) {
+    bindList(path) {
       const hasShow = this.show.length !== 0;
       const hasCreate = this.create.length !== 0;
 
-      return this.list ? { path: path, name: `${this.name}/list`, component: List, props: { name: this.name, fields: this.list, hasShow, hasCreate }} : []
+      return this.list ? { path: path, name: `${this.name}/list`, component: List, props: { name: this.name, fields: this.list, hasShow, hasCreate, resourceId: this.resourceId }} : []
     },
 
-    bindShow(routes, path) {
-      return this.show ? { path: `${path}/:id`, name: `${this.name}/show`, component: Show, props: { name: this.name, fields: this.show }} : []
+    bindShow(path) {
+      return this.show ? { path: `${path}/show/:id`, name: `${this.name}/show`, component: Show, props: { name: this.name, fields: this.show }} : []
     },
 
-    bindCreate(routes, path) {
-      const redirect = { idField: this.redirect.idField, view: this.redirect.views.create }
+    bindCreate(path) {
+      const redirect = { idField: this.resourceId, view: this.redirect.views.create }
       return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create, redirect }} : []
+    },
+
+    bindEdit(path) {
+      return this.edit ? { path: `${path}/edit/:id`, name: `${this.name}/edit`, component: Edit, props: { name: this.name, fields: this.edit }} : []
     }
+
   },
   mounted: function() {
     this.loadRoutes();
