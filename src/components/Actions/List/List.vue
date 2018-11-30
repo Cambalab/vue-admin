@@ -81,6 +81,7 @@ export default {
           text: "ID",
           align: 'left',
           sortable: true,
+          width: 10
         }
       ];
       this.fields.forEach((field) => {
@@ -93,12 +94,14 @@ export default {
       newHeaders.push({
         text: "Edit",
         align: 'center',
-        sortable: false
+        sortable: false,
+        width: 10
       });
       newHeaders.push({
         text: "Delete",
         align: 'right',
-        sortable: false
+        sortable: false,
+        width: 10
       });
       return newHeaders;
     },
