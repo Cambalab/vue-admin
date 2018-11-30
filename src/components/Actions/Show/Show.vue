@@ -17,7 +17,7 @@
 
 <script>
 import { mapState } from "vuex";
-import TextField from "../TextField"
+import { Input, TextField } from "../../UiComponents"
 
 export default {
   name: "Show",
@@ -44,6 +44,7 @@ export default {
   },
 
   components: {
+    Input: Input,
     TextField: TextField
   },
 

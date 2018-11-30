@@ -34,9 +34,8 @@
 
 <script>
 import { mapState } from "vuex";
-import TextField from "../TextField";
-import Delete from "../Delete";
-import EditButton from "../EditButton";
+import { Input, TextField } from "../../UiComponents";
+import { EditButton, Delete } from "../../Actions";
 
 export default {
   name: "List",
@@ -72,6 +71,7 @@ export default {
   },
 
   components: {
+    Input: Input,
     TextField: TextField,
     Delete: Delete,
     EditButton: EditButton
