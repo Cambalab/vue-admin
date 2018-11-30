@@ -17,12 +17,15 @@
 
 <script>
 import { mapState } from "vuex";
-import Input from "../Input"
-import Router from '../../router'
+import { Input, TextField } from "../../UiComponents"
+import Router from '../../../router'
 
 export default {
   name: "Create",
-
+  components: {
+    Input: Input,
+    TextField: TextField
+  },
   props: {
     name: {
       type: String,
@@ -50,10 +53,6 @@ export default {
     ])
   },
 
-  components: {
-    Input: Input
-  },
-
   methods: {
     saveValue(event, field) {
       this.resource[field] = event.target.value;
@@ -71,7 +70,6 @@ export default {
         })
         .catch((err) => {
           console.error(err)
-          return err
         })
     }
   },

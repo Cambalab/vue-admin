@@ -15,12 +15,15 @@
 
 <script>
 import { mapState } from "vuex";
-import Input from "../Input"
-import Router from "../../router"
+import { Input, TextField } from "../../UiComponents"
+import Router from "../../../router"
 
 export default {
   name: "Edit",
-
+  components: {
+    Input: Input,
+    TextField: TextField
+  },
   props: {
     name: {
       type: String,
@@ -51,10 +54,6 @@ export default {
 
   },
 
-  components: {
-    Input: Input
-  },
-
   methods: {
     saveValue(event, fieldName) {
       this.resource[fieldName] = event.target.value;
@@ -71,7 +70,6 @@ export default {
         })
         .catch((err) => {
           console.error(err)
-          return err
         })
     }
   }
