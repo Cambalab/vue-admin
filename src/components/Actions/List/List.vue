@@ -1,13 +1,17 @@
 <template>
   <v-card>
+    <div class="text-xs-center d-flex right">
+        <router-link v-if="hasCreate" :to="{ name: `${name}/create` }">
+          <v-tooltip bottom>
+            <v-btn icon="true" slot="activator" absolute  right color="success" style="top:20px;">+</v-btn>
+            <span>Create {{name}}</span>
+          </v-tooltip>
+        </router-link>
+    </div>
     <v-card-title primary-title>
       <h3 class="headline mb-0 text-capitalize">{{name}}</h3>
     </v-card-title>
-    <v-card-actions>
-      <router-link v-if="hasCreate" :to="{ name: `${name}/create` }">
-        <v-btn icon="true" absolute  right color="success" style="top:30px !important;">+</v-btn>
-      </router-link>
-    </v-card-actions>
+
     <v-data-table
       :headers="headers"
       :items="resourceList"
