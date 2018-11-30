@@ -17,6 +17,14 @@ export default {
     resourceId: {
       type: String,
       default: 'id'
+    },
+    redirect: {
+      type: Object,
+      default: () => ({
+        views: {
+          create: 'list'
+        }
+      })
     }
   },
   data() {
@@ -66,7 +74,8 @@ export default {
     },
 
     bindCreate(path) {
-      return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create }} : []
+      const redirect = { idField: this.resourceId, view: this.redirect.views.create }
+      return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create, redirect }} : []
     },
 
     bindEdit(path) {
