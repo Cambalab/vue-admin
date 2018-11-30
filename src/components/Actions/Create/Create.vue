@@ -17,11 +17,14 @@
 
 <script>
 import { mapState } from "vuex";
-import Input from "../Input"
+import { Input, TextField } from "../../UiComponents"
 
 export default {
   name: "Create",
-
+  components: {
+    Input: Input,
+    TextField: TextField
+  },
   props: {
     name: {
       type: String,
@@ -40,10 +43,6 @@ export default {
     ...mapState([
       "route" // vuex-router-sync
     ])
-  },
-
-  components: {
-    Input: Input
   },
 
   methods: {

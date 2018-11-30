@@ -3,10 +3,7 @@
 </template>
 
 <script>
-import List from "../../List";
-import Show from "../../Show";
-import Create from "../../Create";
-import Edit from "../../Edit";
+import { List, Show, Create, Edit } from "../../Actions";
 import createCrudModule from "vuex-crud";
 
 export default {
