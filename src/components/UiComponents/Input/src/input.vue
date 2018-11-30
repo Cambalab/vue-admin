@@ -1,9 +1,8 @@
 <template>
   <v-text-field
-      v-model="content"
-      :label=placeHolder
-      @input="onChange"
-      required>
+    v-model="inputValue"
+    :label="placeHolder"
+    required>
   </v-text-field>
 </template>
 
@@ -14,18 +13,20 @@ export default {
     placeHolder: {
       type:String,
       default:"Input"
-    }
-    content: [String, Number]
+    },
+    value: [String, Number]
   },
   data() {
-    return {}
+    return {
+      inputValue: this.value
+    }
+  },
+  watch: {
+    inputValue: function(newVal) {
+      this.$emit('change', newVal);
+    }
   },
   computed:{
   },
-  methods:{
-    onChange(event) {
-      this.$emit('change', event);
-    }
-  }
 };
 </script>
