@@ -31,7 +31,7 @@
         </td>
         <td>
           <EditButton
-            :resourceId="resource[resourceId]"
+            :resourceId="props.item.id"
             :resourceName="name">
           </EditButton>
         </td>
@@ -91,9 +91,14 @@ export default {
         })
       })
       newHeaders.push({
+        text: "Edit",
+        align: 'center',
+        sortable: false
+      });
+      newHeaders.push({
         text: "Delete",
         align: 'right',
-        sortable: false,
+        sortable: false
       });
       return newHeaders;
     },
