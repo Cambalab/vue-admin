@@ -37,6 +37,7 @@
               v-for="(child, i) in item.children"
               :key="i"
               :to="child.link"
+              :name="`drawer-${child.title}-tile`"
             >
               <v-list-tile-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
@@ -62,14 +63,14 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar class="success" dark app fixed clipped-left dense>
-      <v-toolbar-title>
+      <v-toolbar-title name="main-toolbar-title">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         Admin XXX
       </v-toolbar-title>
       <v-spacer></v-spacer>
         <v-toolbar-items>
           <v-btn flat>
-            <v-avatar size="36px">Juan</v-avatar>
+            <v-avatar name="main-toolbar-user-avatar" size="36px">Juan</v-avatar>
           </v-btn>
           <v-btn flat @click="onLogout"><v-icon left dark>exit_to_app</v-icon></v-btn>
         </v-toolbar-items>

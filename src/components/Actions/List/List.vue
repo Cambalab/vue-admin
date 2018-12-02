@@ -1,16 +1,16 @@
 <template>
-  <div>
-    <h1> {{name}} resource: list operation </h1>
+  <div :name="`${name}-list-container`">
+    <h1 :name="`${name}-list-title`"> {{name}} resource: list operation </h1>
     <div>
-      <router-link v-if="hasCreate" :to="{ name: `${name}/create` }">
+      <router-link :name="`${name}-create-button`" v-if="hasCreate" :to="{ name: `${name}/create` }">
         <button>Create {{name}}</button>
       </router-link>
     </div>
-    <div v-for="resource in resourceList" :key="resource[resourceId]">
-      <router-link v-if="hasShow" :to="{ name: `${name}/show`, params: { id: resource.id } }">
+    <div :name="`${name}-list-element-container-${index}`" v-for="(resource, index) in resourceList" :key="resource[resourceId]">
+      <router-link :name="`${name}-list-element-${index}-id`" v-if="hasShow" :to="{ name: `${name}/show`, params: { id: resource.id } }">
         <h3>{{ resource.id }}</h3>
       </router-link>
-      <h3 v-else>{{ resource.id }}</h3>
+      <h3 :name="`${name}-list-element-${index}-id`" v-else>{{ resource.id }}</h3>
       <Delete
       :resourceId="resource[resourceId]"
       :resourceName="name">
