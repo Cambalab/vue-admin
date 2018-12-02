@@ -7,6 +7,7 @@
         :create='fieldsArticleCreate'
         :edit='fieldsArticleEdit'
         :resourceId='resourceId'
+        :parseResponses='parseResponses'
         >
       </Resource>
     </Admin>
@@ -47,7 +48,22 @@ const fieldsArticleCreate =[
 
 const fieldsArticleEdit = fieldsArticleCreate
 
-const resourceId = "id"
+const resourceId = "_id"
+
+const parseFeathersResponses = {
+  parseList: (response) => {
+    const { data } = response;
+    return Object.assign({}, response, {
+      data: data.data // expecting array of objects with IDs
+    });
+  },
+  parseSingle: (response) => {
+    const { data } = response;
+    return Object.assign({}, response, {
+      data // expecting object with ID
+    });
+  }
+}
 
 export default {
   name: "App",
@@ -61,7 +77,11 @@ export default {
       articlesShow,
       fieldsArticleCreate,
       fieldsArticleEdit,
-      resourceId
+      resourceId,
+      // #23 - To use the default server just remove the parseResponses attribute
+      // below, the property passed to Resource in the template and update the
+      // resourceId to 'id'. - sgobotta
+      parseResponses: parseFeathersResponses
     };
   }
 };
