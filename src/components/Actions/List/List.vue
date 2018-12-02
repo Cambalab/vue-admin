@@ -7,10 +7,10 @@
       </router-link>
     </div>
     <div v-for="resource in resourceList" :key="resource[resourceId]">
-      <router-link v-if="hasShow" :to="{ name: `${name}/show`, params: { id: resource.id } }">
-        <h3>{{ resource.id }}</h3>
+      <router-link v-if="hasShow" :to="{ name: `${name}/show`, params: { id: resource[resourceId] } }">
+        <h3>{{ resource[resourceId] }}</h3>
       </router-link>
-      <h3 v-else>{{ resource.id }}</h3>
+      <h3 v-else>{{ resource[resourceId] }}</h3>
       <Delete
       :resourceId="resource[resourceId]"
       :resourceName="name">
