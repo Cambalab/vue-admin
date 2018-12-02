@@ -22,8 +22,16 @@ export default {
       type: Object,
       default: () => ({
         views: {
-          create: 'list'
+          create: 'list',
+          edit: 'show'
         }
+      })
+    },
+    parseResponses: {
+      type: Object,
+      default: () => ({
+        single: null,
+        list: null
       })
     }
   },
@@ -35,25 +43,14 @@ export default {
   created: function() {
     let module = createCrudModule({
       resource: this.name,
-      idAttribute: 'id',
+      idAttribute: this.resourceId,
       customUrlFn(id) {
         // TODO: usar una constante para http://localhost:8080 - santiago
         // TODO: verificar que el puerto sea el que esté usando feathers
         const rootUrl = 'http://localhost:8080/api/articles/'
         return id ? `${rootUrl}${id}` : rootUrl
       },
-      parseList(response) {
-        const { data } = response;
-        return Object.assign({}, response, {
-          data: data.data // expecting array of objects with IDs
-        });
-      },
-      parseSingle(response) {
-        const { data } = response;
-        return Object.assign({}, response, {
-          data // expecting object with ID
-        });
-      }
+      ...this.parseResponses
     });
     this.$store.registerModule(this.name, module);
   },
@@ -94,7 +91,8 @@ export default {
     },
 
     bindEdit(path) {
-      return this.edit ? { path: `${path}/edit/:id`, name: `${this.name}/edit`, component: Edit, props: { name: this.name, fields: this.edit }} : []
+      const redirect = { idField: this.resourceId, view: this.redirect.views.edit }
+      return this.edit ? { path: `${path}/edit/:id`, name: `${this.name}/edit`, component: Edit, props: { name: this.name, fields: this.edit, redirect }} : []
     }
 
   },
