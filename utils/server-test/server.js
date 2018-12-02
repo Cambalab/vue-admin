@@ -95,7 +95,7 @@ app.post("/api/articles", (req, res) => {
 
   articles.push(article);
 
-  res.json(article);
+  res.status(201).send(article);
 });
 
 const port = process.env.PORT || 8080;
