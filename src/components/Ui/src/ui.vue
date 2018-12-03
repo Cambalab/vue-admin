@@ -37,7 +37,7 @@
               v-for="(child, i) in item.children"
               :key="i"
               :to="child.link"
-              :name="`drawer-${child.title}-tile`"
+              :name="`${UI_NAMES.DRAWER_RESOURCE_TILE.with({ resourceName: child.title })}`"
             >
               <v-list-tile-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
@@ -63,14 +63,16 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar class="success" dark app fixed clipped-left dense>
-      <v-toolbar-title name="main-toolbar-title">
+      <v-toolbar-title :name="UI_NAMES.MAIN_TOOLBAR_TITLE">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        Admin XXX
+        {{UI_CONTENT.MAIN_TOOLBAR_TITLE}}
       </v-toolbar-title>
       <v-spacer></v-spacer>
         <v-toolbar-items>
           <v-btn flat>
-            <v-avatar name="main-toolbar-user-avatar" size="36px">Juan</v-avatar>
+            <v-avatar :name="UI_NAMES.MAIN_TOOLBAR_USER_AVATAR" size="36px">
+              {{UI_CONTENT.MAIN_TOOLBAR_USER_AVATAR_NAME}}
+            </v-avatar>
           </v-btn>
           <v-btn flat @click="onLogout"><v-icon left dark>exit_to_app</v-icon></v-btn>
         </v-toolbar-items>
@@ -105,6 +107,9 @@
 </template>
 
 <script>
+import UI_CONTENT from '../../../constants/ui.content.default'
+import UI_NAMES from '../../../constants/ui.element.names'
+
 export default {
   name: "Ui",
   props: {
@@ -124,7 +129,9 @@ export default {
           model: true,
           children: []
         }
-      ]
+      ],
+      UI_CONTENT,
+      UI_NAMES
     };
   },
   mounted() {
