@@ -14,10 +14,10 @@ describe('End to end Test', () => {
 
   it('Toolbar title should be Vue Admin XXX', () => {
     const mainToolbarTitleName = UI_NAMES.MAIN_TOOLBAR_TITLE
-    cy.get(`div[name=${mainToolbarTitleName}]`).should((div) => {
+    cy.get(`div[name=${mainToolbarTitleName}]`).should((mainToolbarTitle) => {
       const mainToolbarTitleText = UI_CONTENT.MAIN_TOOLBAR_TITLE
 
-      expect(div).to.contain(mainToolbarTitleText)
+      expect(mainToolbarTitle).to.contain(mainToolbarTitleText)
     })
   })
 
@@ -43,17 +43,22 @@ describe('End to end Test', () => {
   })
 
   it('Articles View should render title: articles resource: list operation', () => {
-    const listViewTitleName = UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
+    const listViewContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
       resourceName: 'articles',
       view: 'list'
     })
-    cy.get(`div[name=${listViewTitleName}]`).should((div) => {
-      const listViewTitleText = UI_CONTENT.RESOURCE_VIEW.with({
+    cy.get(`div[name=${listViewContainerName}]`).should((listViewContainer) => {
+      const listViewTitleContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({
+        resourceName: 'articles',
+        view: 'list'
+      })
+      const listViewTitleContainer = listViewContainer.find(`[name=${listViewTitleContainerName}]`)
+      const listViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
         resourceName: 'articles',
         view: 'list'
       })
 
-      expect(div).to.contain(listViewTitleText)
+      expect(listViewTitleContainer).to.contain(listViewTitleText)
     })
   })
 
@@ -61,12 +66,12 @@ describe('End to end Test', () => {
     const createButtonName = UI_NAMES.RESOURCE_CREATE_BUTTON.with({
       resourceName: 'articles'
     })
-    cy.get(`a[name="${createButtonName}"]`).should((anchor) => {
+    cy.get(`a[name="${createButtonName}"]`).should((createButtonLink) => {
       const createButtonText = UI_CONTENT.RESOURCE_CREATE_BUTTON.with({
         resourceName: 'articles'
       })
 
-      expect(anchor).to.contain(createButtonText)
+      expect(createButtonLink).to.contain(createButtonText)
     })
   })
 
@@ -78,17 +83,17 @@ describe('End to end Test', () => {
         view: 'list',
         index: articleIndex
       })
-      cy.get(`div[name=${listElementContainerName}]`).should((div) => {
-        const listElementField = UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+      cy.get(`div[name=${listElementContainerName}]`).should((listElementContainer) => {
+        const listElementFieldName = UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
           resourceName: 'articles',
           view: 'list',
           field: 'id',
           index: articleIndex
         })
-        const anchor = div.find(`a[name=${listElementField}]`)
-        const anchorIdText = articleIndex + 1
+        const listElementFieldId = listElementContainer.find(`a[name=${listElementFieldName}]`)
+        const listElementFieldIdText = articleIndex + 1
 
-        expect(anchor).to.contain(anchorIdText)
+        expect(listElementFieldId).to.contain(listElementFieldIdText)
       })
     })
   })
