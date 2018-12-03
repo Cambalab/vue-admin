@@ -13,7 +13,7 @@
               :key="key(label(field))"
               :is="type(field.type)"
               v-bind="args(field)"
-              :value="resource[field.label]"
+              :value="resource[label(field)]"
               @change="saveValue($event, label(field))">
             </component>
           </v-flex>
@@ -80,6 +80,7 @@ export default {
           }
         })
         .catch((err) => {
+          // eslint-disable-next-line no-console
           console.error(err)
         })
     },
@@ -97,7 +98,7 @@ export default {
     },
 
     args(field) {
-      const args = typeof(field) === 'string' ? { 'label': field } : field
+      const args = typeof(field) === 'string' ? { 'label': field, 'placeHolder': field } : field
       return args
     }
   }

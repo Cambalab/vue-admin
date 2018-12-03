@@ -35,24 +35,24 @@
         </td>
         <td class="text-xs-left"
           v-for="field in fields"
-          v-bind="field">
+          :key="key(label(field))"
+          >
           <component
             :name="label(field)"
             :is="type(field.type)"
-            :key="key(label(field))"
             v-bind:content="props.item[label(field)]"
             v-bind="args(field)">
           </component>
         </td>
         <td>
           <EditButton
-            :resourceId="props.item.id"
+            :resourceId="props.item[resourceId]"
             :resourceName="name">
           </EditButton>
         </td>
         <td class="text-xs-right">
           <Delete
-            :resourceId="resource[resourceId]"
+            :resourceId="props.item[resourceId]"
             :resourceName="name">
           </Delete>
         </td>
@@ -96,14 +96,16 @@ export default {
           text: "ID",
           align: 'left',
           sortable: true,
-          width: 10
+          width: 10,
+          value: this.resourceId
         }
       ];
       this.fields.forEach((field) => {
         newHeaders.push({
-          text: field.label,
+          text: this.label(field),
           align: field.align || 'left',
           sortable: field.sortable || false,
+          value: this.label(field)
         })
       })
       newHeaders.push({

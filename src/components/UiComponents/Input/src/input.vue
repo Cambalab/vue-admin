@@ -11,8 +11,8 @@ export default {
   name: "Input",
   props:{
     placeHolder: {
-      type:String,
-      default:"Input"
+      type: String,
+      default: "Input"
     },
     value: [String, Number]
   },
@@ -27,6 +27,6 @@ export default {
     }
   },
   computed:{
-  },
+  }
 };
 </script>
