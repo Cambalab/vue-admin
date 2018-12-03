@@ -30,6 +30,10 @@ export default {
   },
   // A specific container of a Resource field inside an element of the List
   RESOURCE_VIEW_ELEMENT_FIELD: {
-    with: ({ resourceName, view, field, index }) => `${resourceName}-${view}-element-${index}-${field}`
+    with: ({ resourceName, view, field, index }) => {
+      return index !== undefined
+      ? `${resourceName}-${view}-element-${field}-${index}`
+      : `${resourceName}-${view}-element-${field}`
+    }
   }
 }
