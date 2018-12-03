@@ -1,16 +1,35 @@
 <template>
-  <div :name="`${name}-list-container`">
-    <h1 :name="`${name}-list-title`"> {{name}} resource: list operation </h1>
+  <div :name="UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })">
+    <h1 :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`">
+      {{UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })}}
+    </h1>
     <div>
-      <router-link :name="`${name}-create-button`" v-if="hasCreate" :to="{ name: `${name}/create` }">
-        <button>Create {{name}}</button>
+      <router-link
+        :name="`${UI_NAMES.RESOURCE_CREATE_BUTTON.with({ resourceName })}`"
+        v-if="hasCreate"
+        :to="{ name: `${name}/create` }"
+      >
+        <button>{{UI_CONTENT.RESOURCE_CREATE_BUTTON.with({ resourceName })}}</button>
       </router-link>
     </div>
-    <div :name="`${name}-list-element-container-${index}`" v-for="(resource, index) in resourceList" :key="resource[resourceId]">
-      <router-link :name="`${name}-list-element-${index}-id`" v-if="hasShow" :to="{ name: `${name}/show`, params: { id: resource.id } }">
+    <div
+      :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_CONTAINER.with({ resourceName, view, index})}`"
+      v-for="(resource, index) in resourceList"
+      :key="resource[resourceId]"
+    >
+      <router-link
+        :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: 'id', index })}`"
+        v-if="hasShow"
+        :to="{ name: `${name}/show`, params: { id: resource.id } }"
+      >
         <h3>{{ resource.id }}</h3>
       </router-link>
-      <h3 :name="`${name}-list-element-${index}-id`" v-else>{{ resource.id }}</h3>
+      <h3
+        :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: 'id', index })}`"
+        v-else
+      >
+        {{ resource.id }}
+      </h3>
       <Delete
       :resourceId="resource[resourceId]"
       :resourceName="name">
@@ -33,6 +52,8 @@
 
 
 <script>
+import UI_CONTENT from '../../../constants/ui.content.default'
+import UI_NAMES from '../../../constants/ui.element.names'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents";
 import { EditButton, Delete } from "../../Actions";
@@ -58,7 +79,14 @@ export default {
       type: String
     }
   },
-
+  data() {
+    return {
+      resourceName: this.name,
+      view: 'list',
+      UI_CONTENT,
+      UI_NAMES
+    }
+  },
   computed: {
     resourceList: function() {
       const resourceName = this.name + "/list";
