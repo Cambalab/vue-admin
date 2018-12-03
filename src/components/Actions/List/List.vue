@@ -1,34 +1,64 @@
 <template>
-  <div>
-    <h1> {{name}} resource: list operation </h1>
-    <div>
-      <router-link v-if="hasCreate" :to="{ name: `${name}/create` }">
-        <button>Create {{name}}</button>
-      </router-link>
+  <v-card>
+    <div class="text-xs-center d-flex right">
+        <router-link v-if="hasCreate" :to="{ name: `${name}/create` }">
+          <v-tooltip bottom>
+            <v-btn
+              icon
+              absolute
+              right
+              color="success"
+              slot="activator"
+              style="top:20px;">
+              <i class="v-icon material-icons">add</i>
+            </v-btn>
+            <span>Create {{name}}</span>
+          </v-tooltip>
+        </router-link>
     </div>
-    <div v-for="resource in resourceList" :key="resource[resourceId]">
-      <router-link v-if="hasShow" :to="{ name: `${name}/show`, params: { id: resource.id } }">
-        <h3>{{ resource.id }}</h3>
-      </router-link>
-      <h3 v-else>{{ resource.id }}</h3>
-      <Delete
-      :resourceId="resource[resourceId]"
-      :resourceName="name">
-      </Delete>
-      <EditButton
-        :resourceId="resource[resourceId]"
-        :resourceName="name">
-      </EditButton>
-      <component
-        :name="label(field)"
-        v-for="field in fields"
-        :key="key(label(field))"
-        :is="type(field.type)"
-        v-bind:content="resource[label(field)]"
-        v-bind="args(field)">
-      </component>
-    </div>
-  </div>
+    <v-card-title primary-title>
+      <h3 class="headline mb-0 text-capitalize">{{name}}</h3>
+    </v-card-title>
+
+    <v-data-table
+      :headers="headers"
+      :items="resourceList"
+      class="elevation-1">
+      <template slot="items" slot-scope="props">
+        <td>
+          <router-link v-if="hasShow" :to="{ name: `${name}/show`, params: { id: props.item[resourceId] } }">
+            {{ props.item[resourceId] }}
+          </router-link>
+          <span v-else>
+            {{ props.item[resourceId] }}
+          </span>
+        </td>
+        <td class="text-xs-left"
+          v-for="field in fields"
+          :key="key(label(field))"
+          >
+          <component
+            :name="label(field)"
+            :is="type(field.type)"
+            v-bind:content="props.item[label(field)]"
+            v-bind="args(field)">
+          </component>
+        </td>
+        <td>
+          <EditButton
+            :resourceId="props.item[resourceId]"
+            :resourceName="name">
+          </EditButton>
+        </td>
+        <td class="text-xs-right">
+          <Delete
+            :resourceId="props.item[resourceId]"
+            :resourceName="name">
+          </Delete>
+        </td>
+      </template>
+    </v-data-table>
+  </v-card>
 </template>
 
 
@@ -60,6 +90,38 @@ export default {
   },
 
   computed: {
+    headers: function () {
+      let newHeaders = [
+        {
+          text: "ID",
+          align: 'left',
+          sortable: true,
+          width: 10,
+          value: this.resourceId
+        }
+      ];
+      this.fields.forEach((field) => {
+        newHeaders.push({
+          text: this.label(field),
+          align: field.align || 'left',
+          sortable: field.sortable || false,
+          value: this.label(field)
+        })
+      })
+      newHeaders.push({
+        text: "Edit",
+        align: 'center',
+        sortable: false,
+        width: 10
+      });
+      newHeaders.push({
+        text: "Delete",
+        align: 'center',
+        sortable: false,
+        width: 10
+      });
+      return newHeaders;
+    },
     resourceList: function() {
       const resourceName = this.name + "/list";
       return this.$store.getters[resourceName];

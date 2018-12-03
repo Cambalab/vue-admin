@@ -64,7 +64,7 @@
     <v-toolbar class="success" dark app fixed clipped-left dense>
       <v-toolbar-title>
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        Admin XXX
+        Vue-admin
       </v-toolbar-title>
       <v-spacer></v-spacer>
         <v-toolbar-items>
