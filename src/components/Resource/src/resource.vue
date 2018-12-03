@@ -18,7 +18,10 @@ export default {
       type: String,
       default: 'id'
     },
-    apiUrl: String,
+    apiUrl: {
+      type: String,
+      required: true
+    },
     redirect: {
       type: Object,
       default: () => ({
