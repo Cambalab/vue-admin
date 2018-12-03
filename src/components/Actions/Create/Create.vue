@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <h1> {{name}} resource: create operation </h1>
+  <div :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })}`">
+    <div :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`">
+      <h1>{{UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })}}</h1>
+    </div>
     <div>
       <component
-        :name="label(field)"
+        :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field)})}`"
         v-for="field in fields"
         :key="key(label(field))"
         :is="type(field.type)"
@@ -16,6 +18,8 @@
 </template>
 
 <script>
+import UI_CONTENT from '../../../constants/ui.content.default'
+import UI_NAMES from '../../../constants/ui.element.names'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents"
 import Router from '../../../router'
@@ -44,7 +48,11 @@ export default {
   },
   data() {
     return {
-      resource: {}
+      resource: {},
+      resourceName: this.name,
+      view: 'create',
+      UI_CONTENT,
+      UI_NAMES
     }
   },
   computed: {
@@ -69,7 +77,7 @@ export default {
           }
         })
         .catch((err) => {
-          // eslint-disable-next-line 
+          // eslint-disable-next-line
           console.error(err)
         })
     },
