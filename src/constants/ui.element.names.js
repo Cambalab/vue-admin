@@ -17,6 +17,9 @@ export default {
   RESOURCE_VIEW_CONTAINER: {
     with: ({ resourceName, view }) => `${resourceName}-${view}-container`
   },
+  RESOURCE_VIEW_CONTAINER_TITLE: {
+    with: ({ resourceName, view }) => `${resourceName}-${view}-container-title`
+  },
   // The button that redirects to a Create view
   RESOURCE_CREATE_BUTTON: {
     with: ({ resourceName }) => `${resourceName}-create-button`

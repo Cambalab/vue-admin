@@ -16,7 +16,7 @@ export default {
    */
 
   // Any View Title (List, Show, Create, Edit)
-  RESOURCE_VIEW: {
+  RESOURCE_VIEW_TITLE: {
     with: ({ resourceName, view }) => `${resourceName} resource: ${view} operation`
   },
   // Create action button
