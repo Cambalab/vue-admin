@@ -1,5 +1,6 @@
 
 export default {
+
   /**
    * UI component
    */
@@ -12,17 +13,19 @@ export default {
   /**
    * List
    */
+  // The whole container of a Resource List
   RESOURCE_VIEW_CONTAINER: {
     with: ({ resourceName, view }) => `${resourceName}-${view}-container`
   },
+  // The button that redirects to a Create view
   RESOURCE_CREATE_BUTTON: {
     with: ({ resourceName }) => `${resourceName}-create-button`
   },
-  // The container of every element of the list
+  // The container of every element of a List
   RESOURCE_VIEW_ELEMENT_CONTAINER: {
     with: ({ resourceName, view, index }) => `${resourceName}-${view}-element-container-${index}`
   },
-  // A specific container (field) inside an element of the list
+  // A specific container of a Resource field inside an element of the List
   RESOURCE_VIEW_ELEMENT_FIELD: {
     with: ({ resourceName, view, field, index }) => `${resourceName}-${view}-element-${index}-${field}`
   }

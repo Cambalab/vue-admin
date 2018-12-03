@@ -6,19 +6,21 @@ export default {
   /**
    * UI component
    */
+  // The Admin name in the Toolbar
   MAIN_TOOLBAR_TITLE: 'Admin XXX',
+  // The user name in the Toolbar
   MAIN_TOOLBAR_USER_AVATAR_NAME: 'Juan',
 
   /**
-   * List, Create, Edit views
+   * Shared content inside List, Show, Create, Edit components
    */
 
-  // View Title
+  // Any View Title (List, Show, Create, Edit)
   RESOURCE_VIEW: {
     with: ({ resourceName, view }) => `${resourceName} resource: ${view} operation`
   },
   // Create action button
-  CREATE_RESOURCE_BUTTON: {
+  RESOURCE_CREATE_BUTTON: {
     with: ({ resourceName }) => `Create ${resourceName}`
   }
 }
