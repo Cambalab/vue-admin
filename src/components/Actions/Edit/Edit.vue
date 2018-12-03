@@ -65,7 +65,7 @@ export default {
       this.$store.dispatch(resourceName, { id: this.$route.params.id , data: this.resource })
         .then((res) => {
           if (this.redirect && res.status === 200) {
-            Router.redirect({ resource: this.name, view: this.redirect.view, id: res.data[this.redirect.idField] })
+            Router.redirect({ router: this.$router, resource: this.name, view: this.redirect.view, id: res.data[this.redirect.idField] })
             return res
           }
         })
