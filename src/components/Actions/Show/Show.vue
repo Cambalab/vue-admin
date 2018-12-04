@@ -1,7 +1,19 @@
 <template>
-  <div>
-    <h1> {{name}} resource: show operation </h1>
-    <div>
+  <v-card>
+    <div class="text-xs-center d-flex right">
+        <EditButton
+          :resourceId="$route.params.id"
+          :resourceName="name">
+        </EditButton>
+        <Delete
+          :resourceId="$route.params.id"
+          :resourceName="name">
+        </Delete>
+    </div>
+    <v-card-title primary-title>
+      <h3 class="headline mb-0 text-capitalize">{{name}} #{{$route.params.id}}</h3>
+    </v-card-title>
+    <v-card-text>
       <component
         :name="label(field)"
         v-for="field in fields"
@@ -10,14 +22,15 @@
         v-bind:content="resourceShow[label(field)]"
         v-bind="args(field)">
       </component>
-    </div>
-  </div>
+    </v-card-text>
+  </v-card>
 </template>
 
 
 <script>
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents"
+import { EditButton, Delete } from "../../Actions";
 
 export default {
   name: "Show",
@@ -45,7 +58,9 @@ export default {
 
   components: {
     Input: Input,
-    TextField: TextField
+    TextField: TextField,
+    Delete: Delete,
+    EditButton: EditButton
   },
 
   methods: {

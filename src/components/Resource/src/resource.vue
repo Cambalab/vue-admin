@@ -18,6 +18,10 @@ export default {
       type: String,
       default: 'id'
     },
+    apiUrl: {
+      type: String,
+      required: true
+    },
     redirect: {
       type: Object,
       default: () => ({
@@ -41,15 +45,14 @@ export default {
     };
   },
   created: function() {
+    const customUrlFn = (id) => {
+      const rootUrl =`${this.apiUrl}${this.name}/` // TODO: usar una constante para http://localhost:8081 - santiago
+      return id ? `${rootUrl}${id}` : rootUrl
+    }
     let module = createCrudModule({
       resource: this.name,
+      customUrlFn,
       idAttribute: this.resourceId,
-      customUrlFn(id) {
-        // TODO: usar una constante para http://localhost:8080 - santiago
-        // TODO: verificar que el puerto sea el que esté usando feathers
-        const rootUrl = 'http://localhost:8080/api/articles/'
-        return id ? `${rootUrl}${id}` : rootUrl
-      },
       ...this.parseResponses
     });
     this.$store.registerModule(this.name, module);

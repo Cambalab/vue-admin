@@ -1,18 +1,29 @@
 <template>
-  <div>
-    <h1> {{name}} resource: create operation </h1>
-    <div>
-      <component
-        :name="label(field)"
-        v-for="field in fields"
-        :key="key(label(field))"
-        :is="type(field.type)"
-        v-bind="args(field)"
-        v-on:change="saveValue($event, label(field))">
-      </component>
-      <button v-on:click="submit">Save</button>
-    </div>
-  </div>
+  <v-card>
+    <v-card-title primary-title>
+      <h3 class="headline mb-0 text-capitalize">{{name}}</h3>
+    </v-card-title>
+    <v-form>
+      <v-card-text>
+        <v-layout wrap>
+          <v-flex xs8>
+            <component
+              :name="label(field)"
+              v-for="field in fields"
+              :key="key(label(field))"
+              :is="type(field.type)"
+              v-bind="args(field)"
+              :value="resource[label(field)]"
+              @change="saveValue($event, label(field))">
+            </component>
+          </v-flex>
+          <v-flex xs12>
+            <v-btn color="success" v-on:click="submit">Save</v-btn>
+          </v-flex>
+        </v-layout>
+      </v-card-text>
+    </v-form>
+  </v-card>
 </template>
 
 <script>
@@ -54,8 +65,8 @@ export default {
   },
 
   methods: {
-    saveValue(event, field) {
-      this.resource[field] = event.target.value;
+    saveValue(newValue, fieldName) {
+      this.resource[fieldName] = newValue;
     },
 
     submit() {
@@ -65,11 +76,12 @@ export default {
         .then((res) => {
           const { status } = res
           if ([200, 201].indexOf(status) !== -1) {
-            Router.redirect({ resource: this.name, view: this.redirect.view, id: res.data[this.redirect.idField] })
+            Router.redirect({ router: this.$router, resource: this.name, view: this.redirect.view, id: res.data[this.redirect.idField] })
             return res
           }
         })
         .catch((err) => {
+          // eslint-disable-next-line no-console
           console.error(err)
         })
     },
@@ -87,13 +99,9 @@ export default {
     },
 
     args(field) {
-      const args = typeof(field) === 'string' ? { 'label': field } : field
+      const args = typeof(field) === 'string' ? { label: field, placeHolder: field } : field
       return args
     }
-  },
-
-  created() {
-
   }
 };
 </script>

@@ -7,6 +7,7 @@
         :create='fieldsArticleCreate'
         :edit='fieldsArticleEdit'
         :resourceId='resourceId'
+        apiUrl='http://localhost:8080/api/'
         >
       </Resource>
     </Admin>
