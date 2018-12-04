@@ -7,7 +7,6 @@
         :create='fieldsArticleCreate'
         :edit='fieldsArticleEdit'
         :resourceId='resourceId'
-        :parseResponses='parseResponses'
         >
       </Resource>
     </Admin>
@@ -48,22 +47,25 @@ const fieldsArticleCreate =[
 
 const fieldsArticleEdit = fieldsArticleCreate
 
-const resourceId = "_id"
+const resourceId = "id"
 
-const parseFeathersResponses = {
-  parseList: (response) => {
-    const { data } = response;
-    return Object.assign({}, response, {
-      data: data.data // expecting array of objects with IDs
-    });
-  },
-  parseSingle: (response) => {
-    const { data } = response;
-    return Object.assign({}, response, {
-      data // expecting object with ID
-    });
-  }
-}
+// Use case of a parsed response using feathers
+// This has to be done because every server client returns different responses. - sgobotta
+//
+// const parseFeathersResponses = {
+//   parseList: (response) => {
+//     const { data } = response;
+//     return Object.assign({}, response, {
+//       data: data.data // expecting array of objects with IDs
+//     });
+//   },
+//   parseSingle: (response) => {
+//     const { data } = response;
+//     return Object.assign({}, response, {
+//       data // expecting object with ID
+//     });
+//   }
+// }
 
 export default {
   name: "App",
@@ -78,10 +80,10 @@ export default {
       fieldsArticleCreate,
       fieldsArticleEdit,
       resourceId,
-      // #23 - To use the default server just remove the parseResponses attribute
-      // below, the property passed to Resource in the template and update the
-      // resourceId to 'id'. - sgobotta
-      parseResponses: parseFeathersResponses
+      // #23 - To use the feathers server just add the parseResponses attribute
+      // below, pass ':parseResponses='parseResponses' to Resource in the
+      // template and update the resourceId to '_id'. - sgobotta
+      // parseResponses: parseFeathersResponses
     };
   }
 };
