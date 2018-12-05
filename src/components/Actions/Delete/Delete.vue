@@ -22,7 +22,7 @@ export default {
       default: null
     },
     resourceId: {
-      type: Number
+      type: [Number, String]
     },
     resourceName: {
       type: String,
