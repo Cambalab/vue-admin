@@ -54,10 +54,8 @@ export default {
     },
   },
   data() {
-    const resourceName = this.name + "/byId";
-    const resource = JSON.parse(JSON.stringify(this.$store.getters[resourceName](this.$route.params.id)))
     return {
-      resource
+      resource: {}
     }
   },
   computed: {
@@ -103,7 +101,17 @@ export default {
     args(field) {
       const args = typeof(field) === 'string' ? { 'label': field, 'placeHolder': field } : field
       return args
+    },
+
+    getResource() {
+      const resourceName = this.name + "/byId";
+      return this.$store.getters[resourceName](this.$route.params.id)
     }
+
+  },
+
+  created() {
+    this.resource = this.getResource();
   }
 
 };
