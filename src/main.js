@@ -8,10 +8,11 @@ const routes = [{}];
 export const router = new VueRouter(routes);
 
 import App from "./App.vue";
-import store from "./store";
+import Vuex from "vuex";
 
-import resources from "./store/resources";
-store.registerModule('resources', resources);
+Vue.use(Vuex);
+
+const store = new Vuex.Store({});
 
 Vue.config.productionTip = false;
 
