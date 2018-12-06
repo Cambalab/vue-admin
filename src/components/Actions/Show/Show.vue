@@ -17,6 +17,7 @@
       <component
         :name="label(field)"
         v-for="field in fields"
+        v-if="resourceShow !== undefined"
         :key="key(label(field))"
         :is="type(field.type)"
         v-bind:content="resourceShow[label(field)]"
