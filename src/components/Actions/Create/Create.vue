@@ -74,7 +74,8 @@ export default {
       // TODO: The then, catch could possibly be moved to the store using vuex-crud callbacks. Read #34 for docs - sgobotta
       this.$store.dispatch(resourceName, { data: this.resource })
         .then((res) => {
-          if (this.redirect && res.status === 200) {
+          const { status } = res
+          if ([200, 201].indexOf(status) !== -1) {
             Router.redirect({ router: this.$router, resource: this.name, view: this.redirect.view, id: res.data[this.redirect.idField] })
             return res
           }
@@ -98,7 +99,7 @@ export default {
     },
 
     args(field) {
-      const args = typeof(field) === 'string' ? { 'label': field, 'placeHolder': field } : field
+      const args = typeof(field) === 'string' ? { label: field, placeHolder: field } : field
       return args
     }
   }

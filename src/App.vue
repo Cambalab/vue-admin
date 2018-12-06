@@ -50,6 +50,24 @@ const fieldsArticleEdit = fieldsArticleCreate
 
 const resourceId = "id"
 
+// Use case of a parsed response using feathers
+// This has to be done because every server client returns different responses. - sgobotta
+//
+// const parseFeathersResponses = {
+//   parseList: (response) => {
+//     const { data } = response;
+//     return Object.assign({}, response, {
+//       data: data.data // expecting array of objects with IDs
+//     });
+//   },
+//   parseSingle: (response) => {
+//     const { data } = response;
+//     return Object.assign({}, response, {
+//       data // expecting object with ID
+//     });
+//   }
+// }
+
 export default {
   name: "App",
   components: {
@@ -62,7 +80,11 @@ export default {
       articlesShow,
       fieldsArticleCreate,
       fieldsArticleEdit,
-      resourceId
+      resourceId,
+      // #23 - To use the feathers server just add the parseResponses attribute
+      // below, pass ':parseResponses='parseResponses' to Resource in the
+      // template and update the resourceId to '_id'. - sgobotta
+      // parseResponses: parseFeathersResponses
     };
   }
 };

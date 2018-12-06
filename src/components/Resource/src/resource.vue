@@ -26,8 +26,16 @@ export default {
       type: Object,
       default: () => ({
         views: {
-          create: 'list'
+          create: 'list',
+          edit: 'show'
         }
+      })
+    },
+    parseResponses: {
+      type: Object,
+      default: () => ({
+        single: null,
+        list: null
       })
     }
   },
@@ -43,7 +51,9 @@ export default {
     }
     let module = createCrudModule({
       resource: this.name,
-      customUrlFn
+      customUrlFn,
+      idAttribute: this.resourceId,
+      ...this.parseResponses
     });
     this.$store.registerModule(this.name, module);
   },
@@ -84,7 +94,8 @@ export default {
     },
 
     bindEdit(path) {
-      return this.edit ? { path: `${path}/edit/:id`, name: `${this.name}/edit`, component: Edit, props: { name: this.name, fields: this.edit }} : []
+      const redirect = { idField: this.resourceId, view: this.redirect.views.edit }
+      return this.edit ? { path: `${path}/edit/:id`, name: `${this.name}/edit`, component: Edit, props: { name: this.name, fields: this.edit, redirect }} : []
     }
 
   },
