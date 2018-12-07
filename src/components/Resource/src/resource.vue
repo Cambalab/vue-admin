@@ -18,6 +18,10 @@ export default {
       type: String,
       default: 'id'
     },
+    apiUrl: {
+      type: String,
+      required: true
+    },
     redirect: {
       type: Object,
       default: () => ({
@@ -33,12 +37,13 @@ export default {
     };
   },
   created: function() {
+    const customUrlFn = (id) => {
+      const rootUrl =`${this.apiUrl}${this.name}/` // TODO: usar una constante para http://localhost:8081 - santiago
+      return id ? `${rootUrl}${id}` : rootUrl
+    }
     let module = createCrudModule({
       resource: this.name,
-      customUrlFn(id) {
-        const rootUrl = 'http://localhost:8080/api/articles/' // TODO: usar una constante para http://localhost:8081 - santiago
-        return id ? `${rootUrl}${id}` : rootUrl
-      }
+      customUrlFn
     });
     this.$store.registerModule(this.name, module);
   },

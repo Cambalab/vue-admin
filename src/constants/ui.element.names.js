@@ -24,16 +24,20 @@ export default {
   RESOURCE_CREATE_BUTTON: {
     with: ({ resourceName }) => `${resourceName}-create-button`
   },
-  // The container of every element of a List
-  RESOURCE_VIEW_ELEMENT_CONTAINER: {
-    with: ({ resourceName, view, index }) => `${resourceName}-${view}-element-container-${index}`
-  },
-  // A specific container of a Resource field inside an element of the List
+  // A specific container of a Resource field inside an element of List
   RESOURCE_VIEW_ELEMENT_FIELD: {
     with: ({ resourceName, view, field, index }) => {
       return index !== undefined
       ? `${resourceName}-${view}-element-${field}-${index}`
       : `${resourceName}-${view}-element-${field}`
     }
-  }
+  },
+
+  /**
+   * Create
+   */
+
+   RESOURCE_CREATE_SUBMIT_BUTTON: {
+     with: ({ resourceName, view }) => `${resourceName}-${view}-submit-button`
+   }
 }

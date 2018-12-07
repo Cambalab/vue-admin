@@ -9,7 +9,7 @@ describe('Create Test', () => {
     cy.visit('/#/articles/create')
   })
 
-  it('Articles Create View should render title: articles resource: create operation', () => {
+  it('Articles Create View should render title: Articles', () => {
     const createViewContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
       resourceName: 'articles',
       view: 'create'
@@ -21,8 +21,7 @@ describe('Create Test', () => {
       })
       const createViewTitleContainer = createViewContainer.find(`[name=${createViewTitleContainerName}]`)
       const createViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
-        resourceName: 'articles',
-        view: 'create'
+        resourceName: 'articles'
       })
 
       expect(createViewTitleContainer).to.contain(createViewTitleText)
@@ -31,7 +30,7 @@ describe('Create Test', () => {
 
   it('Articles Create View should redirect to the List View on an create submit', () => {
     // Creates an article
-    const article = Factory.createArticle({ id: 4 })
+    const article = Factory.createArticle()
     {
       // Inputs the article title
       const titleInputName = UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
@@ -39,7 +38,12 @@ describe('Create Test', () => {
         view: 'create',
         field: 'title'
       })
-      cy.get(`input[name=${titleInputName}]`).type(article.title)
+      const input = cy.get(`input[name=${titleInputName}]`)
+
+      // Types in the article title
+      input.type(article.title)
+      // Asserts the input contains the content
+      input.should('have.value', article.title)
     }
     {
       // Inputs the article content
@@ -48,7 +52,26 @@ describe('Create Test', () => {
         view: 'create',
         field: 'content'
       })
-      cy.get(`input[name=${contentInputName}]`).type(article.content)
+      const input = cy.get(`input[name=${contentInputName}]`)
+
+      // Types in the article content
+      input.type(article.content)
+      // Asserts the input contains the content
+      input.should('have.value', article.content)
+    }
+    {
+      const submitButtonName = UI_NAMES.RESOURCE_CREATE_SUBMIT_BUTTON.with({
+        resourceName: 'articles',
+        view: 'create'
+      })
+
+      cy.get(`button[name=${submitButtonName}]`).should((submitButton) => {
+        const submitButtonText = UI_CONTENT.CREATE_SUBMIT_BUTTON
+
+        expect(submitButton).to.contain(submitButtonText)
+      }).click()
+
+      cy.url().should('eq', 'http://localhost:8081/#/articles')
     }
   })
 })

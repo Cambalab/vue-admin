@@ -17,10 +17,11 @@ export default {
 
   // Any View Title (List, Show, Create, Edit)
   RESOURCE_VIEW_TITLE: {
-    with: ({ resourceName, view }) => `${resourceName} resource: ${view} operation`
+    with: ({ resourceName }) => `${resourceName}`
   },
   // Create action button
-  RESOURCE_CREATE_BUTTON: {
-    with: ({ resourceName }) => `Create ${resourceName}`
-  }
+  RESOURCE_CREATE_BUTTON: 'add',
+
+  // Create Save button
+  CREATE_SUBMIT_BUTTON: 'save'
 }

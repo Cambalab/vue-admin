@@ -1,53 +1,77 @@
 <template>
-  <div :name="UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })">
-    <h1 :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`">
-      {{UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })}}
-    </h1>
-    <div>
-      <router-link
-        :name="`${UI_NAMES.RESOURCE_CREATE_BUTTON.with({ resourceName })}`"
-        v-if="hasCreate"
-        :to="{ name: `${name}/create` }"
-      >
-        <button>{{UI_CONTENT.RESOURCE_CREATE_BUTTON.with({ resourceName })}}</button>
-      </router-link>
+  <v-card :name="UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })">
+    <div class="text-xs-center d-flex right">
+        <router-link
+          :name="`${UI_NAMES.RESOURCE_CREATE_BUTTON.with({ resourceName })}`"
+          v-if="hasCreate"
+          :to="{ name: `${name}/create` }">
+          <v-tooltip bottom>
+            <v-btn
+              icon
+              absolute
+              right
+              color="success"
+              slot="activator"
+              style="top:20px;">
+              <i class="v-icon material-icons">{{UI_CONTENT.RESOURCE_CREATE_BUTTON}}</i>
+            </v-btn>
+            <span>Create {{name}}</span>
+          </v-tooltip>
+        </router-link>
     </div>
-    <div
-      :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_CONTAINER.with({ resourceName, view, index})}`"
-      v-for="(resource, index) in resourceList"
-      :key="resource[resourceId]"
-    >
-      <router-link
-        :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: 'id', index })}`"
-        v-if="hasShow"
-        :to="{ name: `${name}/show`, params: { id: resource.id } }"
-      >
-        <h3>{{ resource.id }}</h3>
-      </router-link>
-      <h3
-        :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: 'id', index })}`"
-        v-else
-      >
-        {{ resource.id }}
-      </h3>
-      <Delete
-      :resourceId="resource[resourceId]"
-      :resourceName="name">
-      </Delete>
-      <EditButton
-        :resourceId="resource[resourceId]"
-        :resourceName="name">
-      </EditButton>
-      <component
-        :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index })}`"
-        v-for="field in fields"
-        :key="key(label(field))"
-        :is="type(field.type)"
-        v-bind:content="resource[label(field)]"
-        v-bind="args(field)">
-      </component>
-    </div>
-  </div>
+    <v-card-title
+      :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`"
+      primary-title>
+      <h3 class="headline mb-0 text-capitalize">{{name}}</h3>
+    </v-card-title>
+
+    <v-data-table
+      :headers="headers"
+      :items="resourceList"
+      class="elevation-1">
+      <template
+        slot="items"
+        slot-scope="props"
+        >
+        <td>
+          <router-link
+            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: 'id', index: props.index })}`"
+            v-if="hasShow"
+            :to="{ name: `${name}/show`, params: { id: props.item[resourceId] } }">
+            {{ props.item[resourceId] }}
+          </router-link>
+          <span
+            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: 'id', index: props.index })}`"
+            v-else>
+            {{ props.item[resourceId] }}
+          </span>
+        </td>
+        <td class="text-xs-left"
+          v-for="field in fields"
+          :key="key(label(field))"
+          >
+          <component
+            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index })}`"
+            :is="type(field.type)"
+            v-bind:content="props.item[label(field)]"
+            v-bind="args(field)">
+          </component>
+        </td>
+        <td>
+          <EditButton
+            :resourceId="props.item[resourceId]"
+            :resourceName="name">
+          </EditButton>
+        </td>
+        <td class="text-xs-right">
+          <Delete
+            :resourceId="props.item[resourceId]"
+            :resourceName="name">
+          </Delete>
+        </td>
+      </template>
+    </v-data-table>
+  </v-card>
 </template>
 
 
@@ -88,6 +112,38 @@ export default {
     }
   },
   computed: {
+    headers: function () {
+      let newHeaders = [
+        {
+          text: "ID",
+          align: 'left',
+          sortable: true,
+          width: 10,
+          value: this.resourceId
+        }
+      ];
+      this.fields.forEach((field) => {
+        newHeaders.push({
+          text: this.label(field),
+          align: field.align || 'left',
+          sortable: field.sortable || false,
+          value: this.label(field)
+        })
+      })
+      newHeaders.push({
+        text: "Edit",
+        align: 'center',
+        sortable: false,
+        width: 10
+      });
+      newHeaders.push({
+        text: "Delete",
+        align: 'center',
+        sortable: false,
+        width: 10
+      });
+      return newHeaders;
+    },
     resourceList: function() {
       const resourceName = this.name + "/list";
       return this.$store.getters[resourceName];

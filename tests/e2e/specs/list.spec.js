@@ -8,7 +8,7 @@ describe('List Test', () => {
     cy.visit('/#/articles')
   })
 
-  it('Articles List View should render title: articles resource: list operation', () => {
+  it('Articles List View should render title', () => {
     const listViewContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
       resourceName: 'articles',
       view: 'list'
@@ -20,8 +20,7 @@ describe('List Test', () => {
       })
       const listViewTitleContainer = listViewContainer.find(`[name=${listViewTitleContainerName}]`)
       const listViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
-        resourceName: 'articles',
-        view: 'list'
+        resourceName: 'articles'
       })
 
       expect(listViewTitleContainer).to.contain(listViewTitleText)
@@ -33,23 +32,20 @@ describe('List Test', () => {
       resourceName: 'articles'
     })
     cy.get(`a[name="${createButtonName}"]`).should((createButtonLink) => {
-      const createButtonText = UI_CONTENT.RESOURCE_CREATE_BUTTON.with({
-        resourceName: 'articles'
-      })
+      const createButtonText = UI_CONTENT.RESOURCE_CREATE_BUTTON
 
       expect(createButtonLink).to.contain(createButtonText)
     })
   })
 
-  it('Articles List View should render three articles links with ids: 1, 2, 3', () => {
+  it('Articles List View should render three articles links with ids', () => {
     const articlesIndexes = [0, 1, 2];
     articlesIndexes.forEach((articleIndex) => {
-      const listElementContainerName = UI_NAMES.RESOURCE_VIEW_ELEMENT_CONTAINER.with({
+      const listContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
         resourceName: 'articles',
-        view: 'list',
-        index: articleIndex
+        view: 'list'
       })
-      cy.get(`div[name=${listElementContainerName}]`).should((listElementContainer) => {
+      cy.get(`div[name=${listContainerName}]`).should((listElementContainer) => {
         const listElementFieldName = UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
           resourceName: 'articles',
           view: 'list',
@@ -68,13 +64,13 @@ describe('List Test', () => {
     const createButtonName = UI_NAMES.RESOURCE_CREATE_BUTTON.with({
       resourceName: 'articles'
     })
+
     cy.get(`a[name="${createButtonName}"]`).should((createButtonLink) => {
-      const createButtonText = UI_CONTENT.RESOURCE_CREATE_BUTTON.with({
-        resourceName: 'articles'
-      })
+      const createButtonText = UI_CONTENT.RESOURCE_CREATE_BUTTON
 
       expect(createButtonLink).to.contain(createButtonText)
-    }).click()
+      // We force click the button because it's width is 0 - santiago
+    }).click({ force: true })
 
     cy.url().should('eq', 'http://localhost:8081/#/articles/create')
   })

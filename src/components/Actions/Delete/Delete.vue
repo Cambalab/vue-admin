@@ -1,8 +1,14 @@
 <template>
   <div>
-    <button @click="onDelete()">
-      <i class="v-icon material-icons">delete</i>
-    </button>
+    <v-tooltip bottom>
+      <v-btn
+        @click="onDelete()"
+        slot="activator"
+        icon>
+        <i class="v-icon material-icons">delete</i>
+      </v-btn>
+      <span>Delete</span>
+    </v-tooltip>
   </div>
 </template>
 
@@ -16,7 +22,7 @@ export default {
       default: null
     },
     resourceId: {
-      type: Number
+      type: [Number, String]
     },
     resourceName: {
       type: String,
@@ -31,7 +37,8 @@ export default {
   methods: {
     onDelete() {
       const resourceName = this.resourceName + "/destroy";
-      return this.$store.dispatch(resourceName, { id: this.resourceId });
+      this.$store.dispatch(resourceName, { id: this.resourceId });
+      return this.$router.push({ path: `/${this.resourceName}`});
     }
   },
 };
