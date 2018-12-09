@@ -41,6 +41,6 @@ describe('UI Test', () => {
     })
     cy.get(`a[name=${drawerArticlesTileName}]`).click()
 
-    cy.url().should('eq', 'http://localhost:8081/#/articles')
+    cy.url().should('include', '/articles')
   })
 })

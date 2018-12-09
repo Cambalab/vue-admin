@@ -4,9 +4,13 @@ const Factory = require('../factory')
 const UI_CONTENT = require('../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../src/constants/ui.element.names')
 
+const { getByName } = UI_NAMES
+
 describe('Create Test', () => {
   it('Visits the app root url', () => {
     cy.visit('/#/articles/create')
+
+    cy.url().should('include', 'articles/create')
   })
 
   it('Articles Create View should render title: Articles', () => {
@@ -38,7 +42,8 @@ describe('Create Test', () => {
         view: 'create',
         field: 'title'
       })
-      const input = cy.get(`input[name=${titleInputName}]`)
+
+      const input = cy.get(getByName({ type: 'input', name: titleInputName }))
 
       // Types in the article title
       input.type(article.title)

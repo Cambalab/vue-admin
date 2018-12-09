@@ -6,6 +6,8 @@ const UI_NAMES = require('../../../src/constants/ui.element.names')
 describe('List Test', () => {
   it('Visits the List View', () => {
     cy.visit('/#/articles')
+
+    cy.url().should('include', '/articles')
   })
 
   it('Articles List View should render title', () => {
@@ -72,6 +74,6 @@ describe('List Test', () => {
       // We force click the button because it's width is 0 - santiago
     }).click({ force: true })
 
-    cy.url().should('eq', 'http://localhost:8081/#/articles/create')
+    cy.url().should('include', '/articles/create')
   })
 })
