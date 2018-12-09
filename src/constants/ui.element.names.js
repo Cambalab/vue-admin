@@ -2,12 +2,6 @@
 export default {
 
   /**
-   * Functions
-   */
-
-   queryElementByProp: ({ type = '', prop, value }) => `${type}[${prop}=${value}]`,
-
-  /**
    * UI component
    */
   MAIN_TOOLBAR_TITLE: 'main-toolbar-title',

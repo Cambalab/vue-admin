@@ -1,9 +1,10 @@
 // https://docs.cypress.io/api/introduction/api.html
 
+const { queryElementByProp } = require('../helpers')
+
 const UI_CONTENT = require('../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../src/constants/ui.element.names')
 
-const { queryElementByProp } = UI_NAMES
 
 describe('UI Test', () => {
   it('Visits the app root url', () => {
@@ -16,7 +17,11 @@ describe('UI Test', () => {
 
   it('Toolbar title should be Vue Admin XXX', () => {
     const mainToolbarTitleName = UI_NAMES.MAIN_TOOLBAR_TITLE
-    const mainToolbarTitleElement = queryElementByProp({ type: 'div', prop: 'name', value: mainToolbarTitleName })
+    const mainToolbarTitleElement = queryElementByProp({
+      type: 'div',
+      prop: 'name',
+      value: mainToolbarTitleName
+    })
 
     const expectedMainToolbarTitleText = UI_CONTENT.MAIN_TOOLBAR_TITLE
 
@@ -27,7 +32,11 @@ describe('UI Test', () => {
 
   it('Toolbar Avatar should show default user name JUAN', () => {
     const mainToolbarUserAvatarName = UI_NAMES.MAIN_TOOLBAR_USER_AVATAR
-    const mainToolbarUserAvatarElement = queryElementByProp({ type: 'div', prop: 'name', value: mainToolbarUserAvatarName})
+    const mainToolbarUserAvatarElement = queryElementByProp({
+      type: 'div',
+      prop: 'name',
+      value: mainToolbarUserAvatarName
+    })
 
     const expectedMainToolbarUserAvatarNameText = UI_CONTENT.MAIN_TOOLBAR_USER_AVATAR_NAME
 
@@ -39,7 +48,11 @@ describe('UI Test', () => {
   it('Toolbar hamburger button should open drawer on click', () => {
     const mainToolbarTitleName = UI_NAMES.MAIN_TOOLBAR_TITLE
 
-    const mainToolbarTitleElement = queryElementByProp({ type: 'div', prop: 'name', value: mainToolbarTitleName})
+    const mainToolbarTitleElement = queryElementByProp({
+      type: 'div',
+      prop: 'name',
+      value: mainToolbarTitleName
+    })
     cy.get(`${mainToolbarTitleElement} button`).click()
   })
 
@@ -48,7 +61,11 @@ describe('UI Test', () => {
       resourceName: 'articles'
     })
 
-    const drawerArticlesTileElement = queryElementByProp({ type: 'a', prop: 'name', value: drawerArticlesTileName })
+    const drawerArticlesTileElement = queryElementByProp({
+      type: 'a',
+      prop: 'name',
+      value: drawerArticlesTileName
+    })
     cy.get(drawerArticlesTileElement).click()
 
     cy.url().should('include', '/articles')
