@@ -10,7 +10,7 @@
         <v-layout wrap>
           <v-flex xs8>
             <component
-              :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field)})}`"
+              :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field) })}`"
               v-for="field in fields"
               :key="key(label(field))"
               :is="type(field.type)"

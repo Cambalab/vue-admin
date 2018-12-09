@@ -2,6 +2,12 @@
 export default {
 
   /**
+   * Functions
+   */
+
+   getByName: ({ type, name }) => `${type}[name=${name}]`,
+
+  /**
    * UI component
    */
   MAIN_TOOLBAR_TITLE: 'main-toolbar-title',
