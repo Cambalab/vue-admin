@@ -5,7 +5,7 @@ export default {
    * Functions
    */
 
-   getByName: ({ type, name }) => `${type}[name=${name}]`,
+   queryElementByProp: ({ type = '', prop, value }) => `${type}[${prop}=${value}]`,
 
   /**
    * UI component

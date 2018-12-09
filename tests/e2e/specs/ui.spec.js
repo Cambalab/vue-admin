@@ -3,6 +3,8 @@
 const UI_CONTENT = require('../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../src/constants/ui.element.names')
 
+const { queryElementByProp } = UI_NAMES
+
 describe('UI Test', () => {
   it('Visits the app root url', () => {
     cy.visit('/')
@@ -14,32 +16,40 @@ describe('UI Test', () => {
 
   it('Toolbar title should be Vue Admin XXX', () => {
     const mainToolbarTitleName = UI_NAMES.MAIN_TOOLBAR_TITLE
-    cy.get(`div[name=${mainToolbarTitleName}]`).should((mainToolbarTitle) => {
-      const mainToolbarTitleText = UI_CONTENT.MAIN_TOOLBAR_TITLE
+    const mainToolbarTitleElement = queryElementByProp({ type: 'div', prop: 'name', value: mainToolbarTitleName })
 
-      expect(mainToolbarTitle).to.contain(mainToolbarTitleText)
+    const expectedMainToolbarTitleText = UI_CONTENT.MAIN_TOOLBAR_TITLE
+
+    cy.get(mainToolbarTitleElement).should((mainToolbarTitle) => {
+      expect(mainToolbarTitle).to.contain(expectedMainToolbarTitleText)
     })
   })
 
   it('Toolbar Avatar should show default user name JUAN', () => {
     const mainToolbarUserAvatarName = UI_NAMES.MAIN_TOOLBAR_USER_AVATAR
-    cy.get(`div[name=${mainToolbarUserAvatarName}]`).should((div) => {
-      const mainToolbarUserAvatarNameText = UI_CONTENT.MAIN_TOOLBAR_USER_AVATAR_NAME
+    const mainToolbarUserAvatarElement = queryElementByProp({ type: 'div', prop: 'name', value: mainToolbarUserAvatarName})
 
-      expect(div).to.contain(mainToolbarUserAvatarNameText)
+    const expectedMainToolbarUserAvatarNameText = UI_CONTENT.MAIN_TOOLBAR_USER_AVATAR_NAME
+
+    cy.get(mainToolbarUserAvatarElement).should((div) => {
+      expect(div).to.contain(expectedMainToolbarUserAvatarNameText)
     })
   })
 
   it('Toolbar hamburger button should open drawer on click', () => {
     const mainToolbarTitleName = UI_NAMES.MAIN_TOOLBAR_TITLE
-    cy.get(`div[name=${mainToolbarTitleName}] button`).click()
+
+    const mainToolbarTitleElement = queryElementByProp({ type: 'div', prop: 'name', value: mainToolbarTitleName})
+    cy.get(`${mainToolbarTitleElement} button`).click()
   })
 
   it('Drawer should redirect to Articles list view on article tile click', () => {
     const drawerArticlesTileName = UI_NAMES.DRAWER_RESOURCE_TILE.with({
       resourceName: 'articles'
     })
-    cy.get(`a[name=${drawerArticlesTileName}]`).click()
+
+    const drawerArticlesTileElement = queryElementByProp({ type: 'a', prop: 'name', value: drawerArticlesTileName })
+    cy.get(drawerArticlesTileElement).click()
 
     cy.url().should('include', '/articles')
   })
