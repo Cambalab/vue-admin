@@ -4,7 +4,7 @@ const Factory = require('../factory')
 const UI_CONTENT = require('../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../src/constants/ui.element.names')
 
-const { getByName } = UI_NAMES
+const { queryElementByProp } = UI_NAMES
 
 describe('Create Test', () => {
   it('Visits the app root url', () => {
@@ -18,12 +18,17 @@ describe('Create Test', () => {
       resourceName: 'articles',
       view: 'create'
     })
-    cy.get(`div[name=${createViewContainerName}]`).should((createViewContainer) => {
+
+    const createViewContainerElement = queryElementByProp({ type: 'div', prop: 'name', value: createViewContainerName})
+
+    cy.get(createViewContainerElement).should((createViewContainer) => {
       const createViewTitleContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({
         resourceName: 'articles',
         view: 'create'
       })
-      const createViewTitleContainer = createViewContainer.find(`[name=${createViewTitleContainerName}]`)
+      const createViewTitleContainerElement = queryElementByProp({ prop: 'name', value: createViewTitleContainerName })
+
+      const createViewTitleContainer = createViewContainer.find(createViewTitleContainerElement)
       const createViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
         resourceName: 'articles'
       })
@@ -43,7 +48,8 @@ describe('Create Test', () => {
         field: 'title'
       })
 
-      const input = cy.get(getByName({ type: 'input', name: titleInputName }))
+      const inputElement = queryElementByProp({ type: 'input', prop: 'name', value: titleInputName })
+      const input = cy.get(inputElement)
 
       // Types in the article title
       input.type(article.title)
@@ -57,7 +63,9 @@ describe('Create Test', () => {
         view: 'create',
         field: 'content'
       })
-      const input = cy.get(`input[name=${contentInputName}]`)
+
+      const inputElement = queryElementByProp({ type: 'input', prop: 'name', value: contentInputName })
+      const input = cy.get(inputElement)
 
       // Types in the article content
       input.type(article.content)
@@ -70,13 +78,15 @@ describe('Create Test', () => {
         view: 'create'
       })
 
-      cy.get(`button[name=${submitButtonName}]`).should((submitButton) => {
+      const buttonElement = queryElementByProp({ type: 'button', prop: 'name', value: submitButtonName })
+
+      cy.get(buttonElement).should((submitButton) => {
         const submitButtonText = UI_CONTENT.CREATE_SUBMIT_BUTTON
 
         expect(submitButton).to.contain(submitButtonText)
       }).click()
 
-      cy.url().should('eq', 'http://localhost:8081/#/articles')
+      cy.url().should('include', '/articles')
     }
   })
 })
