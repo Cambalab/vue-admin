@@ -1,5 +1,6 @@
 <template>
   <v-text-field
+    :name="name"
     v-model="inputValue"
     :label="placeHolder"
     required>
@@ -9,12 +10,16 @@
 <script>
 export default {
   name: "Input",
-  props:{
+  props: {
     placeHolder: {
       type: String,
       default: "Input"
     },
-    value: [String, Number]
+    value: [String, Number],
+    name: {
+      type: String,
+      default: 'va-input'
+    }
   },
   data() {
     return {

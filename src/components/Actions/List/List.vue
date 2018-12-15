@@ -1,7 +1,10 @@
 <template>
-  <v-card>
+  <v-card :name="UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })">
     <div class="text-xs-center d-flex right">
-        <router-link v-if="hasCreate" :to="{ name: `${name}/create` }">
+        <router-link
+          :name="`${UI_NAMES.RESOURCE_CREATE_BUTTON.with({ resourceName })}`"
+          v-if="hasCreate"
+          :to="{ name: `${name}/create` }">
           <v-tooltip bottom>
             <v-btn
               icon
@@ -10,13 +13,15 @@
               color="success"
               slot="activator"
               style="top:20px;">
-              <i class="v-icon material-icons">add</i>
+              <i class="v-icon material-icons">{{UI_CONTENT.RESOURCE_CREATE_BUTTON}}</i>
             </v-btn>
             <span>Create {{name}}</span>
           </v-tooltip>
         </router-link>
     </div>
-    <v-card-title primary-title>
+    <v-card-title
+      :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`"
+      primary-title>
       <h3 class="headline mb-0 text-capitalize">{{name}}</h3>
     </v-card-title>
 
@@ -24,12 +29,20 @@
       :headers="headers"
       :items="resourceList"
       class="elevation-1">
-      <template slot="items" slot-scope="props">
+      <template
+        slot="items"
+        slot-scope="props"
+        >
         <td>
-          <router-link v-if="hasShow" :to="{ name: `${name}/show`, params: { id: props.item[resourceId] } }">
+          <router-link
+            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: 'id', index: props.index })}`"
+            v-if="hasShow"
+            :to="{ name: `${name}/show`, params: { id: props.item[resourceId] } }">
             {{ props.item[resourceId] }}
           </router-link>
-          <span v-else>
+          <span
+            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: 'id', index: props.index })}`"
+            v-else>
             {{ props.item[resourceId] }}
           </span>
         </td>
@@ -38,7 +51,7 @@
           :key="key(label(field))"
           >
           <component
-            :name="label(field)"
+            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index })}`"
             :is="type(field.type)"
             v-bind:content="props.item[label(field)]"
             v-bind="args(field)">
@@ -63,6 +76,8 @@
 
 
 <script>
+import UI_CONTENT from '../../../constants/ui.content.default'
+import UI_NAMES from '../../../constants/ui.element.names'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents";
 import { EditButton, Delete } from "../../Actions";
@@ -88,7 +103,14 @@ export default {
       type: String
     }
   },
-
+  data() {
+    return {
+      resourceName: this.name,
+      view: 'list',
+      UI_CONTENT,
+      UI_NAMES
+    }
+  },
   computed: {
     headers: function () {
       let newHeaders = [
