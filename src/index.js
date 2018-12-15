@@ -1,8 +1,7 @@
 import Admin from './components/Admin';
-import Ui from './components/Ui';
-import Core from './components/Core';
+import Resource from './components/Resource'
 
-const components = [ Admin, Core, Ui ];
+const components = [ Admin, Resource ];
 
 const install = function(Vue) {
   components.forEach(component => {
@@ -14,11 +13,10 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-module.exports = {
+const VueAdmin = {
   version: '0.0.1',
   Admin,
-  Ui,
-  Core
+  Resource
 };
 
-module.exports.default = module.exports;
+export default VueAdmin;
