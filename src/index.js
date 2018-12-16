@@ -1,5 +1,6 @@
 import Admin from './components/Admin';
 import Resource from './components/Resource'
+import { version } from '../package.json'
 
 const components = [ Admin, Resource ];
 
@@ -14,7 +15,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 const VueAdmin = {
-  version: '0.0.1',
+  version,
   Admin,
   Resource
 };
