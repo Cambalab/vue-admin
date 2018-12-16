@@ -1,0 +1,10 @@
+# Ignore everything by default
+*
+
+# Keep source
+!/src/**/*
+/src/main.js
+/src/App.vue
+
+# Keep built files
+!/dist/**/*
