@@ -1,3 +1,8 @@
+
+<div style="text-align: center">
+  <img style="text-align: center" src="public/logo.png" width="200">
+</div>
+
 ## Vue-admin
 
 A frontend Framework for building `admin applications` running in the browser
