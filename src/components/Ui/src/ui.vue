@@ -65,36 +65,9 @@
     <v-toolbar class="success" dark app fixed clipped-left dense>
       <v-toolbar-title :name="UI_NAMES.MAIN_TOOLBAR_TITLE">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        {{UI_CONTENT.MAIN_TOOLBAR_TITLE}}
+        {{title}}
       </v-toolbar-title>
       <v-spacer></v-spacer>
-        <v-toolbar-items>
-          <v-btn flat>
-            <v-avatar :name="UI_NAMES.MAIN_TOOLBAR_USER_AVATAR" size="36px">
-              {{UI_CONTENT.MAIN_TOOLBAR_USER_AVATAR_NAME}}
-            </v-avatar>
-          </v-btn>
-          <v-btn flat @click="onLogout"><v-icon left dark>exit_to_app</v-icon></v-btn>
-        </v-toolbar-items>
-        <div>
-          <v-btn icon>
-            <v-icon>apps</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>notifications</v-icon>
-          </v-btn>
-        </div>
-        <v-menu :nudge-width="100">
-          <v-toolbar-title slot="activator">
-            <span>{{selectedLocale}}</span>
-            <v-icon dark>arrow_drop_down</v-icon>
-          </v-toolbar-title>
-          <v-list>
-            <v-list-tile v-for="locale in locales" :key="locale" @click="setLocale(locale)">
-              <v-list-tile-title v-text="locale"></v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
     </v-toolbar>
     <main>
       <v-content>
@@ -113,7 +86,7 @@ import UI_NAMES from '../../../constants/ui.element.names'
 export default {
   name: "Ui",
   props: {
-    msg: String
+    title: String
   },
   data() {
     return {
@@ -121,7 +94,6 @@ export default {
       locales: ["EN", "ID"],
       drawer: false,
       menuItems: [
-        { icon: "settings", title: "Example Form", link: "/example-form" },
         {
           icon: "keyboard_arrow_up",
           "icon-alt": "keyboard_arrow_down",
@@ -139,20 +111,18 @@ export default {
     let whitelist = ["resources/addRoute"];
     this.$store.subscribe(mutation => {
       if (whitelist.includes(mutation.type)) {
-        this.menuItems[1].children.push({
-          icon: "home",
-          title: mutation.payload.name,
-          link: mutation.payload.path
-        });
+        this.menuItems.forEach(item => {
+          item.children.push({
+            icon: "list",
+            title: mutation.payload.name,
+            link: mutation.payload.path
+          });
+        })
       }
     });
   },
   computed: {},
   methods: {
-    onLogout() {
-      // eslint-disable-next-line
-      console.log("logout");
-    }
   }
 };
 </script>

@@ -51,7 +51,7 @@
           :key="key(label(field))"
           >
           <component
-            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index })}`"
+            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index: props.index })}`"
             :is="type(field.type)"
             v-bind:content="props.item[label(field)]"
             v-bind="args(field)">
