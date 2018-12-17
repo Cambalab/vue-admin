@@ -46,7 +46,7 @@ export default {
   },
   created: function() {
     const customUrlFn = (id) => {
-      const rootUrl =`${this.apiUrl}${this.name}/` // TODO: usar una constante para http://localhost:8081 - santiago
+      const rootUrl =`${this.apiUrl}${this.name}/`
       return id ? `${rootUrl}${id}` : rootUrl
     }
     let module = createCrudModule({
