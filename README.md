@@ -7,12 +7,6 @@ For routing Vue-Admin uses `vue-router`.
 
 Vue-Admin-Js uses VueJs and VuEx, and its based on `Vuex-Crud` library to create the resources.
 
-## Features
-
-- Customize dashboard, menu, layout
-- Leverages the best libraries in the React ecosystem (Redux, redux-form, redux-saga, material-ui, recompose)
-- Can connect to multiple backends
-
 ## Setting Up
 
 ```bash
