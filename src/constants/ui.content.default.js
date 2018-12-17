@@ -7,7 +7,7 @@ export default {
    * UI component
    */
   // The Admin name in the Toolbar
-  MAIN_TOOLBAR_TITLE: 'Admin XXX',
+  MAIN_TOOLBAR_TITLE: 'Vue Admin',
   // The user name in the Toolbar
   MAIN_TOOLBAR_USER_AVATAR_NAME: 'Juan',
 
