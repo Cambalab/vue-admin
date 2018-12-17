@@ -1,16 +1,20 @@
 <template>
-    <div>
-        <component :is="appLayout">
-          <slot></slot>
-        </component>
-    </div>
+  <div>
+    <component
+      :is="appLayout"
+      :title="title"
+    >
+      <slot></slot>
+    </component>
+  </div>
 </template>
 
 <script>
 export default {
   name: "Core",
   props: {
-    appLayout: {}
+    appLayout: {},
+    title: String,
   },
   components: {}
 };

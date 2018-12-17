@@ -15,7 +15,7 @@ describe('UI Test', () => {
     cy.title().should('eq', UI_CONTENT.MAIN_TITLE)
   })
 
-  it('Toolbar title should be Vue Admin XXX', () => {
+  it('Toolbar title should be Vue Admin', () => {
     const mainToolbarTitleName = UI_NAMES.MAIN_TOOLBAR_TITLE
     const mainToolbarTitleElement = queryElementByProp({
       type: 'div',
@@ -27,21 +27,6 @@ describe('UI Test', () => {
 
     cy.get(mainToolbarTitleElement).should((mainToolbarTitle) => {
       expect(mainToolbarTitle).to.contain(expectedMainToolbarTitleText)
-    })
-  })
-
-  it('Toolbar Avatar should show default user name JUAN', () => {
-    const mainToolbarUserAvatarName = UI_NAMES.MAIN_TOOLBAR_USER_AVATAR
-    const mainToolbarUserAvatarElement = queryElementByProp({
-      type: 'div',
-      prop: 'name',
-      value: mainToolbarUserAvatarName
-    })
-
-    const expectedMainToolbarUserAvatarNameText = UI_CONTENT.MAIN_TOOLBAR_USER_AVATAR_NAME
-
-    cy.get(mainToolbarUserAvatarElement).should((div) => {
-      expect(div).to.contain(expectedMainToolbarUserAvatarNameText)
     })
   })
 
