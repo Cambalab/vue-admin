@@ -37,6 +37,7 @@
               v-for="(child, i) in item.children"
               :key="i"
               :to="child.link"
+              :name="`${UI_NAMES.DRAWER_RESOURCE_TILE.with({ resourceName: child.title })}`"
             >
               <v-list-tile-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
@@ -62,40 +63,16 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar class="success" dark app fixed clipped-left dense>
-      <v-toolbar-title>
+      <v-toolbar-title :name="UI_NAMES.MAIN_TOOLBAR_TITLE">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        Admin XXX
+        {{title}}
       </v-toolbar-title>
       <v-spacer></v-spacer>
-        <v-toolbar-items>
-          <v-btn flat>
-            <v-avatar size="36px">Juan</v-avatar>
-          </v-btn>
-          <v-btn flat @click="onLogout"><v-icon left dark>exit_to_app</v-icon></v-btn>
-        </v-toolbar-items>
-        <div>
-          <v-btn icon>
-            <v-icon>apps</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>notifications</v-icon>
-          </v-btn>
-        </div>
-        <v-menu :nudge-width="100">
-          <v-toolbar-title slot="activator">
-            <span>{{selectedLocale}}</span>
-            <v-icon dark>arrow_drop_down</v-icon>
-          </v-toolbar-title>
-          <v-list>
-            <v-list-tile v-for="locale in locales" :key="locale" @click="setLocale(locale)">
-              <v-list-tile-title v-text="locale"></v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
     </v-toolbar>
     <main>
       <v-content>
         <v-container fluid>
+          <slot></slot>
         </v-container>
       </v-content>
     </main>
@@ -103,45 +80,51 @@
 </template>
 
 <script>
+import UI_CONTENT from '../../../constants/ui.content.default'
+import UI_NAMES from '../../../constants/ui.element.names'
+
 export default {
-  name: 'Ui',
+  name: "Ui",
   props: {
-    msg: String
+    title: String
   },
-  data () {
+  data() {
     return {
-      selectedLocale: 'EN',
-      locales: [
-        'EN', 'ID'
-      ],
+      selectedLocale: "EN",
+      locales: ["EN", "ID"],
       drawer: false,
       menuItems: [
-        { icon: 'settings', title: 'Example Form', link: '/example-form' },
         {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          title: 'Crud',
+          icon: "keyboard_arrow_up",
+          "icon-alt": "keyboard_arrow_down",
+          title: "Crud",
           model: true,
-          children: [
-            { icon: 'home', title: 'Party', link: '/party' },
-            { icon: 'home', title: 'Notes', link: '/notes' },
-            { icon: 'announcement', title: 'Notes2', link: '/notes2' }
-          ]
+          children: []
         }
-      ]
-    }
+      ],
+      UI_CONTENT,
+      UI_NAMES
+    };
   },
-  created () {
+  mounted() {
+    // Listen to addRoutes mutations
+    let whitelist = ["resources/addRoute"];
+    this.$store.subscribe(mutation => {
+      if (whitelist.includes(mutation.type)) {
+        this.menuItems.forEach(item => {
+          item.children.push({
+            icon: "list",
+            title: mutation.payload.name,
+            link: mutation.payload.path
+          });
+        })
+      }
+    });
   },
-  computed: {
-  },
+  computed: {},
   methods: {
-    onLogout () {
-      // eslint-disable-next-line
-      console.log('logout');
-    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
