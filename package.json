@@ -1,6 +1,6 @@
 {
   "name": "vue-admin-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An open source frontend Framework for building admin applications running in the browser, using ES6, Vue.js and Vuetify.js",
   "license": "GPL-3.0",
   "author": "Camba <info@camba.coop>",
