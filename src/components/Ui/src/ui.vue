@@ -123,10 +123,6 @@ export default {
   },
   computed: {},
   methods: {
-    onLogout() {
-      // eslint-disable-next-line
-      console.log("logout");
-    }
   }
 };
 </script>
