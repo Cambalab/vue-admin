@@ -80,7 +80,18 @@ export default {
     },
 
     bindTest(path) {
-      return { path: `${path}/test`, name: `${this.name}/test`, component: this.customCreate, props: { name: this.name } }
+      return {
+        path: `${path}/test`,
+        name: `${this.name}/test`,
+        component: this.customCreate,
+        props: {
+          va: {
+            resourceName: this.name,
+            resourceId: this.resourceId,
+            redirectView: this.redirect.views.create
+          }
+        }
+      }
     },
 
     bindList(path) {
