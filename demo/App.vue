@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import Admin from "./components/Admin";
-import Resource from "./components/Resource";
-import CustomCreate from './CustomCreate.vue'
+import Admin from "../src/components/Admin";
+import Resource from "../src/components/Resource";
+import CustomCreate from './components/CustomCreate.vue'
 
 const articlesList = [
   {
