@@ -64,12 +64,14 @@
 </template>
 <script>
 
+// Soon to be replaced using 'dependency injection' with Resource, so that
+// $store and $router don't have to be passed through functions - sgobotta
+import { getEntity, updateEntity, submitEntity } from './store/form.utils'
 import {
   ButtonWrapper,
   SimpleFormWrapper,
   TextInputWrapper
 } from './components/Wrappers'
-import Router from './router'
 
 export default {
   name: 'CustomCreate',
@@ -79,8 +81,8 @@ export default {
     TextInputWrapper
   },
   props: {
-    name: {
-      type: String,
+    va: {
+      type: Object,
       required: true
     }
   },
@@ -89,29 +91,20 @@ export default {
   },
   computed: {
     entity () {
-      return this.$store.state.entities.createForm.magazines
+      return getEntity({ store: this.$store, resourceName: this.va.resourceName })
     }
   },
   methods: {
     storeValue(value, key) {
-      const moduleName = 'entities/updateCreateForm';
-      this.$store.commit(moduleName, { value, key, entity: this.name });
+      updateEntity({ store: this.$store, value, key, resourceName: this.va.resourceName })
     },
     submit() {
-      const resourceName = this.name + "/create";
-      // TODO: The then, catch could possibly be moved to the store using vuex-crud callbacks. Read #34 for docs - sgobotta
-      this.$store.dispatch(resourceName, { data: this.entity })
-        .then((res) => {
-          const { status } = res
-          if ([200, 201].indexOf(status) !== -1) {
-            Router.redirect({ router: this.$router, resource: this.name, view: 'list', id: 'id' })
-            return res
-          }
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error(err)
-        })
+      submitEntity({
+        store: this.$store,
+        resourceName: this.va.resourceName,
+        data: this.entity,
+        redirect: { router: this.$router, view: this.va.redirectView }
+      })
     }
   }
 };
