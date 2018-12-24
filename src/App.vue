@@ -17,6 +17,7 @@
         :create='fieldsMagazineCreate'
         :edit='fieldsMagazineEdit'
         :resourceId='resourceId'
+        :customCreate='CustomCreate'
         apiUrl='http://localhost:8080/api/'
         >
       </Resource>
@@ -26,6 +27,7 @@
 <script>
 import Admin from "./components/Admin";
 import Resource from "./components/Resource";
+import CustomCreate from './CustomCreate.vue'
 
 const articlesList = [
   {
@@ -127,7 +129,8 @@ export default {
       magazinesList,
       magazinesShow,
       fieldsMagazineCreate,
-      fieldsMagazineEdit
+      fieldsMagazineEdit,
+      CustomCreate
       // #23 - To use the feathers server just add the parseResponses attribute
       // below, pass ':parseResponses='parseResponses' to Resource in the
       // template and update the resourceId to '_id'. - sgobotta
