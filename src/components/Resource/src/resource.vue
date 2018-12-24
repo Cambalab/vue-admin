@@ -5,6 +5,7 @@
 <script>
 import { List, Show, Create, Edit } from "../../Actions";
 import createCrudModule from "vuex-crud";
+import createUtils from '../../../store/utils/create.utils'
 
 export default {
   name: "Resource",
@@ -74,21 +75,29 @@ export default {
       routes.push(this.bindShow(path));
       routes.push(this.bindCreate(path));
       routes.push(this.bindEdit(path));
-      routes.push(this.bindTest(path));
+      routes.push(this.bindNewCreateView(path));
 
       this.$router.addRoutes(routes);
     },
 
-    bindTest(path) {
+    bindNewCreateView(path) {
+      const resourceName = this.name
+      const resourceIdName = this.resourceId
+      const utils = createUtils({
+        redirectView: this.redirect.views.create,
+        resourceIdName,
+        resourceName,
+        router: this.$router,
+        store: this.$store
+      })
       return {
         path: `${path}/test`,
         name: `${this.name}/test`,
         component: this.customCreate,
         props: {
           va: {
-            resourceName: this.name,
-            resourceId: this.resourceId,
-            redirectView: this.redirect.views.create
+            resourceName,
+            ...utils
           }
         }
       }

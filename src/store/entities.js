@@ -4,9 +4,9 @@ export const entities = {
     createForm: {}
   },
   mutations: {
-    updateCreateForm({ createForm }, payload) {
-      createForm[payload.entity] = createForm[payload.entity] || {}
-      createForm[payload.entity][payload.key] = payload.value
+    updateCreateForm({ createForm }, { entity, resourceKey, value }) {
+      createForm[entity] = createForm[entity] || {}
+      createForm[entity][resourceKey] = value
     }
   },
   getters: {

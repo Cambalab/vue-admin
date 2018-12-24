@@ -1,86 +1,95 @@
 <template>
-  <SimpleFormWrapper>
-    <v-layout>
-      <v-flex xs12 sm6 offset-sm3>
-        <v-card>
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-            aspect-ratio="2.75"
-          />
-          <v-card-title primary-title>
-            <div>
-              <h3 class="headline mb-0">This is a Custom Create Form</h3>
-              <div>We still need to decouple the v-text-field input events and submit button functionality from this file</div>
-              <div>The Vuex store is used to persist data, this could be the easiest way to save data and call actions from wrapped components such as input, textfield, button, etc...</div>
-            </div>
-          </v-card-title>
+  <v-layout>
+    <v-flex xs12 sm6 offset-sm3>
+      <v-card>
+        <v-img
+          src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+          aspect-ratio="2.75"
+        />
+        <v-card-title primary-title>
           <div>
-            <v-form>
-              <v-container>
-                <v-layout column>
-                    <v-flex xs12>
-                      <TextInputWrapper source="name">
-                        <v-text-field
-                          name="name"
-                          @input="storeValue($event, 'name')"
-                          label="Name"
-                        ></v-text-field>
-                    </TextInputWrapper>
-                    <TextInputWrapper source="issue">
-                      <v-text-field
-                        name="issue"
-                        @input="storeValue($event, 'issue')"
-                        label="Issue"
-                      ></v-text-field>
-                  </TextInputWrapper>
-                  <TextInputWrapper source="publisher">
-                    <v-text-field
-                      name="publisher"
-                      @input="storeValue($event, 'publisher')"
-                      label="Publisher"
-                    ></v-text-field>
-                </TextInputWrapper>
-                    </v-flex>
-                </v-layout>
-              </v-container>
-            </v-form>
+            <h3 class="headline mb-2">This is a Custom Create Form</h3>
+            <p>
+              Although we provide default components for Create views, Vue Admin
+              ships with a <i>kind of injected</i> set of functions for those
+              components declared in <b>Resource</b> as a view, that can be used
+              for updating your resource entity and submitting it for database
+              storage.
+            </p>
+            <p>
+              The Vuex store is the middleware where data is saved until a
+              submit action is triggered. This seems to be the easiest way to
+              save data and call actions from <b>any</b> custom component, such
+              as inputs, textfields, buttons, etc...
+            </p>
+            <p>
+              This is one of the two proposals when we thought about user
+              customization:
+              <ul>
+                <li>
+                  letting a user build their own components with any UI
+                  frameworkand provide a simple API for updating and storing
+                </li>
+                <li>
+                  build our own UI components with a single framework (possibly
+                  Vuetify) and expose them to the user in the form of Buttons,
+                  Inputs, TextFields, DataTables, ..., as fixed templates.
+                </li>
+              </ul>
+            </p>
           </div>
-
-          <v-card-actions>
-            <ButtonWrapper>
-              <v-btn
-                flat
-                color="orange"
-                @click="submit"
-                >
-                Create
-              </v-btn>
-            </ButtonWrapper>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </SimpleFormWrapper>
+        </v-card-title>
+        <div>
+          <v-form>
+            <v-container>
+              <v-layout column>
+                  <v-flex xs12>
+                    <v-text-field
+                      @input="storeValue($event, 'name')"
+                      label="Name"
+                    ></v-text-field>
+                    <v-text-field
+                      @input="storeValue($event, 'issue')"
+                      label="Issue"
+                    ></v-text-field>
+                  <v-text-field
+                    @input="storeValue($event, 'publisher')"
+                    label="Publisher"
+                  ></v-text-field>
+                  </v-flex>
+              </v-layout>
+            </v-container>
+          </v-form>
+        </div>
+        <v-card-actions>
+          <v-btn
+            flat
+            color="orange"
+            @click="submit"
+            >
+            Create
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 <script>
 
-// Soon to be replaced using 'dependency injection' with Resource, so that
-// $store and $router don't have to be passed through functions - sgobotta
-import { getEntity, updateEntity, submitEntity } from './store/form.utils'
-import {
-  ButtonWrapper,
-  SimpleFormWrapper,
-  TextInputWrapper
-} from './components/Wrappers'
+/**
+ * This is a custom component for creating magazines using a form, with a name,
+ * issue number and a publisher.
+ * When passed through the Resource, this custom component is automatically
+ * 'injected' with a 'va' prop used to create magazine entities.
+ * This prop contains getter and setter functions that must be used by your UI
+ * components, such as buttons, inputs, etc.
+ */
 
 export default {
   name: 'CustomCreate',
-  components: {
-    ButtonWrapper,
-    SimpleFormWrapper,
-    TextInputWrapper
-  },
   props: {
+    // This prop will be assigned by Vue Admin for you to use the functions
+    // shown below.
     va: {
       type: Object,
       required: true
@@ -91,21 +100,25 @@ export default {
   },
   computed: {
     entity () {
-      return getEntity({ store: this.$store, resourceName: this.va.resourceName })
+      // We use the getEntity method in computed, so that it gets updated
+      // everytime we use updateEntity.
+      return this.va.getEntity()
     }
   },
   methods: {
-    storeValue(value, key) {
-      updateEntity({ store: this.$store, value, key, resourceName: this.va.resourceName })
+    storeValue(value, resourceKey) {
+      // The updateEntity method receives a key of your resource object and a
+      // value to update it's state in the store. At the moment you will have to
+      // specify the key name to be modified when using this method.
+      this.va.updateEntity({ resourceKey, value })
     },
     submit() {
-      submitEntity({
-        store: this.$store,
-        resourceName: this.va.resourceName,
-        data: this.entity,
-        redirect: { router: this.$router, view: this.va.redirectView }
-      })
+      const data = this.entity
+      // Use this function your 'magazines' entity is ready to be stored in the
+      // database.
+      this.va.submitEntity({ data })
     }
   }
 };
+
 </script>
