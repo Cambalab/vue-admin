@@ -14,6 +14,7 @@ export default {
     show: Array,
     create: Array,
     edit: Array,
+    customCreate: Object,
     resourceId: {
       type: String,
       default: 'id'
@@ -73,8 +74,13 @@ export default {
       routes.push(this.bindShow(path));
       routes.push(this.bindCreate(path));
       routes.push(this.bindEdit(path));
+      routes.push(this.bindTest(path));
 
       this.$router.addRoutes(routes);
+    },
+
+    bindTest(path) {
+      return { path: `${path}/test`, name: `${this.name}/test`, component: this.customCreate, props: { name: this.name } }
     },
 
     bindList(path) {
