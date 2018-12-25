@@ -50,8 +50,8 @@ export default ({
      * @param {String} value       A given value to be stored
      */
     updateEntity({ resourceKey, value }) {
-      const moduleName = 'entities/updateEditForm';
-      store.commit(moduleName, { value, resourceKey, entity: resourceName });
+      const moduleName = 'entities/updateForm';
+      store.commit(moduleName, { formType: 'editForm', value, resourceKey, entity: resourceName });
     },
 
     /**
