@@ -43,20 +43,20 @@
           <v-form>
             <v-container>
               <v-layout column>
-                  <v-flex xs12>
-                    <v-text-field
-                      @input="storeValue($event, 'name')"
-                      label="Name"
-                    ></v-text-field>
-                    <v-text-field
-                      @input="storeValue($event, 'issue')"
-                      label="Issue"
-                    ></v-text-field>
+                <v-flex xs12>
                   <v-text-field
-                    @input="storeValue($event, 'publisher')"
-                    label="Publisher"
-                  ></v-text-field>
-                  </v-flex>
+                    @input="storeValue($event, 'name')"
+                    label="Name"
+                  />
+                  <v-text-field
+                    @input="storeValue($event, 'issue')"
+                    label="Issue"
+                  />
+                <v-text-field
+                  @input="storeValue($event, 'publisher')"
+                  label="Publisher"
+                />
+                </v-flex>
               </v-layout>
             </v-container>
           </v-form>
@@ -86,7 +86,7 @@
  */
 
 export default {
-  name: 'CustomCreate',
+  name: 'CreateMagazines',
   props: {
     // This prop will be assigned by Vue Admin for you to use the functions
     // shown below.
@@ -114,8 +114,8 @@ export default {
     },
     submit() {
       const data = this.entity
-      // Use this function your 'magazines' entity is ready to be stored in the
-      // database.
+      // Use this function when your 'magazines' entity is ready to be sent to
+      // your apiUrl
       this.va.submitEntity({ data })
     }
   }
