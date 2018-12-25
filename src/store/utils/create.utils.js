@@ -37,8 +37,8 @@ export default ({
      * @param {String} value       A given value to be stored
      */
     updateEntity({ resourceKey, value }) {
-      const moduleName = 'entities/updateCreateForm';
-      store.commit(moduleName, { value, resourceKey, entity: resourceName });
+      const moduleName = 'entities/updateForm';
+      store.commit(moduleName, { formType: 'createForm', value, resourceKey, entity: resourceName });
     },
 
     /**
@@ -58,7 +58,8 @@ export default ({
           // store if the creation went Ok, though it could be useful to keep it
           // if we want to implement an Undo feature - @sgobotta
           if (redirectView && [200, 201].indexOf(status) !== -1) {
-            Router.redirect({ router, resource: resourceName, view: redirectView, id: resourceIdName })
+            // FIXME: looking for 'data' in res could cause conflicts depending on how the user api responds - @sgobotta
+            Router.redirect({ router, resource: resourceName, view: redirectView, id: res.data[resourceIdName] })
           }
           return res
         })

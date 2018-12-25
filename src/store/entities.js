@@ -1,12 +1,13 @@
 export const entities = {
   namespaced: true,
   state: {
-    createForm: {}
+    createForm: {},
+    editForm: {}
   },
   mutations: {
-    updateCreateForm({ createForm }, { entity, resourceKey, value }) {
-      createForm[entity] = createForm[entity] || {}
-      createForm[entity][resourceKey] = value
+    updateForm(state, { formType, entity, resourceKey, value }) {
+      state[formType][entity] = state[formType][entity] || {}
+      state[formType][entity][resourceKey] = value
     }
   },
   getters: {
