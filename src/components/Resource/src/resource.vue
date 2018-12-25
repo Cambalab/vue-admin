@@ -6,6 +6,7 @@
 import { List, Show, Create, Edit } from "../../Actions";
 import createCrudModule from "vuex-crud";
 import createUtils from '../../../store/utils/create.utils'
+import createEditUtils from '../../../store/utils/edit.utils'
 
 export default {
   name: "Resource",
@@ -16,6 +17,7 @@ export default {
     create: Array,
     edit: Array,
     customCreate: Object,
+    customEdit: Object,
     resourceId: {
       type: String,
       default: 'id'
@@ -75,25 +77,54 @@ export default {
       routes.push(this.bindShow(path));
       routes.push(this.bindCreate(path));
       routes.push(this.bindEdit(path));
-      routes.push(this.bindNewCreateView(path));
+
+      !!this.customCreate && routes.push(this.bindNewCreateView());
+      !!this.customEdit && routes.push(this.bindNewEditView());
 
       this.$router.addRoutes(routes);
     },
 
-    bindNewCreateView(path) {
+    bindNewCreateView() {
+      const view = 'create'
+
       const resourceName = this.name
       const resourceIdName = this.resourceId
       const utils = createUtils({
-        redirectView: this.redirect.views.create,
+        redirectView: this.redirect.views[view],
         resourceIdName,
         resourceName,
         router: this.$router,
         store: this.$store
       })
       return {
-        path: `${path}/test`,
-        name: `${this.name}/test`,
+        path: `${this.fullRoute}/custom-create`,
+        name: `${this.name}/custom-create`,
         component: this.customCreate,
+        props: {
+          va: {
+            resourceName,
+            ...utils
+          }
+        }
+      }
+    },
+
+    bindNewEditView() {
+      const view = 'edit'
+
+      const resourceName = this.name
+      const resourceIdName = this.resourceId
+      const utils = createEditUtils({
+        redirectView: this.redirect.views[view],
+        resourceIdName,
+        resourceName,
+        router: this.$router,
+        store: this.$store
+      })
+      return {
+        path: `${this.fullRoute}/custom-edit/:id`,
+        name: `${this.name}/custom-edit`,
+        component: this.customEdit,
         props: {
           va: {
             resourceName,
