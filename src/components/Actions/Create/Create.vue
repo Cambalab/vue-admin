@@ -84,11 +84,12 @@ export default {
 
     submit() {
       const resourceName = this.name + "/create";
-      // TODO: The then, catch could possibly be moved to the store using vuex-crud callbacks. Read #34 for docs - sgobotta
+      // TODO: The then, catch could possibly be moved to the store using vuex-crud callbacks. Read #34 for docs - @sgobotta
       this.$store.dispatch(resourceName, { data: this.resource })
         .then((res) => {
           const { status } = res
           if ([200, 201].indexOf(status) !== -1) {
+            // FIXME: looking for 'data' in res could cause conflicts depending on how the user api responds - @sgobotta
             Router.redirect({ router: this.$router, resource: this.name, view: this.redirect.view, id: res.data[this.redirect.idField] })
             return res
           }
