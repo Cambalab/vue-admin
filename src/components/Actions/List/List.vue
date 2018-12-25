@@ -105,13 +105,15 @@ export default {
   },
   data() {
     return {
-      resourceName: this.name,
       view: 'list',
       UI_CONTENT,
       UI_NAMES
     }
   },
   computed: {
+    resourceName: function () {
+      return this.name
+    },
     headers: function () {
       let newHeaders = [
         {
