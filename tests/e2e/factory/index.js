@@ -3,7 +3,7 @@ const Ipsum = require("bavaria-ipsum");
 const ipsum = new Ipsum()
 
 export default {
-  createArticle: ({ args } = {}) => {
+  createArticle: (args = {}) => {
     // Shortens the paragraph
     const title = ipsum.generateSentence()
     const content = ipsum.generateParagraph().substring(0, 100)
@@ -12,6 +12,6 @@ export default {
       title,
       content
     }
-    return Object.assign({}, args, _args)
+    return Object.assign({}, _args, args)
   }
 }
