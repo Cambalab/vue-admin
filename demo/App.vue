@@ -47,8 +47,7 @@ const articlesShow = [
     'type': 'TextField',
     'tag': 'h1'
   },
-  'content',
-  'campoQueNoExiste'
+  'content'
 ]
 
 const fieldsArticleCreate =[
