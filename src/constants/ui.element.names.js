@@ -20,6 +20,15 @@ export default {
   RESOURCE_VIEW_CONTAINER_TITLE: {
     with: ({ resourceName, view }) => `${resourceName}-${view}-container-title`
   },
+
+  RESOURCE_VIEW_CONTAINER_FIELDS: {
+    with: ({ resourceName, view }) => `${resourceName}-${view}-container-fields`
+  },
+
+  RESOURCE_VIEW_CONTAINER_FIELD: {
+    with: ({ resourceName, view, field }) => `${field}-${resourceName}-${view}-container-field`
+  },
+
   // The button that redirects to a Create view
   RESOURCE_CREATE_BUTTON: {
     with: ({ resourceName }) => `${resourceName}-create-button`
