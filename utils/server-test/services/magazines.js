@@ -77,7 +77,7 @@ module.exports = function (app) {
 
     if (index >= 0) magazines.splice(index, 1);
 
-    res.status(202).send({ id: magazine.id });
+    res.status(202).send();
   });
 
   app.post("/api/magazines", (req, res) => {
