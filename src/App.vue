@@ -10,6 +10,16 @@
         apiUrl='http://localhost:8080/api/'
         >
       </Resource>
+      <Resource
+        name='magazines'
+        :list='magazinesList'
+        :show='magazinesShow'
+        :create='fieldsMagazineCreate'
+        :edit='fieldsMagazineEdit'
+        :resourceId='resourceId'
+        apiUrl='http://localhost:8080/api/'
+        >
+      </Resource>
     </Admin>
 </template>
 
@@ -50,6 +60,39 @@ const fieldsArticleEdit = fieldsArticleCreate
 
 const resourceId = "id"
 
+const magazinesList = [
+  {
+    'label':'name',
+    'type':'TextField',
+    'tag':'h2'
+  },
+  'issue',
+  'publisher'
+]
+
+const magazinesShow = [
+  'id',
+  {
+    'label':'name',
+    'type': 'TextField',
+    'tag': 'h1'
+  },
+  'issue',
+  'publisher'
+]
+
+const fieldsMagazineCreate =[
+  {
+    'label':'name',
+    'type':'Input',
+    'placeHolder': 'name'
+  },
+  'issue',
+  'publisher'
+]
+
+const fieldsMagazineEdit = fieldsMagazineCreate
+
 // Use case of a parsed response using feathers
 // This has to be done because every server client returns different responses. - sgobotta
 //
@@ -81,6 +124,10 @@ export default {
       fieldsArticleCreate,
       fieldsArticleEdit,
       resourceId,
+      magazinesList,
+      magazinesShow,
+      fieldsMagazineCreate,
+      fieldsMagazineEdit
       // #23 - To use the feathers server just add the parseResponses attribute
       // below, pass ':parseResponses='parseResponses' to Resource in the
       // template and update the resourceId to '_id'. - sgobotta
