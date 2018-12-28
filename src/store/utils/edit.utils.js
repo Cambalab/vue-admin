@@ -8,6 +8,8 @@ import Router from '../../router'
  * @param {String} resourceName   The name of the resource
  * @param {Object} store          The global Vuex store variable
  * @param {Object} router         The global Vue router variable
+ * @param {Object} parseResponses An object containing a parseSingle function
+ * and a parseList function to be used on submit actions.
  *
  * @return {Object} A set of functions to be used in a Create form.
  */
@@ -16,7 +18,8 @@ export default ({
   resourceIdName,
   resourceName,
   store,
-  router
+  router,
+  parseResponses
 }) => {
   return {
     /**
@@ -68,10 +71,14 @@ export default ({
       return store.dispatch(moduleName, { id, data })
         .then(res => {
           const { status } = res
-          // NOTE - Maybe in the future we want to delete the remaining data in the
-          // store if the creation went Ok, though it could be useful to keep it
-          // if we want to implement an Undo feature - @sgobotta
+          // NOTE - Maybe in the future we want to delete the remaining data in
+          // the store if the creation went Ok, though it could be useful to
+          // keep it if we want to implement an Undo feature - @sgobotta
           if (redirectView && [200, 201].indexOf(status) !== -1) {
+            const parsedResponse = parseResponses.parseSingle
+              ? parseResponses.parseSingle(res)
+              : res
+            const id = parsedResponse.data[resourceIdName]
             Router.redirect({ router, resource: resourceName, view: redirectView, id })
           }
           return res
