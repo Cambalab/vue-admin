@@ -103,13 +103,13 @@ const fieldsMagazineEdit = fieldsMagazineCreate
 //   parseList: (response) => {
 //     const { data } = response;
 //     return Object.assign({}, response, {
-//       data: data.data // expecting array of objects with IDs
+//       data: data.data // Vue Admin expects a 'data' object with an array of objects
 //     });
 //   },
 //   parseSingle: (response) => {
 //     const { data } = response;
 //     return Object.assign({}, response, {
-//       data // expecting object with ID
+//       data // Vue Admin expects a 'data' object as response
 //     });
 //   }
 // }
