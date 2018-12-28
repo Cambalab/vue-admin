@@ -113,10 +113,9 @@ export default {
       this.va.updateEntity({ resourceKey, value })
     },
     submit() {
-      const data = this.entity
       // Use this function when your 'magazines' entity is ready to be sent to
       // your apiUrl
-      this.va.submitEntity({ data })
+      this.va.submitEntity()
     }
   }
 };
