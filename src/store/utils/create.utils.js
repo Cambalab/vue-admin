@@ -48,13 +48,11 @@ export default ({
      * submitEntity - Given a 'resourceName' object, calls the store to dispatch
      * a create request
      *
-     * @param {Object} data A 'resourceName' object
-     *
      * @return {Promise} A pending promise.
      */
-    submitEntity({ data }) {
+    submitEntity() {
       const moduleName = `${resourceName}/create`
-      return store.dispatch(moduleName, { data })
+      return store.dispatch(moduleName, { data: this.getEntity() })
         .then(res => {
           const { status } = res
           // NOTE - Maybe in the future we want to delete the remaining data in

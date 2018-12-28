@@ -61,14 +61,12 @@ export default ({
      * submitEntity - Given a 'resourceName' object, calls the store to dispatch
      * an update request
      *
-     * @param {Object} data A 'resourceName' object
-     *
      * @return {Promise} A pending promise.
      */
-    submitEntity({ data }) {
+    submitEntity() {
       const id = router.history.current.params.id
       const moduleName = `${resourceName}/update`
-      return store.dispatch(moduleName, { id, data })
+      return store.dispatch(moduleName, { id, data: this.getEntity() })
         .then(res => {
           const { status } = res
           // NOTE - Maybe in the future we want to delete the remaining data in
