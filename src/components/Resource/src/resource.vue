@@ -94,7 +94,8 @@ export default {
         resourceIdName,
         resourceName,
         router: this.$router,
-        store: this.$store
+        store: this.$store,
+        parseResponses: this.parseResponses
       })
       return {
         path: `${this.fullRoute}/custom-create`,
@@ -119,7 +120,8 @@ export default {
         resourceIdName,
         resourceName,
         router: this.$router,
-        store: this.$store
+        store: this.$store,
+        parseResponses: this.parseResponses
       })
       return {
         path: `${this.fullRoute}/custom-edit/:id`,
