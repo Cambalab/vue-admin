@@ -71,7 +71,12 @@ module.exports = function (app) {
   });
 
   app.post("/api/articles", (req, res) => {
-    const id = articles[articles.length - 1].id + 1;
+    let id
+    if (!articles.length) {
+      id = 0
+    } else {
+      id = articles[articles.length - 1].id + 1;
+    }
     const { body } = req;
 
     const article = {
