@@ -8,10 +8,10 @@ export default {
     const title = ipsum.generateSentence()
     const content = ipsum.generateParagraph().substring(0, 100)
     const _args = {
-      id: 0,
       title,
       content
     }
     return Object.assign({}, _args, args)
-  }
+  },
+  apiUrl: () => { return 'http://localhost:8080/api/articles/' }
 }
