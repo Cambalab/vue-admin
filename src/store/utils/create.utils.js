@@ -1,4 +1,4 @@
-import Router from '../../router'
+import { submitEntity, updateEntity, getEntity } from './utils'
 
 /**
  * Create View Utils - A function used to create utilities
@@ -29,7 +29,8 @@ export default ({
      * @return {Object} a 'resourceName' object with updated data from the form.
      */
     getEntity() {
-      return store.state.entities.createForm[resourceName]
+      const formType = 'createForm'
+      return getEntity({ store, resourceName, formType })
     },
 
     /**
@@ -40,8 +41,13 @@ export default ({
      * @param {String} value       A given value to be stored
      */
     updateEntity({ resourceKey, value }) {
-      const moduleName = 'entities/updateForm';
-      store.commit(moduleName, { formType: 'createForm', value, resourceKey, entity: resourceName });
+            updateEntity({
+              resourceKey,
+              value,
+              store,
+              resourceName,
+              formType: 'createForm'
+            })
     },
 
     /**
@@ -51,24 +57,17 @@ export default ({
      * @return {Promise} A pending promise.
      */
     submitEntity() {
-      const moduleName = `${resourceName}/create`
-      return store.dispatch(moduleName, { data: this.getEntity() })
-        .then(res => {
-          const { status } = res
-          // NOTE - Maybe in the future we want to delete the remaining data in
-          // the store if the creation went Ok, though it could be useful to
-          // keep it if we want to implement an Undo feature - @sgobotta
-          if (redirectView && [200, 201].indexOf(status) !== -1) {
-            const parsedResponse = parseResponses.parseSingle ? parseResponses.parseSingle(res) : res
-            const id = parsedResponse.data[resourceIdName]
-            Router.redirect({ router, resource: resourceName, view: redirectView, id })
-          }
-          return res
-        })
-        .catch(err => {
-          // eslint-disable-next-line no-console
-          console.error(err)
-        })
+      const actionTypeParams = { data : this.getEntity() }
+      submitEntity({
+        resourceName,
+        actionType: 'create',
+        actionTypeParams,
+        store,
+        router,
+        redirectView,
+        resourceIdName,
+        parseResponses
+      })
     }
   }
 }
