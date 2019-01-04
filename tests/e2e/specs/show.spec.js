@@ -10,7 +10,8 @@ describe('Show Test', () => {
   let article = {}
 
   before('Search the Show view url', () => {
-    cy.request('POST', Factory.apiUrl(), Factory.createArticle()).
+    const url = Factory.apiUrl({ route: 'api/articles/' })
+    cy.request('POST',url , Factory.createArticle()).
     then((res) => { article = res.body })
   })
 
