@@ -1,4 +1,4 @@
-import { submitEntity, updateEntity, getEntity } from './utils'
+import { submitEntity, updateEntity, getEntity } from './common.utils'
 
 /**
  * Create View Utils - A function used to create utilities
