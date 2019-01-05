@@ -1,7 +1,7 @@
 import { submitEntity, updateEntity, fetchEntity, getEntity } from './utils'
 
 /**
- * Create View Utils - A function used to create utilities
+ * Edit View Utils - A function used to create utilities
  *
  * @param {String} redirectView   A view the router will redirect to on submit
  * @param {String} resourceIdName The name of the id of a resource
@@ -11,7 +11,7 @@ import { submitEntity, updateEntity, fetchEntity, getEntity } from './utils'
  * @param {Object} parseResponses An object containing a parseSingle function
  * and a parseList function to be used on submit actions.
  *
- * @return {Object} A set of functions to be used in a Create form.
+ * @return {Object} A set of functions to be used in an Edit form.
  */
 export default ({
   redirectView,
@@ -34,9 +34,7 @@ export default ({
     },
 
     /**
-     * fetchEntity - Fetchs a 'resourceName' entity from the given apiUrl
-     *
-     * @param {String} id The id of a 'resourceName' entity.
+     * fetchEntity - Fetchs a 'resourceName' entity from the resource apiUrl
      *
      * @return {Object} The fetched entity.
      */
@@ -52,27 +50,28 @@ export default ({
      * @param {String} value       A given value to be stored
      */
     updateEntity({ resourceKey, value }) {
+      const formType = 'editForm'
       updateEntity({
         resourceKey,
         value,
         store,
         resourceName,
-        formType: 'editForm'
+        formType
       })
     },
 
     /**
-     * submitEntity - Given a 'resourceName' object, calls the store to dispatch
-     * an update request
+     * submitEntity - Dispatchs an update request
      *
      * @return {Promise} A pending promise.
      */
     submitEntity() {
-      const id = router.history.current.params.id
-      const actionTypeParams = { data : this.getEntity(), id }
+      const { id } = router.history.current.params
+      const actionType = 'update'
+      const actionTypeParams = { data: this.getEntity(), id }
       submitEntity({
         resourceName,
-        actionType: 'update',
+        actionType,
         actionTypeParams,
         store,
         router,

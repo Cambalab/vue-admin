@@ -41,26 +41,27 @@ export default ({
      * @param {String} value       A given value to be stored
      */
     updateEntity({ resourceKey, value }) {
-            updateEntity({
-              resourceKey,
-              value,
-              store,
-              resourceName,
-              formType: 'createForm'
-            })
+      const formType = 'createForm'
+      updateEntity({
+        resourceKey,
+        value,
+        store,
+        resourceName,
+        formType
+      })
     },
 
     /**
-     * submitEntity - Given a 'resourceName' object, calls the store to dispatch
-     * a create request
+     * submitEntity - Dispatchs a create request
      *
      * @return {Promise} A pending promise.
      */
     submitEntity() {
+      const actionType = 'create'
       const actionTypeParams = { data : this.getEntity() }
       submitEntity({
         resourceName,
-        actionType: 'create',
+        actionType,
         actionTypeParams,
         store,
         router,
