@@ -7,7 +7,7 @@
         :create='fieldsArticleCreate'
         :edit='fieldsArticleEdit'
         :resourceId='resourceId'
-        apiUrl='http://localhost:8080/api/'
+        :apiUrl='apiUrl'
         >
       </Resource>
       <Resource
@@ -19,7 +19,7 @@
         :resourceId='resourceId'
         :customCreate='CreateMagazines'
         :customEdit='EditMagazines'
-        apiUrl='http://localhost:8080/api/'
+        :apiUrl='apiUrl'
         >
       </Resource>
     </Admin>
@@ -115,6 +115,8 @@ const fieldsMagazineEdit = fieldsMagazineCreate
 //   }
 // }
 
+const apiUrl = 'http://localhost:8080/api/'
+
 export default {
   name: "App",
   components: {
@@ -123,6 +125,7 @@ export default {
   },
   data() {
     return {
+      apiUrl,
       articlesList,
       articlesShow,
       fieldsArticleCreate,
