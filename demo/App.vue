@@ -14,11 +14,9 @@
         name='magazines'
         :list='magazinesList'
         :show='magazinesShow'
-        :create='fieldsMagazineCreate'
-        :edit='fieldsMagazineEdit'
+        :create='CreateMagazines'
+        :edit='EditMagazines'
         :resourceId='resourceId'
-        :customCreate='CreateMagazines'
-        :customEdit='EditMagazines'
         :apiUrl='apiUrl'
         >
       </Resource>

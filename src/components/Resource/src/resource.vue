@@ -14,8 +14,8 @@ export default {
     name: String,
     list: Array,
     show: Array,
-    create: Array,
-    edit: Array,
+    create: [Array, Object],
+    edit: [Array, Object],
     customCreate: Object,
     customEdit: Object,
     resourceId: {
@@ -42,11 +42,6 @@ export default {
         list: null
       })
     }
-  },
-  data() {
-    return {
-      fullRoute: null
-    };
   },
   created: function() {
     const customUrlFn = (id) => {
@@ -78,13 +73,10 @@ export default {
       routes.push(this.bindCreate(path));
       routes.push(this.bindEdit(path));
 
-      !!this.customCreate && routes.push(this.bindNewCreateView());
-      !!this.customEdit && routes.push(this.bindNewEditView());
-
       this.$router.addRoutes(routes);
     },
 
-    bindNewCreateView() {
+    bindCustomCreateView() {
       const view = 'create'
 
       const resourceName = this.name
@@ -98,9 +90,9 @@ export default {
         parseResponses: this.parseResponses
       })
       return {
-        path: `${this.fullRoute}/custom-create`,
-        name: `${this.name}/custom-create`,
-        component: this.customCreate,
+        path: `${this.fullRoute}/create`,
+        name: `${this.name}/create`,
+        component: this.create,
         props: {
           va: {
             resourceName,
@@ -110,7 +102,7 @@ export default {
       }
     },
 
-    bindNewEditView() {
+    bindCustomEditView() {
       const view = 'edit'
 
       const resourceName = this.name
@@ -124,9 +116,9 @@ export default {
         parseResponses: this.parseResponses
       })
       return {
-        path: `${this.fullRoute}/custom-edit/:id`,
-        name: `${this.name}/custom-edit`,
-        component: this.customEdit,
+        path: `${this.fullRoute}/edit/:id`,
+        name: `${this.name}/edit`,
+        component: this.edit,
         props: {
           va: {
             resourceName,
@@ -148,13 +140,21 @@ export default {
     },
 
     bindCreate(path) {
-      const redirect = { idField: this.resourceId, view: this.redirect.views.create }
-      return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create, redirect }} : []
+      const create = this.create
+      if (create instanceof Array) {
+        const redirect = { idField: this.resourceId, view: this.redirect.views.create }
+        return create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: create, redirect }} : []
+      }
+      else return this.bindCustomCreateView()
     },
 
     bindEdit(path) {
-      const redirect = { idField: this.resourceId, view: this.redirect.views.edit }
-      return this.edit ? { path: `${path}/edit/:id`, name: `${this.name}/edit`, component: Edit, props: { name: this.name, fields: this.edit, redirect }} : []
+      const edit = this.edit
+      if (edit instanceof Array) {
+        const redirect = { idField: this.resourceId, view: this.redirect.views.edit }
+        return edit ? { path: `${path}/edit/:id`, name: `${this.name}/edit`, component: Edit, props: { name: this.name, fields: edit, redirect }} : []
+      }
+      else return this.bindCustomEditView()
     }
 
   },
