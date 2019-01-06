@@ -6,7 +6,7 @@
         :show='articlesShow'
         :create='fieldsArticleCreate'
         :edit='fieldsArticleEdit'
-        :resourceId='resourceId'
+        :resourceIdName='resourceIdName'
         :apiUrl='apiUrl'
         >
       </Resource>
@@ -16,7 +16,7 @@
         :show='magazinesShow'
         :create='CreateMagazines'
         :edit='EditMagazines'
-        :resourceId='resourceId'
+        :resourceIdName='resourceIdName'
         :apiUrl='apiUrl'
         >
       </Resource>
@@ -60,7 +60,7 @@ const fieldsArticleCreate =[
 
 const fieldsArticleEdit = fieldsArticleCreate
 
-const resourceId = "id"
+const resourceIdName = "id"
 
 const magazinesList = [
   {
@@ -128,7 +128,7 @@ export default {
       articlesShow,
       fieldsArticleCreate,
       fieldsArticleEdit,
-      resourceId,
+      resourceIdName,
       magazinesList,
       magazinesShow,
       fieldsMagazineCreate,
@@ -137,7 +137,7 @@ export default {
       EditMagazines
       // #23 - To use the feathers server just add the parseResponses attribute
       // below, pass ':parseResponses='parseResponses' to Resource in the
-      // template and update the resourceId to '_id'. - sgobotta
+      // template and update the resourceIdName to '_id'. - sgobotta
       // parseResponses: parseFeathersResponses
     };
   }
