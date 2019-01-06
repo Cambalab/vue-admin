@@ -4,9 +4,9 @@
 
 <script>
 import { List, Show, Create, Edit } from "../../Actions";
-import createCrudModule from "vuex-crud";
+import createCrudModule from "../../../store/utils/modules";
 import createUtils from '../../../store/utils/create.utils'
-import createEditUtils from '../../../store/utils/edit.utils'
+import editUtils from '../../../store/utils/edit.utils'
 
 export default {
   name: "Resource",
@@ -44,17 +44,13 @@ export default {
     }
   },
   created: function() {
-    const customUrlFn = (id) => {
-      const rootUrl =`${this.apiUrl}${this.name}/`
-      return id ? `${rootUrl}${id}` : rootUrl
-    }
-    let module = createCrudModule({
-      resource: this.name,
-      customUrlFn,
-      idAttribute: this.resourceId,
-      ...this.parseResponses
-    });
-    this.$store.registerModule(this.name, module);
+    createCrudModule({
+      apiUrl: this.apiUrl,
+      resourceName: this.name,
+      resourceIdName: this.resourceId,
+      parseResponses: this.parseResponses,
+      store: this.$store
+    })
   },
   methods: {
     addRoute: function(path, name) {
@@ -107,7 +103,7 @@ export default {
 
       const resourceName = this.name
       const resourceIdName = this.resourceId
-      const utils = createEditUtils({
+      const utils = editUtils({
         redirectView: this.redirect.views[view],
         resourceIdName,
         resourceName,
