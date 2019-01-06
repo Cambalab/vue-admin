@@ -45,14 +45,29 @@
               <v-layout column>
                 <v-flex xs12>
                   <v-text-field
+                    :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+                      resourceName,
+                      view,
+                      field: 'name'
+                    })"
                     @input="storeValue($event, 'name')"
                     label="Name"
                   />
                   <v-text-field
+                    :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+                      resourceName,
+                      view,
+                      field: 'issue'
+                    })"
                     @input="storeValue($event, 'issue')"
                     label="Issue"
                   />
                 <v-text-field
+                  :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+                    resourceName,
+                    view,
+                    field: 'publisher'
+                  })"
                   @input="storeValue($event, 'publisher')"
                   label="Publisher"
                 />
@@ -63,10 +78,14 @@
         </div>
         <v-card-actions>
           <v-btn
+            :name="UI_NAMES.RESOURCE_CREATE_SUBMIT_BUTTON.with({
+              resourceName,
+              view
+            })"
             flat
             color="orange"
             @click="submit"
-            >
+          >
             Create
           </v-btn>
         </v-card-actions>
@@ -85,6 +104,9 @@
  * components, such as buttons, inputs, etc.
  */
 
+// This is only used for e2e demo tests
+import UI_NAMES from '../../src/constants/ui.element.names'
+
 export default {
   name: 'CreateMagazines',
   props: {
@@ -96,7 +118,12 @@ export default {
     }
   },
   data() {
-    return {}
+    // This is only needed for e2e demo tests
+    return {
+      resourceName: 'magazines',
+      view: 'create',
+      UI_NAMES
+    }
   },
   computed: {
     entity () {
