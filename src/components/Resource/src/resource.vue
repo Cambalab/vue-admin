@@ -17,7 +17,7 @@ export default {
     edit: [Array, Object],
     customCreate: Object,
     customEdit: Object,
-    resourceId: {
+    resourceIdName: {
       type: String,
       default: 'id'
     },
@@ -46,7 +46,7 @@ export default {
     createCrudModule({
       apiUrl: this.apiUrl,
       resourceName: this.name,
-      resourceIdName: this.resourceId,
+      resourceIdName: this.resourceIdName,
       parseResponses: this.parseResponses,
       store: this.$store
     })
@@ -68,7 +68,7 @@ export default {
         create: this.create,
         edit: this.edit,
         resourceName: this.name,
-        resourceIdName: this.resourceId,
+        resourceIdName: this.resourceIdName,
         redirection: this.redirect,
         router: this.$router,
         store: this.$store,
