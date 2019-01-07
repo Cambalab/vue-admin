@@ -1,14 +1,14 @@
 <template>
-  <v-card>
-    <v-card-title primary-title>
-      <h3 class="headline mb-0 text-capitalize">{{name}}</h3>
+  <v-card :name="editViewContainer()">
+    <v-card-title primary-title :name="titleContainer()">
+      <h3 class="headline mb-0 text-capitalize">{{titleContent()}}</h3>
     </v-card-title>
     <v-form>
-      <v-card-text>
+      <v-card-text :name="fieldsContainer()">
         <v-layout wrap>
           <v-flex xs8>
             <component
-              :name="label(field)"
+              :name="fieldName(field)"
               v-for="field in fields"
               :key="key(label(field))"
               :is="type(field.type)"
@@ -18,7 +18,7 @@
             </component>
           </v-flex>
           <v-flex xs12>
-            <v-btn color="success" v-on:click="submit">Save</v-btn>
+            <v-btn :name="submitButtonName()" color="success" v-on:click="submit">Save</v-btn>
           </v-flex>
         </v-layout>
       </v-card-text>
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import UI_CONTENT from '../../../constants/ui.content.default'
+import UI_NAMES from '../../../constants/ui.element.names'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents"
 import Router from "../../../router"
@@ -55,7 +57,9 @@ export default {
   },
   data() {
     return {
-      resource: {}
+      resource: {},
+      resourceName: this.name,
+      view: 'edit'
     }
   },
   computed: {
@@ -106,6 +110,30 @@ export default {
     getResource() {
       const resourceName = this.name + "/byId";
       return this.$store.getters[resourceName](this.$route.params.id)
+    },
+
+    editViewContainer() {
+      return UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName: this.resourceName, view: this.view })
+    },
+
+    titleContainer() {
+      return UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName: this.resourceName, view: this.view })
+    },
+
+    titleContent() {
+      return UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName: this.resourceName })
+    },
+
+    fieldName(field) {
+      return UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({ resourceName: this.resourceName, view: this.view, field: this.label(field) })
+    },
+
+    fieldsContainer() {
+      return UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({ resourceName: this.resourceName, view: this.view })
+    },
+
+    submitButtonName() {
+      return UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({ resourceName: this.resourceName, view: this.view })
     }
 
   },
