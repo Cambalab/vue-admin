@@ -8,7 +8,7 @@
       slot="activator"
       icon>
         <i class="v-icon material-icons">
-          {{editButtonContent()}}
+          {{UI_CONTENT.RESOURCE_EDIT_BUTTON}}
         </i>
       </v-btn>
       <span>Edit</span>
@@ -35,14 +35,13 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      UI_CONTENT
+    }
   },
   methods: {
     onEdit() {
       this.$router.push({ name: `${this.resourceName}/edit`, params: { id: this.resourceId } });
-    },
-    editButtonContent() {
-      return UI_CONTENT.RESOURCE_EDIT_BUTTON
     }
   },
 };
