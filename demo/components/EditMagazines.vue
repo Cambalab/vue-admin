@@ -45,16 +45,31 @@
               <v-layout column>
                 <v-flex xs12>
                   <v-text-field
+                    :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+                      resourceName,
+                      view,
+                      field: 'name'
+                    })"
                     @input="storeValue($event, 'name')"
                     v-model="entity.name"
                     label="Name"
                   />
                   <v-text-field
+                    :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+                      resourceName,
+                      view,
+                      field: 'issue'
+                    })"
                     @input="storeValue($event, 'issue')"
                     v-model="entity.issue"
                     label="Issue"
                   />
                 <v-text-field
+                  :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+                    resourceName,
+                    view,
+                    field: 'publisher'
+                  })"
                   @input="storeValue($event, 'publisher')"
                   v-model="entity.publisher"
                   label="Publisher"
@@ -66,10 +81,14 @@
         </div>
         <v-card-actions>
           <v-btn
+            :name="UI_NAMES.RESOURCE_EDIT_SUBMIT_BUTTON.with({
+              resourceName,
+              view
+            })"
             flat
             color="orange"
             @click="submit"
-            >
+          >
             Edit
           </v-btn>
         </v-card-actions>
@@ -88,6 +107,9 @@
  * components, such as buttons, inputs, etc.
  */
 
+// This is only used for e2e demo tests
+import UI_NAMES from '../../src/constants/ui.element.names'
+
 export default {
   name: 'EditMagazines',
   props: {
@@ -96,6 +118,14 @@ export default {
     va: {
       type: Object,
       required: true
+    }
+  },
+  data() {
+    // This is only needed for e2e demo tests
+    return {
+      resourceName: 'magazines',
+      view: 'edit',
+      UI_NAMES
     }
   },
   created() {
