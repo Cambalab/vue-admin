@@ -79,7 +79,9 @@ describe('Edit Test', () => {
       value: saveButtonContainerName
     })
 
-    cy.get(saveButtonContainerQuery).click()
+    cy.get(saveButtonContainerQuery).should((editSubmitButton) => {
+      expect(editSubmitButton).to.contain(UI_CONTENT.EDIT_SUBMIT_BUTTON)
+    }).click()
 
     const url = `articles/show/${article.id}`
     cy.url().should('include', url)
