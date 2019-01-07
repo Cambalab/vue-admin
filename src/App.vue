@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import Admin from "./components/Admin";
-import Resource from "./components/Resource";
+import Admin from "@components/Admin";
+import Resource from "@components/Resource";
 
 const articlesList = [
   {
