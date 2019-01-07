@@ -34,7 +34,7 @@ export default ({
     },
 
     /**
-     * fetchEntity - Fetchs a 'resourceName' entity from the resource apiUrl
+     * fetchEntity - Fetchs a 'resourceName' entity from the store
      *
      * @return {Object} The fetched entity.
      */
