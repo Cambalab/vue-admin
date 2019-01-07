@@ -1,3 +1,11 @@
+import {
+  InitEntityUtils,
+  getElement
+} from '../lib/commands'
+
+Cypress.Commands.add("InitEntityUtils", (args) => InitEntityUtils(args))
+Cypress.Commands.add("getElement", (args) => getElement(args))
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
