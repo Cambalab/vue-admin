@@ -1,6 +1,6 @@
+import showUtils from '../../../store/utils/show.utils'
 import createUtils from '../../../store/utils/create.utils'
 import editUtils from '../../../store/utils/edit.utils'
-
 
 export default ({
   list,
@@ -37,15 +37,34 @@ export default ({
 
     show: ({ wrapper }) => {
       const name = `${resourceName}/show`
-      return show ? {
-        path: `${resourcePath}/show/:id`,
-        name,
-        component: wrapper,
-        props: {
-          name: resourceName,
-          fields: show
+      if (show instanceof Array) {
+        return show ? {
+          path: `${resourcePath}/show/:id`,
+          name,
+          component: wrapper,
+          props: {
+            name: resourceName,
+            fields: show
+          }
+        } : []
+      } else {
+        const utils = showUtils({
+          resourceName,
+          router,
+          store
+        })
+        return {
+          path: `${resourcePath}/show/:id`,
+          name,
+          component: show,
+          props: {
+            va: {
+              resourceName,
+              ...utils
+            }
+          }
         }
-      } : []
+      }
     },
 
     create: ({ wrapper }) => {
