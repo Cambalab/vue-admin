@@ -12,7 +12,7 @@ export default {
   props: {
     name: String,
     list: Array,
-    show: Array,
+    show: [Array, Object],
     create: [Array, Object],
     edit: [Array, Object],
     customCreate: Object,
