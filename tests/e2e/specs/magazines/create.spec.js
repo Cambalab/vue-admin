@@ -3,18 +3,20 @@ const Factory = require('../../factory')
 const { InitEntityUtils } = require('../../lib/commands')
 
 describe('Magazines: Create Action Test', () => {
+  const resourceName = 'magazines'
+  const view = 'create'
   const magazine = Factory.createMagazine()
   const utils = InitEntityUtils({
-    resourceName: 'magazines',
-    view: 'create'
+    resourceName,
+    view
   })
 
   before('Visits the magazines create url', () => {
-    cy.visit('/#/magazines/create')
+    cy.visit(`/#/${resourceName}/${view}`)
   })
 
   it('The url path should be magazines/create', () => {
-    cy.url().should('include', 'magazines/create')
+    cy.url().should('include', `${resourceName}/${view}`)
   })
 
   it('The {Name} input is filled when a user types in', () => {
@@ -46,10 +48,10 @@ describe('Magazines: Create Action Test', () => {
 
   it('A magazine is created when the user submits the form', () => {
     // Setup: Gets the submit button element
-    const button = utils.getSubmitButton()
+    const button = utils.getSubmitButton({ submitType: 'create' })
     // Excersice: Creates a new magazine
     button.click()
     // Assertion: The router redirects to /magazines
-    cy.url().should('include', '/magazines')
+    cy.url().should('include', `/${resourceName}`)
   })
 })
