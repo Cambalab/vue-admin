@@ -13,7 +13,7 @@
       <Resource
         name='magazines'
         :list='magazinesList'
-        :show='magazinesShow'
+        :show='ShowMagazines'
         :create='CreateMagazines'
         :edit='EditMagazines'
         :resourceIdName='resourceIdName'
@@ -26,6 +26,7 @@
 <script>
 import Admin from "../src/components/Admin";
 import Resource from "../src/components/Resource";
+import ShowMagazines from './components/ShowMagazines'
 import CreateMagazines from './components/CreateMagazines'
 import EditMagazines from './components/EditMagazines'
 
@@ -45,7 +46,8 @@ const articlesShow = [
     'type': 'TextField',
     'tag': 'h1'
   },
-  'content'
+  'content',
+  'campoQueNoExiste'
 ]
 
 const fieldsArticleCreate =[
@@ -132,6 +134,7 @@ export default {
       magazinesShow,
       fieldsMagazineCreate,
       fieldsMagazineEdit,
+      ShowMagazines,
       CreateMagazines,
       EditMagazines
       // #23 - To use the feathers server just add the parseResponses attribute
