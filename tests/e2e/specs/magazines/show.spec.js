@@ -18,7 +18,7 @@ describe('Magazines: Show Action Test', () => {
   })
 
   before('Visits the magazines list', () => {
-    // FIXME: Workaround until we fix the edit path push when the store is empty
+    // FIXME: Workaround until we fix the show path push when the store is empty
     cy.visit(`/#/${resourceName}/`)
   })
 
