@@ -10,11 +10,10 @@
           <div>
             <h3 class="headline mb-2">This is a Custom Edit Form</h3>
             <p>
-              Although we provide default components for Create views, Vue Admin
+              Although we provide default components for Edit views, Vue Admin
               ships with a <i>kind of injected</i> set of functions for those
               components declared in <b>Resource</b> as a view, that can be used
-              for updating your resource entity and submitting it for database
-              storage.
+              for updating your resource entity and submitting it to your api.
             </p>
             <p>
               The Vuex store is the middleware where data is saved until a
