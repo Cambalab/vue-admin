@@ -22,6 +22,9 @@ export default {
   // Create action button
   RESOURCE_CREATE_BUTTON: 'add',
 
+  // Create action button
+  RESOURCE_EDIT_BUTTON: 'edit',
+
   // Create Save button
   CREATE_SUBMIT_BUTTON: 'save'
 }
