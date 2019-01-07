@@ -48,5 +48,13 @@ export default {
 
    RESOURCE_CREATE_SUBMIT_BUTTON: {
      with: ({ resourceName, view }) => `${resourceName}-${view}-submit-button`
+   },
+
+  /**
+   * Edit
+   */
+
+   RESOURCE_EDIT_SUBMIT_BUTTON: {
+     with: ({ resourceName, view }) => `${resourceName}-${view}-edit-button`
    }
 }
