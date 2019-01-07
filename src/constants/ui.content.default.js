@@ -26,5 +26,8 @@ export default {
   RESOURCE_EDIT_BUTTON: 'edit',
 
   // Create Save button
-  CREATE_SUBMIT_BUTTON: 'save'
+  CREATE_SUBMIT_BUTTON: 'save',
+
+  // Edit Save button
+  EDIT_SUBMIT_BUTTON: 'save'
 }
