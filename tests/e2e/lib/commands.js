@@ -40,8 +40,8 @@ export const InitEntityUtils = ({
     },
 
     /**
-     * getSubmitButton - Calls cypress to find a button element that matches the
-     * given parameters
+     * getSubmitButton - Calls cypress to find and return a button element that
+     * matches the given parameters
      *
      * @param {Object} args An object with parameters that override the default
      * ones
@@ -65,6 +65,15 @@ export const InitEntityUtils = ({
       return cy.getElement(Object.assign({}, _args, args))
     },
 
+    /**
+     * getTableRowBy - Calls cypress to find and return a row element that
+     * matches the given parameters
+     *
+     * @param {Object} args An object with parameters that override the default
+     * ones
+     *
+     * @return {type} A td element
+     */
     getTableRowBy: (args = {}) => {
       const _args = {
         constant: UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD,
