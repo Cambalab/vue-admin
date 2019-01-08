@@ -1,3 +1,4 @@
+// Can't use aliases yet, without adding a custom webpack config, see https://github.com/vuejs/vue-cli/issues/2465 - @sgobotta
 const UI_NAMES = require('../../../src/constants/ui.element.names')
 const { createElementQueryBy } = require('./helpers')
 

@@ -1,4 +1,4 @@
-import Router from '../../router'
+import Router from '@router'
 
 /**
  * getEntity - Given a resource name and a form type, calls the store to get the

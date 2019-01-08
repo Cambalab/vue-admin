@@ -1,7 +1,7 @@
-import listUtils from '../../../store/utils/list.utils'
-import showUtils from '../../../store/utils/show.utils'
-import createUtils from '../../../store/utils/create.utils'
-import editUtils from '../../../store/utils/edit.utils'
+import listUtils from '@store/utils/list.utils'
+import showUtils from '@store/utils/show.utils'
+import createUtils from '@store/utils/create.utils'
+import editUtils from '@store/utils/edit.utils'
 
 export default ({
   list,
