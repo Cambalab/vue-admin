@@ -72,7 +72,7 @@ export const InitEntityUtils = ({
      * @param {Object} args An object with parameters that override the default
      * ones
      *
-     * @return {type} A td element
+     * @return {Object} A td element
      */
     getTableRowBy: (args = {}) => {
       const _args = {
@@ -103,7 +103,7 @@ export const InitEntityUtils = ({
  * @param {String}        elementProp    The element property to look into,
  *                                       we usually use 'name'.
  *
- * @return {type} An 'elementType' element from the DOM
+ * @return {Object} An 'elementType' element from the DOM
  */
 export const getElement = ({
   constant,
