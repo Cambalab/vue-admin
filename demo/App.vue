@@ -12,7 +12,7 @@
       </Resource>
       <Resource
         name='magazines'
-        :list='magazinesList'
+        :list='ListMagazines'
         :show='ShowMagazines'
         :create='CreateMagazines'
         :edit='EditMagazines'
@@ -24,8 +24,9 @@
 </template>
 
 <script>
-import Admin from "../src/components/Admin";
-import Resource from "../src/components/Resource";
+import Admin from '../src/components/Admin'
+import Resource from '../src/components/Resource'
+import ListMagazines from './components/ListMagazines'
 import ShowMagazines from './components/ShowMagazines'
 import CreateMagazines from './components/CreateMagazines'
 import EditMagazines from './components/EditMagazines'
@@ -134,6 +135,7 @@ export default {
       magazinesShow,
       fieldsMagazineCreate,
       fieldsMagazineEdit,
+      ListMagazines,
       ShowMagazines,
       CreateMagazines,
       EditMagazines
