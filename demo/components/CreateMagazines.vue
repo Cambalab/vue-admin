@@ -104,7 +104,7 @@
  */
 
 // This is only used for e2e demo tests
-import UI_NAMES from '../../src/constants/ui.element.names'
+import UI_NAMES from '@constants/ui.element.names'
 
 export default {
   name: 'CreateMagazines',
