@@ -24,8 +24,9 @@
 </template>
 
 <script>
-import Admin from '../src/components/Admin'
-import Resource from '../src/components/Resource'
+
+import Resource from "@components/Resource";
+import Admin from "@components/Admin";
 import ListMagazines from './components/ListMagazines'
 import ShowMagazines from './components/ShowMagazines'
 import CreateMagazines from './components/CreateMagazines'

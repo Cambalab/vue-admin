@@ -89,7 +89,7 @@ describe('Create Test', () => {
       input.should('have.value', article.content)
     }
     {
-      const submitButtonName = UI_NAMES.RESOURCE_CREATE_SUBMIT_BUTTON.with({
+      const submitButtonName = UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
         resourceName: 'articles',
         view: 'create'
       })
