@@ -19,21 +19,8 @@ describe('Magazines: List Action Test', () => {
     then((res) => { magazines = res.body })
   })
 
-  before('Visits the magazines list', () => {
+  beforeEach('Visits the magazines list', () => {
     cy.visit(`/#/${resourceName}/`)
-  })
-
-  afterEach('Returns to the first table page', () => {
-    const previousPageButton = cy.getElement({
-      constant: '"Previous page"',
-      elementType: 'button',
-      elementProp: 'aria-label'
-    })
-
-    while (timesNavigatedToNextPage !== 0) {
-      previousPageButton.click()
-      timesNavigatedToNextPage = timesNavigatedToNextPage - 1
-    }
   })
 
   it('The url should be /magazines', () => {
@@ -44,13 +31,10 @@ describe('Magazines: List Action Test', () => {
     const field = 'id'
 
     magazines.forEach((magazine, index) => {
-      let _index = index
       // Navigates to next page if necessary
       navigateToNextPage(index)
-      // Resets index if navigated at least once
-      _index = shouldResetIndex(_index)
-      // Setup: Gets the 'name' input element
-      const row = utils.getTableRowBy({ field, index: _index })
+      // Setup: Gets the 'index' id row
+      const row = utils.getTableRowBy({ field, index: index  % 5 })
       // Assertion: the input contains the magazine issue content
       row.should('contain', magazine[field])
     })
@@ -60,13 +44,10 @@ describe('Magazines: List Action Test', () => {
     const field = 'issue'
 
     magazines.forEach((magazine, index) => {
-      let _index = index
       // Navigates to next page if necessary
       navigateToNextPage(index)
-      // Resets index if navigated at least once
-      _index = shouldResetIndex(_index)
-      // Setup: Gets the 'name' input element
-      const row = utils.getTableRowBy({ field, index: _index })
+      // Setup: Gets the 'index' issue row
+      const row = utils.getTableRowBy({ field, index: index % 5 })
       // Assertion: the input contains the magazine issue content
       row.should('contain', magazine[field])
     })
@@ -76,13 +57,10 @@ describe('Magazines: List Action Test', () => {
     const field = 'publisher'
 
     magazines.forEach((magazine, index) => {
-      let _index = index
       // Navigates to next page if necessary
       navigateToNextPage(index)
-      // Resets index if navigated at least once
-      _index = shouldResetIndex(_index)
-      // Setup: Gets the 'name' input element
-      const row = utils.getTableRowBy({ field, index: _index })
+      // Setup: Gets the 'index' publisher row
+      const row = utils.getTableRowBy({ field, index: index % 5 })
       // Assertion: the input contains the magazine issue content
       row.should('contain', magazine[field])
     })
@@ -98,12 +76,5 @@ describe('Magazines: List Action Test', () => {
       nextPageButton.click()
       timesNavigatedToNextPage = timesNavigatedToNextPage + 1
     }
-  }
-
-  const shouldResetIndex = (index) => {
-    if (timesNavigatedToNextPage > 0) {
-      return parseInt(index) - (5 * timesNavigatedToNextPage)
-    }
-    return index
   }
 })
