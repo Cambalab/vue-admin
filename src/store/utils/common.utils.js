@@ -1,6 +1,5 @@
 import Router from '../../router'
 
-
 /**
  * getEntity - Given a resource name and a form type, calls the store to get the
  * current 'resourceName' entity. The value does not exist until a user inputs
@@ -33,6 +32,33 @@ export const fetchEntity = ({ resourceName, store, router }) => {
 }
 
 /**
+ * fetchList - Given a resource name, calls the store to dispatch a get request
+ *
+ * @param {String}  resourceName The name of the resource
+ * @param {Object}  store        The global Vuex store variable
+ *
+ * @return {Array} A 'resourceName' list from the Vuex Crud store
+ */
+export const fetchList = ({ resourceName, store }) => {
+  const moduleName = `${resourceName}/fetchList`;
+  return store.dispatch(moduleName)
+}
+
+/**
+ * getList - Given a resource name, calls the store to get the current
+ * list of 'resourceName' elements
+ *
+ * @param {String} resourceName The name of the resource
+ * @param {Object} store        The global Vuex store variable
+ *
+ * @return {Array} A 'resourceName' list from the Vuex Crud store
+ */
+export const getList = ({ resourceName, store }) => {
+  const moduleName = `${resourceName}/list`
+  return store.getters[moduleName]
+}
+
+/**
  * updateEntity - Given a key and a value, calls the store to update the
  * 'resourceName' entity.
  *
@@ -56,7 +82,7 @@ export const updateEntity = ({
 }
 
 /**
- * submitEntity - Given an object with aprams, calls the store to dispatch
+ * submitEntity - Given an object with params, calls the store to dispatch
  * an 'actionType' request
  *
  * @param {String} resourceName      The name of the resource
@@ -71,7 +97,6 @@ export const updateEntity = ({
  *
  * @return {Promise} A pending promise.
  */
-
 export const submitEntity = ({
   resourceName,
   actionType,
