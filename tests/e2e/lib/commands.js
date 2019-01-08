@@ -38,6 +38,7 @@ export const InitEntityUtils = ({
       }
       return cy.getElement(Object.assign({}, _args, args))
     },
+
     /**
      * getSubmitButton - Calls cypress to find a button element that matches the
      * given parameters
@@ -60,6 +61,21 @@ export const InitEntityUtils = ({
         },
         elementProp: 'name',
         elementType: 'button'
+      }
+      return cy.getElement(Object.assign({}, _args, args))
+    },
+
+    getTableRowBy: (args = {}) => {
+      const _args = {
+        constant: UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD,
+        constantParams: {
+          resourceName,
+          view,
+          field: args.field,
+          index: args.index
+        },
+        elementProp: 'name',
+        elementType: 'td'
       }
       return cy.getElement(Object.assign({}, _args, args))
     }
@@ -87,7 +103,7 @@ export const getElement = ({
   elementProp,
 }) => {
   // Builds the name of the element using predefined constants
-  const elementFieldName = (constant instanceof Object) || !constantParams
+  const elementFieldName = (constant instanceof Object) || constantParams
     ? constant.with(constantParams)
     : constant
   // Creates the Cypress query
