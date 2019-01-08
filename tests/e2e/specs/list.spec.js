@@ -61,6 +61,7 @@ describe('List Test', () => {
   })
 
   it('Articles List View should render three articles links with ids', () => {
+    // FIXME: Refactor to use the cypress request and get the elements from the api
     const articlesIndexes = [0, 1, 2];
     articlesIndexes.forEach((articleIndex) => {
       const listContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
