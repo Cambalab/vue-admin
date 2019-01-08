@@ -5,6 +5,7 @@
       src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
       aspect-ratio="2.75"
     />
+
     <v-card-title primary-title>
       <div>
         <h3 class="headline mb-2">This is a Custom List Form</h3>
@@ -84,15 +85,18 @@
       </template>
 
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.id }}</td>
-        <td class="text-xs-right">{{ props.item.issue }}</td>
-        <td class="text-xs-right">{{ props.item.publisher }}</td>
+        <td :name="idRowName(props.index)">{{ props.item.id }}</td>
+        <td :name="issueRowName(props.index)" class="text-xs-right">{{ props.item.issue }}</td>
+        <td :name="publisherRowName(props.index)" class="text-xs-right">{{ props.item.publisher }}</td>
       </template>
+
     </v-data-table>
   </v-card>
 </template>
 
 <script>
+  import UI_NAMES from '../../src/constants/ui.element.names'
+
   export default {
     name: 'ListMagazines',
     props: {
@@ -101,6 +105,22 @@
       va: {
         type: Object,
         required: true
+      }
+    },
+    data() {
+      // This is only needed for e2e demo tests
+      const resourceName = 'magazines'
+      const view = 'list'
+      const buildName = (field, index) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+        resourceName,
+        view,
+        field,
+        index
+      })
+      return {
+        idRowName: (index) => buildName('id', index),
+        issueRowName: (index) => buildName('issue', index),
+        publisherRowName: (index) => buildName('publisher', index)
       }
     },
     computed: {
