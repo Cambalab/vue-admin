@@ -97,7 +97,7 @@
 import UI_NAMES from '../../src/constants/ui.element.names'
 
 export default {
-  name: 'CreateMagazines',
+  name: 'ShowMagazines',
   props: {
     // This prop will be assigned by Vue Admin for you to use the functions
     // shown below.
