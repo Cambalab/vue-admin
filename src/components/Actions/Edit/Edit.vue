@@ -1,14 +1,14 @@
 <template>
-  <v-card>
-    <v-card-title primary-title>
-      <h3 class="headline mb-0 text-capitalize">{{name}}</h3>
+  <v-card :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })}`">
+    <v-card-title primary-title :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`">
+      <h3 class="headline mb-0 text-capitalize">{{UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName })}}</h3>
     </v-card-title>
     <v-form>
-      <v-card-text>
+      <v-card-text :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({ resourceName, view })}`">
         <v-layout wrap>
           <v-flex xs8>
             <component
-              :name="label(field)"
+              :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({ resourceName, view, field: label(field) })}`"
               v-for="field in fields"
               :key="key(label(field))"
               :is="type(field.type)"
@@ -18,7 +18,7 @@
             </component>
           </v-flex>
           <v-flex xs12>
-            <v-btn color="success" v-on:click="submit">Save</v-btn>
+            <v-btn :name="`${UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({ resourceName, view })}`" color="success" v-on:click="submit">{{UI_CONTENT.EDIT_SUBMIT_BUTTON}}</v-btn>
           </v-flex>
         </v-layout>
       </v-card-text>
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import UI_CONTENT from '../../../constants/ui.content.default'
+import UI_NAMES from '../../../constants/ui.element.names'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents"
 import Router from "../../../router"
@@ -55,7 +57,11 @@ export default {
   },
   data() {
     return {
-      resource: {}
+      resource: {},
+      resourceName: this.name,
+      view: 'edit',
+      UI_CONTENT,
+      UI_NAMES
     }
   },
   computed: {
@@ -107,7 +113,6 @@ export default {
       const resourceName = this.name + "/byId";
       return this.$store.getters[resourceName](this.$route.params.id)
     }
-
   },
 
   created() {

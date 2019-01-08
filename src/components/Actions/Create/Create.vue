@@ -21,7 +21,7 @@
           </v-flex>
           <v-flex xs12>
             <v-btn
-              :name="`${UI_NAMES.RESOURCE_CREATE_SUBMIT_BUTTON.with({ resourceName, view })}`"
+              :name="`${UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({ resourceName, view })}`"
               color="success"
               v-on:click="submit">
               {{UI_CONTENT.CREATE_SUBMIT_BUTTON}}
