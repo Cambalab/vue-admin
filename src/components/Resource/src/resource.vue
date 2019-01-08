@@ -11,7 +11,7 @@ export default {
   name: "Resource",
   props: {
     name: String,
-    list: Array,
+    list: [Array, Object],
     show: [Array, Object],
     create: [Array, Object],
     edit: [Array, Object],
