@@ -40,7 +40,6 @@ export default ({
         // list is a user's custom component
         const utils = listUtils({
           resourceName,
-          router,
           store
         })
         return {
