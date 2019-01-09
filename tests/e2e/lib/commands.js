@@ -1,6 +1,9 @@
 // Can't use aliases yet, without adding a custom webpack config, see https://github.com/vuejs/vue-cli/issues/2465 - @sgobotta
 const UI_NAMES = require('../../../src/constants/ui.element.names')
-const { createElementQueryBy } = require('./helpers')
+const {
+  createUrlWithResource,
+  createElementQueryWith
+} = require('./helpers')
 
 /**
  * InitEntityUtils - Initialises a set of functions to be used by a specific
@@ -17,6 +20,19 @@ export const InitEntityUtils = ({
   view
 }) => {
   return {
+
+    /**
+     * getUrlByResource - Given an object with parameters, returns the url
+     * for a given resource
+     *
+     * @param {Object} args An object with parameters that override the default
+     * ones
+     *
+     * @return {String} An url
+     */
+    getUrlByResource: (args = {}) => {
+      return createUrlWithResource(Object.assign({}, args))
+    },
     /**
      * getInputBy - Calls cypress to find an input element that matches the
      * given parameters
@@ -113,7 +129,7 @@ export const getElement = ({
     ? constant.with(constantParams)
     : constant
   // Creates the Cypress query
-  const element = createElementQueryBy({
+  const element = createElementQueryWith({
     type: elementType,
     prop: elementProp,
     value: elementFieldName
