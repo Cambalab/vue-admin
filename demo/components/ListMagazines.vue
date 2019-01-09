@@ -39,24 +39,6 @@
       </div>
     </v-card-title>
 
-    <div class="text-xs-center d-flex right">
-      <router-link
-        :to="{ 'magazines': `magazines/create` }">
-        <v-tooltip bottom>
-          <v-btn
-            icon
-            absolute
-            right
-            color="success"
-            slot="activator"
-            style="top:20px;">
-            <i class="v-icon material-icons">add</i>
-          </v-btn>
-          <span>Create magazine</span>
-        </v-tooltip>
-      </router-link>
-    </div>
-
     <v-toolbar flat color="white">
       <v-toolbar-title>My Magazines List</v-toolbar-title>
       <v-divider
