@@ -13,7 +13,7 @@ describe('Magazines: List Action Test', () => {
 
   let timesNavigatedToNextPage = 0
 
-  before('Creates a new magazine', () => {
+  before('Gets a list of magazines', () => {
     const url = Factory.apiUrl({ route: `api/${resourceName}/` })
     cy.request('GET', url).
     then((res) => { magazines = res.body })
