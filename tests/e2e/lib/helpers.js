@@ -2,10 +2,15 @@
  * Command Helpers
  */
 
- export default {
-   createElementQueryBy: ({
-     type = '',
-     prop,
-     value
-   }) => `${type}[${prop}=${value}]`
- }
+export default {
+  createElementQueryWith: ({
+    type = '',
+    prop,
+    value
+  }) => `${type}[${prop}=${value}]`,
+
+  createUrlWithResource: ({
+    resourceName,
+    path = ''
+  }) => `${Cypress.config().baseUrl}/#/${resourceName}/${path}`
+}
