@@ -24,7 +24,7 @@ export default ({
       const name = `${resourceName}/list`
       if (list instanceof Array) {
         // list should be a VA default component
-        return list ? {
+        return {
           path: resourcePath,
           name,
           component: wrapper,
@@ -35,7 +35,7 @@ export default ({
             hasCreate,
             resourceId: resourceIdName
           }
-        } : []
+        }
       } else {
         // list is a user's custom component
         const utils = listUtils({
@@ -62,7 +62,7 @@ export default ({
       const name = `${resourceName}/show`
       if (show instanceof Array) {
         // show should be a VA default component
-        return show ? {
+        return {
           path: `${resourcePath}/show/:id`,
           name,
           component: wrapper,
@@ -70,7 +70,7 @@ export default ({
             name: resourceName,
             fields: show
           }
-        } : []
+        }
       } else {
         // show is a user's custom component
         const utils = showUtils({
@@ -99,7 +99,7 @@ export default ({
       if (create instanceof Array) {
         // create should be a VA default component
         const redirect = { idField: resourceIdName, view: redirectView }
-        return create ? {
+        return {
           path: `${resourcePath}/create`,
           name,
           component: wrapper,
@@ -108,7 +108,7 @@ export default ({
             fields: create,
             redirect
           }
-        } : []
+        }
       } else {
         // create is a user's custom component
         const utils = createUtils({
@@ -140,7 +140,7 @@ export default ({
       if (edit instanceof Array) {
         // edit should be a VA default component
         const redirect = { idField: resourceIdName, view: redirectView }
-        return edit ? {
+        return {
           path: `${resourcePath}/edit/:id`,
           name,
           component: wrapper,
@@ -149,7 +149,7 @@ export default ({
             fields: edit,
             redirect
           }
-        } : []
+        }
       } else {
         // edit is a user's custom component
         const utils = editUtils({
