@@ -11,6 +11,7 @@ describe('Magazines: List Action Test', () => {
     view
   })
 
+  const rowsPerPage = 5
   let timesNavigatedToNextPage = 0
 
   before('Gets a list of magazines', () => {
@@ -24,47 +25,45 @@ describe('Magazines: List Action Test', () => {
   })
 
   it('The url should be /magazines', () => {
-    cy.url().should('include', resourceName)
+    const url = utils.getUrlByResource({ resourceName })
+    cy.url().should('eq', url)
   })
 
   it('The list should contain magazines with an {id} attribute', () => {
     const field = 'id'
-
-    magazines.forEach((magazine, index) => {
-      // Navigates to next page if necessary
-      navigateToNextPage(index)
-      // Setup: Gets the 'index' id row
-      const row = utils.getTableRowBy({ field, index: index  % 5 })
-      // Assertion: the input contains the magazine issue content
-      row.should('contain', magazine[field])
-    })
+    assertListElementsByField(magazines, field, rowsPerPage)
   })
 
   it('The list should contain magazines with an {issue} attribute', () => {
     const field = 'issue'
-
-    magazines.forEach((magazine, index) => {
-      // Navigates to next page if necessary
-      navigateToNextPage(index)
-      // Setup: Gets the 'index' issue row
-      const row = utils.getTableRowBy({ field, index: index % 5 })
-      // Assertion: the input contains the magazine issue content
-      row.should('contain', magazine[field])
-    })
+    assertListElementsByField(magazines, field, rowsPerPage)
   })
 
   it('The list should contain magazines with a {publisher} attribute', () => {
     const field = 'publisher'
+    assertListElementsByField(magazines, field, rowsPerPage)
+  })
 
-    magazines.forEach((magazine, index) => {
+  /**
+   * assertListElementsByField - Given an list of elements, a 'field' and a
+   * number, iterates through the array, finds an element field in a table row,
+   * and asserts a cell's value is equal to the current elements's 'field'.
+   *
+   * @param {Array}  list        A list of elements
+   * @param {String} field       A property name of list elements
+   * @param {Number} rowsPerPage A quantity representing the rows per page of a
+   * table.
+   */
+  const assertListElementsByField = (list, field, rowsPerPage) => {
+    list.forEach((element, index) => {
       // Navigates to next page if necessary
       navigateToNextPage(index)
       // Setup: Gets the 'index' publisher row
-      const row = utils.getTableRowBy({ field, index: index % 5 })
+      const row = utils.getTableRowBy({ field, index: index % rowsPerPage })
       // Assertion: the input contains the magazine issue content
-      row.should('contain', magazine[field])
+      row.should('contain', element[field])
     })
-  })
+  }
 
   const navigateToNextPage = (index) => {
     if (index && (index % 5 === 0)) {
