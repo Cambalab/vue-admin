@@ -1,18 +1,20 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-const Factory = require('../factory')
-const { queryElementByProp } = require('../helpers')
+const Factory = require('../../factory')
+const { queryElementByProp } = require('../../helpers')
 
-const UI_CONTENT = require('../../../src/constants/ui.content.default')
-const UI_NAMES = require('../../../src/constants/ui.element.names')
+const UI_CONTENT = require('../../../../src/constants/ui.content.default')
+const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
-describe('Show Test', () => {
+describe('Articles: Show Test', () => {
   let article = {}
 
   before('Search the Show view url', () => {
     const url = Factory.apiUrl({ route: 'api/articles/' })
-    cy.request('POST',url , Factory.createArticle()).
-    then((res) => { article = res.body })
+    cy.request('POST',url , Factory.createArticle())
+      .then((res) => { article = res.body })
+    cy.visit('/#/articles')
+    cy.wait(2000)
   })
 
   it('Visits the Show view url', () => {
@@ -61,15 +63,15 @@ describe('Show Test', () => {
   }
 
   function articlesShowViewShouldContainTheField(field) {
-    cy.get(queryToElement('RESOURCE_VIEW_CONTAINER_FIELDS')).
-    should((fieldsContainerRes) => {
-      const fieldContainerElement = queryToElementWith('RESOURCE_VIEW_CONTAINER_FIELD', {
-        resourceName: 'articles',
-        view: 'show',
-        field: field
+    cy.get(queryToElement('RESOURCE_VIEW_CONTAINER_FIELDS'))
+      .should((fieldsContainerRes) => {
+        const fieldContainerElement = queryToElementWith('RESOURCE_VIEW_CONTAINER_FIELD', {
+          resourceName: 'articles',
+          view: 'show',
+          field: field
+        })
+        const fieldContainer = fieldsContainerRes.find(fieldContainerElement)
+        expect(fieldContainer).to.contain(article[field])
       })
-      const fieldContainer = fieldsContainerRes.find(fieldContainerElement)
-      expect(fieldContainer).to.contain(article[field])
-    })
   }
 })

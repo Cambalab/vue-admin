@@ -1,12 +1,12 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-const { queryElementByProp } = require('../helpers')
+const { queryElementByProp } = require('../../helpers')
 
-const UI_CONTENT = require('../../../src/constants/ui.content.default')
-const UI_NAMES = require('../../../src/constants/ui.element.names')
+const UI_CONTENT = require('../../../../src/constants/ui.content.default')
+const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 
-describe('List Test', () => {
+describe('Articles: List Test', () => {
   it('Visits the List View', () => {
     cy.visit('/#/articles')
 
@@ -61,6 +61,7 @@ describe('List Test', () => {
   })
 
   it('Articles List View should render three articles links with ids', () => {
+    // FIXME: Refactor to use the cypress request and get the elements from the api
     const articlesIndexes = [0, 1, 2];
     articlesIndexes.forEach((articleIndex) => {
       const listContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER.with({

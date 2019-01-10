@@ -1,23 +1,25 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-const Factory = require('../factory')
-const { queryElementByProp } = require('../helpers')
+const Factory = require('../../factory')
+const { queryElementByProp } = require('../../helpers')
 
-const UI_CONTENT = require('../../../src/constants/ui.content.default')
-const UI_NAMES = require('../../../src/constants/ui.element.names')
+const UI_CONTENT = require('../../../../src/constants/ui.content.default')
+const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
-describe('Edit Test', () => {
+describe('Articles: Edit Test', () => {
   let article = {}
   let newArticle = {}
 
   before('Create an article', () => {
     const url = Factory.apiUrl({ route: 'api/articles/' })
-    cy.request('POST',url , Factory.createArticle()).
-    then((res) => { article = res.body })
+    cy.request('POST', url, Factory.createArticle())
+      .then((res) => { article = res.body })
   })
 
   before('Create a new article to edit the fields content', () => {
     newArticle = Factory.createArticle()
+    cy.visit('/#/magazines')
+    cy.wait(8000)
   })
 
   before('Visits the created article with the Show view', () => {
@@ -28,8 +30,7 @@ describe('Edit Test', () => {
 
   before('Click in the Edit button of the Show view', () => {
     const editButtonName = UI_NAMES.RESOURCE_ID_EDIT_BUTTON.with({
-      resourceName: 'articles',
-      resourceId: article.id
+      resourceName: 'articles'
     })
     const editButtonElement = queryElementByProp({
       type: 'button',

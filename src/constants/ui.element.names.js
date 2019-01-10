@@ -41,7 +41,11 @@ export default {
   },
   // The button that redirects to a Edit view
   RESOURCE_ID_EDIT_BUTTON: {
-    with: ({ resourceName, resourceId }) => `${resourceName}-${resourceId}-edit-button`
+    with: ({ resourceName, index }) => {
+      return index !== undefined
+      ? `${resourceName}-edit-button-${index}`
+      : `${resourceName}-edit-button`
+    }
   },
   // A specific container of a Resource field inside an element of List
   RESOURCE_VIEW_ELEMENT_FIELD: {
@@ -51,12 +55,8 @@ export default {
       : `${resourceName}-${view}-element-${field}`
     }
   },
-
-  /**
-   * Create
-   */
-
-   RESOURCE_VIEW_SUBMIT_BUTTON: {
-     with: ({ resourceName, view }) => `${resourceName}-${view}-submit-button`
-   }
+  // The form submit buttons
+  RESOURCE_VIEW_SUBMIT_BUTTON: {
+    with: ({ resourceName, view }) => `${resourceName}-${view}-submit-button`
+  }
 }

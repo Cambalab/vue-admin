@@ -6,26 +6,31 @@
         :show='articlesShow'
         :create='fieldsArticleCreate'
         :edit='fieldsArticleEdit'
-        :resourceId='resourceId'
-        apiUrl='http://localhost:8080/api/'
+        :resourceIdName='resourceIdName'
+        :apiUrl='apiUrl'
         >
       </Resource>
       <Resource
         name='magazines'
-        :list='magazinesList'
-        :show='magazinesShow'
-        :create='fieldsMagazineCreate'
-        :edit='fieldsMagazineEdit'
-        :resourceId='resourceId'
-        apiUrl='http://localhost:8080/api/'
+        :list='ListMagazines'
+        :show='ShowMagazines'
+        :create='CreateMagazines'
+        :edit='EditMagazines'
+        :resourceIdName='resourceIdName'
+        :apiUrl='apiUrl'
         >
       </Resource>
     </Admin>
 </template>
 
 <script>
-import Admin from "@components/Admin";
+
 import Resource from "@components/Resource";
+import Admin from "@components/Admin";
+import ListMagazines from './components/ListMagazines'
+import ShowMagazines from './components/ShowMagazines'
+import CreateMagazines from './components/CreateMagazines'
+import EditMagazines from './components/EditMagazines'
 
 const articlesList = [
   {
@@ -43,7 +48,8 @@ const articlesShow = [
     'type': 'TextField',
     'tag': 'h1'
   },
-  'content'
+  'content',
+  'campoQueNoExiste'
 ]
 
 const fieldsArticleCreate =[
@@ -57,7 +63,7 @@ const fieldsArticleCreate =[
 
 const fieldsArticleEdit = fieldsArticleCreate
 
-const resourceId = "id"
+const resourceIdName = "id"
 
 const magazinesList = [
   {
@@ -99,16 +105,18 @@ const fieldsMagazineEdit = fieldsMagazineCreate
 //   parseList: (response) => {
 //     const { data } = response;
 //     return Object.assign({}, response, {
-//       data: data.data // expecting array of objects with IDs
+//       data: data.data // Vue Admin expects a 'data' object with an array of objects
 //     });
 //   },
 //   parseSingle: (response) => {
 //     const { data } = response;
 //     return Object.assign({}, response, {
-//       data // expecting object with ID
+//       data // Vue Admin expects a 'data' object as response
 //     });
 //   }
 // }
+
+const apiUrl = 'http://localhost:8080/api/'
 
 export default {
   name: "App",
@@ -118,18 +126,23 @@ export default {
   },
   data() {
     return {
+      apiUrl,
       articlesList,
       articlesShow,
       fieldsArticleCreate,
       fieldsArticleEdit,
-      resourceId,
+      resourceIdName,
       magazinesList,
       magazinesShow,
       fieldsMagazineCreate,
-      fieldsMagazineEdit
+      fieldsMagazineEdit,
+      ListMagazines,
+      ShowMagazines,
+      CreateMagazines,
+      EditMagazines
       // #23 - To use the feathers server just add the parseResponses attribute
       // below, pass ':parseResponses='parseResponses' to Resource in the
-      // template and update the resourceId to '_id'. - sgobotta
+      // template and update the resourceIdName to '_id'. - sgobotta
       // parseResponses: parseFeathersResponses
     };
   }

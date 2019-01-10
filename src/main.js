@@ -1,13 +1,13 @@
 import "@babel/polyfill";
 import Vue from "vue";
-import "./plugins/vuetify";
+import "@plugins/vuetify";
 import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 const routes = [{}];
 const router = new VueRouter(routes);
 
-import App from "./App.vue";
+import App from "@demo/App.vue";
 import Vuex from "vuex";
 
 Vue.use(Vuex);

@@ -13,7 +13,8 @@
 <script>
 import Core from "../../Core";
 import Ui from "../../Ui";
-import resource from "./resource";
+import resource from "../../../store/resource";
+import { entities } from "../../../store/entities"
 import UI_CONTENT from '../../../constants/ui.content.default'
 
 export default {
@@ -33,6 +34,7 @@ export default {
   },
   created() {
     this.$store.registerModule('resources', resource)
+    this.$store.registerModule('entities', entities)
   }
 };
 </script>

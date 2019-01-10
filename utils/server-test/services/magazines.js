@@ -9,22 +9,22 @@ module.exports = function (app) {
       id: 1,
       name: 'Console log Oriented Programming',
       articles: [1, 2, 3],
-      issue: 20,
-      publisher: ipsum.generateSentence(2),
+      issue: '#20',
+      publisher: ipsum.generateParagraph(1)
     },
     {
       id: 2,
-      name: ipsum.generateWord(),
+      name: ipsum.generateSentence(),
       articles: [],
-      issue: 13,
-      publisher: ipsum.generateSentence(2)
+      issue: '#13',
+      publisher: ipsum.generateParagraph(1)
     },
     {
       id: 3,
-      name: ipsum.generateWord(),
+      name: ipsum.generateSentence(),
       articles: [],
-      issue: 7,
-      publisher: ipsum.generateSentence(2),
+      issue: '#7',
+      publisher: ipsum.generateParagraph(1)
     }
   ];
 

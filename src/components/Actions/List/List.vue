@@ -35,13 +35,13 @@
         >
         <td>
           <router-link
-            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: 'id', index: props.index })}`"
+            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: resourceId, index: props.index })}`"
             v-if="hasShow"
             :to="{ name: `${name}/show`, params: { id: props.item[resourceId] } }">
             {{ props.item[resourceId] }}
           </router-link>
           <span
-            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: 'id', index: props.index })}`"
+            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: resourceId, index: props.index })}`"
             v-else>
             {{ props.item[resourceId] }}
           </span>

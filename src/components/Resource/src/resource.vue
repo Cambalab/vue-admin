@@ -1,21 +1,25 @@
-<template>
-  <div></div>
-</template>
-
 <script>
-import { List, Show, Create, Edit } from "../../Actions";
-import createCrudModule from "vuex-crud";
+import { List, Show, Create, Edit } from '@components/Actions';
+import createCrudModule from '@store/utils/modules';
+import createRouteBindings from './binding.utils'
 
 export default {
   name: "Resource",
   props: {
-    name: String,
-    list: Array,
-    show: Array,
-    create: Array,
-    edit: Array,
-    resourceId: {
+    name: {
       type: String,
+      required: true
+    },
+    list: {
+      type: [Array, Object],
+      required: true
+    },
+    show: [Array, Object],
+    create: [Array, Object],
+    edit: [Array, Object],
+    resourceIdName: {
+      type: String,
+      required: true,
       default: 'id'
     },
     apiUrl: {
@@ -39,23 +43,14 @@ export default {
       })
     }
   },
-  data() {
-    return {
-      fullRoute: null
-    };
-  },
   created: function() {
-    const customUrlFn = (id) => {
-      const rootUrl =`${this.apiUrl}${this.name}/`
-      return id ? `${rootUrl}${id}` : rootUrl
-    }
-    let module = createCrudModule({
-      resource: this.name,
-      customUrlFn,
-      idAttribute: this.resourceId,
-      ...this.parseResponses
-    });
-    this.$store.registerModule(this.name, module);
+    createCrudModule({
+      apiUrl: this.apiUrl,
+      resourceName: this.name,
+      resourceIdName: this.resourceIdName,
+      parseResponses: this.parseResponses,
+      store: this.$store
+    })
   },
   methods: {
     addRoute: function(path, name) {
@@ -63,44 +58,37 @@ export default {
       this.$store.commit(resourceName, { path, name });
     },
     loadRoutes() {
-      this.fullRoute = "/" + this.name;
-      const path = this.fullRoute;
+      const resourcePath = `/${this.name}`
       const routes = [];
-
-      this.addRoute(path, this.name);
-
-      routes.push(this.bindList(path));
-      routes.push(this.bindShow(path));
-      routes.push(this.bindCreate(path));
-      routes.push(this.bindEdit(path));
-
+      // Adds the 'resourceName' path, mainly used for the drawer
+      this.addRoute(resourcePath, this.name);
+      // Initialises bindings to create the navigation routes
+      const bind = createRouteBindings({
+        list: this.list,
+        show: this.show,
+        create: this.create,
+        edit: this.edit,
+        resourceName: this.name,
+        resourceIdName: this.resourceIdName,
+        redirection: this.redirect,
+        router: this.$router,
+        store: this.$store,
+        parseResponses: this.parseResponses
+      })
+      // Adds binded components to routes
+      routes.push(bind.list({ wrapper: List }))
+      routes.push(bind.show({ wrapper: Show }))
+      routes.push(bind.create({ wrapper: Create }))
+      routes.push(bind.edit({ wrapper: Edit }));
+      // Adds the routes to the global router
       this.$router.addRoutes(routes);
-    },
-
-    bindList(path) {
-      const hasShow = this.show.length !== 0;
-      const hasCreate = this.create.length !== 0;
-
-      return this.list ? { path: path, name: `${this.name}/list`, component: List, props: { name: this.name, fields: this.list, hasShow, hasCreate, resourceId: this.resourceId }} : []
-    },
-
-    bindShow(path) {
-      return this.show ? { path: `${path}/show/:id`, name: `${this.name}/show`, component: Show, props: { name: this.name, fields: this.show }} : []
-    },
-
-    bindCreate(path) {
-      const redirect = { idField: this.resourceId, view: this.redirect.views.create }
-      return this.create ? { path: `${path}/create`, name: `${this.name}/create`, component: Create, props: { name: this.name, fields: this.create, redirect }} : []
-    },
-
-    bindEdit(path) {
-      const redirect = { idField: this.resourceId, view: this.redirect.views.edit }
-      return this.edit ? { path: `${path}/edit/:id`, name: `${this.name}/edit`, component: Edit, props: { name: this.name, fields: this.edit, redirect }} : []
     }
-
   },
   mounted: function() {
     this.loadRoutes();
+  },
+  render() {
+    return null
   }
 };
 </script>
