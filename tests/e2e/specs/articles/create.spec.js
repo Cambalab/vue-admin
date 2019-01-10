@@ -1,13 +1,13 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-const Factory = require('../factory')
-const { queryElementByProp } = require('../helpers')
+const Factory = require('../../factory')
+const { queryElementByProp } = require('../../helpers')
 
-const UI_CONTENT = require('../../../src/constants/ui.content.default')
-const UI_NAMES = require('../../../src/constants/ui.element.names')
+const UI_CONTENT = require('../../../../src/constants/ui.content.default')
+const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 
-describe('Create Test', () => {
+describe('Articles: Create Test', () => {
   it('Visits the app root url', () => {
     cy.visit('/#/articles/create')
 

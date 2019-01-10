@@ -21,6 +21,7 @@ describe('Magazines: Edit Action Test', () => {
   before('Visits the magazines list', () => {
     // FIXME: Workaround until we fix the edit path push when the store is empty
     cy.visit(`/#/${resourceName}/`)
+    cy.wait(2000)
   })
 
   it('Visits the magazines edit url and the path should be magazines/edit', () => {

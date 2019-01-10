@@ -1,12 +1,12 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-const { queryElementByProp } = require('../helpers')
+const { queryElementByProp } = require('../../helpers')
 
-const UI_CONTENT = require('../../../src/constants/ui.content.default')
-const UI_NAMES = require('../../../src/constants/ui.element.names')
+const UI_CONTENT = require('../../../../src/constants/ui.content.default')
+const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 
-describe('List Test', () => {
+describe('Articles: List Test', () => {
   it('Visits the List View', () => {
     cy.visit('/#/articles')
 
