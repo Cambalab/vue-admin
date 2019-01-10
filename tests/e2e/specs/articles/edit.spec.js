@@ -18,7 +18,7 @@ describe('Articles: Edit Test', () => {
 
   before('Create a new article to edit the fields content', () => {
     newArticle = Factory.createArticle()
-    cy.visit('/#/magazines')
+    cy.visit('/#/articles')
     cy.wait(8000)
   })
 
