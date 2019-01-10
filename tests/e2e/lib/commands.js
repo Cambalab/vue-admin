@@ -31,7 +31,7 @@ export const InitEntityUtils = ({
      * @return {String} An url
      */
     getUrlByResource: (args = {}) => {
-      return createUrlWithResource(Object.assign({}, args))
+      return createUrlWithResource(args)
     },
     /**
      * getInputBy - Calls cypress to find an input element that matches the

@@ -110,7 +110,7 @@ export default {
     },
 
     editButtonName() {
-      return UI_NAMES.RESOURCE_ID_EDIT_BUTTON.with({ resourceName: this.resourceName, resourceId: this.$route.params.id })
+      return UI_NAMES.RESOURCE_ID_EDIT_BUTTON.with({ resourceName: this.resourceName })
     }
   },
 
