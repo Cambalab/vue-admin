@@ -11,8 +11,11 @@ describe('Show Test', () => {
 
   before('Search the Show view url', () => {
     const url = Factory.apiUrl({ route: 'api/articles/' })
-    cy.request('POST',url , Factory.createArticle()).
-    then((res) => { article = res.body })
+    cy.request('POST',url , Factory.createArticle())
+      .then((res) => {
+        article = res.body
+        cy.visit('/#/articles')
+      })
   })
 
   it('Visits the Show view url', () => {
@@ -61,15 +64,15 @@ describe('Show Test', () => {
   }
 
   function articlesShowViewShouldContainTheField(field) {
-    cy.get(queryToElement('RESOURCE_VIEW_CONTAINER_FIELDS')).
-    should((fieldsContainerRes) => {
-      const fieldContainerElement = queryToElementWith('RESOURCE_VIEW_CONTAINER_FIELD', {
-        resourceName: 'articles',
-        view: 'show',
-        field: field
+    cy.get(queryToElement('RESOURCE_VIEW_CONTAINER_FIELDS'))
+      .should((fieldsContainerRes) => {
+        const fieldContainerElement = queryToElementWith('RESOURCE_VIEW_CONTAINER_FIELD', {
+          resourceName: 'articles',
+          view: 'show',
+          field: field
+        })
+        const fieldContainer = fieldsContainerRes.find(fieldContainerElement)
+        expect(fieldContainer).to.contain(article[field])
       })
-      const fieldContainer = fieldsContainerRes.find(fieldContainerElement)
-      expect(fieldContainer).to.contain(article[field])
-    })
   }
 })

@@ -12,8 +12,8 @@ describe('Edit Test', () => {
 
   before('Create an article', () => {
     const url = Factory.apiUrl({ route: 'api/articles/' })
-    cy.request('POST',url , Factory.createArticle()).
-    then((res) => { article = res.body })
+    cy.request('POST',url , Factory.createArticle())
+      .then((res) => { article = res.body })
   })
 
   before('Create a new article to edit the fields content', () => {
@@ -21,6 +21,7 @@ describe('Edit Test', () => {
   })
 
   before('Visits the created article with the Show view', () => {
+    cy.visit('/#/magazines')
     const url = `articles/show/${article.id}`
     cy.visit(`/#/${url}`)
     cy.url().should('include', url)
@@ -28,8 +29,7 @@ describe('Edit Test', () => {
 
   before('Click in the Edit button of the Show view', () => {
     const editButtonName = UI_NAMES.RESOURCE_ID_EDIT_BUTTON.with({
-      resourceName: 'articles',
-      resourceId: article.id
+      resourceName: 'articles'
     })
     const editButtonElement = queryElementByProp({
       type: 'button',

@@ -14,8 +14,8 @@ describe('Magazines: Edit Action Test', () => {
 
   before('Creates a new magazine', () => {
     const url = Factory.apiUrl({ route: `api/${resourceName}/` })
-    cy.request('POST', url, Factory.createMagazine()).
-    then((res) => { magazine = res.body })
+    cy.request('POST', url, Factory.createMagazine())
+      .then((res) => { magazine = res.body })
   })
 
   before('Visits the magazines list', () => {
