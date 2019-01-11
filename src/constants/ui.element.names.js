@@ -70,5 +70,13 @@ export default {
 
    RESOURCE_EDIT_SUBMIT_BUTTON: {
      with: ({ resourceName, view }) => `${resourceName}-${view}-edit-button`
+   },
+   
+   RESOURCE_ID_DELETE_BUTTON: {
+     with: ({ resourceName, index }) => {
+       return index !== undefined
+       ? `${resourceName}-delete-button-${index}`
+       : `${resourceName}-delete-button`
+     }
    }
 }
