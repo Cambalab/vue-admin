@@ -7,6 +7,7 @@
           :resourceName="name">
         </EditButton>
         <Delete
+          :name="deleteButtonName()"
           :resourceId="$route.params.id"
           :resourceName="name">
         </Delete>
@@ -111,6 +112,10 @@ export default {
 
     editButtonName() {
       return UI_NAMES.RESOURCE_ID_EDIT_BUTTON.with({ resourceName: this.resourceName })
+    },
+
+    deleteButtonName() {
+      return UI_NAMES.RESOURCE_ID_DELETE_BUTTON.with({ resourceName: this.resourceName })
     }
   },
 

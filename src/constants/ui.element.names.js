@@ -58,5 +58,13 @@ export default {
   // The form submit buttons
   RESOURCE_VIEW_SUBMIT_BUTTON: {
     with: ({ resourceName, view }) => `${resourceName}-${view}-submit-button`
+  },
+
+  RESOURCE_ID_DELETE_BUTTON: {
+    with: ({ resourceName, index }) => {
+      return index !== undefined
+      ? `${resourceName}-delete-button-${index}`
+      : `${resourceName}-delete-button`
+    }
   }
 }
