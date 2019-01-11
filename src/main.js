@@ -16,8 +16,13 @@ const store = new Vuex.Store({});
 
 Vue.config.productionTip = false;
 
-new Vue({
+const app = new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount("#app");
+
+if (window.Cypress) {
+  // exposes the app, only available during E2E tests
+  window.app = app
+}
