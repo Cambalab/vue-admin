@@ -36,6 +36,7 @@ describe('Vuex Store State', () => {
   it('Attribute {entities} should be empty', () => {
     const attribute = 'entities'
     const state = `state.${attribute}`
+    getStore().its(state).should('eql', initialState[attribute])
     getStore().its(state).should('be.empty')
   })
 
