@@ -1,5 +1,7 @@
-const createInitialVuexStoreState = require('./initial.state')
+import createInitialVuexStoreState from './initial.state'
+import createInitialVuexStoreGetters from './initial.getters'
 
 export const store = {
-  createInitialVuexStoreState
+  createInitialVuexStoreState,
+  createInitialVuexStoreGetters
 }

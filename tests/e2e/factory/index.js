@@ -9,6 +9,10 @@ const createInitialVuexStoreState = () => {
   return store.createInitialVuexStoreState()
 }
 
+const createInitialVuexStoreGetters = () => {
+  return store.createInitialVuexStoreGetters()
+}
+
 /**
  * Entities Methods
  */
@@ -55,6 +59,7 @@ const apiUrl = ({ url, port, route }) => {
 export default {
   // Store methods
   createInitialVuexStoreState,
+  createInitialVuexStoreGetters,
   // Entities methods
   createArticle,
   createMagazine,
