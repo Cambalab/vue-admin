@@ -1,9 +1,6 @@
 // Can't use aliases yet, without adding a custom webpack config, see https://github.com/vuejs/vue-cli/issues/2465 - @sgobotta
-const UI_NAMES = require('../../../src/constants/ui.element.names')
-const {
-  createUrlWithResource,
-  createElementQueryWith
-} = require('./helpers')
+import UI_NAMES from '../../../src/constants/ui.element.names'
+import { createUrlWithResource, createElementQueryWith } from './helpers'
 
 const storePath = 'app.$store'
 
