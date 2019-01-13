@@ -1,4 +1,4 @@
-const Factory = require('../../factory')
+import Factory from '../../factory'
 
 describe('Vuex Store State', () => {
   const getStore = () => cy.getStore()
@@ -13,12 +13,7 @@ describe('Vuex Store State', () => {
 
   it('Should have attributes on initialisation', () => {
     const state = 'state'
-    getStore().its(state).should('have.keys', [
-      'articles',
-      'entities',
-      'magazines',
-      'resources'
-    ])
+    getStore().its(state).should('have.keys', Object.keys(initialState))
   })
 
   it('Attribute {articles} should have the vuex crud intitial configuration', () => {
