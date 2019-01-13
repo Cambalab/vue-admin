@@ -1,10 +1,12 @@
 import {
   InitEntityUtils,
-  getElement
+  getElement,
+  getStore
 } from '../lib/commands'
 
-Cypress.Commands.add("InitEntityUtils", (args) => InitEntityUtils(args))
-Cypress.Commands.add("getElement", (args) => getElement(args))
+Cypress.Commands.add('getStore', () => getStore())
+Cypress.Commands.add('InitEntityUtils', (args) => InitEntityUtils(args))
+Cypress.Commands.add('getElement', (args) => getElement(args))
 
 // ***********************************************
 // This example commands.js shows you how to

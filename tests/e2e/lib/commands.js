@@ -5,6 +5,8 @@ const {
   createElementQueryWith
 } = require('./helpers')
 
+const storePath = 'app.$store'
+
 /**
  * InitEntityUtils - Initialises a set of functions to be used by a specific
  * test
@@ -141,3 +143,5 @@ export const getElement = ({
   // Gets the 'elementType' element
   return cy.get(element)
 }
+
+export const getStore = () => cy.window().its(storePath)
