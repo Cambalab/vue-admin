@@ -1,9 +1,17 @@
 import { ipsum, numbers } from './utils'
 import { store } from './store'
 
-const createVuexCrudInitialState = () => {
-  return store.createVuexCrudInitialState()
+/**
+ * Store Methods
+ */
+
+const createInitialVuexStoreState = () => {
+  return store.createInitialVuexStoreState()
 }
+
+/**
+ * Entities Methods
+ */
 
 const createArticle = (args = {}) => {
   // Shortens the paragraph
@@ -28,6 +36,10 @@ const createMagazine = (args = {}) => {
   return Object.assign({}, _args, args)
 }
 
+/**
+ * API related Methods
+ */
+
 const apiUrl = ({ url, port, route }) => {
   const address = {}
   address.url  = url || 'http://localhost'
@@ -36,9 +48,16 @@ const apiUrl = ({ url, port, route }) => {
   return `${address.url}:${address.port}/${address.route}`
 }
 
+/**
+ * Exported Factory
+ */
+
 export default {
-  createVuexCrudInitialState,
+  // Store methods
+  createInitialVuexStoreState,
+  // Entities methods
   createArticle,
   createMagazine,
+  // API related methods
   apiUrl
 }
