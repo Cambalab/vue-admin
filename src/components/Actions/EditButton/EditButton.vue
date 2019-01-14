@@ -3,7 +3,7 @@
     <v-tooltip
     bottom>
       <v-btn
-      :name="`${name}`"
+      :name="`${UI_NAMES.RESOURCE_EDIT_BUTTON.with({ resourceName: this.resourceName })}`"
       @click="onEdit()"
       slot="activator"
       icon>
@@ -17,7 +17,8 @@
 </template>
 
 <script>
-import UI_CONTENT from '../../../constants/ui.content.default'
+import UI_CONTENT from '@constants/ui.content.default'
+import UI_NAMES from '@constants/ui.element.names'
 
 export default {
   name: "EditButton",
@@ -36,7 +37,8 @@ export default {
   },
   data() {
     return {
-      UI_CONTENT
+      UI_CONTENT,
+      UI_NAMES
     }
   },
   methods: {

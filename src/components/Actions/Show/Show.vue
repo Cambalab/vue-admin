@@ -2,7 +2,6 @@
   <v-card :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })}`">
     <div class="text-xs-center d-flex right" :name="`${UI_NAMES.RESOURCE_VIEW_ACTIONS_CONTAINER.with({ resourceName, view })}`">
         <EditButton
-          :name="editButtonName()"
           :resourceId="$route.params.id"
           :resourceName="name">
         </EditButton>
@@ -107,10 +106,6 @@ export default {
 
     componentName(field) {
       return UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({ resourceName: this.resourceName, view: this.view, field: this.label(field) })
-    },
-
-    editButtonName() {
-      return UI_NAMES.RESOURCE_ID_EDIT_BUTTON.with({ resourceName: this.resourceName })
     }
   },
 
