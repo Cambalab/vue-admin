@@ -40,11 +40,9 @@ export default {
     with: ({ resourceName }) => `${resourceName}-create-button`
   },
   // The button that redirects to a Edit view
-  RESOURCE_ID_EDIT_BUTTON: {
-    with: ({ resourceName, index }) => {
-      return index !== undefined
-      ? `${resourceName}-edit-button-${index}`
-      : `${resourceName}-edit-button`
+  RESOURCE_EDIT_BUTTON: {
+    with: ({ resourceName }) => {
+      return `${resourceName}-edit-button`
     }
   },
   // A specific container of a Resource field inside an element of List
@@ -71,8 +69,8 @@ export default {
    RESOURCE_EDIT_SUBMIT_BUTTON: {
      with: ({ resourceName, view }) => `${resourceName}-${view}-edit-button`
    },
-   
-   RESOURCE_ID_DELETE_BUTTON: {
+
+   RESOURCE_DELETE_BUTTON: {
      with: ({ resourceName, index }) => {
        return index !== undefined
        ? `${resourceName}-delete-button-${index}`

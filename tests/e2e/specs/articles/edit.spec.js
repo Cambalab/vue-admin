@@ -29,7 +29,7 @@ describe('Articles: Edit Test', () => {
   })
 
   before('Click in the Edit button of the Show view', () => {
-    const editButtonName = UI_NAMES.RESOURCE_ID_EDIT_BUTTON.with({
+    const editButtonName = UI_NAMES.RESOURCE_EDIT_BUTTON.with({
       resourceName: 'articles'
     })
     const editButtonElement = queryElementByProp({
@@ -42,7 +42,7 @@ describe('Articles: Edit Test', () => {
     }).click()
   })
 
-  it('Articles Show Edit should render title: Articles', () => {
+  it('Articles Edit should render title: Articles', () => {
     cy.get(editViewDivContainerQuery('RESOURCE_VIEW_CONTAINER')).should((editViewContainer) => {
       const editViewTitleContainer = editViewContainer.find(editViewDivContainerQuery('RESOURCE_VIEW_CONTAINER_TITLE'))
       const editViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
