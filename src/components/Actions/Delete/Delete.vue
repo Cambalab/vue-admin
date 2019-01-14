@@ -2,7 +2,7 @@
   <div>
     <v-tooltip bottom>
       <v-btn
-        :name="`${name}`"
+        :name="`${UI_NAMES.RESOURCE_DELETE_BUTTON.with({ resourceName: this.resourceName })}`"
         @click="onDelete()"
         slot="activator"
         icon>
@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import UI_CONTENT from '../../../constants/ui.content.default'
+import UI_CONTENT from '@constants/ui.content.default'
+import UI_NAMES from '@constants/ui.element.names'
 
 export default {
   name: "Delete",
@@ -37,7 +38,8 @@ export default {
 
   data() {
     return {
-      UI_CONTENT
+      UI_CONTENT,
+      UI_NAMES
     }
   },
 
