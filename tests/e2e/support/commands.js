@@ -3,10 +3,12 @@ import {
   getElement,
   getStore
 } from '../lib/commands'
+import InitServer from '../lib/server'
 
 Cypress.Commands.add('getStore', () => getStore())
 Cypress.Commands.add('InitEntityUtils', (args) => InitEntityUtils(args))
 Cypress.Commands.add('getElement', (args) => getElement(args))
+Cypress.Commands.add('InitServer', (args) => InitServer(args))
 
 // ***********************************************
 // This example commands.js shows you how to
