@@ -7,9 +7,8 @@
         :create='fieldsArticleCreate'
         :edit='fieldsArticleEdit'
         :resourceIdName='resourceIdName'
-        :apiUrl='apiUrl'
-        >
-      </Resource>
+        :apiUrl='articlesApiUrl'
+      />
       <Resource
         name='magazines'
         :list='ListMagazines'
@@ -17,9 +16,8 @@
         :create='CreateMagazines'
         :edit='EditMagazines'
         :resourceIdName='resourceIdName'
-        :apiUrl='apiUrl'
-        >
-      </Resource>
+        :apiUrl='magazinesApiUrl'
+      />
     </Admin>
 </template>
 
@@ -116,7 +114,8 @@ const fieldsMagazineEdit = fieldsMagazineCreate
 //   }
 // }
 
-const apiUrl = 'http://localhost:8080/api/'
+const articlesApiUrl = 'http://localhost:8080/api/'
+const magazinesApiUrl = 'http://localhost:8888/api/'
 
 export default {
   name: "App",
@@ -126,7 +125,8 @@ export default {
   },
   data() {
     return {
-      apiUrl,
+      articlesApiUrl,
+      magazinesApiUrl,
       articlesList,
       articlesShow,
       fieldsArticleCreate,
