@@ -1,9 +1,8 @@
 // Can't use aliases yet, without adding a custom webpack config, see https://github.com/vuejs/vue-cli/issues/2465 - @sgobotta
-const UI_NAMES = require('../../../src/constants/ui.element.names')
-const {
-  createUrlWithResource,
-  createElementQueryWith
-} = require('./helpers')
+import UI_NAMES from '../../../src/constants/ui.element.names'
+import { createUrlWithResource, createElementQueryWith } from './helpers'
+
+const storePath = 'app.$store'
 
 /**
  * InitEntityUtils - Initialises a set of functions to be used by a specific
@@ -137,3 +136,5 @@ export const getElement = ({
   // Gets the 'elementType' element
   return cy.get(element)
 }
+
+export const getStore = () => cy.window().its(storePath)
