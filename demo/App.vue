@@ -8,6 +8,7 @@
         :edit='fieldsArticleEdit'
         :resourceIdName='resourceIdName'
         :apiUrl='articlesApiUrl'
+        :redirect='articlesRedirect'
       />
       <Resource
         name='magazines'
@@ -17,6 +18,7 @@
         :edit='EditMagazines'
         :resourceIdName='resourceIdName'
         :apiUrl='magazinesApiUrl'
+        :redirect='magazinesRedirect'
       />
     </Admin>
 </template>
@@ -61,6 +63,13 @@ const fieldsArticleCreate =[
 
 const fieldsArticleEdit = fieldsArticleCreate
 
+const articlesRedirect = {
+  views: {
+    create: 'list',
+    edit: 'show'
+  }
+}
+
 const resourceIdName = "id"
 
 const magazinesList = [
@@ -95,6 +104,8 @@ const fieldsMagazineCreate =[
 ]
 
 const fieldsMagazineEdit = fieldsMagazineCreate
+
+const magazinesRedirect = articlesRedirect
 
 // Use case of a parsed response using feathers
 // This has to be done because every server client returns different responses. - sgobotta
@@ -131,6 +142,7 @@ export default {
       articlesShow,
       fieldsArticleCreate,
       fieldsArticleEdit,
+      articlesRedirect,
       resourceIdName,
       magazinesList,
       magazinesShow,
@@ -139,7 +151,8 @@ export default {
       ListMagazines,
       ShowMagazines,
       CreateMagazines,
-      EditMagazines
+      EditMagazines,
+      magazinesRedirect
       // #23 - To use the feathers server just add the parseResponses attribute
       // below, pass ':parseResponses='parseResponses' to Resource in the
       // template and update the resourceIdName to '_id'. - sgobotta
