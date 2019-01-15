@@ -59,6 +59,10 @@
       :headers="headers"
       :items="desserts"
       class="elevation-1"
+      disable-initial-sort
+      :pagination.sync="pagination"
+      :dark="true"
+      rows-per-page-text="Magazines per page"
     >
       <template slot="no-data">
         <v-alert :value="true" color="warning" icon="warning">
@@ -68,7 +72,8 @@
 
       <template slot="items" slot-scope="props">
         <td :name="idRowName(props.index)">{{ props.item.id }}</td>
-        <td :name="issueRowName(props.index)" class="text-xs-right">{{ props.item.issue }}</td>
+        <td :name="nameRowName(props.index)" class="text-xs-left">{{ props.item.name }}</td>
+        <td :name="issueRowName(props.index)" class="text-xs-center">{{ props.item.issue }}</td>
         <td :name="publisherRowName(props.index)" class="text-xs-right">{{ props.item.publisher }}</td>
       </template>
 
@@ -78,6 +83,7 @@
 
 <script>
   import UI_NAMES from '@constants/ui.element.names'
+  import { rowsPerPage } from '../constants'
 
   export default {
     name: 'ListMagazines',
@@ -101,14 +107,20 @@
       })
       return {
         idRowName: (index) => buildName('id', index),
+        nameRowName: (index) => buildName('name', index),
         issueRowName: (index) => buildName('issue', index),
-        publisherRowName: (index) => buildName('publisher', index)
+        publisherRowName: (index) => buildName('publisher', index),
+        pagination: {
+          page: 1,
+          rowsPerPage
+        }
       }
     },
     computed: {
       headers: function() {
         return [
           { text: 'ID', align: 'left', sortable: true, value: 'id' },
+          { text: 'Name', value: 'name' },
           { text: 'Issue', value: 'issue' },
           { text: 'Publisher', value: 'publisher' }
         ]
