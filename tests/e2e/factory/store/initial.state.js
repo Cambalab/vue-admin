@@ -1,7 +1,7 @@
 import { initialResourcesRoutes } from './common.utils'
 
 /**
- * Annonymous Function - Creates a simualtion of initial vuex crud state
+ * Anonymous Function - Creates a simualtion of initial vuex crud state
  *
  * @return {Object} The expected Vuex Crud mocked state
  */

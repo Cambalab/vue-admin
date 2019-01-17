@@ -1,5 +1,3 @@
-const Factory = require('../../factory')
-
 const { InitEntityUtils } = require('../../lib/commands')
 
 describe('Magazines: Show Action Test', () => {
@@ -11,20 +9,26 @@ describe('Magazines: Show Action Test', () => {
     view
   })
 
-  before('Creates a new magazine', () => {
-    const url = Factory.apiUrl({ route: `api/${resourceName}/` })
-    cy.request('POST', url, Factory.createMagazine()).
-    then((res) => { magazine = res.body })
+  before('Initialises the server', () => {
+    // Inits the server with a stubbed list to fetch all magazines
+    const routes = [ { name: 'list' } ]
+    cy.InitServer({ resourceName, routes })
   })
 
   before('Visits the magazines list', () => {
     // FIXME: Workaround until we fix the show path push when the store is empty
     cy.visit(`/#/${resourceName}/`)
-    cy.wait(2000)
+    cy.wait(`@${resourceName}/list`).then(xmlHttpRequest => {
+      // Takes the first element of the list to show
+      magazine = xmlHttpRequest.response.body[0]
+    })
+    cy.server({ enable: false })
   })
 
   it('Visits the magazines show url and the path should be magazines/show', () => {
+    // Exercise: visits the show view
     cy.visit(`/#/${resourceName}/${view}/${magazine.id}`)
+    // Assertion: the url should match the show view url
     cy.url().should('include', `${resourceName}/${view}`)
   })
 
