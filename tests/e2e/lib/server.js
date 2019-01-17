@@ -20,9 +20,9 @@ export default ({
 
     // New endpoints should be added here
     const initEndpoints = {
-      list: (args) => listRequest(args),
-      create: (args) => createRequest(args),
-      edit: (args) => editRequest(args)
+      list: listRequest,
+      create: createRequest,
+      edit: editRequest
     }
 
     /**
