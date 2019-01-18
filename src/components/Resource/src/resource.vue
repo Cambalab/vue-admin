@@ -19,7 +19,6 @@ export default {
     edit: [Array, Object],
     resourceIdName: {
       type: String,
-      required: true,
       default: 'id'
     },
     apiUrl: {
