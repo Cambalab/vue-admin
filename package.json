@@ -30,6 +30,7 @@
     "bavaria-ipsum": "^1.0.3",
     "cypress": "^3.1.4",
     "cypress-dark": "^1.7.4",
+    "joi": "^14.3.1",
     "vue": "^2.5.18",
     "vue-cli-plugin-vuetify": "^0.1.6",
     "vue-router": "^3.0.1",
