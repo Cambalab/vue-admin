@@ -1,0 +1,4 @@
+{
+  "UNDEFINED_PROPERTY": "{prefix}  It seems that the {prop} property is undefined.\n\n",
+  "INVALID_SCHEMA": "{prefix}  Some of the {prop} properties are invalid:\n{details}\n\n"
+}
