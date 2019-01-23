@@ -28,12 +28,8 @@ export default {
     },
     redirect: {
       type: Object,
-      default: () => ({
-        views: {
-          create: 'list',
-          edit: 'show'
-        }
-      })
+      default: defaults().props.redirect,
+      validator: defaults().validate.redirect
     },
     parseResponses: {
       type: Object,
