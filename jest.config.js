@@ -16,7 +16,9 @@ module.exports = {
     '@constants(.*)$': '<rootDir>/src/constants/$1',
     '@handlers(.*)$': '<rootDir>/src/handlers/$1',
     '@router(.*)$': '<rootDir>/src/router/$1',
-    '@store(.*)$': '<rootDir>/src/store/$1'
+    '@store(.*)$': '<rootDir>/src/store/$1',
+    '@templates(.*)$': '<rootDir>/src/templates/src/$1',
+    '@validators(.*)$': '<rootDir>/src/validators/src/$1'
   },
   snapshotSerializers: [
     'jest-serializer-vue'

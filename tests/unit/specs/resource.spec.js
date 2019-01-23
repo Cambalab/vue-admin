@@ -5,6 +5,7 @@ import VueRouter from "vue-router"
 import Vuex from 'vuex'
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import ERROR_MESSAGES from '@constants/error.messages'
+import { validateSchema } from '@validators'
 
 describe('Resource.vue', () => {
   const subject = 'Resource'
@@ -117,6 +118,12 @@ describe('Resource.vue', () => {
     shouldThrowOnMissingProp({ prop, subject })
   })
 
+  it('should throw an error when the {redirect} component is invalid', () => {
+    const prop = 'redirect'
+    const invalidProp = { invalidKey: { create: 'list', edit: 'show' } }
+    const validate = validateSchema
+    shouldThrowOnInvalidProp({ prop, subject, invalidProp, validate })
+  })
 
 /**
  * Helper functions
@@ -129,6 +136,18 @@ describe('Resource.vue', () => {
     const at = subject
     const message = UNDEFINED_PROPERTY.with({ prop, at })
     // Exercise: mounts the subject instance
+    expect(mountSubject).toThrowError(message)
+  }
+
+  function shouldThrowOnInvalidProp({ prop, subject, invalidProp, validate }) {
+    // Setup: corrupts the redirect prop
+    propsData[prop] = invalidProp
+    const { error } = validate(prop, invalidProp)
+    const { details } = error
+    const { INVALID_SCHEMA } = ERROR_MESSAGES
+    const at = subject
+    const message = INVALID_SCHEMA.with({ prop, at, details })
+    expect(error.name).toMatch('ValidationError')
     expect(mountSubject).toThrowError(message)
   }
 
