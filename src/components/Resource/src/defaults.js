@@ -1,11 +1,16 @@
-import { handleEmptyProp } from '@handlers/error/src'
+import {
+  handleEmptyProp,
+  handleSchemaValidation
+} from '@handlers/error/src'
 
 /**
- * Anonymous - Default attributes for the Resource component
+ * Defaults - Default attributes for the Resource component
  *
  * @return {Object} An object containing props and methods
  */
 export default () => {
+  const component = 'Resource'
+
   function _parseResponse(response) {
     const { data } = response;
     return Object.assign({}, response, { data });
@@ -19,15 +24,34 @@ export default () => {
   }
 
   function _redirect() {
-    return { views: { create: 'list', edit: 'show' } }
+    return {
+      views: {
+        create: 'list',
+        edit: 'show'
+      }
+    }
   }
 
-  const apiUrl         = handleEmptyProp({ prop: 'apiUrl', at: 'Resource' })
-  const list           = handleEmptyProp({ prop: 'list', at: 'Resource' })
-  const name           = handleEmptyProp({ prop: 'name', at: 'Resource' })
-  const parseResponses = () => _parseResponses()
-  const redirect       = () => _redirect()
+  /**
+   * Resource default props
+   */
+  const apiUrl         = handleEmptyProp({ prop: 'apiUrl', at: component })
+  const list           = handleEmptyProp({ prop: 'list', at: component })
+  const name           = handleEmptyProp({ prop: 'name', at: component })
+  const parseResponses = _parseResponses
+  const redirect       = _redirect
   const resourceIdName = 'id'
+
+  /**
+   * Resource default validations
+   */
+  function validateRedirect(redirect) {
+    return handleSchemaValidation({
+      schema: redirect,
+      prop: 'redirect',
+      at: component
+    })
+  }
 
   return {
     props: {
@@ -37,6 +61,9 @@ export default () => {
       apiUrl,
       redirect,
       parseResponses
+    },
+    validate: {
+      redirect: validateRedirect
     }
   }
 }
