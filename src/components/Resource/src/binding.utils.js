@@ -23,17 +23,17 @@ export default ({
     list: ({ wrapper }) => {
       const name = `${resourceName}/list`
       if (list instanceof Array) {
-        // list should be a VA default component
+        // list should be an array based component
         return {
           path: resourcePath,
           name,
           component: wrapper,
           props: {
-            name: resourceName,
+            resourceName,
             fields: list,
             hasShow,
             hasCreate,
-            resourceId: resourceIdName
+            resourceIdName
           }
         }
       } else {
@@ -47,9 +47,12 @@ export default ({
           name,
           component: list,
           props: {
+            resourceName,
+            hasShow,
+            hasCreate,
+            resourceIdName,
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             va: {
-              resourceName,
               ...utils
             }
           }
