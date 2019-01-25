@@ -41,8 +41,10 @@ export default {
   },
   // The button that redirects to a Edit view
   RESOURCE_EDIT_BUTTON: {
-    with: ({ resourceName }) => {
-      return `${resourceName}-edit-button`
+    with: ({ resourceName, index }) => {
+      return index !== undefined
+      ? `${resourceName}-${index}-edit-button`
+      : `${resourceName}-edit-button`
     }
   },
   // A specific container of a Resource field inside an element of List

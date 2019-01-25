@@ -3,7 +3,7 @@
     <v-tooltip
     bottom>
       <v-btn
-      :name="`${UI_NAMES.RESOURCE_EDIT_BUTTON.with({ resourceName: this.resourceName })}`"
+      :name="editButtonName()"
       @click="onEdit()"
       slot="activator"
       icon>
@@ -33,6 +33,9 @@ export default {
     },
     resourceName: {
       type: String
+    },
+    index: {
+      type: Number
     }
   },
   data() {
@@ -44,6 +47,11 @@ export default {
   methods: {
     onEdit() {
       this.$router.push({ name: `${this.resourceName}/edit`, params: { id: this.resourceId } });
+    },
+    editButtonName() {
+      return this.index !== undefined
+      ? UI_NAMES.RESOURCE_EDIT_BUTTON.with({ resourceName: this.resourceName, index: this.index })
+      : UI_NAMES.RESOURCE_EDIT_BUTTON.with({ resourceName: this.resourceName })
     }
   },
 };
