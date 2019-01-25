@@ -47,8 +47,7 @@ const articlesShow = [
     'type': 'TextField',
     'tag': 'h1'
   },
-  'content',
-  'campoQueNoExiste'
+  'content'
 ]
 
 const fieldsArticleCreate =[
@@ -124,7 +123,7 @@ const magazinesRedirect = articlesRedirect
 //   }
 // }
 
-const articlesApiUrl = 'http://localhost:8080/api/'
+const articlesApiUrl = 'http://localhost:8888/api/'
 const magazinesApiUrl = 'http://localhost:8888/api/'
 
 export default {
