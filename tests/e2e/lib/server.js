@@ -22,7 +22,9 @@ export default ({
     const initEndpoints = {
       list: listRequest,
       create: createRequest,
-      edit: editRequest
+      edit: editRequest,
+      show: showRequest,
+      delete: deleteRequest
     }
 
     /**
@@ -68,6 +70,32 @@ export default ({
           }
         }
       ).as(`${resourceName}/update`)
+    }
+
+    /**
+     * showRequest - A stub for GET Many requests
+     */
+    function showRequest({ response }) {
+      cy.route({
+        method: 'GET',
+        url: `api/${resourceName}/${response.id}`,
+        response: response
+      }).as(`${resourceName}/show/${response.id}`)
+    }
+
+    /**
+     * deleteRequest - A stub for DELETE Many requests
+     */
+    function deleteRequest({ response }) {
+      const resource = data.find(a => a.id === response.id)
+      const index = data.indexOf(resource)
+      data.splice(index,1)
+      cy.route({
+        method: 'DELETE',
+        url: `api/${resourceName}/${response.id}`,
+        response: {},
+        status: 202
+      }).as(`${resourceName}/delete/${response.id}`)
     }
 
     // Initialises endpoints

@@ -1,112 +1,69 @@
-// https://docs.cypress.io/api/introduction/api.html
-
 const Factory = require('../../factory')
-const { queryElementByProp } = require('../../helpers')
-
 const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
-
 describe('Articles: Create Test', () => {
-  it('Visits the app root url', () => {
-    cy.visit('/#/articles/create')
+  const resourceName = 'articles'
+  const view = 'create'
+  const article = {}
 
-    cy.url().should('include', 'articles/create')
+  before('Generate an article to create', () => {
+    Object.assign(article, Factory.createArticle())
+  })
+
+  it('The url path should be articles/create', () => {
+    cy.visit(`/#/${resourceName}/${view}`)
+    cy.url().should('include', `${resourceName}/${view}`)
   })
 
   it('Articles Create View should render title: Articles', () => {
-    const createViewContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
-      resourceName: 'articles',
-      view: 'create'
+    const createViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })
+    const createViewTitleContainer = cy.getElement({
+      constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE,
+      constantParams: { resourceName, view },
+      elementType: 'div',
+      elementProp: 'name'
     })
 
-    const createViewContainerElement = queryElementByProp({
-      type: 'div',
-      prop: 'name',
-      value: createViewContainerName
-    })
+    createViewTitleContainer.should('contain', createViewTitleText)
+  })
 
-    cy.get(createViewContainerElement).should((createViewContainer) => {
-      const createViewTitleContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({
-        resourceName: 'articles',
-        view: 'create'
-      })
-      const createViewTitleContainerElement = queryElementByProp({
-        prop: 'name',
-        value: createViewTitleContainerName
-      })
+  it('The {Title} input is filled when an user types in', () => {
+    theFieldInputIsFilledWhenAnUserTypesIn('title')
+  })
 
-      const createViewTitleContainer = createViewContainer.find(createViewTitleContainerElement)
-      const createViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
-        resourceName: 'articles'
-      })
-
-      expect(createViewTitleContainer).to.contain(createViewTitleText)
-    })
+  it('The {Content} input is filled when an user types in', () => {
+    theFieldInputIsFilledWhenAnUserTypesIn('content')
   })
 
   it('Articles Create View should redirect to the List View on a create submit', () => {
-    // Creates an article
-    const article = Factory.createArticle()
-    {
-      // Inputs the article title
-      const titleInputName = UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-        resourceName: 'articles',
-        view: 'create',
-        field: 'title'
-      })
+    const routes = [ { name: view, response: article }, { name: 'list' } ]
+    cy.InitServer({ resourceName, routes, response: article })
 
-      const inputElement = queryElementByProp({
-        type: 'input',
-        prop: 'name',
-        value: titleInputName
-      })
-      const input = cy.get(inputElement)
+    const submitButtonText = UI_CONTENT.CREATE_SUBMIT_BUTTON
+    const submitButton = cy.getElement({
+      constant: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON,
+      constantParams: { resourceName, view },
+      elementType: 'button',
+      elementProp: 'name'
+    })
 
-      // Types in the article title
-      input.type(article.title)
-      // Asserts the input contains the content
-      input.should('have.value', article.title)
-    }
-    {
-      // Inputs the article content
-      const contentInputName = UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-        resourceName: 'articles',
-        view: 'create',
-        field: 'content'
-      })
+    submitButton.should('contain', submitButtonText).click()
 
-      const inputElement = queryElementByProp({
-        type: 'input',
-        prop: 'name',
-        value: contentInputName
-      })
-      const input = cy.get(inputElement)
+    cy.server({ enable: false })
 
-      // Types in the article content
-      input.type(article.content)
-      // Asserts the input contains the content
-      input.should('have.value', article.content)
-    }
-    {
-      const submitButtonName = UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
-        resourceName: 'articles',
-        view: 'create'
-      })
-
-      const buttonElement = queryElementByProp({
-        type: 'button',
-        prop: 'name',
-        value: submitButtonName
-      })
-
-      cy.get(buttonElement).should((submitButton) => {
-        const submitButtonText = UI_CONTENT.CREATE_SUBMIT_BUTTON
-
-        expect(submitButton).to.contain(submitButtonText)
-      }).click()
-
-      cy.url().should('include', '/articles')
-    }
+    cy.url().should('include', '/articles')
   })
+
+  function theFieldInputIsFilledWhenAnUserTypesIn(field) {
+    const input = cy.getElement({
+      constant: UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD,
+      constantParams: { resourceName, view, field },
+      elementType: 'input',
+      elementProp: 'name'
+    })
+
+    input.type(article[field])
+    input.should('have.value', article[field])
+  }
 })
