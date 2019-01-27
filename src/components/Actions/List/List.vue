@@ -61,14 +61,14 @@
             </component>
           </span>
         </td>
-        <td>
+        <td v-if="hasEdit">
           <EditButton
             :resourceId="props.item[resourceIdName]"
             :resourceName="resourceName"
             :index="props.index">
           </EditButton>
         </td>
-        <td class="text-xs-right">
+        <td>
           <Delete
             :resourceId="props.item[resourceIdName]"
             :resourceName="resourceName">
@@ -79,12 +79,10 @@
   </v-card>
 </template>
 
-
 <script>
-import UI_CONTENT from '../../../constants/ui.content.default'
-import UI_NAMES from '../../../constants/ui.element.names'
-import UI_ELEMENTS from '../../../constants/ui.elements.props'
-import { mapState } from "vuex";
+import UI_CONTENT from '@constants/ui.content.default'
+import UI_NAMES from '@constants/ui.element.names'
+import UI_ELEMENTS from '@constants/ui.elements.props'
 import { Input, TextField } from "../../UiComponents";
 import { EditButton, Delete } from "../../Actions";
 
@@ -93,7 +91,7 @@ export default {
   props: {
     resourceName: {
       type: String,
-      default: null
+      required: true,
     },
     hasShow: {
       type: Boolean
@@ -101,11 +99,20 @@ export default {
     hasCreate: {
       type: Boolean
     },
-    fields: {
-      type: Array
+    hasEdit: {
+      type: Boolean
     },
-    resourceIdName:{
-      type: String
+    fields: {
+      type: Array,
+      required: true
+    },
+    resourceIdName: {
+      type: String,
+      required: true
+    },
+    va: {
+      type: Object,
+      required: true
     }
   },
   data() {
@@ -125,13 +132,13 @@ export default {
       const newHeaders = []
       this.fields.forEach((field) => {
         newHeaders.push({
-          text: this.label(field),
-          align: field.align || 'left',
+          text: field.headerText || this.label(field),
+          align: field.alignHeader || 'left',
           sortable: field.sortable || false,
           value: this.label(field)
         })
       })
-      newHeaders.push({
+      this.hasEdit && newHeaders.push({
         text: "Edit",
         align: 'center',
         sortable: false,
@@ -146,12 +153,8 @@ export default {
       return newHeaders;
     },
     resourceList: function() {
-      const resourceName = this.resourceName + "/list";
-      return this.$store.getters[resourceName];
-    },
-    ...mapState([
-      "route" // vuex-router-sync
-    ])
+      return this.va.getList()
+    }
   },
 
   components: {
@@ -162,15 +165,6 @@ export default {
   },
 
   methods: {
-    fetchResource: function() {
-      const resourceName = this.resourceName + "/fetchList";
-      return this.$store.dispatch(resourceName);
-    },
-
-    fetchData() {
-      return this.fetchResource();
-    },
-
     type(type) {
       return type || 'TextField'
     },
@@ -189,12 +183,8 @@ export default {
     }
   },
 
-  watch: {
-    $route: "fetchData"
-  },
-
   created() {
-    this.fetchData();
+    this.va.fetchList()
   }
 };
 </script>
