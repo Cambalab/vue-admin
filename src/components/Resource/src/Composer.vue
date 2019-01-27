@@ -17,10 +17,9 @@ export default {
         })
       }, slots)
       Object.assign(props, slots)
-      return createElement(Resource, { props })
     }
-    // The context has no slots, and it's passed directly to Resource
-    return createElement(Resource, context)
+    // Resource is rendered with props, either having slots or not.
+    return createElement(Resource, { props })
   }
 }
 </script>
