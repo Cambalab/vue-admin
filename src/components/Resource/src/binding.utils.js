@@ -17,6 +17,7 @@ export default ({
 }) => {
   const hasShow = !!show
   const hasCreate = !!create
+  const hasEdit = !!edit
   const resourcePath = `/${resourceName}`
   return {
 
@@ -33,11 +34,12 @@ export default ({
             fields: list,
             hasShow,
             hasCreate,
+            hasEdit,
             resourceIdName
           }
         }
       } else {
-        // list is a user's custom component
+        // list is a Component
         const utils = listUtils({
           resourceName,
           store
@@ -50,6 +52,7 @@ export default ({
             resourceName,
             hasShow,
             hasCreate,
+            hasEdit,
             resourceIdName,
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             va: {
