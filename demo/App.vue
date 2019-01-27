@@ -23,7 +23,7 @@
 
 import Resource from '@components/Resource'
 import Admin from '@components/Admin'
-import ListArticles from './components/ListArticles'
+import ListArticles from './components/articles/ListArticles'
 import ListMagazines from './components/ListMagazines'
 import ShowMagazines from './components/ShowMagazines'
 import CreateMagazines from './components/CreateMagazines'
