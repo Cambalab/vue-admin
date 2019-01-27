@@ -1,6 +1,6 @@
 import Factory from '../factory'
 import resourceFixture from '../fixtures/resource/magazines'
-import Resource from '@components/Resource'
+import Resource from '@components/Resource/src/Resource'
 import VueRouter from "vue-router"
 import Vuex from 'vuex'
 import { shallowMount, createLocalVue } from '@vue/test-utils'
