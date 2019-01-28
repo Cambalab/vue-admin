@@ -1,4 +1,4 @@
-import { submitEntity, updateEntity, fetchEntity, getEntity } from './common.utils'
+import { submitEntity, updateEntity, getEntity, getEntityForm } from './common.utils'
 
 /**
  * Edit View Utils - A function used to create utilities
@@ -23,23 +23,23 @@ export default ({
 }) => {
   return {
     /**
-     * getEntity - Gets the current 'resourceName' entity. The value does not
-     * exist until a user inputs data using 'updateEntity'.
+     * getEntityForm - Gets the current 'resourceName' entity. The value does
+     * not exist until a user inputs data using 'updateEntity'.
      *
      * @return {Object} a 'resourceName' object with updated data from the form.
      */
-    getEntity() {
+    getEntityForm() {
       const formType = 'editForm'
-      return getEntity({ store, resourceName, formType })
+      return getEntityForm({ store, resourceName, formType })
     },
 
     /**
-     * fetchEntity - Fetchs a 'resourceName' entity from the store
+     * getEntity - Gets a 'resourceName' entity from the store
      *
-     * @return {Object} The fetched entity.
+     * @return {Object} A 'resourceName' entity.
      */
-    fetchEntity() {
-      return fetchEntity({ router, resourceName, store })
+    getEntity() {
+      return getEntity({ router, resourceName, store })
     },
 
     /**
@@ -68,7 +68,7 @@ export default ({
     submitEntity() {
       const { id } = router.history.current.params
       const actionType = 'update'
-      const actionTypeParams = { data: this.getEntity(), id }
+      const actionTypeParams = { data: this.getEntityForm(), id }
       submitEntity({
         resourceName,
         actionType,

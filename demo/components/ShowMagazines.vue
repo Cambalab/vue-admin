@@ -115,8 +115,8 @@ export default {
     }
   },
   created() {
-    // With fetchEntity you can have your 'resourceName' entity initialised.
-    this.entity = this.va.fetchEntity()
+    // With getEntity you can have your 'resourceName' entity initialised.
+    this.entity = this.va.getEntity()
   },
 };
 

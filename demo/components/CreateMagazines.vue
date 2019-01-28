@@ -124,13 +124,6 @@ export default {
       UI_NAMES
     }
   },
-  computed: {
-    entity () {
-      // We use the getEntity method in computed, so that it gets updated
-      // everytime we use updateEntity.
-      return this.va.getEntity()
-    }
-  },
   methods: {
     storeValue(value, resourceKey) {
       // The updateEntity method receives a key of your resource object and a
