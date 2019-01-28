@@ -1,4 +1,10 @@
-import { submitEntity, updateEntity, getEntity, getEntityForm } from './common.utils'
+import {
+  fetchEntity,
+  getEntity,
+  getEntityForm,
+  submitEntity,
+  updateEntity
+} from './common.utils'
 
 /**
  * Edit View Utils - A function used to create utilities
@@ -40,6 +46,15 @@ export default ({
      */
     getEntity() {
       return getEntity({ router, resourceName, store })
+    },
+
+    /**
+     * fetchEntity - Fetchs a single 'resourceName' element from the store.
+     *
+     * @return {Object} A fetched 'resourceName' entity.
+     */
+    fetchEntity() {
+      return fetchEntity({ resourceName, router, store })
     },
 
     /**
