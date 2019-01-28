@@ -3,7 +3,7 @@
     <Resource name="articles" :resourceIdName="resourceIdName" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
       <View slot="list"   :component="ListArticles" />
       <View slot="show"   :component="ShowArticles" />
-      <View slot="create" :component="fieldsArticleCreate" />
+      <View slot="create" :component="CreateArticles" />
       <View slot="edit"   :component="EditArticles" />
     </Resource>
     <Resource
@@ -26,6 +26,7 @@ import Admin from '@components/Admin'
 
 import ListArticles from './components/articles/ListArticles'
 import ShowArticles from './components/articles/ShowArticles'
+import CreateArticles from './components/articles/CreateArticles'
 import EditArticles from './components/articles/EditArticles'
 
 import ListMagazines from './components/ListMagazines'
@@ -122,6 +123,7 @@ export default {
       // Articles Views as Components
       ListArticles,
       ShowArticles,
+      CreateArticles,
       EditArticles,
       // Magazines Views as Custom Components
       ListMagazines,
