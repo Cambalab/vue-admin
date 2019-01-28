@@ -37,7 +37,7 @@ export default {
       })
 
       const props = {
-        name: resourceName,
+        resourceName,
         fields,
         va
       }

@@ -3,11 +3,11 @@
     <div class="text-xs-center d-flex right" :name="`${UI_NAMES.RESOURCE_VIEW_ACTIONS_CONTAINER.with({ resourceName, view })}`">
         <EditButton
           :resourceId="$route.params.id"
-          :resourceName="name">
+          :resourceName="resourceName">
         </EditButton>
         <Delete
           :resourceId="$route.params.id"
-          :resourceName="name">
+          :resourceName="resourceName">
         </Delete>
     </div>
     <v-card-title primary-title :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`">
@@ -41,17 +41,18 @@ export default {
   name: "Show",
 
   props: {
-    name: {
-      type: String
+    resourceName: {
+      type: String,
+      required: true
     },
     fields: {
-      type: Array
+      type: Array,
+      required: true
     }
   },
 
   data() {
     return {
-      resourceName: this.name,
       view: 'show',
       UI_CONTENT,
       UI_NAMES
@@ -60,7 +61,7 @@ export default {
 
   computed: {
     resourceShow: function() {
-      const resourceName = this.name + "/byId";
+      const resourceName = this.resourceName + "/byId";
       return this.$store.getters[resourceName](this.$route.params.id);
     },
 
@@ -78,7 +79,7 @@ export default {
 
   methods: {
     fetchResource: function() {
-      const resourceName = this.name + "/fetchSingle";
+      const resourceName = this.resourceName + "/fetchSingle";
       return this.$store.dispatch(resourceName, { id: this.$route.params.id });
     },
 
@@ -91,7 +92,7 @@ export default {
     },
 
     key(label) {
-      return `${this.name}_${label}`
+      return `${this.resourceName}_${label}`
     },
 
     label(field) {
