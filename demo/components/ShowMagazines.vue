@@ -49,6 +49,7 @@
                       view,
                       field: 'name'
                     })"
+                    v-if="entity"
                     v-model="entity.name"
                     disabled
                     label="Name"
@@ -59,6 +60,7 @@
                       view,
                       field: 'issue'
                     })"
+                    v-if="entity"
                     v-model="entity.issue"
                     disabled
                     label="Issue"
@@ -69,6 +71,7 @@
                     view,
                     field: 'publisher'
                   })"
+                  v-if="entity"
                   v-model="entity.publisher"
                   disabled
                   label="Publisher"
@@ -106,6 +109,11 @@ export default {
       required: true
     }
   },
+  computed: {
+    entity() {
+      return this.va.getEntity()
+    }
+  },
   data() {
     // This is only needed for e2e demo tests
     return {
@@ -116,7 +124,7 @@ export default {
   },
   created() {
     // With getEntity you can have your 'resourceName' entity initialised.
-    this.entity = this.va.getEntity()
+    this.va.fetchEntity()
   },
 };
 
