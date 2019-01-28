@@ -31,8 +31,8 @@
 
 
 <script>
-import UI_CONTENT from '../../../constants/ui.content.default'
-import UI_NAMES from '../../../constants/ui.element.names'
+import UI_CONTENT from '@constants/ui.content.default'
+import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents"
 import { EditButton, Delete } from "../../Actions";
