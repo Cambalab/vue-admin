@@ -34,6 +34,11 @@ import EditMagazines from './components/EditMagazines'
 
 const articlesList = [
   {
+    'label': 'id',
+    'type': 'TextField',
+    'tag': 'h2'
+  },
+  {
     'label':'title',
     'type':'TextField',
     'tag':'h2'

@@ -48,6 +48,10 @@ export default {
     fields: {
       type: Array,
       required: true
+    },
+    va: {
+      type: Object,
+      required: true
     }
   },
 
@@ -61,8 +65,7 @@ export default {
 
   computed: {
     resourceShow: function() {
-      const resourceName = this.resourceName + "/byId";
-      return this.$store.getters[resourceName](this.$route.params.id);
+      return this.va.getEntity()
     },
 
     ...mapState([
@@ -78,13 +81,8 @@ export default {
   },
 
   methods: {
-    fetchResource: function() {
-      const resourceName = this.resourceName + "/fetchSingle";
-      return this.$store.dispatch(resourceName, { id: this.$route.params.id });
-    },
-
     fetchData() {
-      return this.fetchResource();
+      return this.va.fetchEntity()
     },
 
     type(type) {
