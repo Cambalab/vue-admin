@@ -31,6 +31,22 @@ export const getEntity = ({ resourceName, store, router }) => {
 }
 
 /**
+ * fetchEntity - Given a resource name, calls the store to dispatch a single get
+ * request
+ *
+ * @param {String} resourceName   The name of the resource
+ * @param {Object} store          The global Vuex store variable
+ * @param {Object} router         The global Vue router variable
+ *
+ * @return {Object} The fetched entity.
+ */
+export const fetchEntity = ({ resourceName, store, router }) => {
+  const { id } = router.history.current.params
+  const moduleName = `${resourceName}/fetchSingle`;
+  return store.dispatch(moduleName, { id });
+}
+
+/**
  * fetchList - Given a resource name, calls the store to dispatch a get request
  *
  * @param {String}  resourceName The name of the resource

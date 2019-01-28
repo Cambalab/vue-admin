@@ -23,6 +23,10 @@ export default ({
 
     list: ({ wrapper }) => {
       const name = `${resourceName}/list`
+      const utils = listUtils({
+        resourceName,
+        store
+      })
       if (list instanceof Array) {
         // list should be an array based component
         return {
@@ -35,15 +39,15 @@ export default ({
             hasShow,
             hasCreate,
             hasEdit,
-            resourceIdName
+            resourceIdName,
+            // This could be refactored into a vue mixin, check #52 - @sgobotta
+            va: {
+              ...utils
+            }
           }
         }
       } else {
         // list is a Component
-        const utils = listUtils({
-          resourceName,
-          store
-        })
         return {
           path: resourcePath,
           name,
@@ -65,6 +69,11 @@ export default ({
 
     show: ({ wrapper }) => {
       const name = `${resourceName}/show`
+      const utils = showUtils({
+        resourceName,
+        router,
+        store
+      })
       if (show instanceof Array) {
         // show should be a VA default component
         return {
@@ -72,17 +81,16 @@ export default ({
           name,
           component: wrapper,
           props: {
-            name: resourceName,
-            fields: show
+            resourceName,
+            fields: show,
+            // This could be refactored into a vue mixin, check #52 - @sgobotta
+            va: {
+              ...utils
+            }
           }
         }
       } else {
         // show is a user's custom component
-        const utils = showUtils({
-          resourceName,
-          router,
-          store
-        })
         return {
           path: `${resourcePath}/show/:id`,
           name,
