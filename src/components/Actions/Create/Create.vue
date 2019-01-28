@@ -47,7 +47,7 @@ export default {
     TextField: TextField
   },
   props: {
-    name: {
+    resourceName: {
       type: String,
       default: null
     },
@@ -65,7 +65,6 @@ export default {
   data() {
     return {
       resource: {},
-      resourceName: this.name,
       view: 'create',
       UI_CONTENT,
       UI_NAMES
@@ -83,14 +82,14 @@ export default {
     },
 
     submit() {
-      const resourceName = this.name + "/create";
+      const resourceName = this.resourceName + "/create";
       // TODO: The then, catch could possibly be moved to the store using vuex-crud callbacks. Read #34 for docs - @sgobotta
       this.$store.dispatch(resourceName, { data: this.resource })
         .then((res) => {
           const { status } = res
           if ([200, 201].indexOf(status) !== -1) {
             // FIXME: looking for 'data' in res could cause conflicts depending on how the user api responds - @sgobotta
-            Router.redirect({ router: this.$router, resource: this.name, view: this.redirect.view, id: res.data[this.redirect.idField] })
+            Router.redirect({ router: this.$router, resource: this.resourceName, view: this.redirect.view, id: res.data[this.redirect.idField] })
             return res
           }
         })
@@ -105,7 +104,7 @@ export default {
     },
 
     key(label) {
-      return `${this.name}_${label}`
+      return `${this.resourceName}_${label}`
     },
 
     label(field) {
