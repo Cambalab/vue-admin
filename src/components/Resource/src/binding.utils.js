@@ -109,7 +109,14 @@ export default ({
     create: ({ wrapper }) => {
       const name = `${resourceName}/create`
       const redirectView = redirection.views.create
-      const redirect = { idField: resourceIdName, view: redirectView }
+      const utils = createUtils({
+        redirectView,
+        resourceIdName,
+        resourceName,
+        router,
+        store,
+        parseResponses
+      })
       if (create instanceof Array) {
         // create should be a VA default component
         return {
@@ -119,19 +126,13 @@ export default ({
           props: {
             resourceName,
             fields: create,
-            redirect
+            va: {
+              ...utils
+            }
           }
         }
       } else {
         // create is a user's custom component
-        const utils = createUtils({
-          redirectView,
-          resourceIdName,
-          resourceName,
-          router,
-          store,
-          parseResponses
-        })
         return {
           path: `${resourcePath}/create`,
           name,
@@ -139,7 +140,6 @@ export default ({
           props: {
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             resourceName,
-            redirect,
             va: {
               ...utils
             }
