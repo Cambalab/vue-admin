@@ -1,4 +1,4 @@
-import Show from "./Show";
+import Show from "./Composer";
 
 Show.install = function(Vue) {
   Vue.component(Show.name, Show);

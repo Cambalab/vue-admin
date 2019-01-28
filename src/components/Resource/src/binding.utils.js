@@ -88,9 +88,9 @@ export default ({
           name,
           component: show,
           props: {
+            resourceName,
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             va: {
-              resourceName,
               ...utils
             }
           }
