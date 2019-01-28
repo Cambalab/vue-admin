@@ -4,7 +4,7 @@
       <View slot="list"   :component="ListArticles" />
       <View slot="show"   :component="ShowArticles" />
       <View slot="create" :component="fieldsArticleCreate" />
-      <View slot="edit"   :component="fieldsArticleEdit" />
+      <View slot="edit"   :component="EditArticles" />
     </Resource>
     <Resource
       name="magazines"
@@ -23,8 +23,11 @@
 
 import Resource from '@components/Resource'
 import Admin from '@components/Admin'
+
 import ListArticles from './components/articles/ListArticles'
 import ShowArticles from './components/articles/ShowArticles'
+import EditArticles from './components/articles/EditArticles'
+
 import ListMagazines from './components/ListMagazines'
 import ShowMagazines from './components/ShowMagazines'
 import CreateMagazines from './components/CreateMagazines'
@@ -119,6 +122,7 @@ export default {
       // Articles Views as Components
       ListArticles,
       ShowArticles,
+      EditArticles,
       // Magazines Views as Custom Components
       ListMagazines,
       ShowMagazines,
