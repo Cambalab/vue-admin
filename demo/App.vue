@@ -1,8 +1,8 @@
 <template>
   <Admin>
-    <Resource name="articles" :resourceIdName="resourceIdName" :apiUrl="apiUrl" :redirect="articlesRedirect">
+    <Resource name="articles" :resourceIdName="resourceIdName" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
       <View slot="list"   :component="ListArticles" />
-      <View slot="show"   :component="articlesShow" />
+      <View slot="show"   :component="ShowArticles" />
       <View slot="create" :component="fieldsArticleCreate" />
       <View slot="edit"   :component="fieldsArticleEdit" />
     </Resource>
@@ -13,7 +13,7 @@
       :create="CreateMagazines"
       :edit="EditMagazines"
       :resourceIdName="resourceIdName"
-      :apiUrl="apiUrl"
+      :apiUrl="magazinesApiUrl"
       :redirect="magazinesRedirect"
     />
   </Admin>
@@ -24,10 +24,13 @@
 import Resource from '@components/Resource'
 import Admin from '@components/Admin'
 import ListArticles from './components/articles/ListArticles'
+import ShowArticles from './components/articles/ShowArticles'
 import ListMagazines from './components/ListMagazines'
 import ShowMagazines from './components/ShowMagazines'
 import CreateMagazines from './components/CreateMagazines'
 import EditMagazines from './components/EditMagazines'
+
+// Articles Views as Array
 
 const articlesList = [
   {
@@ -66,42 +69,10 @@ const articlesRedirect = {
   }
 }
 
-const resourceIdName = 'id'
-
-const magazinesList = [
-  {
-    'label':'name',
-    'type':'TextField',
-    'tag':'h2'
-  },
-  'issue',
-  'publisher'
-]
-
-const magazinesShow = [
-  'id',
-  {
-    'label':'name',
-    'type': 'TextField',
-    'tag': 'h1'
-  },
-  'issue',
-  'publisher'
-]
-
-const fieldsMagazineCreate =[
-  {
-    'label':'name',
-    'type':'Input',
-    'placeHolder': 'name'
-  },
-  'issue',
-  'publisher'
-]
-
-const fieldsMagazineEdit = fieldsMagazineCreate
-
 const magazinesRedirect = articlesRedirect
+
+// The name of the id attribute
+const resourceIdName = 'id'
 
 // Use case of a parsed response using feathers
 // This has to be done because every server client returns different responses. - sgobotta
@@ -134,23 +105,23 @@ export default {
     return {
       articlesApiUrl,
       magazinesApiUrl,
+      resourceIdName,
       articlesList,
       articlesShow,
       fieldsArticleCreate,
       fieldsArticleEdit,
       articlesRedirect,
-      resourceIdName,
-      magazinesList,
-      magazinesShow,
-      fieldsMagazineCreate,
-      fieldsMagazineEdit,
+      // Articles Views as Components
       ListArticles,
+      ShowArticles,
+      // Magazines Views as Custom Components
       ListMagazines,
       ShowMagazines,
       CreateMagazines,
       EditMagazines,
       magazinesRedirect
-      // #23 - To use the feathers server just add the parseResponses attribute
+
+      // #23 - To use a feathers server just add the parseResponses attribute
       // below, pass ':parseResponses='parseResponses' to Resource in the
       // template and update the resourceIdName to '_id'. - sgobotta
       // parseResponses: parseFeathersResponses

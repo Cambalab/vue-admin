@@ -42,8 +42,7 @@ export default {
 
   props: {
     name: {
-      type: String,
-      default: null
+      type: String
     },
     fields: {
       type: Array
