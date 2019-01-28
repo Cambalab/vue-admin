@@ -6,11 +6,12 @@ export default {
   functional: true,
   render(createElement, context) {
     // TODO: this should be the right place to handle List component misusing.
-    // For example: use it as a component in a template without passing any
-    // View children - @sgobotta
+    // Use case: a user instance it as a component in a template without passing
+    // any children with a source property - @sgobotta
 
-    // If List is being used in a user template it should contain View
-    // children, then they are processed and passed as props to the List
+    // If List is being used in a user template it should contain children with
+    // a source property, then they are processed and passed as props to the
+    // List view component
     if (context.children) {
       // Gets the list component associated by Resource during the binding.
       const { children, parent: { $attrs } } = context
