@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import UI_CONTENT from '../../../constants/ui.content.default'
-import UI_NAMES from '../../../constants/ui.element.names'
+import UI_CONTENT from '@constants/ui.content.default'
+import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents"
-import Router from "../../../router"
+import Router from "@router"
 
 export default {
   name: "Edit",

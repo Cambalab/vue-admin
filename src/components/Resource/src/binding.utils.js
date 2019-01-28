@@ -150,9 +150,9 @@ export default ({
     edit: ({ wrapper }) => {
       const name = `${resourceName}/edit`
       const redirectView = redirection.views.edit
+      const redirect = { idField: resourceIdName, view: redirectView }
       if (edit instanceof Array) {
         // edit should be a VA default component
-        const redirect = { idField: resourceIdName, view: redirectView }
         return {
           path: `${resourcePath}/edit/:id`,
           name,
@@ -179,8 +179,9 @@ export default ({
           component: edit,
           // This could be refactored into a vue mixin, check #52 - @sgobotta
           props: {
+            resourceName,
+            redirect,
             va: {
-              resourceName,
               ...utils
             }
           }
