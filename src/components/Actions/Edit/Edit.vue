@@ -13,7 +13,6 @@
               v-for="field in fields"
               :key="key(label(field))"
               :is="type(field.type)"
-              v-bind="args(field)"
               :value="entity[label(field)]"
               @change="storeValue($event, label(field))">
             </component>
