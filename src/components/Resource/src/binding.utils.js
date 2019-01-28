@@ -158,7 +158,7 @@ export default ({
           name,
           component: wrapper,
           props: {
-            name: resourceName,
+            resourceName,
             fields: edit,
             redirect
           }
