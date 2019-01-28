@@ -1,4 +1,4 @@
-import Create from "./Create";
+import Create from "./Composer";
 
 Create.install = function(Vue) {
   Vue.component(Create.name, Create);
