@@ -1,4 +1,4 @@
-import { fetchEntity } from './common.utils'
+import { getEntity } from './common.utils'
 
 /**
  * Show View Utils - A function used to create utilities
@@ -16,12 +16,12 @@ export default ({
 }) => {
   return {
     /**
-     * fetchEntity - Fetchs a 'resourceName' entity from the store
+     * getEntity - Gets a 'resourceName' entity from the store
      *
-     * @return {Object} The fetched entity.
+     * @return {Object} A 'resourceName' entity.
      */
-    fetchEntity() {
-      return fetchEntity({ router, resourceName, store })
+    getEntity() {
+      return getEntity({ router, resourceName, store })
     }
   }
 }

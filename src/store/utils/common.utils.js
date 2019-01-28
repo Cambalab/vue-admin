@@ -1,7 +1,7 @@
 import Router from '@router'
 
 /**
- * getEntity - Given a resource name and a form type, calls the store to get the
+ * getEntityForm - Given a resource name and a form type, calls the store to get the
  * current 'resourceName' entity. The value does not exist until a user inputs
  * data using 'updateEntity'.
  *
@@ -11,21 +11,20 @@ import Router from '@router'
  *
  * @return {Object} a 'resourceName' object with updated data from the form.
  */
-export const getEntity = ({ resourceName, formType, store }) => {
+export const getEntityForm = ({ resourceName, formType, store }) => {
   return store.state.entities[formType][resourceName]
 }
 
 /**
- * fetchEntity - Given a resource name, calls the store to dispatch a single get
- * request
+ * getEntity - Given a resource name, calls the store to get a single element.
  *
  * @param {String} resourceName   The name of the resource
  * @param {Object} store          The global Vuex store variable
  * @param {Object} router         The global Vue router variable
  *
- * @return {Object} The fetched entity.
+ * @return {Object} A 'resourceName' entity.
  */
-export const fetchEntity = ({ resourceName, store, router }) => {
+export const getEntity = ({ resourceName, store, router }) => {
   const { id } = router.history.current.params
   const moduleName = `${resourceName}/byId`;
   return store.getters[moduleName](id)
