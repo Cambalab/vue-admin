@@ -9,12 +9,13 @@
           <v-flex xs8>
             <component
               :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({ resourceName, view, field: label(field) })}`"
+              v-if="entity"
               v-for="field in fields"
               :key="key(label(field))"
               :is="type(field.type)"
               v-bind="args(field)"
-              :value="resource[label(field)]"
-              @change="saveValue($event, label(field))">
+              :value="entity[label(field)]"
+              @change="storeValue($event, label(field))">
             </component>
           </v-flex>
           <v-flex xs12>
@@ -31,7 +32,6 @@ import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents"
-import Router from "@router"
 
 export default {
   name: "Edit",
@@ -47,17 +47,13 @@ export default {
     fields: {
       type: Array
     },
-    redirect: {
+    va: {
       type: Object,
-      default: () => ({
-        idField: 'id',
-        view: 'show'
-      })
-    },
+      required: true
+    }
   },
   data() {
     return {
-      resource: {},
       view: 'edit',
       UI_CONTENT,
       UI_NAMES
@@ -66,29 +62,19 @@ export default {
   computed: {
     ...mapState([
       "route" // vuex-router-sync
-    ])
-
+    ]),
+    entity() {
+      return this.va.getEntity()
+    }
   },
 
   methods: {
-    saveValue(newValue, fieldName) {
-      this.resource[fieldName] = newValue;
+    storeValue(value, resourceKey) {
+      this.va.updateEntity({ resourceKey, value })
     },
 
     submit() {
-      const resourceName = this.resourceName + "/update";
-      // TODO: The then, catch could possibly be moved to the store using vuex-crud callbacks. Read #34 for docs - sgobotta
-      this.$store.dispatch(resourceName, { id: this.$route.params.id , data: this.resource })
-        .then((res) => {
-          if (this.redirect && res.status === 200) {
-            Router.redirect({ router: this.$router, resource: this.resourceName, view: this.redirect.view, id: res.data[this.redirect.idField] })
-            return res
-          }
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error(err)
-        })
+      this.va.submitEntity()
     },
 
     type(type) {
@@ -106,16 +92,11 @@ export default {
     args(field) {
       const args = typeof(field) === 'string' ? { 'label': field, 'placeHolder': field } : field
       return args
-    },
-
-    getResource() {
-      const resourceName = this.resourceName + "/byId";
-      return this.$store.getters[resourceName](this.$route.params.id)
     }
   },
 
   created() {
-    this.resource = this.getResource();
+    this.va.fetchEntity()
   }
 
 };
