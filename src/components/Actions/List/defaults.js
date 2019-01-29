@@ -5,29 +5,28 @@
  * @return {Object} An object containing props and methods
  */
 export default () => {
-  const component = 'List'
-
   /**
-   * Create View default validations
+   * List View default composer options
    */
+   const composer = {
+     parentPropKeys: [
+       'resourceName',
+       'resourceIdName',
+       'hasCreate',
+       'hasShow',
+       'hasEdit',
+       'va'
+     ],
+     childrenAdapter: {
+       alignContent: 'align',
+       alignHeader: 'alignHeader',
+       headerText: 'headerText',
+       sortable: 'sortable',
+       source: 'label'
+     }
+   }
 
   return {
-    composer: {
-      parentPropKeys: [
-        'resourceName',
-        'resourceIdName',
-        'hasCreate',
-        'hasShow',
-        'hasEdit',
-        'va'
-      ],
-      childrenAdapter: {
-        alignContent: 'align',
-        alignHeader: 'alignHeader',
-        headerText: 'headerText',
-        sortable: 'sortable',
-        source: 'label'
-      }
-    }
+    composer
   }
 }
