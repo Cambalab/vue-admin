@@ -1,119 +1,157 @@
-// https://docs.cypress.io/api/introduction/api.html
-
-const { queryElementByProp } = require('../../helpers')
+import { InitEntityUtils } from '../../lib/commands'
+import { rowsPerPage } from '../../../../src/constants/ui.elements.props'
 
 const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 
 describe('Articles: List Test', () => {
-  it('Visits the List View', () => {
-    cy.visit('/#/articles')
-
-    cy.url().should('include', '/articles')
+  const resourceName = 'articles'
+  const view = 'list'
+  const utils = InitEntityUtils({
+    resourceName,
+    view
   })
 
+  let articles
+  let timesNavigatedToNextPage = 0
+
+
+  before('Sets the articles fixture', () => {
+    cy.fixture(resourceName).then(fixture => {
+      articles = fixture
+    })
+  })
+
+  afterEach('Visits the articles list', () => {
+    navigateToFirstPage()
+  })
+
+  it('{GET} - When a resource / path is visited, a list of elements is returned in response', () => {
+    // Setup: the stubbed route it set
+    const routes = [{ name: view }]
+    cy.InitServer({ resourceName, routes })
+    // Exercise: visits the '/#/articles/' url
+    cy.visit(`/#/${resourceName}/`)
+    // Assertion: a list of articles is returned
+    cy.wait(`@${resourceName}/${view}`).then(xmlHttpRequest => {
+      articles = xmlHttpRequest.response.body
+      const responseData = xmlHttpRequest.response.body
+      expect(responseData).not.to.be.empty
+      expect(articles.length).to.equal(responseData.length)
+      expect(articles).to.deep.equal(responseData)
+    })
+   cy.server({ enable: false })
+  })
+
+   it('Visits the List View', () => {
+     const url = utils.getUrlByResource({ resourceName })
+     cy.url().should('eq', url)
+   })
+
   it('Articles List View should render title', () => {
-    const listViewContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
-      resourceName: 'articles',
-      view: 'list'
+    const titleContainer = cy.getElement({
+      constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE,
+      constantParams: { resourceName, view },
+      elementType: '',
+      elementProp: 'name'
     })
-    const listViewContainerElement = queryElementByProp({
-      type: 'div',
-      prop: 'name',
-      value: listViewContainerName
-    })
+    const expectedTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName })
 
-    const expectedListViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
-      resourceName: 'articles'
-    })
-
-    cy.get(listViewContainerElement).should((listViewContainer) => {
-      const listViewTitleContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({
-        resourceName: 'articles',
-        view: 'list'
-      })
-      const listViewTitleContainerElement = queryElementByProp({
-        prop: 'name',
-        value: listViewTitleContainerName
-      })
-      const listViewTitleContainer = listViewContainer.find(listViewTitleContainerElement)
-
-      expect(listViewTitleContainer).to.contain(expectedListViewTitleText)
-    })
+    titleContainer.should('contain', expectedTitleText)
   })
 
   it('Articles List View should render a create button', () => {
-    const createButtonName = UI_NAMES.RESOURCE_CREATE_BUTTON.with({
-      resourceName: 'articles'
+    const createButtonElement = cy.getElement({
+      constant: UI_NAMES.RESOURCE_CREATE_BUTTON,
+      constantParams: { resourceName },
+      elementType: 'a',
+      elementProp: 'name'
     })
-    const createButtonElement = queryElementByProp({
-      type: 'a',
-      prop: 'name',
-      value: createButtonName
-    })
-
     const expectedCreateButtonText = UI_CONTENT.RESOURCE_CREATE_BUTTON
 
-    cy.get(createButtonElement).should((createButtonLink) => {
-      expect(createButtonLink).to.contain(expectedCreateButtonText)
-    })
+    createButtonElement.should('contain',expectedCreateButtonText)
   })
 
-  it('Articles List View should render three articles links with ids', () => {
-    // FIXME: Refactor to use the cypress request and get the elements from the api
-    const articlesIndexes = [0, 1, 2];
-    articlesIndexes.forEach((articleIndex) => {
-      const listContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
-        resourceName: 'articles',
-        view: 'list'
-      })
-      const listContainerElement = queryElementByProp({
-        type: 'div',
-        prop: 'name',
-        value: listContainerName
-      })
+  it('The list should contain articles with an {id} attribute', () => {
+    const field = 'id'
+    assertListElementsByField(articles, field, rowsPerPage)
+  })
 
-      const expectedListElementFieldIdText = articleIndex + 1
+  it('The list should contain articles with a {title} attribute', () => {
+    const field = 'title'
+    assertListElementsByField(articles, field, rowsPerPage)
+  })
 
-      cy.get(listContainerElement).should((listElementContainer) => {
-        const listElementFieldName = UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-          resourceName: 'articles',
-          view: 'list',
-          field: 'id',
-          index: articleIndex
-        })
-        const listElementFieldElement = queryElementByProp({
-          type: 'a',
-          prop: 'name',
-          value: listElementFieldName
-        })
-        const listElementFieldId = listElementContainer.find(listElementFieldElement)
-
-        expect(listElementFieldId).to.contain(expectedListElementFieldIdText)
-      })
-    })
+  it('The list should contain articles with an {content} attribute', () => {
+    const field = 'content'
+    assertListElementsByField(articles, field, rowsPerPage)
   })
 
   it('Articles List View should go to the Create View when the Create button is clicked', () => {
-    const createButtonName = UI_NAMES.RESOURCE_CREATE_BUTTON.with({
-      resourceName: 'articles'
+    const createButtonElement = cy.getElement({
+      constant: UI_NAMES.RESOURCE_CREATE_BUTTON,
+      constantParams: { resourceName },
+      elementType: 'a',
+      elementProp: 'name'
     })
-
-    const createButtonElement = queryElementByProp({
-      type: 'a',
-      prop: 'name',
-      value: createButtonName
-    })
-
     const expectedCreateButtonText = UI_CONTENT.RESOURCE_CREATE_BUTTON
 
-    cy.get(createButtonElement).should((createButtonLink) => {
-
-      expect(createButtonLink).to.contain(expectedCreateButtonText)
-      // We force click the button because it's width is 0 - santiago
-    }).click({ force: true })
-
-    cy.url().should('include', '/articles/create')
+    createButtonElement.should('contain', expectedCreateButtonText).click({ force: true })
+    cy.url().should('include', `/${resourceName}/create`)
   })
+
+  /*
+  * Helper functions
+  */
+
+  /**
+   * assertListElementsByField - Given an list of elements, a 'field' and a
+   * number, iterates through the array, finds an element field in a table row,
+   * and asserts a cell's value is equal to the current elements's 'field'.
+   *
+   * @param {Array}  list        A list of elements
+   * @param {String} field       A property name of list elements
+   * @param {Number} rowsPerPage A quantity representing the rows per page of a
+   * table.
+   */
+  const assertListElementsByField = (list, field, rowsPerPage) => {
+    list.forEach((element, index) => {
+      // Navigates to next page if necessary
+      navigateToNextPage(index)
+      // Setup: Gets the 'index' publisher row
+      const row = utils.getTableRowBy({
+        field,
+        index: index % rowsPerPage
+      })
+      // Assertion: the input contains the article issue content
+      row.should('contain', element[field])
+    })
+  }
+
+  const navigateToNextPage = (index) => {
+    if (index && (index % rowsPerPage === 0)) {
+      const nextPageButton = cy.getElement({
+        constant: '"Next page"',
+        elementType: 'button',
+        elementProp: 'aria-label'
+      })
+      nextPageButton.click()
+      timesNavigatedToNextPage = timesNavigatedToNextPage + 1
+    }
+  }
+
+  const navigateToFirstPage = () => {
+    if (timesNavigatedToNextPage) {
+      const previousPageButton = cy.getElement({
+        constant: '"Previous page"',
+        elementType: 'button',
+        elementProp: 'aria-label'
+      })
+      while (timesNavigatedToNextPage > 0) {
+        previousPageButton.click({ multiple: true })
+        timesNavigatedToNextPage--
+      }
+    }
+  }
 })

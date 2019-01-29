@@ -28,20 +28,22 @@
     <v-data-table
       :headers="headers"
       :items="resourceList"
-      class="elevation-1">
+      class="elevation-1"
+      disable-initial-sort
+      :pagination.sync="pagination"
+      >
       <template
         slot="items"
         slot-scope="props"
         >
-        <td>
+        <td
+          :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: resourceId, index: props.index })}`">
           <router-link
-            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: resourceId, index: props.index })}`"
             v-if="hasShow"
             :to="{ name: `${name}/show`, params: { id: props.item[resourceId] } }">
             {{ props.item[resourceId] }}
           </router-link>
           <span
-            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: resourceId, index: props.index })}`"
             v-else>
             {{ props.item[resourceId] }}
           </span>
@@ -49,9 +51,9 @@
         <td class="text-xs-left"
           v-for="field in fields"
           :key="key(label(field))"
+          :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index: props.index })}`"
           >
           <component
-            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index: props.index })}`"
             :is="type(field.type)"
             v-bind:content="props.item[label(field)]"
             v-bind="args(field)">
@@ -60,7 +62,8 @@
         <td>
           <EditButton
             :resourceId="props.item[resourceId]"
-            :resourceName="name">
+            :resourceName="name"
+            :index="props.index">
           </EditButton>
         </td>
         <td class="text-xs-right">
@@ -78,6 +81,7 @@
 <script>
 import UI_CONTENT from '../../../constants/ui.content.default'
 import UI_NAMES from '../../../constants/ui.element.names'
+import UI_ELEMENTS from '../../../constants/ui.elements.props'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents";
 import { EditButton, Delete } from "../../Actions";
@@ -104,10 +108,15 @@ export default {
     }
   },
   data() {
+    const { rowsPerPage } = UI_ELEMENTS
     return {
       view: 'list',
       UI_CONTENT,
-      UI_NAMES
+      UI_NAMES,
+      pagination: {
+        page: 1,
+        rowsPerPage
+      }
     }
   },
   computed: {
