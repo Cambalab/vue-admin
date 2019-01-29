@@ -38,6 +38,9 @@
     "vuex": "^3.0.1",
     "vuex-crud": "^0.3.2"
   },
+  "directories": {
+    "doc": "https://github.com/Cambalab/vue-admin/blob/develop/Docs"
+  },
   "eslintConfig": {
     "root": true,
     "env": {

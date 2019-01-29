@@ -14,6 +14,7 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/src/$1',
     '@components(.*)$': '<rootDir>/src/components/$1',
     '@constants(.*)$': '<rootDir>/src/constants/$1',
+    '@handlers(.*)$': '<rootDir>/src/handlers/$1',
     '@router(.*)$': '<rootDir>/src/router/$1',
     '@store(.*)$': '<rootDir>/src/store/$1'
   },
@@ -23,5 +24,6 @@ module.exports = {
   testMatch: [
     '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)'
   ],
+  transformIgnorePatterns: ['<rootDir>/node_modules/'],
   testURL: 'http://localhost/'
 }

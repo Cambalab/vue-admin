@@ -2,6 +2,7 @@ import CreateMagazines from '../../../../demo/components/CreateMagazines'
 import EditMagazines from '../../../../demo/components/EditMagazines'
 import ListMagazines from '../../../../demo/components/ListMagazines'
 import ShowMagazines from '../../../../demo/components/ShowMagazines'
+import defaults from '../../../../src/components/Resource/src/defaults'
 
 export default {
   props: {
@@ -12,16 +13,8 @@ export default {
     edit: EditMagazines,
     list: ListMagazines,
     show: ShowMagazines,
-    redirect: {
-      views: {
-        create: 'list',
-        edit: 'show'
-      }
-    },
-    parseResponses: {
-      single: null,
-      list: null
-    }
+    redirect: defaults().props.redirect(),
+    parseResponses: defaults().props.parseResponses()
   },
   methods: {
     storeMethods: {
