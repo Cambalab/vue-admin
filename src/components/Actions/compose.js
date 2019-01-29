@@ -1,35 +1,18 @@
 
-export default (createElement, context, {
-  component,
-  view
-}) => {
-  const views = {
-    list: composeList,
-    show: composeShow,
-    create: composeCreate,
-    edit: composeEdit
-  }
-
-  return views[view](createElement, context, { component })
-}
-
-function composeList(createElement, context, { component }) {
-  const parentPropKeys = [
-    'resourceName',
-    'resourceIdName',
-    'hasCreate',
-    'hasShow',
-    'hasEdit',
-    'va'
-  ]
-
-  const childrenAdapter = {
-    alignContent: 'align',
-    alignHeader: 'alignHeader',
-    headerText: 'headerText',
-    sortable: 'sortable',
-    source: 'label'
-  }
+/**
+ * Compose - Given a function that creates VNodes and a context, delegates
+ * to the proper function to compose the node.
+ *
+ * @param {Function} createElement  The first param of the render function
+ * @param {Object}   context        The second param of the render function
+ * @param {Object}   component      A view component to be wrapped
+ * @param {String}   view           The name of the view that is being composed
+ *
+ * @return {VNode} A Vue component
+ */
+export default (createElement, context, { component }) => {
+  const { composer } = require(`./${component.name}/defaults.js`).default()
+  const { parentPropKeys, childrenAdapter } = composer
 
   return compose(createElement, context, {
     component,
@@ -38,63 +21,18 @@ function composeList(createElement, context, { component }) {
   })
 }
 
-function composeShow(createElement, context, { component }) {
-  const parentPropKeys = [
-    'resourceName',
-    'redirect',
-    'va'
-  ]
-
-  const childrenAdapter = {
-    placeHolder: 'placeHolder',
-    source: 'label'
-  }
-
-  return compose(createElement, context, {
-    component,
-    parentPropKeys,
-    childrenAdapter
-  })
-}
-
-function composeCreate(createElement, context, { component }) {
-  const parentPropKeys = [
-    'resourceName',
-    'redirect',
-    'va'
-  ]
-
-  const childrenAdapter = {
-    placeHolder: 'placeHolder',
-    source: 'label'
-  }
-
-  return compose(createElement, context, {
-    component,
-    parentPropKeys,
-    childrenAdapter
-  })
-}
-
-function composeEdit(createElement, context, { component }) {
-  const parentPropKeys = [
-    'resourceName',
-    'va'
-  ]
-
-  const childrenAdapter = {
-    placeHolder: 'placeHolder',
-    source: 'label'
-  }
-
-  return compose(createElement, context, {
-    component,
-    parentPropKeys,
-    childrenAdapter
-  })
-}
-
-
+/**
+ * compose - Given a createElement function, a context and a set of options,
+ * composes the 'component' using the given options
+ *
+ * @param {Function} createElement   A function that creates VNodes
+ * @param {Object}   context         The render context
+ * @param {Object}   component       A Vue component
+ * @param {Array}    parentPropKeys  The keys to extract from the parent
+ * @param {Object}   childrenAdapter The data to extract from the children
+ *
+ * @return {VNode} A Vue component
+ */
 function compose(createElement, context, {
   component,
   parentPropKeys,
@@ -127,16 +65,10 @@ function compose(createElement, context, {
         return props
       }, {})
 
-      return {
-        ...childrenProps,
-        tag
-      }
+      return { ...childrenProps, tag }
     })
 
-    const props = {
-      ...parentProps,
-      fields
-    }
+    const props = { ...parentProps, fields }
     return createElement(component, { props })
   }
   // The View is already being instanced by Resource as an Array
