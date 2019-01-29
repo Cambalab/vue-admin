@@ -47,7 +47,7 @@ export default {
   props: {
     resourceName: {
       type: String,
-      default: null
+      require: true
     },
     fields: {
       type: Array,
