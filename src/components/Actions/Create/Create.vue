@@ -50,7 +50,8 @@ export default {
       default: null
     },
     fields: {
-      type: Array
+      type: Array,
+      required: true
     },
     va: {
       type: Object,

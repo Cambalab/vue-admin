@@ -13,6 +13,7 @@
               v-for="field in fields"
               :key="key(label(field))"
               :is="type(field.type)"
+              v-bind="args(field)"
               :value="entity[label(field)]"
               @change="storeValue($event, label(field))">
             </component>
@@ -44,7 +45,8 @@ export default {
       default: null
     },
     fields: {
-      type: Array
+      type: Array,
+      required: true
     },
     va: {
       type: Object,
