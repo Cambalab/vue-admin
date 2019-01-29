@@ -1,27 +1,42 @@
-const Factory = require('../../factory')
-
-const { InitEntityUtils } = require('../../lib/commands')
+import { InitEntityUtils } from '../../lib/commands'
+import { rowsPerPage } from '../../../../demo/constants'
 
 describe('Magazines: List Action Test', () => {
   const resourceName = 'magazines'
   const view = 'list'
-  let magazines
   const utils = InitEntityUtils({
     resourceName,
     view
   })
 
-  const rowsPerPage = 5
+  let magazines
   let timesNavigatedToNextPage = 0
 
-  before('Gets a list of magazines', () => {
-    const url = Factory.apiUrl({ route: `api/${resourceName}/` })
-    cy.request('GET', url).
-    then((res) => { magazines = res.body })
+  before('Sets the magazines fixture', () => {
+    cy.fixture(resourceName).then(fixture => {
+      magazines = fixture
+    })
   })
 
-  beforeEach('Visits the magazines list', () => {
+  afterEach('Visits the magazines list', () => {
+    navigateToFirstPage()
+  })
+
+  it('{GET} - When a resource / path is visited, a list of elements is returned in response', () => {
+    // Setup: the stubbed route it set
+    const routes = [{ name: 'list' }]
+    cy.InitServer({ resourceName, routes })
+    // Exercise: visits the /#/{resourceName}/ url
     cy.visit(`/#/${resourceName}/`)
+    // Assertion: a list of magazines is returned
+    cy.wait(`@${resourceName}/${view}`).then(xmlHttpRequest => {
+      magazines = xmlHttpRequest.response.body
+      const responseData = xmlHttpRequest.response.body
+      expect(responseData).not.to.be.empty
+      expect(magazines.length).to.equal(responseData.length)
+      expect(magazines).to.deep.equal(responseData)
+    })
+    cy.server({ enable: false })
   })
 
   it('The url should be /magazines', () => {
@@ -31,6 +46,11 @@ describe('Magazines: List Action Test', () => {
 
   it('The list should contain magazines with an {id} attribute', () => {
     const field = 'id'
+    assertListElementsByField(magazines, field, rowsPerPage)
+  })
+
+  it('The list should contain magazines with a {name} attribute', () => {
+    const field = 'name'
     assertListElementsByField(magazines, field, rowsPerPage)
   })
 
@@ -66,7 +86,7 @@ describe('Magazines: List Action Test', () => {
   }
 
   const navigateToNextPage = (index) => {
-    if (index && (index % 5 === 0)) {
+    if (index && (index % rowsPerPage === 0)) {
       const nextPageButton = cy.getElement({
         constant: '"Next page"',
         elementType: 'button',
@@ -74,6 +94,20 @@ describe('Magazines: List Action Test', () => {
       })
       nextPageButton.click()
       timesNavigatedToNextPage = timesNavigatedToNextPage + 1
+    }
+  }
+
+  const navigateToFirstPage = () => {
+    if (timesNavigatedToNextPage) {
+      const previousPageButton = cy.getElement({
+        constant: '"Previous page"',
+        elementType: 'button',
+        elementProp: 'aria-label'
+      })
+      while (timesNavigatedToNextPage > 0) {
+        previousPageButton.click({ multiple: true })
+        timesNavigatedToNextPage--
+      }
     }
   }
 })

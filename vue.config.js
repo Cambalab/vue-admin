@@ -9,6 +9,7 @@ module.exports = {
         '@constants': path.resolve(__dirname, 'src/constants'),
         '@demo': path.resolve(__dirname, 'demo'),
         '@e2e': path.resolve(__dirname, 'tests/e2e'),
+        '@handlers': path.resolve(__dirname, 'src/handlers'),
         '@plugins': path.resolve(__dirname, 'src/plugins'),
         '@router': path.resolve(__dirname, 'src/router'),
         '@store': path.resolve(__dirname, 'src/store'),

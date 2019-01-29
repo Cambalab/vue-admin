@@ -1,16 +1,23 @@
 import { initialResourcesRoutes } from './common.utils'
 
 /**
- * Anonymous Function - Creates a simualtion of initial vuex crud state
+ * Annonymous Function - Creates a simualtion of initial vuex crud state
+ *
+ * @param {String} snapshot          The name of a component the state should be
+ *                                   initialised for
+ * @param {Array}  initialResources  A list of resources to initialise the state
  *
  * @return {Object} The expected Vuex Crud mocked state
  */
-export default () => {
-  // Initial vuex crud resources should be added here
-  const initialResources = [
-    'articles',
-    'magazines'
-  ]
+export default ({
+  snapshot = 'default',
+  initialResources
+}) => {
+  // New custom mutations configurations should be added here
+  const snapshots = {
+    default: initDefaultState,
+    Resource: initStateForResource
+  }
   // Vuex Crud Initial State for a resource
   const initialResourceState = {
     createError: null,
@@ -50,10 +57,18 @@ export default () => {
     })
     return _resources
   }
-
-  return {
-    ...initResourcesState(initialResources),
-    entities: initialEntitiesState,
-    resources: initialResourcesState
+  // Initialises default state
+  function initDefaultState() {
+    return {
+      ...initResourcesState(initialResources),
+      entities: initialEntitiesState,
+      resources: initialResourcesState
+    }
   }
+  // Initialises state for a Resource component
+  function initStateForResource() {
+    return {}
+  }
+
+  snapshots[snapshot]()
 }
