@@ -1,24 +1,21 @@
-const docs      = require('@/../package.json').directories.doc
-const prefix    = 'VueAdmin'
-const docsUrl   = docs
-const docsPaths = {
-  Resource: `${docsUrl}/Resource.md#resource-props`
-}
+import templates from '@templates'
 
-const templates = {
-  UNDEFINED_PROPERTY: ({ prop, at, url }) => `
-    ${prefix}/${at}:
-      It seems that the ${prop} property is undefined.
-      Please refer to our documentation at ${url}
-  `
+const buildMessage = templates('en.error')
+
+function parseErrorDetails(details) {
+  return details.map(detail => `\t${detail.message}`).join('\n')
 }
 
 export default {
   UNDEFINED_PROPERTY: {
     with: ({ prop, at }) => {
-      const url = docsPaths[at]
-      const template = templates['UNDEFINED_PROPERTY']({ prop, at, url })
-      return template
+      return buildMessage('UNDEFINED_PROPERTY', { prop, at })
+    }
+  },
+  INVALID_SCHEMA: {
+    with: ({ prop, at, details }) => {
+      const _details = parseErrorDetails(details)
+      return buildMessage('INVALID_SCHEMA', { prop, at, details: _details })
     }
   }
 }

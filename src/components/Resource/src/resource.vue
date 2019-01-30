@@ -31,7 +31,8 @@ export default {
     },
     redirect: {
       type: Object,
-      default: defaults().props.redirect
+      default: defaults().props.redirect,
+      validator: defaults().validate.redirect
     },
     parseResponses: {
       type: Object,
