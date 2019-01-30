@@ -6,7 +6,7 @@ export default {
   name: 'ShowComposer',
   functional: true,
   render(createElement, context) {
-    return composeView(createElement, context, { component: Show, view: 'show' })
+    return composeView(createElement, context, { component: Show })
   }
 }
 </script>

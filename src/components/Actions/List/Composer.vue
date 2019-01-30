@@ -6,7 +6,7 @@ export default {
   name: 'ListComposer',
   functional: true,
   render(createElement, context) {
-    return composeView(createElement, context, { component: List, view: 'list' })
+    return composeView(createElement, context, { component: List })
   }
 }
 </script>
