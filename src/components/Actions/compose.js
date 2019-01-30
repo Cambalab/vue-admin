@@ -1,7 +1,7 @@
 
 /**
- * Compose - Given a function that creates VNodes and a context, delegates
- * to the proper function to compose the node.
+ * Compose - Given a function that creates VNodes and a context, composes the
+ * View using it's default values
  *
  * @param {Function} createElement  The first param of the render function
  * @param {Object}   context        The second param of the render function

@@ -6,7 +6,7 @@ export default {
   name: 'EditComposer',
   functional: true,
   render(createElement, context) {
-    return composeView(createElement, context, { component: Edit, view: 'edit' })
+    return composeView(createElement, context, { component: Edit })
   }
 }
 </script>
