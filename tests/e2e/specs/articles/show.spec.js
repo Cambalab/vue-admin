@@ -1,34 +1,42 @@
-// https://docs.cypress.io/api/introduction/api.html
-
-const Factory = require('../../factory')
 const { queryElementByProp } = require('../../helpers')
-
 const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 describe('Articles: Show Test', () => {
-  let article = {}
+  const resourceName = 'articles'
+  const view = 'show'
+  const article = {}
 
-  before('Search the Show view url', () => {
-    const url = Factory.apiUrl({ route: 'api/articles/' })
-    cy.request('POST',url , Factory.createArticle())
-      .then((res) => { article = res.body })
-    cy.visit('/#/articles')
-    cy.wait(2000)
+  before('Search an article to show', () => {
+    cy.fixture(resourceName).then(fixture => {
+      // Takes the first element of the fixture to use as subject
+      Object.assign(article, fixture[0])
+    })
   })
 
-  it('Visits the Show view url', () => {
-    const url = `articles/show/${article.id}`
-    cy.visit(`/#/${url}`)
-    cy.url().should('include', url)
+  before('Initialises the server', () => {
+    // Inits the server with a stubbed get endpoint
+    const routes = [{ name: view, response: article }]
+    cy.InitServer({ resourceName, routes })
+  })
+
+  it('Visits the articles show', () => {
+    // Exercise: visits the show view
+    cy.visit(`/#/${resourceName}/${view}/${article.id}`)
+    cy.server({ enable: false })
+    // Assertion: the url should match the show view url
+    cy.url().should('include', `${resourceName}/${view}/${article.id}`)
   })
 
   it('Articles Show View should render title: Articles', () => {
-    cy.get(queryToElement('RESOURCE_VIEW_CONTAINER')).should((showViewContainer) => {
-      const showViewTitleContainer = showViewContainer.find(queryToElement('RESOURCE_VIEW_CONTAINER_TITLE'))
-      const showViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName: 'articles' })
-      expect(showViewTitleContainer).to.contain(showViewTitleText)
-    })
+    const showViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName })
+
+    cy.getElement({
+      constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE,
+      constantParams: { resourceName, view },
+      elementType: 'div',
+      elementProp: 'name'
+    }).should('contain', showViewTitleText)
   })
 
   it('Articles Show View should contain the id field', () => {
@@ -56,19 +64,16 @@ describe('Articles: Show Test', () => {
   }
 
   function queryToElement(containerType) {
-    return queryToElementWith(containerType, {
-      resourceName: 'articles',
-      view: 'show'
-    })
+    return queryToElementWith(containerType, { resourceName, view })
   }
 
   function articlesShowViewShouldContainTheField(field) {
     cy.get(queryToElement('RESOURCE_VIEW_CONTAINER_FIELDS'))
       .should((fieldsContainerRes) => {
         const fieldContainerElement = queryToElementWith('RESOURCE_VIEW_CONTAINER_FIELD', {
-          resourceName: 'articles',
-          view: 'show',
-          field: field
+          resourceName,
+          view,
+          field
         })
         const fieldContainer = fieldsContainerRes.find(fieldContainerElement)
         expect(fieldContainer).to.contain(article[field])

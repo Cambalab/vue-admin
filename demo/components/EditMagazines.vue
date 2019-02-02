@@ -42,7 +42,7 @@
           <v-form>
             <v-container>
               <v-layout column>
-                <v-flex xs12>
+                <v-flex xs12 v-if="entity">
                   <v-text-field
                     :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
                       resourceName,
@@ -129,7 +129,12 @@ export default {
   },
   created() {
     // With getEntity you can have your 'resourceName' entity initialised.
-    this.entity = this.va.getEntity()
+    this.va.fetchEntity()
+  },
+  computed: {
+    entity() {
+      return this.va.getEntity()
+    }
   },
   methods: {
     storeValue(value, resourceKey) {

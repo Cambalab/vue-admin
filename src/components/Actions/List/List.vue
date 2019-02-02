@@ -28,7 +28,10 @@
     <v-data-table
       :headers="headers"
       :items="resourceList"
-      class="elevation-1">
+      class="elevation-1"
+      disable-initial-sort
+      :pagination.sync="pagination"
+      >
       <template
         slot="items"
         slot-scope="props"
@@ -36,6 +39,7 @@
         <td class="text-xs-left"
           v-for="field in fields"
           :key="key(label(field))"
+          :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index: props.index })}`"
           >
           <router-link
             :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: resourceIdName, index: props.index })}`"
@@ -60,13 +64,17 @@
         <td v-if="hasEdit">
           <EditButton
             :resourceId="props.item[resourceIdName]"
-            :resourceName="resourceName">
+            :resourceName="resourceName"
+            :index="props.index"
+            >
           </EditButton>
         </td>
         <td>
           <Delete
             :resourceId="props.item[resourceIdName]"
-            :resourceName="resourceName">
+            :resourceName="resourceName"
+            :index="props.index"
+            >
           </Delete>
         </td>
       </template>
@@ -75,8 +83,11 @@
 </template>
 
 <script>
+
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
+import UI_ELEMENTS from '@constants/ui.elements.props'
+
 import { Input, TextField } from "../../UiComponents";
 import { EditButton, Delete } from "../../Actions";
 
@@ -110,10 +121,15 @@ export default {
     }
   },
   data() {
+    const { rowsPerPage } = UI_ELEMENTS
     return {
       view: 'list',
       UI_CONTENT,
-      UI_NAMES
+      UI_NAMES,
+      pagination: {
+        page: 1,
+        rowsPerPage
+      }
     }
   },
   computed: {

@@ -1,6 +1,6 @@
 <template>
   <Admin>
-    <Resource name="articles" :resourceIdName="resourceIdName" :apiUrl="apiUrl" :redirect="articlesRedirect">
+    <Resource name="articles" :resourceIdName="resourceIdName" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
       <View slot="list"   :component="ListArticles" />
       <View slot="show"   :component="ShowArticles" />
       <View slot="create" :component="CreateArticles" />
@@ -13,7 +13,7 @@
       :create="CreateMagazines"
       :edit="EditMagazines"
       :resourceIdName="resourceIdName"
-      :apiUrl="apiUrl"
+      :apiUrl="magazinesApiUrl"
       :redirect="magazinesRedirect"
     />
   </Admin>
@@ -57,8 +57,7 @@ const articlesShow = [
     'type': 'TextField',
     'tag': 'h1'
   },
-  'content',
-  'campoQueNoExiste'
+  'content'
 ]
 
 const fieldsArticleCreate =[
@@ -102,7 +101,8 @@ const resourceIdName = 'id'
 //   }
 // }
 
-const apiUrl = 'http://localhost:8080/api/'
+const articlesApiUrl = 'http://localhost:8888/api/'
+const magazinesApiUrl = 'http://localhost:8888/api/'
 
 export default {
   name: 'App',
@@ -112,9 +112,10 @@ export default {
   },
   data() {
     return {
-      apiUrl,
       resourceIdName,
       // Articles Views as Array
+      articlesApiUrl,
+      magazinesApiUrl,
       articlesList,
       articlesShow,
       fieldsArticleCreate,

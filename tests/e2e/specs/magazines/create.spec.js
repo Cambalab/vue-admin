@@ -13,6 +13,11 @@ describe('Magazines: Create Action Test', () => {
 
   before('Visits the magazines create url', () => {
     cy.visit(`/#/${resourceName}/${view}`)
+    cy.reload()
+  })
+
+  after('Shuts down the server', () => {
+    cy.server({ enable: false })
   })
 
   it('The url path should be magazines/create', () => {
@@ -22,7 +27,7 @@ describe('Magazines: Create Action Test', () => {
   it('The {Name} input is filled when a user types in', () => {
     // Setup: Gets the 'name' input element
     const input = utils.getInputBy({ field: 'name' })
-    // Excersice: Types in the magazine name
+    // Exercise: Types in the magazine name
     input.type(magazine.name)
     // Assertion: the input contains the magazine issue content
     input.should('have.value', magazine.name)
@@ -31,7 +36,7 @@ describe('Magazines: Create Action Test', () => {
   it('The {Issue} input is filled when user types in', () => {
     // Setup: Gets the 'issue' input element
     const input = utils.getInputBy({ field: 'issue' })
-    // Excersice: Types in the magazine issue
+    // Exercise: Types in the magazine issue
     input.type(magazine.issue)
     // Assertion: the input contains the magazine issue content
     input.should('have.value', magazine.issue)
@@ -40,18 +45,38 @@ describe('Magazines: Create Action Test', () => {
   it('The {Publisher} input is filled when user types in', () => {
     // Setup: Gets the 'publisher' input element
     const input = utils.getInputBy({ field: 'publisher' })
-    // Excersice: Types in the magazine publisher
+    // Exercise: Types in the magazine publisher
     input.type(magazine.publisher)
     // Assertion: the input contains the magazine publisher content
     input.should('have.value', magazine.publisher)
   })
 
   it('A magazine is created when the user submits the form', () => {
+    // Setup: Initialises the server before the create request request
+    const routes = [
+      { name: 'create', response: magazine },
+      { name: 'list' }
+    ]
+    cy.InitServer({ resourceName, routes, response: magazine })
     // Setup: Gets the submit button element
     const button = utils.getSubmitButton({ submitType: 'create' })
-    // Excersice: Creates a new magazine
+    // Exercise: Creates a new magazine
     button.click()
     // Assertion: The router redirects to /magazines
-    cy.url().should('include', `/${resourceName}`)
+    cy.wait(`@${resourceName}/${view}`).then(xmlHttpRequest => {
+      const newMagazine = xmlHttpRequest.response.body
+      expect(xmlHttpRequest.status).to.equal(201)
+      expect(newMagazine).to.deep.equal(magazine)
+    })
+    // Assertion: The magazine exists in the list
+    cy.wait(`@${resourceName}/list`).then((xmlHttpRequest) => {
+      const newMagazine = xmlHttpRequest.response.body.find(_magazine => {
+        return _magazine.id === magazine.id
+      })
+      // Assertion: The updated magazine is equal to the setup magazine
+      expect(newMagazine).to.deep.equal(magazine)
+      // Assertion: The view is redirected to the list
+      cy.url().should('include', `/${resourceName}`)
+    })
   })
 })

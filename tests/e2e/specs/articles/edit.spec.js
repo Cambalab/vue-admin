@@ -1,55 +1,43 @@
-// https://docs.cypress.io/api/introduction/api.html
-
 const Factory = require('../../factory')
-const { queryElementByProp } = require('../../helpers')
+const { InitEntityUtils } = require('../../lib/commands')
 
 const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 describe('Articles: Edit Test', () => {
-  let article = {}
-  let newArticle = {}
 
-  before('Create an article', () => {
-    const url = Factory.apiUrl({ route: 'api/articles/' })
-    cy.request('POST', url, Factory.createArticle())
-      .then((res) => { article = res.body })
-  })
+  const resourceName = 'articles'
+  const view = 'edit'
+  const article = {}
+  const newArticle = Factory.createArticle()
+  const utils = InitEntityUtils({ resourceName, view })
 
-  before('Create a new article to edit the fields content', () => {
-    newArticle = Factory.createArticle()
-    cy.visit('/#/articles')
-    cy.wait(8000)
-  })
-
-  before('Visits the created article with the Show view', () => {
-    const url = `articles/show/${article.id}`
-    cy.visit(`/#/${url}`)
-    cy.url().should('include', url)
-  })
-
-  before('Click in the Edit button of the Show view', () => {
-    const editButtonName = UI_NAMES.RESOURCE_EDIT_BUTTON.with({
-      resourceName: 'articles'
+  before('Search an article to edit', () => {
+    cy.fixture(resourceName).then(fixture => {
+      Object.assign(article, fixture[0])
+      newArticle.id = article.id
     })
-    const editButtonElement = queryElementByProp({
-      type: 'button',
-      prop: 'name',
-      value: editButtonName
-    })
-    cy.get(editButtonElement).should((editButtonLink) => {
-      expect(editButtonLink).to.contain(UI_CONTENT.RESOURCE_EDIT_BUTTON)
-    }).click()
+  })
+
+  before('Initialises the mocked server and visits the edit url', () => {
+    const response = article
+    const routes = [{ name: 'edit', response }, { name: 'show', response }]
+
+    cy.InitServer({ resourceName, routes })
+    cy.visit(`/#/${resourceName}/edit/${article.id}`)
+    cy.server({ enable: false })
   })
 
   it('Articles Edit should render title: Articles', () => {
-    cy.get(editViewDivContainerQuery('RESOURCE_VIEW_CONTAINER')).should((editViewContainer) => {
-      const editViewTitleContainer = editViewContainer.find(editViewDivContainerQuery('RESOURCE_VIEW_CONTAINER_TITLE'))
-      const editViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
-        resourceName: 'articles'
-      })
-      expect(editViewTitleContainer).to.contain(editViewTitleText)
+    const editViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })
+    const editViewTitleContainer = cy.getElement({
+      constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE,
+      constantParams: { resourceName, view },
+      elementType: 'div',
+      elementProp: 'name'
     })
+
+    editViewTitleContainer.should('contain', editViewTitleText)
   })
 
   it('Articles Edit view should contain a title field', () => {
@@ -70,91 +58,45 @@ describe('Articles: Edit Test', () => {
     articlesEditViewShouldContainsTheField('content', newArticle.content)
   })
 
-  it('Press the save button and redirect to the Show view', () => {
-    const saveButtonContainerName = UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
-      resourceName: 'articles',
-      view: 'edit'
+  it('An article is updated when the user submits the form', () => {
+    const routes = [
+      { name: view, response: newArticle },
+      { name: 'show', response: newArticle }
+    ]
+    cy.InitServer({ resourceName, routes })
+
+    const button = utils.getSubmitButton({ submitType: view })
+    button.click()
+
+    cy.wait(`@${resourceName}/update`).then(xmlHttpRequest => {
+      const _newArticle = xmlHttpRequest.response.body
+      expect(_newArticle).to.deep.equal(newArticle)
+      cy.url().should('include', `/${resourceName}/show/${_newArticle.id}`)
     })
-    const saveButtonContainerQuery = queryElementByProp({
-      prop: 'name',
-      value: saveButtonContainerName
-    })
-
-    cy.get(saveButtonContainerQuery).should((editSubmitButton) => {
-      expect(editSubmitButton).to.contain(UI_CONTENT.EDIT_SUBMIT_BUTTON)
-    }).click()
-
-    const url = `articles/show/${article.id}`
-    cy.url().should('include', url)
-  })
-
-  it('The title field was saved with the new content', () => {
-    theFieldwasSavedWithTheNewContent('title')
-  })
-
-  it('The content field was saved with the new content', () => {
-    theFieldwasSavedWithTheNewContent('content')
+    cy.server({ enable: false })
   })
 
   /**
   * Helper functions
   **/
 
-  function editViewDivContainerQuery(containerType) {
-    const editViewContainerName = UI_NAMES[containerType].with({
-      resourceName: 'articles',
-      view: 'edit'
-    })
-
-    return queryElementByProp({
-      type: 'div',
-      prop: 'name',
-      value: editViewContainerName
-    })
-  }
-
-  function theFieldwasSavedWithTheNewContent(field) {
-    const fieldContainerName = UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({
-      resourceName: 'articles',
-      view: 'show',
-      field
-    })
-    const fieldContainerQuery = queryElementByProp({
-      type:'div',
-      prop: 'name',
-      value: fieldContainerName
-    })
-
-    cy.get(fieldContainerQuery).should((fieldContainer) => {
-      expect(fieldContainer).to.contain(newArticle[field])
-    })
-  }
-
   function editField(field, content) {
-    cy.get(queryToField(field))
+    queryToField(field)
       .focus()
       .clear()
       .type(content)
   }
 
-  function queryToElementWith(containerType, containerParams){
-    const containerName = UI_NAMES[containerType].with(containerParams)
-    return queryElementByProp({
-      type: 'input',
-      prop: 'name',
-      value: containerName
-    })
-  }
-
   function queryToField(field) {
-    return queryToElementWith('RESOURCE_VIEW_CONTAINER_FIELD', {
-      resourceName: 'articles',
-      view: 'edit',
-      field
+    return cy.getElement({
+      constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD,
+      constantParams: { resourceName, view, field },
+      elementType: 'input',
+      elementProp: 'name'
     })
   }
 
   function articlesEditViewShouldContainsTheField(field, expectedContent) {
-    cy.get(queryToField(field)).should('have.value', expectedContent)
+    queryToField(field).should('have.value', expectedContent)
   }
 })
