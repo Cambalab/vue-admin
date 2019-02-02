@@ -39,10 +39,10 @@
           </div>
         </v-card-title>
         <div>
-          <v-form>
+          <v-form v-if="entity">
             <v-container>
               <v-layout column>
-                <v-flex xs12 v-if="entity">
+                <v-flex xs12>
                   <v-text-field
                     :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
                       resourceName,
@@ -128,11 +128,12 @@ export default {
     }
   },
   created() {
-    // With getEntity you can have your 'resourceName' entity initialised.
+    // With fetchEntity you can have your 'resourceName' entity initialised.
     this.va.fetchEntity()
   },
   computed: {
     entity() {
+      // getEntity gets initialised data from the store
       return this.va.getEntity()
     }
   },
