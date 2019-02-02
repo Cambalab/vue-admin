@@ -39,7 +39,7 @@
           </div>
         </v-card-title>
         <div>
-          <v-form>
+          <v-form v-if="entity">
             <v-container>
               <v-layout column>
                 <v-flex xs12>
@@ -128,8 +128,14 @@ export default {
     }
   },
   created() {
-    // With getEntity you can have your 'resourceName' entity initialised.
-    this.entity = this.va.getEntity()
+    // With fetchEntity you can have your 'resourceName' entity initialised.
+    this.va.fetchEntity()
+  },
+  computed: {
+    entity() {
+      // getEntity gets initialised data from the store
+      return this.va.getEntity()
+    }
   },
   methods: {
     storeValue(value, resourceKey) {
