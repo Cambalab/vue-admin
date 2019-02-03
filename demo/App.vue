@@ -1,7 +1,7 @@
 <template>
   <Admin>
     <Resource name="articles" :resourceIdName="resourceIdName" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
-      <View slot="list"   :component="ListArticles" />
+      <View slot="list"   :component="ListArticles" :whitelist="['admin', 'developer']"/>
       <View slot="show"   :component="ShowArticles" />
       <View slot="create" :component="CreateArticles" />
       <View slot="edit"   :component="EditArticles" />
@@ -29,10 +29,10 @@ import ShowArticles from './components/articles/ShowArticles'
 import CreateArticles from './components/articles/CreateArticles'
 import EditArticles from './components/articles/EditArticles'
 
-import ListMagazines from './components/ListMagazines'
-import ShowMagazines from './components/ShowMagazines'
-import CreateMagazines from './components/CreateMagazines'
-import EditMagazines from './components/EditMagazines'
+import ListMagazines from './components/magazines/ListMagazines'
+import ShowMagazines from './components/magazines/ShowMagazines'
+import CreateMagazines from './components/magazines/CreateMagazines'
+import EditMagazines from './components/magazines/EditMagazines'
 
 // Articles Views as Array
 
