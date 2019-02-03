@@ -1,21 +1,17 @@
 <template>
   <Admin>
     <Resource name="articles" :resourceIdName="resourceIdName" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
-      <View slot="list"   :component="ListArticles" :whitelist="['admin', 'developer']"/>
+      <View slot="list"   :component="ListArticles" />
       <View slot="show"   :component="ShowArticles" />
       <View slot="create" :component="CreateArticles" />
       <View slot="edit"   :component="EditArticles" />
     </Resource>
-    <Resource
-      name="magazines"
-      :list="ListMagazines"
-      :show="ShowMagazines"
-      :create="CreateMagazines"
-      :edit="EditMagazines"
-      :resourceIdName="resourceIdName"
-      :apiUrl="magazinesApiUrl"
-      :redirect="magazinesRedirect"
-    />
+    <Resource name="magazines" :resourceIdName="resourceIdName" :apiUrl="magazinesApiUrl" :redirect="magazinesRedirect">
+      <View slot="list"   :component="ListMagazines" />
+      <View slot="show"   :component="ShowMagazines" />
+      <View slot="create" :component="CreateMagazines" />
+      <View slot="edit"   :component="EditMagazines" />
+    </Resource>
   </Admin>
 </template>
 
