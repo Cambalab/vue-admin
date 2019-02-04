@@ -65,12 +65,8 @@ export const InitEntityUtils = ({
      * @return {Object} A button element.
      */
     getSubmitButton: (args = {}) => {
-      const buttonConstants = {
-        create: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON,
-        edit: UI_NAMES.RESOURCE_EDIT_SUBMIT_BUTTON
-      }
       const _args = {
-        constant: buttonConstants[args.submitType],
+        constant: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON,
         constantParams: {
           resourceName,
           view

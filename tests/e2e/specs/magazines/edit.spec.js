@@ -5,33 +5,30 @@ const { InitEntityUtils } = require('../../lib/commands')
 describe('Magazines: Edit Action Test', () => {
   const resourceName = 'magazines'
   const view = 'edit'
-  let magazine
-  const updatedMagazine = Factory.createMagazine()
+  const magazine = {}
+  const newMagazine = Factory.createMagazine()
   const utils = InitEntityUtils({
     resourceName,
     view
   })
 
-  before('Initialises the server', () => {
-    const routes = [{ name: 'list' }]
-    cy.InitServer({ resourceName, routes })
+  before('Search a magazine to edit', () => {
+    cy.fixture(resourceName).then(fixture => {
+      Object.assign(magazine, fixture[0])
+      newMagazine.id = magazine.id
+    })
   })
 
-  before('Visits the magazines list', () => {
-    // FIXME: Workaround until we can access the edit route without going to /{resourceName}/
-    cy.visit(`/#/${resourceName}/`)
-    cy.wait(`@${resourceName}/list`).then(xmlHttpRequest => {
-      // Takes the first element of the list to edit
-      magazine = xmlHttpRequest.response.body[0]
-      // Sets the original id to the new magazine to redirect on edition submit
-      updatedMagazine.id = magazine.id
-    })
+  before('Initialises the mocked server and visits the edit url', () => {
+    const response = magazine
+    const routes = [{ name: 'edit', response }, { name: 'show', response }]
+
+    cy.InitServer({ resourceName, routes })
+    cy.visit(`/#/${resourceName}/edit/${magazine.id}`)
     cy.server({ enable: false })
   })
 
   it('Visits the magazines edit url and the path should be magazines/edit', () => {
-    // Exercise: visits the edit view
-    cy.visit(`/#/${resourceName}/${view}/${magazine.id}`)
     // Assertion: the url should match the edit view url
     cy.url().should('include', `${resourceName}/${view}`)
   })
@@ -47,9 +44,9 @@ describe('Magazines: Edit Action Test', () => {
     // Setup: Gets the 'name' input element
     const input = utils.getInputBy({ field: 'name' })
     // Exercise: Clears the input and types in the magazine name
-    input.clear().type(updatedMagazine.name)
+    input.clear().type(newMagazine.name)
     // Assertion: the input contains the magazine issue content
-    input.should('have.value', updatedMagazine.name)
+    input.should('have.value', newMagazine.name)
   })
 
   it('The {Issue} input should match the created magazine {issue}', () => {
@@ -64,9 +61,9 @@ describe('Magazines: Edit Action Test', () => {
     const input = utils.getInputBy({ field: 'issue' })
     // Clears the input and types in the magazine issue
     input.focus()
-    input.clear().type(updatedMagazine.issue)
+    input.clear().type(newMagazine.issue)
     // Assertion: the input contains the magazine issue content
-    input.should('have.value', updatedMagazine.issue)
+    input.should('have.value', newMagazine.issue)
   })
 
   it('The {Publisher} input should match the created magazine {publisher}', () => {
@@ -80,13 +77,16 @@ describe('Magazines: Edit Action Test', () => {
     // Setup: Gets the 'publisher' input element
     const input = utils.getInputBy({ field: 'publisher' })
     // Clears the input and types in the magazine publisher
-    input.clear().type(updatedMagazine.publisher)
+    input.clear().type(newMagazine.publisher)
     // Assertion: the input contains the magazine publisher content
-    input.should('have.value', updatedMagazine.publisher)
+    input.should('have.value', newMagazine.publisher)
   })
 
   it('A magazine is updated when the user submits the form', () => {
-    const routes = [{ name: view, response: updatedMagazine }]
+    const routes = [
+      { name: view, response: newMagazine },
+      { name: 'show', response: newMagazine }
+    ]
     cy.InitServer({ resourceName, routes })
     // Setup: Gets the submit button element
     const button = utils.getSubmitButton({ submitType: 'edit' })
@@ -94,11 +94,12 @@ describe('Magazines: Edit Action Test', () => {
     button.click()
     // Waits for API response
     cy.wait(`@${resourceName}/update`).then(xmlHttpRequest => {
-      const _updatedMagazine = xmlHttpRequest.response.body
+      const _newMagazine = xmlHttpRequest.response.body
       // Assertion: The updated magazine is equal to the setup magazine
-      expect(_updatedMagazine).to.deep.equal(updatedMagazine)
+      expect(_newMagazine).to.deep.equal(newMagazine)
       // Assertion: The view is redirected to magazines/show
-      cy.url().should('include', `/${resourceName}`)
+      cy.url().should('include', `/${resourceName}/show/${_newMagazine.id}`)
     })
+    cy.server({ enable: false })
   })
 })
