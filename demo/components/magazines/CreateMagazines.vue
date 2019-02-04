@@ -77,7 +77,7 @@
         </div>
         <v-card-actions>
           <v-btn
-            :name="UI_NAMES.RESOURCE_CREATE_SUBMIT_BUTTON.with({
+            :name="UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
               resourceName,
               view
             })"
