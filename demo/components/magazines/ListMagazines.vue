@@ -83,7 +83,7 @@
 
 <script>
   import UI_NAMES from '@constants/ui.element.names'
-  import { rowsPerPage } from '../constants'
+  import { rowsPerPage } from '../../constants'
 
   export default {
     name: 'ListMagazines',

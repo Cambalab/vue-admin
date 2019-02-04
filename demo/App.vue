@@ -6,16 +6,12 @@
       <View slot="create" :component="CreateArticles" />
       <View slot="edit"   :component="EditArticles" />
     </Resource>
-    <Resource
-      name="magazines"
-      :list="ListMagazines"
-      :show="ShowMagazines"
-      :create="CreateMagazines"
-      :edit="EditMagazines"
-      :resourceIdName="resourceIdName"
-      :apiUrl="magazinesApiUrl"
-      :redirect="magazinesRedirect"
-    />
+    <Resource name="magazines" :resourceIdName="resourceIdName" :apiUrl="magazinesApiUrl" :redirect="magazinesRedirect">
+      <View slot="list"   :component="ListMagazines" />
+      <View slot="show"   :component="ShowMagazines" />
+      <View slot="create" :component="CreateMagazines" />
+      <View slot="edit"   :component="EditMagazines" />
+    </Resource>
   </Admin>
 </template>
 
@@ -29,10 +25,10 @@ import ShowArticles from './components/articles/ShowArticles'
 import CreateArticles from './components/articles/CreateArticles'
 import EditArticles from './components/articles/EditArticles'
 
-import ListMagazines from './components/ListMagazines'
-import ShowMagazines from './components/ShowMagazines'
-import CreateMagazines from './components/CreateMagazines'
-import EditMagazines from './components/EditMagazines'
+import ListMagazines from './components/magazines/ListMagazines'
+import ShowMagazines from './components/magazines/ShowMagazines'
+import CreateMagazines from './components/magazines/CreateMagazines'
+import EditMagazines from './components/magazines/EditMagazines'
 
 // Articles Views as Array
 
