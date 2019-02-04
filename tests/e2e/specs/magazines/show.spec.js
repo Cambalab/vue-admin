@@ -3,33 +3,31 @@ const { InitEntityUtils } = require('../../lib/commands')
 describe('Magazines: Show Action Test', () => {
   const resourceName = 'magazines'
   const view = 'show'
-  let magazine
+  const magazine = {}
   const utils = InitEntityUtils({
     resourceName,
     view
   })
 
+  before('Search a magazine to show', () => {
+    cy.fixture(resourceName).then(fixture => {
+      // Takes the first element of the fixture to use as subject
+      Object.assign(magazine, fixture[0])
+    })
+  })
+
   before('Initialises the server', () => {
-    // Inits the server with a stubbed list to fetch all magazines
-    const routes = [ { name: 'list' } ]
+    // Inits the server with a stubbed get endpoint
+    const routes = [ { name: view, response: magazine } ]
     cy.InitServer({ resourceName, routes })
   })
 
-  before('Visits the magazines list', () => {
-    // FIXME: Workaround until we fix the show path push when the store is empty
-    cy.visit(`/#/${resourceName}/`)
-    cy.wait(`@${resourceName}/list`).then(xmlHttpRequest => {
-      // Takes the first element of the list to show
-      magazine = xmlHttpRequest.response.body[0]
-    })
-    cy.server({ enable: false })
-  })
-
-  it('Visits the magazines show url and the path should be magazines/show', () => {
+  it('Visits the magazines show', () => {
     // Exercise: visits the show view
     cy.visit(`/#/${resourceName}/${view}/${magazine.id}`)
+    cy.server({ enable: false })
     // Assertion: the url should match the show view url
-    cy.url().should('include', `${resourceName}/${view}`)
+    cy.url().should('include', `${resourceName}/${view}/${magazine.id}`)
   })
 
   it('The {Name} input should match the created magazine {name}', () => {

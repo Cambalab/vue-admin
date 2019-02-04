@@ -8,9 +8,9 @@
         />
         <v-card-title primary-title>
           <div>
-            <h3 class="headline mb-2">This is a Custom Show Form</h3>
+            <h3 class="headline mb-2">This is a Custom Create Form</h3>
             <p>
-              Although we provide default components for Show views, Vue Admin
+              Although we provide default components for Create views, Vue Admin
               ships with a <i>kind of injected</i> set of functions for those
               components declared in <b>Resource</b> as a view, that can be used
               for updating your resource entity and submitting it to your api.
@@ -49,8 +49,7 @@
                       view,
                       field: 'name'
                     })"
-                    v-model="entity.name"
-                    disabled
+                    @input="storeValue($event, 'name')"
                     label="Name"
                   />
                   <v-text-field
@@ -59,8 +58,7 @@
                       view,
                       field: 'issue'
                     })"
-                    v-model="entity.issue"
-                    disabled
+                    @input="storeValue($event, 'issue')"
                     label="Issue"
                   />
                 <v-text-field
@@ -69,8 +67,7 @@
                     view,
                     field: 'publisher'
                   })"
-                  v-model="entity.publisher"
-                  disabled
+                  @input="storeValue($event, 'publisher')"
                   label="Publisher"
                 />
                 </v-flex>
@@ -78,6 +75,19 @@
             </v-container>
           </v-form>
         </div>
+        <v-card-actions>
+          <v-btn
+            :name="UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
+              resourceName,
+              view
+            })"
+            flat
+            color="orange"
+            @click="submit"
+          >
+            Create
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-flex>
   </v-layout>
@@ -97,7 +107,7 @@
 import UI_NAMES from '@constants/ui.element.names'
 
 export default {
-  name: 'ShowMagazines',
+  name: 'CreateMagazines',
   props: {
     // This prop will be assigned by Vue Admin for you to use the functions
     // shown below.
@@ -110,14 +120,23 @@ export default {
     // This is only needed for e2e demo tests
     return {
       resourceName: 'magazines',
-      view: 'show',
+      view: 'create',
       UI_NAMES
     }
   },
-  created() {
-    // With fetchEntity you can have your 'resourceName' entity initialised.
-    this.entity = this.va.fetchEntity()
-  },
+  methods: {
+    storeValue(value, resourceKey) {
+      // The updateEntity method receives a key of your resource object and a
+      // value to update it's state in the store. At the moment you will have to
+      // specify the key name to be modified when using this method.
+      this.va.updateEntity({ resourceKey, value })
+    },
+    submit() {
+      // Use this function when your 'magazines' entity is ready to be sent to
+      // your apiUrl
+      this.va.submitEntity()
+    }
+  }
 };
 
 </script>

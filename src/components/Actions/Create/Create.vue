@@ -15,8 +15,7 @@
               :key="key(label(field))"
               :is="type(field.type)"
               v-bind="args(field)"
-              :value="resource[label(field)]"
-              @change="saveValue($event, label(field))">
+              @change="storeValue($event, label(field))">
             </component>
           </v-flex>
           <v-flex xs12>
@@ -34,11 +33,10 @@
 </template>
 
 <script>
-import UI_CONTENT from '../../../constants/ui.content.default'
-import UI_NAMES from '../../../constants/ui.element.names'
+import UI_CONTENT from '@constants/ui.content.default'
+import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents"
-import Router from '../../../router'
 
 export default {
   name: "Create",
@@ -47,30 +45,27 @@ export default {
     TextField: TextField
   },
   props: {
-    name: {
+    resourceName: {
       type: String,
-      default: null
+      require: true
     },
     fields: {
-      type: Array
+      type: Array,
+      required: true
     },
-    redirect: {
+    va: {
       type: Object,
-      default: () => ({
-        idField: 'id',
-        view: 'show'
-      })
-    },
+      required: true
+    }
   },
   data() {
     return {
-      resource: {},
-      resourceName: this.name,
       view: 'create',
       UI_CONTENT,
       UI_NAMES
     }
   },
+
   computed: {
     ...mapState([
       "route" // vuex-router-sync
@@ -78,26 +73,12 @@ export default {
   },
 
   methods: {
-    saveValue(newValue, fieldName) {
-      this.resource[fieldName] = newValue;
+    storeValue(value, resourceKey) {
+      this.va.updateEntity({ resourceKey, value })
     },
 
     submit() {
-      const resourceName = this.name + "/create";
-      // TODO: The then, catch could possibly be moved to the store using vuex-crud callbacks. Read #34 for docs - @sgobotta
-      this.$store.dispatch(resourceName, { data: this.resource })
-        .then((res) => {
-          const { status } = res
-          if ([200, 201].indexOf(status) !== -1) {
-            // FIXME: looking for 'data' in res could cause conflicts depending on how the user api responds - @sgobotta
-            Router.redirect({ router: this.$router, resource: this.name, view: this.redirect.view, id: res.data[this.redirect.idField] })
-            return res
-          }
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error(err)
-        })
+      this.va.submitEntity()
     },
 
     type(type) {
@@ -105,7 +86,7 @@ export default {
     },
 
     key(label) {
-      return `${this.name}_${label}`
+      return `${this.resourceName}_${label}`
     },
 
     label(field) {

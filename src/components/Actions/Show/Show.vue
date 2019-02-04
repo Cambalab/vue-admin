@@ -3,11 +3,11 @@
     <div class="text-xs-center d-flex right" :name="`${UI_NAMES.RESOURCE_VIEW_ACTIONS_CONTAINER.with({ resourceName, view })}`">
         <EditButton
           :resourceId="$route.params.id"
-          :resourceName="name">
+          :resourceName="resourceName">
         </EditButton>
         <Delete
           :resourceId="$route.params.id"
-          :resourceName="name">
+          :resourceName="resourceName">
         </Delete>
     </div>
     <v-card-title primary-title :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`">
@@ -31,8 +31,8 @@
 
 
 <script>
-import UI_CONTENT from '../../../constants/ui.content.default'
-import UI_NAMES from '../../../constants/ui.element.names'
+import UI_CONTENT from '@constants/ui.content.default'
+import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents"
 import { EditButton, Delete } from "../../Actions";
@@ -41,18 +41,22 @@ export default {
   name: "Show",
 
   props: {
-    name: {
+    resourceName: {
       type: String,
-      default: null
+      required: true
     },
     fields: {
-      type: Array
+      type: Array,
+      required: true
+    },
+    va: {
+      type: Object,
+      required: true
     }
   },
 
   data() {
     return {
-      resourceName: this.name,
       view: 'show',
       UI_CONTENT,
       UI_NAMES
@@ -61,8 +65,7 @@ export default {
 
   computed: {
     resourceShow: function() {
-      const resourceName = this.name + "/byId";
-      return this.$store.getters[resourceName](this.$route.params.id);
+      return this.va.getEntity()
     },
 
     ...mapState([
@@ -78,13 +81,8 @@ export default {
   },
 
   methods: {
-    fetchResource: function() {
-      const resourceName = this.name + "/fetchSingle";
-      return this.$store.dispatch(resourceName, { id: this.$route.params.id });
-    },
-
     fetchData() {
-      return this.fetchResource();
+      return this.va.fetchEntity()
     },
 
     type(type) {
@@ -92,7 +90,7 @@ export default {
     },
 
     key(label) {
-      return `${this.name}_${label}`
+      return `${this.resourceName}_${label}`
     },
 
     label(field) {

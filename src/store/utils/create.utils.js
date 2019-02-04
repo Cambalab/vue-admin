@@ -1,4 +1,4 @@
-import { submitEntity, updateEntity, getEntity } from './common.utils'
+import { submitEntity, updateEntity, getEntityForm } from './common.utils'
 
 /**
  * Create View Utils - A function used to create utilities
@@ -23,14 +23,14 @@ export default ({
 }) => {
   return {
     /**
-     * getEntity - Gets the current 'resourceName' entity. The value does not
+     * getEntityForm - Gets the current 'resourceName' entity. The value does not
      * exist until a user inputs data using 'updateEntity'.
      *
      * @return {Object} a 'resourceName' object with updated data from the form.
      */
-    getEntity() {
+    getEntityForm() {
       const formType = 'createForm'
-      return getEntity({ store, resourceName, formType })
+      return getEntityForm({ store, resourceName, formType })
     },
 
     /**
@@ -58,7 +58,7 @@ export default ({
      */
     submitEntity() {
       const actionType = 'create'
-      const actionTypeParams = { data : this.getEntity() }
+      const actionTypeParams = { data : this.getEntityForm() }
       submitEntity({
         resourceName,
         actionType,

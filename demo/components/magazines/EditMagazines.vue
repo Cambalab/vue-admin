@@ -8,9 +8,9 @@
         />
         <v-card-title primary-title>
           <div>
-            <h3 class="headline mb-2">This is a Custom Create Form</h3>
+            <h3 class="headline mb-2">This is a Custom Edit Form</h3>
             <p>
-              Although we provide default components for Create views, Vue Admin
+              Although we provide default components for Edit views, Vue Admin
               ships with a <i>kind of injected</i> set of functions for those
               components declared in <b>Resource</b> as a view, that can be used
               for updating your resource entity and submitting it to your api.
@@ -39,7 +39,7 @@
           </div>
         </v-card-title>
         <div>
-          <v-form>
+          <v-form v-if="entity">
             <v-container>
               <v-layout column>
                 <v-flex xs12>
@@ -50,6 +50,7 @@
                       field: 'name'
                     })"
                     @input="storeValue($event, 'name')"
+                    v-model="entity.name"
                     label="Name"
                   />
                   <v-text-field
@@ -59,6 +60,7 @@
                       field: 'issue'
                     })"
                     @input="storeValue($event, 'issue')"
+                    v-model="entity.issue"
                     label="Issue"
                   />
                 <v-text-field
@@ -68,6 +70,7 @@
                     field: 'publisher'
                   })"
                   @input="storeValue($event, 'publisher')"
+                  v-model="entity.publisher"
                   label="Publisher"
                 />
                 </v-flex>
@@ -85,7 +88,7 @@
             color="orange"
             @click="submit"
           >
-            Create
+            Edit
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -95,10 +98,10 @@
 <script>
 
 /**
- * This is a custom component for creating magazines using a form, with a name,
+ * This is a custom component for editing magazines using a form, with a name,
  * issue number and a publisher.
  * When passed through the Resource, this custom component is automatically
- * 'injected' with a 'va' prop used to create magazine entities.
+ * 'injected' with a 'va' prop used to edit magazine entities.
  * This prop contains getter and setter functions that must be used by your UI
  * components, such as buttons, inputs, etc.
  */
@@ -107,7 +110,7 @@
 import UI_NAMES from '@constants/ui.element.names'
 
 export default {
-  name: 'CreateMagazines',
+  name: 'EditMagazines',
   props: {
     // This prop will be assigned by Vue Admin for you to use the functions
     // shown below.
@@ -120,14 +123,17 @@ export default {
     // This is only needed for e2e demo tests
     return {
       resourceName: 'magazines',
-      view: 'create',
+      view: 'edit',
       UI_NAMES
     }
   },
+  created() {
+    // With fetchEntity you can have your 'resourceName' entity initialised.
+    this.va.fetchEntity()
+  },
   computed: {
-    entity () {
-      // We use the getEntity method in computed, so that it gets updated
-      // everytime we use updateEntity.
+    entity() {
+      // getEntity gets initialised data from the store
       return this.va.getEntity()
     }
   },

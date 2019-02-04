@@ -13,23 +13,19 @@ describe('Articles: Edit Test', () => {
   const utils = InitEntityUtils({ resourceName, view })
 
   before('Search an article to edit', () => {
-    const routes = [ { name: 'list' } ]
-    cy.InitServer({ resourceName, routes })
-    cy.visit(`/#/${resourceName}`)
-    cy.wait(`@${resourceName}/list`).then(xmlHttpRequest => {
-      Object.assign(article, xmlHttpRequest.response.body[0])
+    cy.fixture(resourceName).then(fixture => {
+      Object.assign(article, fixture[0])
       newArticle.id = article.id
     })
-    cy.server({ enable: false })
   })
 
-  before('Click in the edit button', () => {
-    cy.getElement({
-      constant: UI_NAMES.RESOURCE_EDIT_BUTTON,
-      constantParams: { resourceName , index: 0 },
-      elementType: 'button',
-      elementProp: 'name'
-    }).click()
+  before('Initialises the mocked server and visits the edit url', () => {
+    const response = article
+    const routes = [{ name: 'edit', response }, { name: 'show', response }]
+
+    cy.InitServer({ resourceName, routes })
+    cy.visit(`/#/${resourceName}/edit/${article.id}`)
+    cy.server({ enable: false })
   })
 
   it('Articles Edit should render title: Articles', () => {
@@ -64,16 +60,18 @@ describe('Articles: Edit Test', () => {
 
   it('An article is updated when the user submits the form', () => {
     const routes = [
-      {name: view, response: newArticle },
-      {name: 'show', response: newArticle }
+      { name: view, response: newArticle },
+      { name: 'show', response: newArticle }
     ]
     cy.InitServer({ resourceName, routes })
+
     const button = utils.getSubmitButton({ submitType: view })
     button.click()
+
     cy.wait(`@${resourceName}/update`).then(xmlHttpRequest => {
       const _newArticle = xmlHttpRequest.response.body
       expect(_newArticle).to.deep.equal(newArticle)
-      cy.url().should('include', `/${resourceName}`)
+      cy.url().should('include', `/${resourceName}/show/${_newArticle.id}`)
     })
     cy.server({ enable: false })
   })

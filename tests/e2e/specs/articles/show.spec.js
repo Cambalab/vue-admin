@@ -9,18 +9,22 @@ describe('Articles: Show Test', () => {
 
   before('Search an article to show', () => {
     cy.fixture(resourceName).then(fixture => {
+      // Takes the first element of the fixture to use as subject
       Object.assign(article, fixture[0])
     })
   })
 
   before('Initialises the server', () => {
+    // Inits the server with a stubbed get endpoint
     const routes = [{ name: view, response: article }]
     cy.InitServer({ resourceName, routes })
   })
 
   it('Visits the articles show', () => {
+    // Exercise: visits the show view
     cy.visit(`/#/${resourceName}/${view}/${article.id}`)
     cy.server({ enable: false })
+    // Assertion: the url should match the show view url
     cy.url().should('include', `${resourceName}/${view}/${article.id}`)
   })
 

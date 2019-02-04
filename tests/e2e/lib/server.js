@@ -76,11 +76,11 @@ export default ({
      * showRequest - A stub for GET Many requests
      */
     function showRequest({ response }) {
-      cy.route({
-        method: 'GET',
-        url: `api/${resourceName}/${response.id}`,
-        response: response
-      }).as(`${resourceName}/show/${response.id}`)
+      cy.route(
+        'GET',
+        `api/${resourceName}/${response.id}`,
+        response
+      ).as(`${resourceName}/show/${response.id}`)
     }
 
     /**

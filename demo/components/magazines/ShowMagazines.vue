@@ -8,9 +8,9 @@
         />
         <v-card-title primary-title>
           <div>
-            <h3 class="headline mb-2">This is a Custom Edit Form</h3>
+            <h3 class="headline mb-2">This is a Custom Show Form</h3>
             <p>
-              Although we provide default components for Edit views, Vue Admin
+              Although we provide default components for Show views, Vue Admin
               ships with a <i>kind of injected</i> set of functions for those
               components declared in <b>Resource</b> as a view, that can be used
               for updating your resource entity and submitting it to your api.
@@ -39,7 +39,7 @@
           </div>
         </v-card-title>
         <div>
-          <v-form>
+          <v-form v-if="entity">
             <v-container>
               <v-layout column>
                 <v-flex xs12>
@@ -49,8 +49,8 @@
                       view,
                       field: 'name'
                     })"
-                    @input="storeValue($event, 'name')"
                     v-model="entity.name"
+                    disabled
                     label="Name"
                   />
                   <v-text-field
@@ -59,8 +59,8 @@
                       view,
                       field: 'issue'
                     })"
-                    @input="storeValue($event, 'issue')"
                     v-model="entity.issue"
+                    disabled
                     label="Issue"
                   />
                 <v-text-field
@@ -69,8 +69,8 @@
                     view,
                     field: 'publisher'
                   })"
-                  @input="storeValue($event, 'publisher')"
                   v-model="entity.publisher"
+                  disabled
                   label="Publisher"
                 />
                 </v-flex>
@@ -78,19 +78,6 @@
             </v-container>
           </v-form>
         </div>
-        <v-card-actions>
-          <v-btn
-            :name="UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
-              resourceName,
-              view
-            })"
-            flat
-            color="orange"
-            @click="submit"
-          >
-            Edit
-          </v-btn>
-        </v-card-actions>
       </v-card>
     </v-flex>
   </v-layout>
@@ -98,10 +85,10 @@
 <script>
 
 /**
- * This is a custom component for editing magazines using a form, with a name,
+ * This is a custom component for creating magazines using a form, with a name,
  * issue number and a publisher.
  * When passed through the Resource, this custom component is automatically
- * 'injected' with a 'va' prop used to edit magazine entities.
+ * 'injected' with a 'va' prop used to create magazine entities.
  * This prop contains getter and setter functions that must be used by your UI
  * components, such as buttons, inputs, etc.
  */
@@ -110,7 +97,7 @@
 import UI_NAMES from '@constants/ui.element.names'
 
 export default {
-  name: 'EditMagazines',
+  name: 'ShowMagazines',
   props: {
     // This prop will be assigned by Vue Admin for you to use the functions
     // shown below.
@@ -123,25 +110,18 @@ export default {
     // This is only needed for e2e demo tests
     return {
       resourceName: 'magazines',
-      view: 'edit',
+      view: 'show',
       UI_NAMES
     }
   },
   created() {
     // With fetchEntity you can have your 'resourceName' entity initialised.
-    this.entity = this.va.fetchEntity()
+    this.va.fetchEntity()
   },
-  methods: {
-    storeValue(value, resourceKey) {
-      // The updateEntity method receives a key of your resource object and a
-      // value to update it's state in the store. At the moment you will have to
-      // specify the key name to be modified when using this method.
-      this.va.updateEntity({ resourceKey, value })
-    },
-    submit() {
-      // Use this function when your 'magazines' entity is ready to be sent to
-      // your apiUrl
-      this.va.submitEntity()
+  computed: {
+    entity() {
+      // getEntity gets initialised data from the store
+      return this.va.getEntity()
     }
   }
 };
