@@ -22,7 +22,7 @@ describe('Magazines: Show Action Test', () => {
     cy.InitServer({ resourceName, routes })
   })
 
-  it('Visits the magazines show', () => {
+  it('Visits the magazines show url and the path should be magazines/show/:id', () => {
     // Exercise: visits the show view
     cy.visit(`/#/${resourceName}/${view}/${magazine.id}`)
     cy.server({ enable: false })

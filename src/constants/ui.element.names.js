@@ -55,14 +55,28 @@ export default {
       : `${resourceName}-${view}-element-${field}`
     }
   },
-  // The form submit buttons
-  RESOURCE_VIEW_SUBMIT_BUTTON: {
-    with: ({ resourceName, view }) => `${resourceName}-${view}-submit-button`
-  },
 
-  RESOURCE_DELETE_BUTTON: {
-    with: ({ resourceName }) => {
-      return `${resourceName}-delete-button`
-    }
-  }
+  /**
+   * Create
+   */
+
+   RESOURCE_VIEW_SUBMIT_BUTTON: {
+     with: ({ resourceName, view }) => `${resourceName}-${view}-submit-button`
+   },
+
+  /**
+   * Edit
+   */
+
+   RESOURCE_EDIT_SUBMIT_BUTTON: {
+     with: ({ resourceName, view }) => `${resourceName}-${view}-edit-button`
+   },
+
+   RESOURCE_DELETE_BUTTON: {
+     with: ({ resourceName, index }) => {
+       return index !== undefined
+       ? `${resourceName}-delete-button-${index}`
+       : `${resourceName}-delete-button`
+     }
+   }
 }
