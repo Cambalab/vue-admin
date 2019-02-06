@@ -65,8 +65,7 @@
           <EditButton
             :resourceId="props.item[resourceIdName]"
             :resourceName="resourceName"
-            :index="props.index"
-            >
+            :index="props.index">
           </EditButton>
         </td>
         <td>
@@ -83,11 +82,9 @@
 </template>
 
 <script>
-
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import UI_ELEMENTS from '@constants/ui.elements.props'
-
 import { Input, TextField } from "../../UiComponents";
 import { EditButton, Delete } from "../../Actions";
 

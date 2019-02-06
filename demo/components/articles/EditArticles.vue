@@ -1,5 +1,6 @@
 <template>
   <Edit>
+    <input source="id" placeHolder="Id" />
     <input source="title" placeHolder="Title" />
     <input source="content" placeHolder="Content" />
   </Edit>
