@@ -12,6 +12,14 @@ export default {
   MAIN_TOOLBAR_USER_AVATAR_NAME: 'Juan',
 
   /**
+   * Auth component
+   */
+  AUTH_CONTAINER_TITLE: 'Sign In',
+  AUTH_LABEL_USERNAME: 'E-mail',
+  AUTH_LABEL_PASSWORD: 'Password',
+  AUTH_LABEL_SIGN_IN_BUTTON: 'Sign In',
+
+  /**
    * Shared content inside List, Show, Create, Edit components
    */
 
