@@ -11,6 +11,16 @@ export default {
   },
 
   /**
+   * Auth component
+   */
+
+   AUTH_CONTAINER: 'va-login-container',
+   AUTH_CONTAINER_TITLE: 'va-login-container-title',
+   AUTH_USERNAME_INPUT: 'va-login-username',
+   AUTH_PASSWORD_INPUT: 'va-login-password',
+   AUTH_SIGN_IN_BUTTON: 'va-login-submit-button',
+
+  /**
    * List
    */
   // The whole container of a Resource List
