@@ -11,11 +11,12 @@
 </template>
 
 <script>
-import Core from "../../Core";
-import Ui from "../../Ui";
-import resource from "../../../store/resource";
-import { entities } from "../../../store/entities"
-import UI_CONTENT from '../../../constants/ui.content.default'
+import Core from "@components/Core";
+import Ui from "@components/Ui";
+import resource from "@store/resource";
+import { entities } from "@store/entities"
+import UI_CONTENT from '@constants/ui.content.default'
+import Auth from '@components/Auth'
 
 export default {
   name: "Admin",
@@ -35,6 +36,25 @@ export default {
   created() {
     this.$store.registerModule('resources', resource)
     this.$store.registerModule('entities', entities)
+  },
+  mounted: function() {
+    this.loadAuthRoutes()
+  },
+  methods: {
+    loadAuthRoutes() {
+      const routes = []
+      const route = {
+        path: '/login',
+        name: 'login',
+        component: Auth,
+        props: {}
+      }
+      routes.push(route)
+      this.$router.addRoutes(routes)
+    }
+  },
+  render() {
+    return null
   }
 };
 </script>
