@@ -71,7 +71,7 @@
     </v-toolbar>
     <main>
       <v-content>
-        <v-container fluid>
+        <v-container class="no-padding">
           <slot></slot>
         </v-container>
       </v-content>
@@ -142,5 +142,8 @@ li {
 }
 a {
   color: #42b983;
+}
+.no-padding {
+  padding: 0;
 }
 </style>
