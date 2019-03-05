@@ -1,7 +1,7 @@
 <script>
 import { List, Show, Create, Edit } from '@components/Actions'
 import createCrudModule from '@store/utils/modules'
-import createRouteBindings from './binding.utils'
+import createRouteBindings from '@router/route-bindings'
 import defaults from './defaults'
 
 export default {
