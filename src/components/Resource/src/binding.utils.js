@@ -47,11 +47,12 @@ export default ({
           }
         }
       } else {
-        // list is a Component
+        // list is an Object
+        const { component, permissions } = list
         return {
           path: resourcePath,
           name,
-          component: list,
+          component,
           props: {
             resourceName,
             hasShow,
@@ -62,6 +63,10 @@ export default ({
             va: {
               ...utils
             }
+          },
+          beforeEnter: (to, from, next) => {
+            console.log('List Permissions', permissions)
+            next()
           }
         }
       }
@@ -90,17 +95,22 @@ export default ({
           }
         }
       } else {
-        // show is a user's custom component
+        // show is an Object
+        const { component, permissions } = show
         return {
           path: `${resourcePath}/show/:id`,
           name,
-          component: show,
+          component,
           props: {
             resourceName,
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             va: {
               ...utils
             }
+          },
+          beforeEnter: (to, from, next) => {
+            console.log('Show Permissions', permissions)
+            next()
           }
         }
       }
@@ -132,17 +142,22 @@ export default ({
           }
         }
       } else {
-        // create is a user's custom component
+        // create is an Object
+        const { component, permissions } = create
         return {
           path: `${resourcePath}/create`,
           name,
-          component: create,
+          component,
           props: {
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             resourceName,
             va: {
               ...utils
             }
+          },
+          beforeEnter: (to, from, next) => {
+            console.log('Create Permissions', permissions)
+            next()
           }
         }
       }
@@ -174,17 +189,22 @@ export default ({
           }
         }
       } else {
-        // edit is a user's custom component
+        // edit is an Object
+        const { component, permissions } = edit
         return {
           path: `${resourcePath}/edit/:id`,
           name,
-          component: edit,
+          component,
           // This could be refactored into a vue mixin, check #52 - @sgobotta
           props: {
             resourceName,
             va: {
               ...utils
             }
+          },
+          beforeEnter: (to, from, next) => {
+            console.log('Edit Permissions', permissions)
+            next()
           }
         }
       }
