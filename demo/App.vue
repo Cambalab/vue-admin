@@ -1,16 +1,16 @@
 <template>
   <Admin>
     <Resource name="articles" :resourceIdName="resourceIdName" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
-      <View slot="list"   :component="ListArticles" />
-      <View slot="show"   :component="ShowArticles" />
-      <View slot="create" :component="CreateArticles" />
-      <View slot="edit"   :component="EditArticles" />
+      <View slot="list"   :component="ListArticles" :permissions="['admin']" />
+      <View slot="show"   :component="ShowArticles" :permissions="['admin']" />
+      <View slot="create" :component="CreateArticles" :permissions="['admin']" />
+      <View slot="edit"   :component="EditArticles" :permissions="['admin']" />
     </Resource>
     <Resource name="magazines" :resourceIdName="resourceIdName" :apiUrl="magazinesApiUrl" :redirect="magazinesRedirect">
-      <View slot="list"   :component="ListMagazines" />
-      <View slot="show"   :component="ShowMagazines" />
-      <View slot="create" :component="CreateMagazines" />
-      <View slot="edit"   :component="EditMagazines" />
+      <View slot="list"   :component="ListMagazines" :permissions="['admin']" />
+      <View slot="show"   :component="ShowMagazines" :permissions="['admin']" />
+      <View slot="create" :component="CreateMagazines" :permissions="['admin']" />
+      <View slot="edit"   :component="EditMagazines" :permissions="['admin']" />
     </Resource>
   </Admin>
 </template>
