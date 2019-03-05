@@ -4,15 +4,21 @@ import Resource from './Resource'
 export default {
   functional: true,
   render(createElement, context) {
-    const { props } = context
+    const { children, props } = context
     const slots = context.slots()
     const isEmpty = Object.keys(slots).length === 0
     // If the context has slots, we build a map with the name of the view and
     // the associated component to it
     if (!isEmpty) {
       Object.keys(slots).reduce((prevValue, nextValue) => {
+        const {
+          data: { attrs: { permissions = [] } }
+        } = children.find(c => c.data.slot === nextValue)
         return Object.assign(prevValue, {
-          [nextValue]: prevValue[nextValue][0].data.attrs.component
+          [nextValue]: {
+            component: prevValue[nextValue][0].data.attrs.component,
+            permissions
+          }
         })
       }, slots)
       Object.assign(props, slots)
