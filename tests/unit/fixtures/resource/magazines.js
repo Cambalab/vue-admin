@@ -8,7 +8,8 @@ export default {
   props: {
     name: 'magazines',
     apiUrl: 'http://localhost:8888',
-    resourceIdName: 'id',
+    resourceIdName: defaults().props.resourceIdName,
+    userPermissionsField: defaults().props.userPermissionsField,
     create: CreateMagazines,
     edit: EditMagazines,
     list: ListMagazines,
