@@ -12,11 +12,12 @@ export default {
     if (!isEmpty) {
       Object.keys(slots).reduce((prevValue, nextValue) => {
         const {
-          data: { attrs: { permissions = [] } }
+          data: { attrs: { permissions = [], isPublic = false } }
         } = children.find(c => c.data.slot === nextValue)
         return Object.assign(prevValue, {
           [nextValue]: {
             component: prevValue[nextValue][0].data.attrs.component,
+            isPublic,
             permissions
           }
         })
