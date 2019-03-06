@@ -1,16 +1,16 @@
 <template>
   <Admin>
-    <Resource name="articles" :resourceIdName="resourceIdName" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
+    <Resource name="articles" :resourceIdName="resourceIdName" :userPermissionsField="userPermissionsField" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
       <View slot="list"   :component="ListArticles" :permissions="['admin']" />
       <View slot="show"   :component="ShowArticles" :permissions="['admin']" />
       <View slot="create" :component="CreateArticles" :permissions="['admin']" />
-      <View slot="edit"   :component="EditArticles" :permissions="['admin']" />
+      <View slot="edit"   :component="EditArticles" :isPublic="true" />
     </Resource>
     <Resource name="magazines" :resourceIdName="resourceIdName" :apiUrl="magazinesApiUrl" :redirect="magazinesRedirect">
-      <View slot="list"   :component="ListMagazines" :permissions="['admin']" />
-      <View slot="show"   :component="ShowMagazines" :permissions="['admin']" />
-      <View slot="create" :component="CreateMagazines" :permissions="['admin']" />
-      <View slot="edit"   :component="EditMagazines" :permissions="['admin']" />
+      <View slot="list"   :component="ListMagazines" :isPublic="true" />
+      <View slot="show"   :component="ShowMagazines" :isPublic="true" />
+      <View slot="create" :component="CreateMagazines" :isPublic="true" />
+      <View slot="edit"   :component="EditMagazines" :isPublic="true" />
     </Resource>
   </Admin>
 </template>
@@ -79,6 +79,9 @@ const magazinesRedirect = articlesRedirect
 // The name of the id attribute
 const resourceIdName = 'id'
 
+// The name of the permissions field
+const userPermissionsField = 'permissions'
+
 // Use case of a parsed response using feathers
 // This has to be done because every server client returns different responses. - sgobotta
 //
@@ -109,6 +112,7 @@ export default {
   data() {
     return {
       resourceIdName,
+      userPermissionsField,
       // Articles Views as Array
       articlesApiUrl,
       magazinesApiUrl,
