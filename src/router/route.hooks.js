@@ -1,0 +1,64 @@
+
+
+/**
+ * Create Route Hooks - A function used to create route hooks
+ *
+ * @param {Boolean}   isPublic               Indicates whether or not a route needs authentication to be visited
+ * @param {Array}     permissions            An array of route permissions as Strings
+ * @param {String}    userPermissionsField   The name of the permissions field in a user object
+ *
+ * @return {type} An object with hook functions
+ */
+export default({
+  isPublic,
+  permissions,
+  userPermissionsField
+}) => {
+  const requiresAuth = !isPublic
+
+  const beforeEnter = (to, from, next) => {
+    if (requiresAuth) {
+      // It's a private route
+
+      // TODO: Gets token from localStorage or authorise in the backend
+      const token = localStorage.getItem('jwt')
+      if (token === null) {
+        // User is not authenticated
+        next({
+            path: '/login',
+            params: { nextUrl: to.fullPath }
+        })
+      } else {
+        // User is authenticated
+
+        if (permissions.length > 0) {
+          // Route has permissions restriction
+
+          // TODO: Gets user from the store
+          const user = { userPermissions: [] }
+          const { userPermissions } = user
+          const userHasPermissions = permissions.some(permission => userPermissions.indexOf(permission) > -1)
+          if (userHasPermissions) {
+            // User is authenticated and has route permissions
+            next()
+          } else {
+            // User is authenticated but does not have route permissions
+            next({
+              path: '/'
+            })
+          }
+        } else {
+          // Route has no permissions restriction
+          next()
+        }
+      }
+    } else {
+      // It's a public route
+      next()
+    }
+  }
+
+  return {
+    beforeEnter
+  }
+}

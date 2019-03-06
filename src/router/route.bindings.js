@@ -2,7 +2,24 @@ import listUtils from '@store/utils/list.utils'
 import showUtils from '@store/utils/show.utils'
 import createUtils from '@store/utils/create.utils'
 import editUtils from '@store/utils/edit.utils'
+import createRouteHooks from './route.hooks'
 
+/**
+ * Create Route Bindings - A function used to bind components to routes.
+ *
+ * @param {Object}   list                   The component for the list route
+ * @param {Object}   show                   The component for the show route
+ * @param {Object}   create                 The component for the create route
+ * @param {Object}   edit                   The component for the edit route
+ * @param {String}   resourceName           The name of a resource
+ * @param {String}   resourceIdName         The name of the id field
+ * @param {String}   userPermissionsField   The name of the permissions field
+ * @param {Object}   redirection            An object with redirection route names
+ * @param {Object}   router                 The Router object
+ * @param {Object}   parseResponses         An object with a parseSingle and parseList functions
+ *
+ * @return {Object} An object with binding functions
+ */
 export default ({
   list,
   show,
@@ -10,11 +27,12 @@ export default ({
   edit,
   resourceName,
   resourceIdName,
+  userPermissionsField,
   redirection,
   router,
-  store,
   parseResponses
 }) => {
+  const store = router.app.$store
   const hasShow = !!show
   const hasCreate = !!create
   const hasEdit = !!edit
@@ -48,7 +66,7 @@ export default ({
         }
       } else {
         // list is an Object
-        const { component, permissions } = list
+        const { component, isPublic, permissions } = list
         return {
           path: resourcePath,
           name,
@@ -64,9 +82,9 @@ export default ({
               ...utils
             }
           },
-          beforeEnter: (to, from, next) => {
-            console.log('List Permissions', permissions)
-            next()
+          meta: {
+            isPublic,
+            permissions
           }
         }
       }
@@ -96,7 +114,7 @@ export default ({
         }
       } else {
         // show is an Object
-        const { component, permissions } = show
+        const { component, isPublic, permissions } = show
         return {
           path: `${resourcePath}/show/:id`,
           name,
@@ -108,9 +126,9 @@ export default ({
               ...utils
             }
           },
-          beforeEnter: (to, from, next) => {
-            console.log('Show Permissions', permissions)
-            next()
+          meta: {
+            isPublic,
+            permissions
           }
         }
       }
@@ -143,7 +161,7 @@ export default ({
         }
       } else {
         // create is an Object
-        const { component, permissions } = create
+        const { component, isPublic, permissions } = create
         return {
           path: `${resourcePath}/create`,
           name,
@@ -155,9 +173,9 @@ export default ({
               ...utils
             }
           },
-          beforeEnter: (to, from, next) => {
-            console.log('Create Permissions', permissions)
-            next()
+          meta: {
+            isPublic,
+            permissions
           }
         }
       }
@@ -190,7 +208,7 @@ export default ({
         }
       } else {
         // edit is an Object
-        const { component, permissions } = edit
+        const { component, isPublic, permissions } = edit
         return {
           path: `${resourcePath}/edit/:id`,
           name,
@@ -202,9 +220,9 @@ export default ({
               ...utils
             }
           },
-          beforeEnter: (to, from, next) => {
-            console.log('Edit Permissions', permissions)
-            next()
+          meta: {
+            isPublic,
+            permissions
           }
         }
       }
