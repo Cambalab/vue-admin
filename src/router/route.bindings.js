@@ -2,7 +2,24 @@ import listUtils from '@store/utils/list.utils'
 import showUtils from '@store/utils/show.utils'
 import createUtils from '@store/utils/create.utils'
 import editUtils from '@store/utils/edit.utils'
+import createRouteHooks from './route.hooks'
 
+/**
+ * Create Route Bindings - A function used to bind components to routes.
+ *
+ * @param {Object}   list                   The component for the list route
+ * @param {Object}   show                   The component for the show route
+ * @param {Object}   create                 The component for the create route
+ * @param {Object}   edit                   The component for the edit route
+ * @param {String}   resourceName           The name of a resource
+ * @param {String}   resourceIdName         The name of the id field
+ * @param {String}   userPermissionsField   The name of the permissions field
+ * @param {Object}   redirection            An object with redirection route names
+ * @param {Object}   router                 The Router object
+ * @param {Object}   parseResponses         An object with a parseSingle and parseList functions
+ *
+ * @return {Object} An object with binding functions
+ */
 export default ({
   list,
   show,
@@ -10,11 +27,12 @@ export default ({
   edit,
   resourceName,
   resourceIdName,
+  userPermissionsField,
   redirection,
   router,
-  store,
   parseResponses
 }) => {
+  const store = router.app.$store
   const hasShow = !!show
   const hasCreate = !!create
   const hasEdit = !!edit
@@ -47,11 +65,12 @@ export default ({
           }
         }
       } else {
-        // list is a Component
+        // list is an Object
+        const { component, isPublic, permissions } = list
         return {
           path: resourcePath,
           name,
-          component: list,
+          component,
           props: {
             resourceName,
             hasShow,
@@ -62,6 +81,10 @@ export default ({
             va: {
               ...utils
             }
+          },
+          meta: {
+            isPublic,
+            permissions
           }
         }
       }
@@ -90,17 +113,22 @@ export default ({
           }
         }
       } else {
-        // show is a user's custom component
+        // show is an Object
+        const { component, isPublic, permissions } = show
         return {
           path: `${resourcePath}/show/:id`,
           name,
-          component: show,
+          component,
           props: {
             resourceName,
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             va: {
               ...utils
             }
+          },
+          meta: {
+            isPublic,
+            permissions
           }
         }
       }
@@ -132,17 +160,22 @@ export default ({
           }
         }
       } else {
-        // create is a user's custom component
+        // create is an Object
+        const { component, isPublic, permissions } = create
         return {
           path: `${resourcePath}/create`,
           name,
-          component: create,
+          component,
           props: {
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             resourceName,
             va: {
               ...utils
             }
+          },
+          meta: {
+            isPublic,
+            permissions
           }
         }
       }
@@ -174,17 +207,22 @@ export default ({
           }
         }
       } else {
-        // edit is a user's custom component
+        // edit is an Object
+        const { component, isPublic, permissions } = edit
         return {
           path: `${resourcePath}/edit/:id`,
           name,
-          component: edit,
+          component,
           // This could be refactored into a vue mixin, check #52 - @sgobotta
           props: {
             resourceName,
             va: {
               ...utils
             }
+          },
+          meta: {
+            isPublic,
+            permissions
           }
         }
       }

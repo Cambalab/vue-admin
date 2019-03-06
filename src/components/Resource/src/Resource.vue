@@ -1,7 +1,7 @@
 <script>
 import { List, Show, Create, Edit } from '@components/Actions'
 import createCrudModule from '@store/utils/modules'
-import createRouteBindings from './binding.utils'
+import createRouteBindings from '@router/route.bindings'
 import defaults from './defaults'
 
 export default {
@@ -23,6 +23,10 @@ export default {
     resourceIdName: {
       type: String,
       default: defaults().props.resourceIdName
+    },
+    userPermissionsField: {
+      type: String,
+      default: defaults().props.userPermissionsField
     },
     apiUrl: {
       type: String,
@@ -66,9 +70,9 @@ export default {
         edit: this.edit,
         resourceName: this.name,
         resourceIdName: this.resourceIdName,
+        userPermissionsField: this.userPermissionsField,
         redirection: this.redirect,
         router: this.$router,
-        store: this.$store,
         parseResponses: this.parseResponses
       })
       // Adds binded components to routes

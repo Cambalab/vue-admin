@@ -35,12 +35,13 @@ export default () => {
   /**
    * Resource default props
    */
-  const apiUrl         = handleEmptyProp({ prop: 'apiUrl', at: component })
-  const list           = handleEmptyProp({ prop: 'list', at: component })
-  const name           = handleEmptyProp({ prop: 'name', at: component })
-  const parseResponses = _parseResponses
-  const redirect       = _redirect
-  const resourceIdName = 'id'
+  const apiUrl               = handleEmptyProp({ prop: 'apiUrl', at: component })
+  const list                 = handleEmptyProp({ prop: 'list', at: component })
+  const name                 = handleEmptyProp({ prop: 'name', at: component })
+  const parseResponses       = _parseResponses
+  const redirect             = _redirect
+  const resourceIdName       = 'id'
+  const userPermissionsField = 'permissions'
 
   /**
    * Resource default validations
@@ -58,6 +59,7 @@ export default () => {
       name,
       list,
       resourceIdName,
+      userPermissionsField,
       apiUrl,
       redirect,
       parseResponses

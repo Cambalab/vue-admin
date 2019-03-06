@@ -34,6 +34,10 @@ describe('Resource.vue', () => {
     mockedRouter = new VueRouter(routes)
     // Configures a Vuex Store instance
     mockedStore = new Vuex.Store({ mutations: dummyStore.mutations })
+    // Configures Router app dependency with the Store as used in the
+    // route.bindings module
+    mockedRouter['app'] = {}
+    mockedRouter.app['$store'] = mockedStore
     // Configures mocks for the subject
     mocks = { $store: mockedStore, $router: mockedRouter }
     // Configures the subject props
@@ -60,6 +64,7 @@ describe('Resource.vue', () => {
     const props = subjectWrapper.props()
     expect(subjectWrapper.name()).toMatch(subject)
     expect(props.resourceIdName).toMatch(resourceFixture.props.resourceIdName)
+    expect(props.userPermissionsField).toMatch(resourceFixture.props.userPermissionsField)
     expect(props.redirect).toMatchObject(resourceFixture.props.redirect)
     expect(props.parseResponses).toMatchObject(resourceFixture.props.parseResponses)
   })
