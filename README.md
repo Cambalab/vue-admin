@@ -6,7 +6,7 @@
 
 <h1 align="center">Vue Admin</h1>
 
-<h4 align="center">A frontend Framework for building `admin applications` running in the browser on top of `REST services`, using `ES6`, `vue-router`, `vuex`, `vuex-crud` and `vuetify`.</h4>
+<h4 align="center">A frontend Framework for building admin applications running in the browser on top of REST services, using ES6, vue-router, vuex, vuex-crud and vuetify.</h4>
 
 ## Introduction
 
@@ -33,7 +33,7 @@ npm i --save vue-admin-js
 
 ## Usage
 
-***App.js template***
+***App.vue***
 ```vue
 <template>
   <Admin>
@@ -77,7 +77,7 @@ npm i --save vue-admin-js
 </script>
 ```
 
-***ListArticles.js***
+***ListArticles.vue***
 ```vue
 <template>
   <List>
@@ -147,12 +147,12 @@ npm run test:unit
 ***if you feel like contributing or just sharing an idea for us to improve the library, please do not hesitate to comment our issues or open an issue with the available labels.***
 
 ---
-<p>
-<a href="https://vuejs.org" target="_blank" rel="noopener noreferrer">
-  <img class="margin" width="20" src="public/camba_icon.png" alt="Cambá logo" />
-</a>
-**With :green_heart::purple_heart::heart: from [Cambá Coop](https://camba.coop), Buenos Aires, Argentina**
-<a href="https://vuejs.org" target="_blank" rel="noopener noreferrer">
-  <img class="margin" width="20" src="public/camba_icon.png" alt="Cambá logo" />
-</a>
+<p align="center">
+  <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">
+    <img class="margin" width="20" src="public/camba_icon.png" />
+  </a>
+  <strong>With :green_heart::purple_heart::heart: from <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">Cambá Coop</a>, Buenos Aires, Argentina</strong>
+  <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">
+    <img class="margin" width="20" src="public/camba_icon.png" />
+  </a>
 </p>
