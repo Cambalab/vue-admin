@@ -15,6 +15,8 @@ import Core from "@components/Core";
 import Ui from "@components/Ui";
 import resource from "@store/resource";
 import { entities } from "@store/entities"
+import auth from '@store/auth'
+import user from '@store/user'
 import UI_CONTENT from '@constants/ui.content.default'
 import Auth from '@components/Auth'
 
@@ -36,6 +38,8 @@ export default {
   created() {
     this.$store.registerModule('resources', resource)
     this.$store.registerModule('entities', entities)
+    this.$store.registerModule('auth', auth)
+    this.$store.registerModule('user', user)
   },
   mounted: function() {
     this.loadAuthRoutes()
