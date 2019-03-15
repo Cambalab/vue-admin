@@ -37,6 +37,8 @@ export default {
   },
   actions: {
     [AUTH_REQUEST]: (context, user) => {
+      // TODO: should move to adapter implementation
+
       const url = 'http://localhost:8888/api/auth'
       const headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -61,6 +63,8 @@ export default {
           .catch(error => {
             context.commit(AUTH_ERROR, error)
             // if the request fails, remove any possible user token if possible
+
+            // TODO: should move to adapter implementation
             localStorage.removeItem('userToken')
             reject(error)
           })
@@ -69,12 +73,16 @@ export default {
     [AUTH_ERROR]: ({ commit }) => {
       commit(AUTH_ERROR)
       // if the request fails, remove any possible user token if possible
+
+      // TODO: should move to adapter implementation
       localStorage.removeItem('userToken')
     },
     [AUTH_LOGOUT]: ({ commit }) => {
       return new Promise((resolve) => {
         commit(AUTH_LOGOUT)
         // clear your user's token from localstorage
+
+        // TODO: should move to adapter implementation
         localStorage.removeItem('userToken')
         delete axios.defaults.headers.common['Authorization']
         resolve()
