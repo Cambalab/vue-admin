@@ -15,8 +15,7 @@ import Core from "@components/Core";
 import Ui from "@components/Ui";
 import resourceModule from "@store/modules/resource";
 import entitiesModule from "@store/modules/entities"
-import auth from '@store/auth'
-import user from '@store/user'
+import { authModule, userModule } from '@va-auth/store'
 import UI_CONTENT from '@constants/ui.content.default'
 import Auth from '@components/Auth'
 
@@ -38,8 +37,8 @@ export default {
   created() {
     this.$store.registerModule('resources', resourceModule)
     this.$store.registerModule('entities', entitiesModule)
-    this.$store.registerModule('auth', auth)
-    this.$store.registerModule('user', user)
+    this.$store.registerModule('auth', authModule)
+    this.$store.registerModule('user', userModule)
   },
   mounted: function() {
     this.loadAuthRoutes()

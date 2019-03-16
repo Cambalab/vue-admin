@@ -1,8 +1,9 @@
-import createCrudModule from "vuex-crud";
+import AuthModule from './modules/auth'
+import UserModule from './modules/user'
 
 /**
- * Modules utils - Given a set of data, creates a vuex crud module and calls
- * the store to register a new module.
+ * Create Auth Module - Given a set of data, creates a vuex auth module and
+ * calls the store to get it registered.
  *
  * @param {String} apiUrl         The api url for a 'resourceName' resource
  * @param {String} resourceName   The name of the resource
@@ -18,15 +19,11 @@ export default ({
   parseResponses,
   store
 }) => {
-  const customUrlFn = (id) => {
-    const rootUrl =`${apiUrl}${resourceName}/`
-    return id ? `${rootUrl}${id}` : rootUrl
-  }
-  const module = createCrudModule({
-    resource: resourceName,
-    customUrlFn,
-    idAttribute: resourceIdName,
-    ...parseResponses
-  });
+
+  const module = {}
+
   store.registerModule(resourceName, module);
 }
+
+export const authModule = AuthModule
+export const userModule = UserModule

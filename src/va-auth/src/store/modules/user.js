@@ -1,27 +1,22 @@
 import axios from 'axios'
-
-const USER_REQUEST = 'USER_REQUEST'
-const USER_SUCCESS = 'USER_SUCCESS'
-const USER_FAILURE = 'USER_FAILURE'
-const AUTH_ERROR   = 'AUTH_ERROR'
-
+import { AuthTypes, UserTypes } from '../../types'
 
 export default {
   namespaced: true,
   state: {
     status: 'idle',
     user: {},
-    error: ''
+    error: '',
   },
   mutations: {
-    [USER_REQUEST]: (state) => {
+    [UserTypes.USER_REQUEST]: (state) => {
       state.status = 'running'
     },
-    [USER_SUCCESS]: (state, user) => {
+    [UserTypes.USER_SUCCESS]: (state, user) => {
       state.status = 'idle'
       state.user   = user
     },
-    [USER_FAILURE]: (state, error) => {
+    [UserTypes.USER_FAILURE]: (state, error) => {
       state.status = 'idle'
       state.error  = error
     },
@@ -31,8 +26,8 @@ export default {
     userStatus: state => state.status,
   },
   actions: {
-    [USER_REQUEST]: ({ commit }, payload) => {
-      commit(USER_REQUEST)
+    [UserTypes.USER_REQUEST]: ({ commit }, payload) => {
+      commit(UserTypes.USER_REQUEST)
       const { token } = payload
       const url = 'http://localhost:8888/api/auth'
       const headers = {
@@ -44,12 +39,12 @@ export default {
         axios({ url, headers, method })
           .then(response => {
             const { data: { user } } = response
-            commit(USER_SUCCESS, user)
+            commit(UserTypes.USER_SUCCESS, user)
             resolve(response)
           })
           .catch(error => {
-            commit(`auth/${AUTH_ERROR}`, error, { root: true })
-            commit(USER_FAILURE, error)
+            commit(`auth/${AuthTypes.AUTH_ERROR}`, error, { root: true })
+            commit(UserTypes.USER_FAILURE, error)
             reject(error)
           })
       })
