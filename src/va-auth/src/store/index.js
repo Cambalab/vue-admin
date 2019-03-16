@@ -1,5 +1,4 @@
 import AuthModule from './modules/auth'
-import UserModule from './modules/user'
 
 /**
  * Create Auth Module - Given a set of data, creates a vuex auth module and
@@ -18,12 +17,9 @@ export default ({
   resourceIdName,
   parseResponses,
   store
-}) => {
+} = {}) => {
 
   const module = {}
 
-  store.registerModule(resourceName, module);
+  return AuthModule
 }
-
-export const authModule = AuthModule
-export const userModule = UserModule

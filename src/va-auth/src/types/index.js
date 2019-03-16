@@ -1,7 +1,10 @@
-import AuthTypes from './auth'
-import UserTypes from './user'
 
-export {
-  AuthTypes,
-  UserTypes,
+export default {
+  AUTH_REQUEST: 'AUTH_REQUEST',
+  AUTH_SUCCESS: 'AUTH_SUCCESS',
+  AUTH_ERROR: 'AUTH_ERROR',
+  AUTH_LOGOUT: 'AUTH_LOGOUT',
+  USER_REQUEST: 'USER_REQUEST',
+  USER_SUCCESS: 'USER_SUCCESS',
+  USER_FAILURE: 'USER_FAILURE',
 }
