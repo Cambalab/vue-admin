@@ -37,13 +37,27 @@ export default {
   created() {
     this.$store.registerModule('resources', resourceModule)
     this.$store.registerModule('entities', entitiesModule)
-    const authModule = createAuthModule()
-    this.$store.registerModule('auth', authModule)
+    this.createAuthModule()
   },
   mounted: function() {
     this.loadAuthRoutes()
   },
   methods: {
+    createAuthModule() {
+      const accessTokenField = 'userToken'
+      const authUrl = 'http://localhost:8888/api/auth'
+      const authModuleName = 'auth'
+      const usersUrl = 'http://localhost:8888/api/auth'
+      const userFields = { username: 'email', password: 'password' }
+      createAuthModule({
+        accessTokenField,
+        authUrl,
+        moduleName: authModuleName,
+        store: this.$store,
+        usersUrl,
+        userFields,
+      })
+    },
     loadAuthRoutes() {
       const routes = []
       const route = {
