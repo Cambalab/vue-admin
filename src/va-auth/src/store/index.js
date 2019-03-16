@@ -1,25 +1,54 @@
-import AuthModule from './modules/auth'
+import axios from 'axios'
+import createActions from './modules/actions'
+import createGetters from './modules/getters'
+import createMutations  from './modules/mutations'
+import createState from './modules/state'
+import Types from '../types'
 
 /**
  * Create Auth Module - Given a set of data, creates a vuex auth module and
  * calls the store to get it registered.
  *
- * @param {String} apiUrl         The api url for a 'resourceName' resource
- * @param {String} resourceName   The name of the resource
- * @param {String} resourceIdName The name of the id property of a resource
- * @param {Object} parseResponses An object containing a parseSingle function
- * and a parseList function to be used by Vuex Crud.
- * @param {Object} store          The global Vuex store variable
+ * @param {String}  accessTokenField  The name of the token in localStorage
+ * @param {String}  authUrl           The authentication url
+ * @param {Object}  client            An http client (axios by default)
+ * @param {String}  moduleName        The name of the auth module
+ * @param {Object}  store             The global Vuex store variable
+ * @param {Object}  userFields        An object with the username and password field names
+ * @param {String}  usersUrl          The url to fetch a user by a token
  */
 export default ({
-  apiUrl,
-  resourceName,
-  resourceIdName,
-  parseResponses,
-  store
-} = {}) => {
+  accessTokenField,
+  authUrl,
+  client = axios,
+  moduleName,
+  store,
+  userFields,
+  usersUrl,
+}) => {
+  const types = Types
 
-  const module = {}
+  const module = {
+    namespaced: true,
 
-  return AuthModule
+    state: createState({
+      accessTokenField
+    }),
+
+    actions: createActions({
+      accessTokenField,
+      authUrl,
+      client,
+      types,
+      userFields,
+      usersUrl,
+    }),
+
+    mutations: createMutations({
+      types
+    }),
+
+    getters: createGetters(),
+  }
+  store.registerModule(moduleName, module)
 }
