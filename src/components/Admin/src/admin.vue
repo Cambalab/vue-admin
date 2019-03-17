@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div v-if="isAuthenticated"></div>
     <Core
       v-bind:appLayout="appLayout"
       :title="title"
@@ -18,6 +19,7 @@ import entitiesModule from "@store/modules/entities"
 import createAuthModule from '@va-auth/store'
 import UI_CONTENT from '@constants/ui.content.default'
 import Auth from '@components/Auth'
+import AuthActionTypes from '@va-auth/types'
 
 export default {
   name: "Admin",
@@ -25,14 +27,14 @@ export default {
     appLayout: {
       default: () => Ui
     },
+    authProvider: {
+      type: Function,
+      required: true
+    },
     title: {
       type: String,
       default: UI_CONTENT.MAIN_TOOLBAR_TITLE
     },
-    authProvider: {
-      type: Function,
-      required: true
-    }
   },
   components: {
     Core,
@@ -45,6 +47,7 @@ export default {
   },
   mounted: function() {
     this.loadAuthRoutes()
+    this.$store.dispatch(`auth/${AuthActionTypes.AUTH_CHECK_REQUEST}`)
   },
   methods: {
     registerStoreModule() {
@@ -64,6 +67,11 @@ export default {
       }
       routes.push(route)
       this.$router.addRoutes(routes)
+    }
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$store.getters[`auth/isAuthenticated`]
     }
   },
   render() {
