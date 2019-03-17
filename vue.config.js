@@ -14,6 +14,7 @@ module.exports = {
         '@router': path.resolve(__dirname, 'src/router'),
         '@store': path.resolve(__dirname, 'src/store'),
         '@templates': path.resolve(__dirname, 'src/templates/src'),
+        '@va-auth': path.resolve(__dirname, 'src/va-auth/src'),
         '@validators': path.resolve(__dirname, 'src/validators/src')
       }
     }

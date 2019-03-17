@@ -13,8 +13,9 @@
 <script>
 import Core from "@components/Core";
 import Ui from "@components/Ui";
-import resource from "@store/resource";
-import { entities } from "@store/entities"
+import resourceModule from "@store/modules/resource";
+import entitiesModule from "@store/modules/entities"
+import createAuthModule from '@va-auth/store'
 import UI_CONTENT from '@constants/ui.content.default'
 import Auth from '@components/Auth'
 
@@ -34,13 +35,29 @@ export default {
     Ui
   },
   created() {
-    this.$store.registerModule('resources', resource)
-    this.$store.registerModule('entities', entities)
+    this.$store.registerModule('resources', resourceModule)
+    this.$store.registerModule('entities', entitiesModule)
+    this.createAuthModule()
   },
   mounted: function() {
     this.loadAuthRoutes()
   },
   methods: {
+    createAuthModule() {
+      const accessTokenField = 'userToken'
+      const authUrl = 'http://localhost:8888/api/auth'
+      const authModuleName = 'auth'
+      const usersUrl = 'http://localhost:8888/api/auth'
+      const userFields = { username: 'email', password: 'password' }
+      createAuthModule({
+        accessTokenField,
+        authUrl,
+        moduleName: authModuleName,
+        store: this.$store,
+        usersUrl,
+        userFields,
+      })
+    },
     loadAuthRoutes() {
       const routes = []
       const route = {

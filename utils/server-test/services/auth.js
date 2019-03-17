@@ -1,39 +1,54 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 
+const secret = 'mySecret'
+
 module.exports = function(app) {
 
-  const whitelist = [
+  let whitelist = [
     {
       id: 123456,
       email: 'user@camba.coop',
       password: '$2b$08$ZRrJWppetUmKe5Zlc1Mtj.w51ZTmmx2M4YKUdS4QOBHXq2gzF/zyS', // bcrypt.hashSync('123456')
-      permissions: ['guest']
+      permissions: ['guest'],
+      token: '',
     },
     {
       id: 234567,
       email: 'dev@camba.coop',
       password: '$2b$08$ZRrJWppetUmKe5Zlc1Mtj.w51ZTmmx2M4YKUdS4QOBHXq2gzF/zyS', // bcrypt.hashSync('123456')
-      permissions: ['admin']
+      permissions: ['admin'],
+      token: '',
     }
   ]
 
-  app.post('/auth/login', (req, res) => {
-    // db.selectByEmail(req.body.email, (err, user) => {
-    //     if (err) return res.status(500).send('Error on the server.');
-    //     if (!user) return res.status(404).send('No user found.');
-    //     let passwordIsValid = bcrypt.compareSync(req.body.password, user.user_pass);
-    //     if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
-    //     let token = jwt.sign({ id: user.id }, config.secret, { expiresIn: 86400 // expires in 24 hours
-    //     });
-    //     res.status(200).send({ auth: true, token: token, user: user });
-    // });
-
-    const user = whitelist.find(user => user.email === req.headers.email);
+  app.post('/api/auth', (req, res) => {
+    const user = whitelist.find(user => user.email === req.headers.username);
     if (!user) return res.status(404).send('No user found.');
     const isPasswordValid = bcrypt.compareSync(req.headers.password, user.password);
     if (!isPasswordValid) return res.status(401).send({ auth: false, token: null });
-    const token = jwt.sign({ id: user.id }, 'mySecret', { expiresIn: 86400 });
-    res.status(200).send({ auth: true, token, user })
+    const token = jwt.sign({ id: user.id }, secret, { expiresIn: 3600 });
+    // Saves the token in the whitelist user array
+    whitelist = whitelist.map(_user => {
+      if (_user.id === user.id) {
+        _user.token = token
+        return _user
+      }
+      return user
+    })
+    return res.status(200).send({ auth: true, token })
+  })
+
+  app.get('/api/auth', (req, res) => {
+    const token = req.headers.token
+    if (!token) return res.status(401).send('Invalid token')
+    jwt.verify(token, secret, (err, decodedToken) => {
+      if (err) return res.status(401).send('Token is invalid or has expired')
+      const user = {}
+      Object.assign(user, whitelist.find(user => user.id === decodedToken.id))
+      delete user.token
+      delete user.password
+      return res.status(200).send({ user })
+    })
   })
 }

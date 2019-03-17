@@ -1,8 +1,8 @@
 import createCrudModule from "vuex-crud";
 
 /**
- * Modules utils - Given a set of data, creates a vuex crud module and calls
- * the store to register a new module.
+ * Crud Module - Given a set of data, creates a vuex crud module and calls
+ * the store to get it registered.
  *
  * @param {String} apiUrl         The api url for a 'resourceName' resource
  * @param {String} resourceName   The name of the resource

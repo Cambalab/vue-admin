@@ -28,6 +28,13 @@ export default () => {
     replaceError: null,
     updateError: null
   }
+  // Vuex Initial State for auth
+  const initialAuthState = {
+    error: '',
+    status: 'idle',
+    token: '',
+    user: {}
+  }
   // Vuex Initial State for entities
   const initialEntitiesState = {}
   // Vuex Initial State for resource routes
@@ -53,6 +60,7 @@ export default () => {
 
   return {
     ...initResourcesState(initialResources),
+    auth: initialAuthState,
     entities: initialEntitiesState,
     resources: initialResourcesState
   }

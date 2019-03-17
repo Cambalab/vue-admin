@@ -1,4 +1,4 @@
-export const entities = {
+export default {
   namespaced: true,
   state: {},
   mutations: {

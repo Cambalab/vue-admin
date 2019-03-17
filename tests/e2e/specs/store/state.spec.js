@@ -16,6 +16,12 @@ describe('Vuex Store State', () => {
     getStore().its(state).should('have.keys', Object.keys(initialState))
   })
 
+  it('Attribute {auth} should have an intitial configuration', () => {
+    const attribute = 'auth'
+    const state = `state.${attribute}`
+    getStore().its(state).should('deep.equal', initialState[attribute])
+  })
+
   it('Attribute {articles} should have the vuex crud intitial configuration', () => {
     const attribute = 'articles'
     const state = `state.${attribute}`
