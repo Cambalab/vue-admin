@@ -80,7 +80,7 @@ export default {
     validate () {
       if (this.$refs.form.validate()) {
         this.snackbar = true
-        const params = { email: this.email, password: this.password }
+        const params = { username: this.email, password: this.password }
         this.$store.dispatch(`auth/${AuthTypes.AUTH_LOGIN_REQUEST}`, params)
       }
     },
