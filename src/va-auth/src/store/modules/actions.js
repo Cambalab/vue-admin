@@ -21,7 +21,7 @@ export default ({
 }) => {
 
   return {
-    [types.AUTH_REQUEST]: (context, user) => {
+    [types.AUTH_LOGIN_REQUEST]: ({ commit, dispatch }, user) => {
       // TODO: should move to adapter implementation
 
       const url = authUrl
@@ -33,45 +33,50 @@ export default ({
       const method = 'post'
       // The Promise used for router redirect in login
       return new Promise((resolve, reject) => {
-        context.commit(types.AUTH_REQUEST)
+        commit(types.AUTH_LOGIN_REQUEST)
+
         client({ url, headers, method })
           .then(response => {
             const token = response.data.token || ''
             // store the token in localstorage
             localStorage.setItem(accessTokenField, token)
             client.defaults.headers.common['Authorization'] = token
-            context.commit(types.AUTH_SUCCESS, token)
+            commit(types.AUTH_LOGIN_SUCCESS, token)
             // you have your token, now log in your user :)
-            context.dispatch(types.USER_REQUEST, { token })
+            dispatch(types.USER_REQUEST, { token })
             resolve(response)
           })
           .catch(error => {
-            context.commit(types.AUTH_ERROR, error)
+            commit(types.AUTH_LOGIN_FAILURE, error)
             // if the request fails, remove any possible user token if possible
 
             // TODO: should move to adapter implementation
             localStorage.removeItem(accessTokenField)
             reject(error)
           })
+
       })
     },
-    [types.AUTH_ERROR]: ({ commit }) => {
-      commit(types.AUTH_ERROR)
+    [types.AUTH_LOGIN_FAILURE]: ({ commit }) => {
+      commit(types.AUTH_LOGIN_FAILURE)
       // if the request fails, remove any possible user token if possible
 
       // TODO: should move to adapter implementation
       localStorage.removeItem(accessTokenField)
     },
-    [types.AUTH_LOGOUT]: ({ commit }) => {
-      return new Promise((resolve) => {
-        commit(types.AUTH_LOGOUT)
-        // clear your user's token from localstorage
-
-        // TODO: should move to adapter implementation
-        localStorage.removeItem(accessTokenField)
-        delete client.defaults.headers.common['Authorization']
-        resolve()
-      })
+    [types.AUTH_LOGOUT_REQUEST]: ({ commit }) => {
+      commit(types.AUTH_LOGOUT_REQUEST)
+      try {
+        return new Promise((resolve) => {
+          localStorage.removeItem(accessTokenField)
+          delete client.defaults.headers.common['Authorization']
+          commit(types.AUTH_LOGOUT_SUCCESS)
+          resolve()
+        })
+      }
+      catch (error) {
+        commit(types.AUTH_LOGIN_FAILURE, error)
+      }
     },
     [types.USER_REQUEST]: ({ commit }, payload) => {
       commit(types.USER_REQUEST)
@@ -90,7 +95,6 @@ export default ({
             resolve(response)
           })
           .catch(error => {
-            commit(types.AUTH_ERROR, error)
             commit(types.USER_FAILURE, error)
             reject(error)
           })

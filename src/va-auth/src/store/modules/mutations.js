@@ -10,20 +10,29 @@ export default({
   types,
 }) => {
   return {
-    [types.AUTH_REQUEST]: (state) => {
+    [types.AUTH_LOGIN_REQUEST]: (state) => {
       state.status = 'running'
     },
-    [types.AUTH_SUCCESS]: (state, token) => {
+    [types.AUTH_LOGIN_SUCCESS]: (state, token) => {
       state.status = 'idle'
       state.token  = token
     },
-    [types.AUTH_ERROR]: (state, error) => {
+    [types.AUTH_LOGIN_FAILURE]: (state, error) => {
+      state.error  = error
       state.status = 'idle'
       state.token  = ''
-      state.error  = error
     },
-    [types.AUTH_LOGOUT]: (state) => {
-      state.token = ''
+    [types.AUTH_LOGOUT_REQUEST]: (state) => {
+      state.status = 'running'
+    },
+    [types.AUTH_LOGOUT_SUCCESS]: (state) => {
+      state.status = 'idle'
+      state.token  = ''
+      state.user   = {}
+    },
+    [types.AUTH_LOGOUT_FAILURE]: (state, error) => {
+      state.error  = error
+      state.status = 'idle'
     },
     [types.USER_REQUEST]: (state) => {
       state.status = 'running'
