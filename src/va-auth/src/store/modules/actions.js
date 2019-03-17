@@ -23,9 +23,11 @@ export default ({
           commit(types.AUTH_LOGIN_FAILURE, error)
         })
     },
+
     [types.AUTH_LOGIN_FAILURE]: ({ commit }) => {
       commit(types.AUTH_LOGIN_FAILURE)
     },
+
     [types.AUTH_LOGOUT_REQUEST]: ({ commit }) => {
       commit(types.AUTH_LOGOUT_REQUEST)
       client(types.AUTH_LOGOUT_REQUEST)
@@ -36,27 +38,5 @@ export default ({
           commit(types.AUTH_LOGIN_FAILURE, error)
         })
     },
-    // [types.USER_REQUEST]: ({ commit }, payload) => {
-    //   commit(types.USER_REQUEST)
-    //   const { token } = payload
-    //   const url = usersUrl
-    //   const headers = {
-    //     'Content-Type': 'application/x-www-form-urlencoded',
-    //     token,
-    //   }
-    //   const method = 'get'
-    //   return new Promise((resolve, reject) => {
-    //     axios({ url, headers, method })
-    //       .then(response => {
-    //         const { data: { user } } = response
-    //         commit(types.USER_SUCCESS, user)
-    //         resolve(response)
-    //       })
-    //       .catch(error => {
-    //         commit(types.USER_FAILURE, error)
-    //         reject(error)
-    //       })
-    //   })
-    // }
   }
 }

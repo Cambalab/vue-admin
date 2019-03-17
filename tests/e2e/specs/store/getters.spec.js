@@ -50,12 +50,10 @@ describe('Vuex Store Getters', () => {
    */
   function authGettersShouldHaveBeenInitialised(resource) {
     const authStatus = `${resource}/authStatus`
-    const getToken = `${resource}/getToken`
     const getUser = `${resource}/getUser`
     const isAuthenticated = `${resource}/isAuthenticated`
     getStore().its('getters').should(getters => {
       expect(getters[authStatus]).to.equal(initialGetters[authStatus])
-      expect(getters[getToken]).to.equal(initialGetters[getToken])
       expect(getters[getUser]).to.be.empty
       expect(getters[isAuthenticated]).to.equal(initialGetters[isAuthenticated])
     })

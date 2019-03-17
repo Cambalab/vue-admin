@@ -43,7 +43,7 @@ export default (client, options = {}) => {
         })
 
       case AUTH_LOGOUT_REQUEST:
-      return new Promise(resolve => {
+        return new Promise(resolve => {
           localStorage.removeItem(storageKey)
           delete client.defaults.headers.common['Authorization']
           resolve()

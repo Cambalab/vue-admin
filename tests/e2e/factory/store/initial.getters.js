@@ -23,7 +23,6 @@ export default () => {
   // Vuex auth getters
   const authGetters = {
     'auth/authStatus': 'idle',
-    'auth/getToken': '',
     'auth/getUser': '',
     'auth/isAuthenticated': false
   }
