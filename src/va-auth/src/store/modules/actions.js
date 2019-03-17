@@ -24,10 +24,6 @@ export default ({
         })
     },
 
-    [types.AUTH_LOGIN_FAILURE]: ({ commit }) => {
-      commit(types.AUTH_LOGIN_FAILURE)
-    },
-
     [types.AUTH_LOGOUT_REQUEST]: ({ commit }) => {
       commit(types.AUTH_LOGOUT_REQUEST)
       client(types.AUTH_LOGOUT_REQUEST)
@@ -38,5 +34,16 @@ export default ({
           commit(types.AUTH_LOGIN_FAILURE, error)
         })
     },
+
+    [types.AUTH_CHECK_REQUEST]: ({ commit }) => {
+      commit(types.AUTH_CHECK_REQUEST)
+      client(types.AUTH_CHECK_REQUEST)
+        .then((response) => {
+          commit(types.AUTH_CHECK_SUCCESS, response)
+        })
+        .catch((error) => {
+          commit(types.AUTH_CHECK_FAILURE, error)
+        })
+    }
   }
 }

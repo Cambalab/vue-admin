@@ -6,6 +6,7 @@
 export default () => {
   return {
     error: '',
+    isAuthenticated: false,
     status: 'idle',
     user: {},
   }
