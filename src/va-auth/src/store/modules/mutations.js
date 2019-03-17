@@ -13,21 +13,19 @@ export default({
     [types.AUTH_LOGIN_REQUEST]: (state) => {
       state.status = 'running'
     },
-    [types.AUTH_LOGIN_SUCCESS]: (state, token) => {
+    [types.AUTH_LOGIN_SUCCESS]: (state, user) => {
       state.status = 'idle'
-      state.token  = token
+      state.user  = user
     },
     [types.AUTH_LOGIN_FAILURE]: (state, error) => {
       state.error  = error
       state.status = 'idle'
-      state.token  = ''
     },
     [types.AUTH_LOGOUT_REQUEST]: (state) => {
       state.status = 'running'
     },
     [types.AUTH_LOGOUT_SUCCESS]: (state) => {
       state.status = 'idle'
-      state.token  = ''
       state.user   = {}
     },
     [types.AUTH_LOGOUT_FAILURE]: (state, error) => {

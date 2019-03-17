@@ -28,6 +28,10 @@ export default {
     title: {
       type: String,
       default: UI_CONTENT.MAIN_TOOLBAR_TITLE
+    },
+    authProvider: {
+      type: Function,
+      required: true
     }
   },
   components: {
@@ -37,25 +41,17 @@ export default {
   created() {
     this.$store.registerModule('resources', resourceModule)
     this.$store.registerModule('entities', entitiesModule)
-    this.createAuthModule()
+    this.registerStoreModule()
   },
   mounted: function() {
     this.loadAuthRoutes()
   },
   methods: {
-    createAuthModule() {
-      const accessTokenField = 'userToken'
-      const authUrl = 'http://localhost:8888/api/auth'
-      const authModuleName = 'auth'
-      const usersUrl = 'http://localhost:8888/api/auth'
-      const userFields = { username: 'email', password: 'password' }
+    registerStoreModule() {
       createAuthModule({
-        accessTokenField,
-        authUrl,
-        moduleName: authModuleName,
+        client: this.authProvider,
+        moduleName: 'auth',
         store: this.$store,
-        usersUrl,
-        userFields,
       })
     },
     loadAuthRoutes() {
