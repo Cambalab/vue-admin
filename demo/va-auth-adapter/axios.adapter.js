@@ -1,11 +1,12 @@
-import AuthTypes from '@va-auth/types'
+import AuthActionTypes from '@va-auth/types'
 
 export default (client, options = {}) => {
   return (type, params) => {
     const {
       AUTH_LOGIN_REQUEST,
       AUTH_LOGOUT_REQUEST,
-    } = AuthTypes
+      AUTH_CHECK_REQUEST,
+    } = AuthActionTypes
 
     const {
       authUrl,
@@ -48,6 +49,29 @@ export default (client, options = {}) => {
           delete client.defaults.headers.common['Authorization']
           resolve()
         })
+
+      case AUTH_CHECK_REQUEST:
+      return new Promise((resolve, reject) => {
+        const token = localStorage.getItem(storageKey)
+        if (token) {
+          const url = authUrl
+          const headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            token,
+          }
+          const method = 'get'
+          client({ url, headers, method })
+            .then(response => {
+              resolve(response)
+            })
+            .catch(error => {
+              reject(error)
+            })
+        } else {
+          reject('Authentication failed.')
+        }
+      })
+
       default:
         return Promise.reject(`Unsupported @va-auth action type: ${type}`);
     }
