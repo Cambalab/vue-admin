@@ -15,35 +15,59 @@ describe('Vuex Store Getters', () => {
     getStore().its('getters').should('have.keys', Object.keys(initialGetters))
   })
 
-  it('Attribute {resources/all} should be initialised', () => {
+  it('Attribute {resources/all} should have been initialised', () => {
     const attribute = 'resources/all'
     const getters = `getters.${attribute}`
     getStore().its(getters).should('deep.equal', initialGetters[attribute])
   })
 
-  it('{Articles} getters should be initialised', () => {
+  it('{Auth} getters should have been initialised', () => {
+    const resource = 'auth'
+    authGettersShouldHaveBeenInitialised(resource)
+  })
+
+  it('{Articles} vuex crud getters should have been initialised', () => {
     const resource = 'articles'
-    gettersShouldBeInitialised(resource)
+    vuexCrudGettersShouldHaveBeenInitialised(resource)
   })
 
-  it('{Magazines} getters should be initialised', () => {
+  it('{Magazines} vuex crud getters should have been initialised', () => {
     const resource = 'magazines'
-    gettersShouldBeInitialised(resource)
+    vuexCrudGettersShouldHaveBeenInitialised(resource)
   })
 
-  it('{Entities} getters should be initialised', () => {
+  it('{Entities} getters should have been initialised', () => {
     getStore().its('getters').should((getters) => {
       expect(getters['entities/getEntity']).to.be.empty
     })
   })
 
   /**
-   * gettersShouldBeInitialised - Given a resource, asserts the current store
-   * getters are properly initialised
+   * authGettersShouldHaveBeenInitialised - Given a resource, asserts the
+   * auth getters were properly initialised for the store
    *
    * @param {String} resource The name of a resource
    */
-  function gettersShouldBeInitialised(resource) {
+  function authGettersShouldHaveBeenInitialised(resource) {
+    const authStatus = `${resource}/authStatus`
+    const getToken = `${resource}/getToken`
+    const getUser = `${resource}/getUser`
+    const isAuthenticated = `${resource}/isAuthenticated`
+    getStore().its('getters').should(getters => {
+      expect(getters[authStatus]).to.equal(initialGetters[authStatus])
+      expect(getters[getToken]).to.equal(initialGetters[getToken])
+      expect(getters[getUser]).to.be.empty
+      expect(getters[isAuthenticated]).to.equal(initialGetters[isAuthenticated])
+    })
+  }
+
+  /**
+   * vuexCrudGettersShouldHaveBeenInitialised - Given a resource, asserts the
+   * crud getters were properly initialised for the store
+   *
+   * @param {String} resource The name of a resource
+   */
+  function vuexCrudGettersShouldHaveBeenInitialised(resource) {
     const byId = `${resource}/byId`
     const isError = `${resource}/isError`
     const isLoading = `${resource}/isLoading`

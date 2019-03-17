@@ -20,6 +20,13 @@ export default () => {
     'resources/all': initialResourcesRoutes(initialResources)
   }
 
+  // Vuex auth getters
+  const authGetters = {
+    'auth/authStatus': 'idle',
+    'auth/getToken': '',
+    'auth/getUser': '',
+    'auth/isAuthenticated': false
+  }
   /**
    * initResourcesCrud - Given a list of resources, creates mocked vuex crud
    * methods for each of them
@@ -40,6 +47,7 @@ export default () => {
   }
 
   return {
+    ...authGetters,
     ...initResourcesCrud(initialResources),
     ...entitiesCrud,
     ...resourcesGetters
