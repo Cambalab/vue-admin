@@ -4,6 +4,7 @@ export default (client, options = {}) => {
   return (type, params) => {
     const {
       AUTH_LOGIN_REQUEST,
+      AUTH_LOGOUT_REQUEST,
     } = AuthTypes
 
     const {
@@ -41,6 +42,12 @@ export default (client, options = {}) => {
             })
         })
 
+      case AUTH_LOGOUT_REQUEST:
+      return new Promise(resolve => {
+          localStorage.removeItem(storageKey)
+          delete client.defaults.headers.common['Authorization']
+          resolve()
+        })
       default:
         return Promise.reject(`Unsupported @va-auth action type: ${type}`);
     }

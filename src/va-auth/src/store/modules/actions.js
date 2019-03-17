@@ -1,11 +1,9 @@
-import axios from 'axios'
-
 /**
  * Create Auth Module Actions - Given a set of data, creates the actions for an
  * auth store module
  *
- * @param {Object}   client           An http client (axios by default)
- * @param {Object}   types            An object containing all the auth Types
+ * @param {Object}   client   An http client
+ * @param {Object}   types    An object containing all the auth Types
  *
  * @return {Object} The actions for the auth store
  */
@@ -18,7 +16,7 @@ export default ({
     [types.AUTH_LOGIN_REQUEST]: ({ commit }, user) => {
       commit(types.AUTH_LOGIN_REQUEST)
       client(types.AUTH_LOGIN_REQUEST, { ...user })
-        .then((response) => {
+        .then(response => {
           commit(types.AUTH_LOGIN_SUCCESS, response)
         })
         .catch(error => {
@@ -30,17 +28,13 @@ export default ({
     },
     [types.AUTH_LOGOUT_REQUEST]: ({ commit }) => {
       commit(types.AUTH_LOGOUT_REQUEST)
-      try {
-        return new Promise((resolve) => {
-          // localStorage.removeItem(accessTokenField)
-          delete axios.defaults.headers.common['Authorization']
+      client(types.AUTH_LOGOUT_REQUEST)
+        .then(() => {
           commit(types.AUTH_LOGOUT_SUCCESS)
-          resolve()
         })
-      }
-      catch (error) {
-        commit(types.AUTH_LOGIN_FAILURE, error)
-      }
+        .catch(error => {
+          commit(types.AUTH_LOGIN_FAILURE, error)
+        })
     },
     // [types.USER_REQUEST]: ({ commit }, payload) => {
     //   commit(types.USER_REQUEST)
