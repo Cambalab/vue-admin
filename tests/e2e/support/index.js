@@ -13,9 +13,16 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
+import moment from 'moment'
 import './commands'
-import 'cypress-dark/src/halloween'
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+function isOctober() {
+  const today            = moment()
+  const year             = today.year()
+  const format           = 'MM-DD-YYYY'
+  const octoberStartDate = moment(`10-01-${year}`, format)
+  const octoberEndDate   = moment(`10-31-${year}`, format)
+  return today.isBetween(octoberStartDate, octoberEndDate)
+}
+
+isOctober() ? require('cypress-dark/src/halloween') : require('cypress-dark')
