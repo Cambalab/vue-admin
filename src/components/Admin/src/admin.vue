@@ -1,13 +1,17 @@
 <template>
   <div>
-    <div v-if="isAuthenticated"></div>
-    <Core
-      v-bind:appLayout="appLayout"
-      :title="title"
-    >
-      <router-view></router-view>
-    </Core>
-    <slot></slot>
+    <div v-if="!isAuthenticated">
+      <Auth />
+    </div>
+    <div v-else>
+      <Core
+        v-bind:appLayout="appLayout"
+        :title="title"
+      >
+        <router-view></router-view>
+      </Core>
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -27,6 +31,9 @@ export default {
     appLayout: {
       default: () => Ui
     },
+    authLayout: {
+      default: () => Auth
+    },
     authProvider: {
       type: Function,
       required: true
@@ -37,6 +44,7 @@ export default {
     },
   },
   components: {
+    Auth,
     Core,
     Ui
   },
