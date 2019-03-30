@@ -16,6 +16,7 @@
           >
 
             <v-text-field
+              color="teal"
               :label="UI_CONTENT.AUTH_LABEL_USERNAME"
               :name="UI_NAMES.AUTH_USERNAME_INPUT"
               required
@@ -24,6 +25,7 @@
             />
 
             <v-text-field
+              color="teal"
               :label="UI_CONTENT.AUTH_LABEL_PASSWORD"
               :name="UI_NAMES.AUTH_PASSWORD_INPUT"
               required
@@ -61,20 +63,27 @@ export default {
 
   },
 
-  data: () => ({
-    valid: true,
-    email: '',
-    emailRules: [
-      v => !!v || 'E-mail is required',
-      v =>  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(v) || 'E-mail must be valid'
-    ],
-    passwordRules: [
-      v => !!v || 'Password is required',
-    ],
-    password: '',
-    UI_NAMES,
-    UI_CONTENT
-  }),
+  data: () => {
+    const {
+      AUTH_ALERT_EMAIL_REQUIRED,
+      AUTH_ALERT_INVALID_EMAIL,
+      AUTH_ALERT_PASSWORD_REQUIRED,
+    } = UI_CONTENT
+    return {
+      valid: true,
+      email: '',
+      emailRules: [
+        v => !!v || AUTH_ALERT_EMAIL_REQUIRED,
+        v =>  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(v) || AUTH_ALERT_INVALID_EMAIL
+      ],
+      passwordRules: [
+        v => !!v || AUTH_ALERT_PASSWORD_REQUIRED,
+      ],
+      password: '',
+      UI_NAMES,
+      UI_CONTENT
+    }
+  },
 
   methods: {
     validate () {
