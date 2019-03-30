@@ -19,6 +19,9 @@ export default {
   AUTH_LABEL_PASSWORD: 'Password',
   AUTH_LABEL_SIGN_IN_BUTTON: 'Sign In',
 
+  AUTH_ALERT_EMAIL_REQUIRED: 'E-mail is required',
+  AUTH_ALERT_PASSWORD_REQUIRED: 'Password is required',
+  AUTH_ALERT_INVALID_EMAIL: 'E-mail must be valid',
   /**
    * Shared content inside List, Show, Create, Edit components
    */
