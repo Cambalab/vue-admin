@@ -30,7 +30,7 @@ export default({
       state.status = 'running'
     },
     [types.AUTH_LOGOUT_SUCCESS]: (state) => {
-      state.isAuthenticated = true
+      state.isAuthenticated = false
       state.status = 'idle'
       state.user   = {}
     },
