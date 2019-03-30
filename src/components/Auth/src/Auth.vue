@@ -1,7 +1,7 @@
 <template>
   <v-container fill-height class="background-image">
     <v-layout align-center justify-center>
-      <v-flex xs4 class="text-xs-center">
+      <v-flex xs11 sm8 md4 class="text-xs-center">
         <v-card :name="UI_NAMES.AUTH_CONTAINER" class="card-container">
           <v-card-title primary-title :name="UI_NAMES.AUTH_CONTAINER_TITLE">
             <h3 class="headline mb-0 text-capitalize">
@@ -21,7 +21,7 @@
               required
               :rules="emailRules"
               v-model="email"
-            ></v-text-field>
+            />
 
             <v-text-field
               :label="UI_CONTENT.AUTH_LABEL_PASSWORD"
@@ -30,12 +30,12 @@
               :rules="passwordRules"
               type="password"
               v-model="password"
-            ></v-text-field>
+            />
 
             <v-btn
               class="text-xs-center extra-spacing"
               @click="validate"
-              color="success"
+              color="green"
               :disabled="!valid"
               :name="UI_NAMES.AUTH_SIGN_IN_BUTTON"
             >
@@ -79,7 +79,6 @@ export default {
   methods: {
     validate () {
       if (this.$refs.form.validate()) {
-        this.snackbar = true
         const params = { username: this.email, password: this.password }
         this.$store.dispatch(`auth/${AuthTypes.AUTH_LOGIN_REQUEST}`, params)
       }
@@ -104,11 +103,12 @@ export default {
     min-width: 100%;
   }
 
+  .extra-spacing {
+    margin-bottom: 18px
+  }
+
   .input-padding > div.v-input {
     padding: 4px 24px;
   }
 
-  .extra-spacing {
-    margin-bottom: 18px
-  }
 </style>
