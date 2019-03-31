@@ -17,6 +17,13 @@ const createInitialVuexStoreGetters = () => {
  * Entities Methods
  */
 
+const createAuthResponse = (args = {}) => {
+  const _args = {
+    status: 200,
+  }
+  return Object.assign({}, _args, args)
+}
+
 const createCredentials = (args = {}) => {
   const username = 'dev@camba.coop'
   const password = '123456'
@@ -86,6 +93,7 @@ export default {
   createArticle,
   createMagazine,
   // Auth methods
+  createAuthResponse,
   createCredentials,
   createUser,
   // API related methods
