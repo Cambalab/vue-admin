@@ -1,104 +1,34 @@
-import { ipsum, numbers } from './utils'
-import { store } from './store'
-
-/**
- * Store Methods
- */
-
-const createInitialVuexStoreState = () => {
-  return store.createInitialVuexStoreState()
-}
-
-const createInitialVuexStoreGetters = () => {
-  return store.createInitialVuexStoreGetters()
-}
-
-/**
- * Entities Methods
- */
-
-const createAuthResponse = (args = {}) => {
-  const status = 200
-  const user = createUser()
-  const _args = {
-    status,
-    user
-  }
-  return Object.assign({}, _args, args)
-}
-
-const createCredentials = (args = {}) => {
-  const username = 'dev@camba.coop'
-  const password = '123456'
-  const _args = {
-    username,
-    password
-  }
-  return Object.assign({}, _args, args)
-}
-
-const createUser = (args = {}) => {
-  const id = 234567
-  const email = 'dev@camba.coop'
-  const permissions = ['admin']
-  const _args = {
-    id,
-    email,
-    permissions,
-  }
-  return Object.assign({}, _args, args)
-}
-
-const createArticle = (args = {}) => {
-  // Shortens the paragraph
-  const title = ipsum.generateSentence()
-  const content = ipsum.generateParagraph({ useStartingSentence: true })
-  const _args = {
-    title,
-    content
-  }
-  return Object.assign({}, _args, args)
-}
-
-const createMagazine = (args = {}) => {
-  const name = ipsum.generateSentence()
-  const issue = `#${numbers.randomBetween(1, 500)}`
-  const publisher = ipsum.generateParagraph(1, { useStartingSentence: true })
-  const _args = {
-    name,
-    issue,
-    publisher
-  }
-  return Object.assign({}, _args, args)
-}
-
-/**
- * API related Methods
- */
-
-const apiUrl = ({ url, port, route }) => {
-  const address = {}
-  address.url  = url || 'http://localhost'
-  address.port = port || '8080'
-  address.route = route || ''
-  return `${address.url}:${address.port}/${address.route}`
-}
-
-/**
- * Exported Factory
- */
-
-export default {
-  // Store methods
-  createInitialVuexStoreState,
-  createInitialVuexStoreGetters,
-  // Entities methods
+import {
   createArticle,
   createMagazine,
-  // Auth methods
+} from './resources'
+import {
+  createAuthResponse,
+  createCredentials
+} from './auth'
+import {
+  createUser,
+} from './users'
+import {
+  createInitialVuexStoreGetters,
+  createInitialVuexStoreState,
+} from './store'
+import {
+  createApiUrl,
+} from './env'
+
+export default {
+  // Auth builders
   createAuthResponse,
   createCredentials,
+  // Entities builders
+  createArticle,
+  createMagazine,
+  // Env builders
+  createApiUrl,
+  // Store builders
+  createInitialVuexStoreState,
+  createInitialVuexStoreGetters,
+  // User builders
   createUser,
-  // API related methods
-  apiUrl
 }
