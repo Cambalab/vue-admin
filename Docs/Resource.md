@@ -1,4 +1,4 @@
-# `<Resource>` component
+# `<Resource>` component (outdated)
 
 A `<Resource>` component maps one API endpoint to a CRUD interface.
 
