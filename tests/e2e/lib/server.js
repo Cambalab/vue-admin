@@ -99,14 +99,6 @@ export default ({
       }).as(`${resourceName}/delete/${response.id}`)
     }
 
-    function authRequest({ response }) {
-      cy.route({
-        method: 'POST',
-        url: 'api/auth',
-        response,
-      }).as('auth')
-    }
-
     // Initialises endpoints
     routes.forEach(route => {
       initEndpoints[route.name](route)
