@@ -25,6 +25,7 @@
             no-action
             :prepend-icon="item.model ? item.icon : item['icon-alt']"
             append-icon=""
+            :value="item.value"
           >
             <v-list-tile slot="activator">
               <v-list-tile-content>
@@ -111,6 +112,8 @@ export default {
           "icon-alt": "keyboard_arrow_down",
           title: "Crud",
           children: [],
+          model: {},
+          value: true,
         },
         {
           click: () => this.$store.dispatch(`auth/${AuthActionTypes.AUTH_LOGOUT_REQUEST}`),
