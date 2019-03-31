@@ -19,12 +19,23 @@ describe('Articles: Edit Test', () => {
     })
   })
 
-  before('Initialises the mocked server and visits the edit url', () => {
+  before('Initialises the mocked server, visits the edit url an logs in', () => {
     const response = article
-    const routes = [{ name: 'edit', response }, { name: 'show', response }]
+    // const credentials = Factory.createCredentials()
+    const authResponse = Factory.createUser()
+    const routes = [
+      { name: 'edit', response },
+      { name: 'show', response },
+      { name: 'auth', response: authResponse }
+    ]
 
     cy.InitServer({ resourceName, routes })
     cy.visit(`/#/${resourceName}/edit/${article.id}`)
+    cy.authenticate()
+    cy.wait(`@auth`).then(xmlHttpRequest => {
+      const { status } = xmlHttpRequest
+      expect(status).to.equal(200)
+    })
     cy.server({ enable: false })
   })
 
