@@ -9,6 +9,10 @@ describe('Magazines: Show Action Test', () => {
     view
   })
 
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser()
+  })
+
   before('Search a magazine to show', () => {
     cy.fixture(resourceName).then(fixture => {
       // Takes the first element of the fixture to use as subject
