@@ -1,10 +1,12 @@
 import {
+  authenticate,
   InitEntityUtils,
   getElement,
   getStore
 } from '../lib/commands'
 import InitServer from '../lib/server'
 
+Cypress.Commands.add('authenticate', (args) => authenticate(args))
 Cypress.Commands.add('getStore', () => getStore())
 Cypress.Commands.add('InitEntityUtils', (args) => InitEntityUtils(args))
 Cypress.Commands.add('getElement', (args) => getElement(args))
