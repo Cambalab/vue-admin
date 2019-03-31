@@ -25,7 +25,6 @@ export default ({
       edit: editRequest,
       show: showRequest,
       delete: deleteRequest,
-      auth: authRequest,
     }
 
     /**
