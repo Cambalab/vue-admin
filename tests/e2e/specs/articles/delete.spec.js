@@ -13,12 +13,12 @@ describe('Articles: Delete Test', () => {
   })
 
   before('Initialises the server', () => {
-    const authResponse = Factory.createUser()
+    const authResponse = Factory.createAuthResponse()
     const routes = [
       { name: 'show', response: article },
       { name: 'auth', response: authResponse }
     ]
-    cy.InitServer({ resourceName, routes, response: article })
+    cy.InitServer({ resourceName, routes })
   })
 
   before('Visits the Show view url', () => {

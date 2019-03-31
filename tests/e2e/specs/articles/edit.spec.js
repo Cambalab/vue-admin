@@ -22,7 +22,7 @@ describe('Articles: Edit Test', () => {
   before('Initialises the mocked server, visits the edit url an logs in', () => {
     const response = article
     // const credentials = Factory.createCredentials()
-    const authResponse = Factory.createUser()
+    const authResponse = Factory.createAuthResponse()
     const routes = [
       { name: 'edit', response },
       { name: 'show', response },
@@ -31,8 +31,7 @@ describe('Articles: Edit Test', () => {
 
     cy.InitServer({ resourceName, routes })
     cy.visit(`/#/${resourceName}/edit/${article.id}`)
-    cy.authenticate()
-    cy.wait(`@auth`).then(xmlHttpRequest => {
+    cy.authenticate().wait(`@auth`).then(xmlHttpRequest => {
       const { status } = xmlHttpRequest
       expect(status).to.equal(200)
     })
