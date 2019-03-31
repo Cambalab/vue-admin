@@ -7,8 +7,12 @@ const UI_NAMES = require('../../../src/constants/ui.element.names')
 
 
 describe('UI Test', () => {
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser()
+  })
+
   it('Visits the app root url', () => {
-    cy.visit('/')
+    cy.visit('/#/')
   })
 
   it('Title should be vue-admin', () => {
