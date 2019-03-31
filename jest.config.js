@@ -18,7 +18,8 @@ module.exports = {
     '@router(.*)$': '<rootDir>/src/router/$1',
     '@store(.*)$': '<rootDir>/src/store/$1',
     '@templates(.*)$': '<rootDir>/src/templates/src/$1',
-    '@validators(.*)$': '<rootDir>/src/validators/src/$1'
+    '@va-auth(.*)$': '<rootDir>/src/va-auth/src/$1',
+    '@validators(.*)$': '<rootDir>/src/validators/src/$1',
   },
   snapshotSerializers: [
     'jest-serializer-vue'
