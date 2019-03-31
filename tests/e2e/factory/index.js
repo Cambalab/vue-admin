@@ -17,6 +17,16 @@ const createInitialVuexStoreGetters = () => {
  * Entities Methods
  */
 
+const createCredentials = (args = {}) => {
+  const username = 'dev@camba.coop'
+  const password = '123456'
+  const _args = {
+    username,
+    password
+  }
+  return Object.assign({}, _args, args)
+}
+
 const createArticle = (args = {}) => {
   // Shortens the paragraph
   const title = ipsum.generateSentence()
@@ -63,6 +73,8 @@ export default {
   // Entities methods
   createArticle,
   createMagazine,
+  // Auth methods
+  createCredentials,
   // API related methods
   apiUrl
 }
