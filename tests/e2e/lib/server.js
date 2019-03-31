@@ -24,7 +24,8 @@ export default ({
       create: createRequest,
       edit: editRequest,
       show: showRequest,
-      delete: deleteRequest
+      delete: deleteRequest,
+      auth: authRequest,
     }
 
     /**
@@ -96,6 +97,14 @@ export default ({
         response: {},
         status: 202
       }).as(`${resourceName}/delete/${response.id}`)
+    }
+
+    function authRequest({ response }) {
+      cy.route({
+        method: 'POST',
+        url: 'api/auth',
+        response,
+      }).as('auth')
     }
 
     // Initialises endpoints
