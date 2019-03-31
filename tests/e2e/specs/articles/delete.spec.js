@@ -6,6 +6,10 @@ describe('Articles: Delete Test', () => {
   const resourceName = 'articles'
   const article = {}
 
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser()
+  })
+
   before('Search an article to delete', () => {
     cy.fixture(resourceName).then(fixture => {
       Object.assign(article, fixture[0])
@@ -13,22 +17,16 @@ describe('Articles: Delete Test', () => {
   })
 
   before('Initialises the server', () => {
-    const authResponse = Factory.createAuthResponse()
     const routes = [
       { name: 'show', response: article },
-      { name: 'auth', response: authResponse }
     ]
     cy.InitServer({ resourceName, routes })
   })
 
   before('Visits the Show view url', () => {
-    const url = `${resourceName}/show/${article.id}`
-    cy.visit(`/#/${url}`)
-    cy.authenticate().wait(`@auth`).then(xmlHttpRequest => {
-      const { status } = xmlHttpRequest
-      expect(status).to.equal(200)
-    })
-    cy.url().should('include', url)
+    const showUrl = `${resourceName}/show/${article.id}`
+    cy.visit(`/#/${showUrl}`)
+    cy.url().should('include', showUrl)
     cy.server({ enable: false })
   })
 

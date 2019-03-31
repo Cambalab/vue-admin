@@ -7,18 +7,15 @@ describe('Articles: Create Test', () => {
   const view = 'create'
   const article = {}
 
-  before('Generate an article to create', () => {
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser()
+  })
+
+  before('Visits the create url', () => {
     cy.visit(`/#/${resourceName}/${view}`)
-    const credentials = Factory.createCredentials()
-    const authResponse = Factory.createAuthResponse()
-    const routes = [
-      { name: 'auth', response: authResponse },
-    ]
-    cy.InitServer({ resourceName, routes })
-    cy.authenticate(credentials).wait(`@auth`).then(xmlHttpRequest => {
-      const { status } = xmlHttpRequest
-      expect(status).to.equal(200)
-    })
+  })
+
+  before('Generate an article to create', () => {
     Object.assign(article, Factory.createArticle())
   })
 
