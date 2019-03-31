@@ -10,7 +10,15 @@ describe('Articles: Create Test', () => {
   before('Generate an article to create', () => {
     cy.visit(`/#/${resourceName}/${view}`)
     const credentials = Factory.createCredentials()
-    cy.authenticate(credentials)
+    const authResponse = Factory.createAuthResponse()
+    const routes = [
+      { name: 'auth', response: authResponse },
+    ]
+    cy.InitServer({ resourceName, routes })
+    cy.authenticate(credentials).wait(`@auth`).then(xmlHttpRequest => {
+      const { status } = xmlHttpRequest
+      expect(status).to.equal(200)
+    })
     Object.assign(article, Factory.createArticle())
   })
 
