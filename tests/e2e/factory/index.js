@@ -1,17 +1,34 @@
-const Ipsum = require("bavaria-ipsum");
-
-const ipsum = new Ipsum()
+import {
+  createArticle,
+  createMagazine,
+} from './resources'
+import {
+  createAuthResponse,
+  createCredentials
+} from './auth'
+import {
+  createUser,
+} from './users'
+import {
+  createInitialVuexStoreGetters,
+  createInitialVuexStoreState,
+} from './store'
+import {
+  createApiUrl,
+} from './env'
 
 export default {
-  createArticle: ({ args } = {}) => {
-    // Shortens the paragraph
-    const title = ipsum.generateSentence()
-    const content = ipsum.generateParagraph().substring(0, 100)
-    const _args = {
-      id: 0,
-      title,
-      content
-    }
-    return Object.assign({}, args, _args)
-  }
+  // Auth builders
+  createAuthResponse,
+  createCredentials,
+  // Entities builders
+  createArticle,
+  createMagazine,
+  // Env builders
+  createApiUrl,
+  // Store builders
+  createInitialVuexStoreState,
+  createInitialVuexStoreGetters,
+  // User builders
+  createUser,
 }

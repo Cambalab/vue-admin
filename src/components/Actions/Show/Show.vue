@@ -1,21 +1,23 @@
 <template>
-  <v-card>
-    <div class="text-xs-center d-flex right">
+  <v-card :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })}`">
+    <div class="text-xs-center d-flex right" :name="`${UI_NAMES.RESOURCE_VIEW_ACTIONS_CONTAINER.with({ resourceName, view })}`">
         <EditButton
           :resourceId="$route.params.id"
-          :resourceName="name">
+          :resourceName="resourceName">
         </EditButton>
         <Delete
           :resourceId="$route.params.id"
-          :resourceName="name">
+          :resourceName="resourceName">
         </Delete>
     </div>
-    <v-card-title primary-title>
-      <h3 class="headline mb-0 text-capitalize">{{name}} #{{$route.params.id}}</h3>
+    <v-card-title primary-title :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`">
+      <h3 class="headline mb-0 text-capitalize">
+        {{UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })}}
+      </h3>
     </v-card-title>
-    <v-card-text>
+    <v-card-text :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({ resourceName, view })}`">
       <component
-        :name="label(field)"
+        :name="componentName(field)"
         v-for="field in fields"
         v-if="resourceShow !== undefined"
         :key="key(label(field))"
@@ -29,6 +31,8 @@
 
 
 <script>
+import UI_CONTENT from '@constants/ui.content.default'
+import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents"
 import { EditButton, Delete } from "../../Actions";
@@ -37,19 +41,31 @@ export default {
   name: "Show",
 
   props: {
-    name: {
+    resourceName: {
       type: String,
-      default: null
+      required: true
     },
     fields: {
-      type: Array
+      type: Array,
+      required: true
+    },
+    va: {
+      type: Object,
+      required: true
+    }
+  },
+
+  data() {
+    return {
+      view: 'show',
+      UI_CONTENT,
+      UI_NAMES
     }
   },
 
   computed: {
     resourceShow: function() {
-      const resourceName = this.name + "/byId";
-      return this.$store.getters[resourceName](this.$route.params.id);
+      return this.va.getEntity()
     },
 
     ...mapState([
@@ -65,13 +81,8 @@ export default {
   },
 
   methods: {
-    fetchResource: function() {
-      const resourceName = this.name + "/fetchSingle";
-      return this.$store.dispatch(resourceName, { id: this.$route.params.id });
-    },
-
     fetchData() {
-      return this.fetchResource();
+      return this.va.fetchEntity()
     },
 
     type(type) {
@@ -79,7 +90,7 @@ export default {
     },
 
     key(label) {
-      return `${this.name}_${label}`
+      return `${this.resourceName}_${label}`
     },
 
     label(field) {
@@ -89,6 +100,10 @@ export default {
     args(field) {
       const args = typeof(field) === 'string' ? { 'label': field } : field
       return args
+    },
+
+    componentName(field) {
+      return UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({ resourceName: this.resourceName, view: this.view, field: this.label(field) })
     }
   },
 

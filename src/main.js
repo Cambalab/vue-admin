@@ -1,23 +1,28 @@
-import "@babel/polyfill";
-import Vue from "vue";
-import "./plugins/vuetify";
-import VueRouter from "vue-router";
+import "@babel/polyfill"
+import Vue from "vue"
+import "@plugins/vuetify"
+import VueRouter from "vue-router"
 
-Vue.use(VueRouter);
-const routes = [{}];
-const router = new VueRouter(routes);
+Vue.use(VueRouter)
+const routes = [{}]
+const router = new VueRouter(routes)
 
-import App from "./App.vue";
-import Vuex from "vuex";
+import App from "@demo/App.vue"
+import Vuex from "vuex"
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
-const store = new Vuex.Store({});
+const store = new Vuex.Store({})
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
-new Vue({
+const app = new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount("#app");
+}).$mount("#app")
+
+if (window.Cypress) {
+  // exposes the app, only available during E2E tests
+  window.app = app
+}

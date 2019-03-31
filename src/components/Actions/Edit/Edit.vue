@@ -1,24 +1,25 @@
 <template>
-  <v-card>
-    <v-card-title primary-title>
-      <h3 class="headline mb-0 text-capitalize">{{name}}</h3>
+  <v-card :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })}`">
+    <v-card-title primary-title :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`">
+      <h3 class="headline mb-0 text-capitalize">{{UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName })}}</h3>
     </v-card-title>
     <v-form>
-      <v-card-text>
+      <v-card-text :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({ resourceName, view })}`">
         <v-layout wrap>
           <v-flex xs8>
             <component
-              :name="label(field)"
+              :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({ resourceName, view, field: label(field) })}`"
+              v-if="entity"
               v-for="field in fields"
               :key="key(label(field))"
               :is="type(field.type)"
               v-bind="args(field)"
-              :value="resource[label(field)]"
-              @change="saveValue($event, label(field))">
+              :value="entity[label(field)]"
+              @change="storeValue($event, label(field))">
             </component>
           </v-flex>
           <v-flex xs12>
-            <v-btn color="success" v-on:click="submit">Save</v-btn>
+            <v-btn :name="`${UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({ resourceName, view })}`" color="success" v-on:click="submit">{{UI_CONTENT.EDIT_SUBMIT_BUTTON}}</v-btn>
           </v-flex>
         </v-layout>
       </v-card-text>
@@ -27,9 +28,10 @@
 </template>
 
 <script>
+import UI_CONTENT from '@constants/ui.content.default'
+import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from "vuex";
 import { Input, TextField } from "../../UiComponents"
-import Router from "../../../router"
 
 export default {
   name: "Edit",
@@ -38,52 +40,42 @@ export default {
     TextField: TextField
   },
   props: {
-    name: {
+    resourceName: {
       type: String,
       default: null
     },
     fields: {
-      type: Array
+      type: Array,
+      required: true
     },
-    redirect: {
+    va: {
       type: Object,
-      default: () => ({
-        idField: 'id',
-        view: 'show'
-      })
-    },
+      required: true
+    }
   },
   data() {
     return {
-      resource: {}
+      view: 'edit',
+      UI_CONTENT,
+      UI_NAMES
     }
   },
   computed: {
     ...mapState([
       "route" // vuex-router-sync
-    ])
-
+    ]),
+    entity() {
+      return this.va.getEntity()
+    }
   },
 
   methods: {
-    saveValue(newValue, fieldName) {
-      this.resource[fieldName] = newValue;
+    storeValue(value, resourceKey) {
+      this.va.updateEntity({ resourceKey, value })
     },
 
     submit() {
-      const resourceName = this.name + "/update";
-      // TODO: The then, catch could possibly be moved to the store using vuex-crud callbacks. Read #34 for docs - sgobotta
-      this.$store.dispatch(resourceName, { id: this.$route.params.id , data: this.resource })
-        .then((res) => {
-          if (this.redirect && res.status === 200) {
-            Router.redirect({ router: this.$router, resource: this.name, view: this.redirect.view, id: res.data[this.redirect.idField] })
-            return res
-          }
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error(err)
-        })
+      this.va.submitEntity()
     },
 
     type(type) {
@@ -91,7 +83,7 @@ export default {
     },
 
     key(label) {
-      return `${this.name}_${label}`
+      return `${this.resourceName}_${label}`
     },
 
     label(field) {
@@ -101,17 +93,11 @@ export default {
     args(field) {
       const args = typeof(field) === 'string' ? { 'label': field, 'placeHolder': field } : field
       return args
-    },
-
-    getResource() {
-      const resourceName = this.name + "/byId";
-      return this.$store.getters[resourceName](this.$route.params.id)
     }
-
   },
 
   created() {
-    this.resource = this.getResource();
+    this.va.fetchEntity()
   }
 
 };

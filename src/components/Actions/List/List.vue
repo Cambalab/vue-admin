@@ -1,72 +1,79 @@
 <template>
   <v-card :name="UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })">
     <div class="text-xs-center d-flex right">
-        <router-link
-          :name="`${UI_NAMES.RESOURCE_CREATE_BUTTON.with({ resourceName })}`"
-          v-if="hasCreate"
-          :to="{ name: `${name}/create` }">
-          <v-tooltip bottom>
-            <v-btn
-              icon
-              absolute
-              right
-              color="success"
-              slot="activator"
-              style="top:20px;">
-              <i class="v-icon material-icons">{{UI_CONTENT.RESOURCE_CREATE_BUTTON}}</i>
-            </v-btn>
-            <span>Create {{name}}</span>
-          </v-tooltip>
-        </router-link>
+      <router-link
+        :name="`${UI_NAMES.RESOURCE_CREATE_BUTTON.with({ resourceName })}`"
+        v-if="hasCreate"
+        :to="{ name: `${resourceName}/create` }">
+        <v-tooltip bottom>
+          <v-btn
+            icon
+            absolute
+            right
+            color="success"
+            slot="activator"
+            style="top:20px;">
+            <i class="v-icon material-icons">{{UI_CONTENT.RESOURCE_CREATE_BUTTON}}</i>
+          </v-btn>
+          <span>Create {{resourceName}}</span>
+        </v-tooltip>
+      </router-link>
     </div>
     <v-card-title
       :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`"
       primary-title>
-      <h3 class="headline mb-0 text-capitalize">{{name}}</h3>
+      <h3 class="headline mb-0 text-capitalize">{{resourceName}}</h3>
     </v-card-title>
 
     <v-data-table
       :headers="headers"
       :items="resourceList"
-      class="elevation-1">
+      class="elevation-1"
+      disable-initial-sort
+      :pagination.sync="pagination"
+      >
       <template
         slot="items"
         slot-scope="props"
         >
-        <td>
-          <router-link
-            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: 'id', index: props.index })}`"
-            v-if="hasShow"
-            :to="{ name: `${name}/show`, params: { id: props.item[resourceId] } }">
-            {{ props.item[resourceId] }}
-          </router-link>
-          <span
-            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: 'id', index: props.index })}`"
-            v-else>
-            {{ props.item[resourceId] }}
-          </span>
-        </td>
         <td class="text-xs-left"
           v-for="field in fields"
           :key="key(label(field))"
+          :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index: props.index })}`"
           >
-          <component
-            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index: props.index })}`"
-            :is="type(field.type)"
-            v-bind:content="props.item[label(field)]"
-            v-bind="args(field)">
-          </component>
+          <router-link
+            :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: resourceIdName, index: props.index })}`"
+            v-if="label(field) === resourceIdName && hasShow"
+            :to="{ name: `${resourceName}/show`, params: { id: props.item[resourceIdName] } }">
+            <component
+              :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index: props.index })}`"
+              :is="type(field.type)"
+              v-bind:content="props.item[label(field)]"
+              v-bind="args(field)">
+            </component>
+          </router-link>
+          <span v-else>
+            <component
+              :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index: props.index })}`"
+              :is="type(field.type)"
+              v-bind:content="props.item[label(field)]"
+              v-bind="args(field)">
+            </component>
+          </span>
         </td>
-        <td>
+        <td v-if="hasEdit">
           <EditButton
-            :resourceId="props.item[resourceId]"
-            :resourceName="name">
+            :resourceId="props.item[resourceIdName]"
+            :resourceName="resourceName"
+            :index="props.index">
           </EditButton>
         </td>
-        <td class="text-xs-right">
+        <td>
           <Delete
-            :resourceId="props.item[resourceId]"
-            :resourceName="name">
+            :resourceId="props.item[resourceIdName]"
+            :resourceName="resourceName"
+            :index="props.index"
+            >
           </Delete>
         </td>
       </template>
@@ -74,21 +81,19 @@
   </v-card>
 </template>
 
-
 <script>
-import UI_CONTENT from '../../../constants/ui.content.default'
-import UI_NAMES from '../../../constants/ui.element.names'
-import { mapState } from "vuex";
+import UI_CONTENT from '@constants/ui.content.default'
+import UI_NAMES from '@constants/ui.element.names'
+import UI_ELEMENTS from '@constants/ui.elements.props'
 import { Input, TextField } from "../../UiComponents";
 import { EditButton, Delete } from "../../Actions";
 
 export default {
   name: "List",
-
   props: {
-    name: {
+    resourceName: {
       type: String,
-      default: null
+      required: true,
     },
     hasShow: {
       type: Boolean
@@ -96,41 +101,46 @@ export default {
     hasCreate: {
       type: Boolean
     },
-    fields: {
-      type: Array
+    hasEdit: {
+      type: Boolean
     },
-    resourceId:{
-      type: String
+    fields: {
+      type: Array,
+      required: true
+    },
+    resourceIdName: {
+      type: String,
+      required: true
+    },
+    va: {
+      type: Object,
+      required: true
     }
   },
   data() {
+    const { rowsPerPage } = UI_ELEMENTS
     return {
-      resourceName: this.name,
       view: 'list',
       UI_CONTENT,
-      UI_NAMES
+      UI_NAMES,
+      pagination: {
+        page: 1,
+        rowsPerPage
+      }
     }
   },
   computed: {
     headers: function () {
-      let newHeaders = [
-        {
-          text: "ID",
-          align: 'left',
-          sortable: true,
-          width: 10,
-          value: this.resourceId
-        }
-      ];
+      const newHeaders = []
       this.fields.forEach((field) => {
         newHeaders.push({
-          text: this.label(field),
-          align: field.align || 'left',
+          text: field.headerText || this.label(field),
+          align: field.alignHeader || 'left',
           sortable: field.sortable || false,
           value: this.label(field)
         })
       })
-      newHeaders.push({
+      this.hasEdit && newHeaders.push({
         text: "Edit",
         align: 'center',
         sortable: false,
@@ -145,13 +155,8 @@ export default {
       return newHeaders;
     },
     resourceList: function() {
-      const resourceName = this.name + "/list";
-      return this.$store.getters[resourceName];
-    },
-
-    ...mapState([
-      "route" // vuex-router-sync
-    ])
+      return this.va.getList()
+    }
   },
 
   components: {
@@ -162,21 +167,12 @@ export default {
   },
 
   methods: {
-    fetchResource: function() {
-      const resourceName = this.name + "/fetchList";
-      return this.$store.dispatch(resourceName);
-    },
-
-    fetchData() {
-      return this.fetchResource();
-    },
-
     type(type) {
       return type || 'TextField'
     },
 
     key(label) {
-      return `${this.name}_${label}`
+      return `${this.resourceName}_${label}`
     },
 
     label(field) {
@@ -187,15 +183,10 @@ export default {
       const args = typeof(field) === 'string' ? { 'label': field } : field
       return args
     }
-
-  },
-
-  watch: {
-    $route: "fetchData"
   },
 
   created() {
-    this.fetchData();
+    this.va.fetchList()
   }
 };
 </script>

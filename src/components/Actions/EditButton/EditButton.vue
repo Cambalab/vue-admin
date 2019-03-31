@@ -1,16 +1,25 @@
 <template>
-  <v-tooltip bottom>
-    <v-btn
+  <div>
+    <v-tooltip
+    bottom>
+      <v-btn
+      :name="`${UI_NAMES.RESOURCE_EDIT_BUTTON.with({ resourceName, index })}`"
       @click="onEdit()"
       slot="activator"
       icon>
-      <i class="v-icon material-icons">edit</i>
-    </v-btn>
-    <span>Edit</span>
-  </v-tooltip>
+        <i class="v-icon material-icons">
+          {{UI_CONTENT.RESOURCE_EDIT_BUTTON}}
+        </i>
+      </v-btn>
+      <span>Edit</span>
+    </v-tooltip>
+  </div>
 </template>
 
 <script>
+import UI_CONTENT from '@constants/ui.content.default'
+import UI_NAMES from '@constants/ui.element.names'
+
 export default {
   name: "EditButton",
 
@@ -24,10 +33,16 @@ export default {
     },
     resourceName: {
       type: String
+    },
+    index: {
+      type: Number
     }
   },
   data() {
-    return {}
+    return {
+      UI_CONTENT,
+      UI_NAMES
+    }
   },
   methods: {
     onEdit() {
