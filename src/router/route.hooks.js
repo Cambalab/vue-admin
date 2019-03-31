@@ -1,17 +1,16 @@
-
-
 /**
  * Create Route Hooks - A function used to create route hooks
  *
  * @param {Boolean}   isPublic               Indicates whether or not a route needs authentication to be visited
  * @param {Array}     permissions            An array of route permissions as Strings
+ * @param {Object}    store                  A group of store auth actions
  * @param {String}    userPermissionsField   The name of the permissions field in a user object
- *
  * @return {type} An object with hook functions
  */
 export default({
   isPublic,
   permissions,
+  store,
   userPermissionsField
 }) => {
   const requiresAuth = !isPublic
@@ -20,9 +19,8 @@ export default({
     if (requiresAuth) {
       // It's a private route
 
-      // TODO: Gets token from localStorage or authorise in the backend
-      const token = localStorage.getItem('jwt')
-      if (token === null) {
+      const isAuthenticated = store.isAuthenticated()
+      if (!isAuthenticated) {
         // User is not authenticated
         next({
             path: '/login',
@@ -30,19 +28,20 @@ export default({
         })
       } else {
         // User is authenticated
-
         if (permissions.length > 0) {
           // Route has permissions restriction
 
-          // TODO: Gets user from the store
-          const user = { userPermissions: [] }
-          const { userPermissions } = user
-          const userHasPermissions = permissions.some(permission => userPermissions.indexOf(permission) > -1)
+          const user = store.getUser()
+          const { [userPermissionsField]: userPermissions } = user
+          const userHasPermissions = permissions.some(permission => {
+            return userPermissions.indexOf(permission) > -1
+          })
           if (userHasPermissions) {
             // User is authenticated and has route permissions
             next()
           } else {
             // User is authenticated but does not have route permissions
+            // TODO: Should redirect to an Anauthorized page - #90 - @sgobotta
             next({
               path: '/'
             })
