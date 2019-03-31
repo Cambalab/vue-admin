@@ -31,12 +31,21 @@
 npm i --save vue-admin-js
 ```
 
+## Configuration
+
+### Auth Provider
+**You will have to configure a simple adapter to communicate with your REST api.**
+
+**We currently provide a simple example using an axios client in the demo app. Though we intend to keep developing other kind of adapters for different node backend frameworks, they will live in separate packages.**
+
+**Anyways, we hope the axios example encourages you to write your own adapter until we release the adapters guide. The @va-auth module uses the vuex store and expects a user to make use of the action types it provides.**
+
 ## Usage
 
-***App.vue***
+***Your App.vue file***
 ```vue
 <template>
-  <Admin>
+  <Admin :authProvider="authProvider">
     <Resource
       name="articles"
       resourceIdName="id"
@@ -58,6 +67,13 @@ npm i --save vue-admin-js
   import ShowArticles from './components/articles/ShowArticles'
   import CreateArticles from './components/articles/CreateArticles'
   import EditArticles from './components/articles/EditArticles'
+  import createAxiosAdapter from './va-auth-adapter/axios.adapter'
+  import axios from 'axios'
+
+  const authUrl = 'http://localhost:8888/api/auth'
+  const client = axios
+
+  const authProvider = createAxiosAdapter(client, { authUrl })
 
   export default {
     name: 'App',
@@ -67,6 +83,8 @@ npm i --save vue-admin-js
     },
     data() {
       return {
+        authProvider,
+        // Your Components
         ListArticles,
         ShowArticles,
         CreateArticles,
@@ -77,7 +95,7 @@ npm i --save vue-admin-js
 </script>
 ```
 
-***ListArticles.vue***
+***Example of a ListArticles.vue component***
 ```vue
 <template>
   <List>
@@ -151,7 +169,7 @@ npm run test:unit
   <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">
     <img class="margin" width="20" src="public/camba_icon.png" />
   </a>
-  <strong>With :green_heart::purple_heart::heart: from <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">Cambá Coop</a>, Buenos Aires, Argentina</strong>
+  <strong>With :green_heart::purple_heart::heart: by <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">Cambá Coop</a> :earth_americas: Buenos Aires, Argentina</strong>
   <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">
     <img class="margin" width="20" src="public/camba_icon.png" />
   </a>
