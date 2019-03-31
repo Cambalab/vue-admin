@@ -36,7 +36,10 @@ module.exports = function(app) {
       }
       return user
     })
-    return res.status(200).send({ auth: true, token })
+    const newUser = Object.assign({}, user)
+    delete newUser.password
+    delete newUser.token
+    return res.status(200).send({ auth: true, token, user: newUser })
   })
 
   app.get('/api/auth', (req, res) => {

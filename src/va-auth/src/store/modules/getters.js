@@ -6,8 +6,7 @@
 export default () => {
   return {
     authStatus: state => state.status,
-    isAuthenticated: state => !!state.token,
-    getToken: state => state.token,
+    isAuthenticated: state => state.isAuthenticated,
     getUser: state => state.user,
   }
 }

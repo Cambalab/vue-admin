@@ -16,6 +16,9 @@ describe('Articles: List Test', () => {
   let articles
   let timesNavigatedToNextPage = 0
 
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser()
+  })
 
   before('Sets the articles fixture', () => {
     cy.fixture(resourceName).then(fixture => {

@@ -11,9 +11,12 @@ describe('Magazines: Create Action Test', () => {
     view
   })
 
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser()
+  })
+
   before('Visits the magazines create url', () => {
     cy.visit(`/#/${resourceName}/${view}`)
-    cy.reload()
   })
 
   after('Shuts down the server', () => {

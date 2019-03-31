@@ -12,6 +12,10 @@ describe('Magazines: Edit Action Test', () => {
     view
   })
 
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser()
+  })
+
   before('Search a magazine to edit', () => {
     cy.fixture(resourceName).then(fixture => {
       Object.assign(magazine, fixture[0])

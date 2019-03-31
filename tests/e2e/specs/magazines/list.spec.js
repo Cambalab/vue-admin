@@ -12,6 +12,10 @@ describe('Magazines: List Action Test', () => {
   let magazines
   let timesNavigatedToNextPage = 0
 
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser()
+  })
+
   before('Sets the magazines fixture', () => {
     cy.fixture(resourceName).then(fixture => {
       magazines = fixture

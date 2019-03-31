@@ -7,12 +7,19 @@ describe('Articles: Create Test', () => {
   const view = 'create'
   const article = {}
 
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser()
+  })
+
+  before('Visits the create url', () => {
+    cy.visit(`/#/${resourceName}/${view}`)
+  })
+
   before('Generate an article to create', () => {
     Object.assign(article, Factory.createArticle())
   })
 
   it('The url path should be articles/create', () => {
-    cy.visit(`/#/${resourceName}/${view}`)
     cy.url().should('include', `${resourceName}/${view}`)
   })
 

@@ -25,6 +25,7 @@
             no-action
             :prepend-icon="item.model ? item.icon : item['icon-alt']"
             append-icon=""
+            :value="item.value"
           >
             <v-list-tile slot="activator">
               <v-list-tile-content>
@@ -49,7 +50,17 @@
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
-          <v-list-tile v-else :to="item.link" :key="item.title">
+          <v-list-tile v-else-if="item.link" :to="item.link" :key="item.title">
+            <v-list-tile-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>
+                {{ item.title }}
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile v-else-if="item.click" @click="item.click()" :key="item.title">
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -82,6 +93,7 @@
 <script>
 import UI_CONTENT from '../../../constants/ui.content.default'
 import UI_NAMES from '../../../constants/ui.element.names'
+import AuthActionTypes from '@va-auth/types'
 
 export default {
   name: "Ui",
@@ -95,11 +107,18 @@ export default {
       drawer: false,
       menuItems: [
         {
+          click: () => {},
           icon: "keyboard_arrow_up",
           "icon-alt": "keyboard_arrow_down",
           title: "Crud",
-          model: true,
-          children: []
+          children: [],
+          model: {},
+          value: true,
+        },
+        {
+          click: () => this.$store.dispatch(`auth/${AuthActionTypes.AUTH_LOGOUT_REQUEST}`),
+          icon: "power_settings_new",
+          title: "Sign Out",
         }
       ],
       UI_CONTENT,
@@ -111,13 +130,11 @@ export default {
     let whitelist = ["resources/addRoute"];
     this.$store.subscribe(mutation => {
       if (whitelist.includes(mutation.type)) {
-        this.menuItems.forEach(item => {
-          item.children.push({
-            icon: "list",
-            title: mutation.payload.name,
-            link: mutation.payload.path
-          });
-        })
+        this.menuItems[0].children.push({
+          icon: "list",
+          title: mutation.payload.name,
+          link: mutation.payload.path
+        });
       }
     });
   },

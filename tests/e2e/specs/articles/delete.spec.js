@@ -5,21 +5,27 @@ describe('Articles: Delete Test', () => {
   const resourceName = 'articles'
   const article = {}
 
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser()
+  })
+
   before('Search an article to delete', () => {
     cy.fixture(resourceName).then(fixture => {
       Object.assign(article, fixture[0])
     })
   })
 
-  before('initialise the server', () => {
-    const routes = [{ name: 'show', response: article }]
-    cy.InitServer({ resourceName, routes, response: article })
+  before('Initialises the server', () => {
+    const routes = [
+      { name: 'show', response: article },
+    ]
+    cy.InitServer({ resourceName, routes })
   })
 
   before('Visits the Show view url', () => {
-    const url = `${resourceName}/show/${article.id}`
-    cy.visit(`/#/${url}`)
-    cy.url().should('include', url)
+    const showUrl = `${resourceName}/show/${article.id}`
+    cy.visit(`/#/${showUrl}`)
+    cy.url().should('include', showUrl)
     cy.server({ enable: false })
   })
 

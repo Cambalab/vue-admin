@@ -31,8 +31,8 @@ export default () => {
   // Vuex Initial State for auth
   const initialAuthState = {
     error: '',
+    isAuthenticated: false,
     status: 'idle',
-    token: '',
     user: {}
   }
   // Vuex Initial State for entities

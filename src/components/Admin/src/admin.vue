@@ -1,12 +1,17 @@
 <template>
   <div>
-    <Core
-      v-bind:appLayout="appLayout"
-      :title="title"
-    >
-      <router-view></router-view>
-    </Core>
-    <slot></slot>
+    <div v-if="!isAuthenticated">
+      <Auth />
+    </div>
+    <div v-else>
+      <Core
+        v-bind:appLayout="appLayout"
+        :title="title"
+      >
+        <router-view></router-view>
+      </Core>
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -18,6 +23,7 @@ import entitiesModule from "@store/modules/entities"
 import createAuthModule from '@va-auth/store'
 import UI_CONTENT from '@constants/ui.content.default'
 import Auth from '@components/Auth'
+import AuthActionTypes from '@va-auth/types'
 
 export default {
   name: "Admin",
@@ -25,37 +31,38 @@ export default {
     appLayout: {
       default: () => Ui
     },
+    authLayout: {
+      default: () => Auth
+    },
+    authProvider: {
+      type: Function,
+      required: true
+    },
     title: {
       type: String,
       default: UI_CONTENT.MAIN_TOOLBAR_TITLE
-    }
+    },
   },
   components: {
+    Auth,
     Core,
     Ui
   },
   created() {
     this.$store.registerModule('resources', resourceModule)
     this.$store.registerModule('entities', entitiesModule)
-    this.createAuthModule()
+    this.registerStoreModule()
   },
   mounted: function() {
     this.loadAuthRoutes()
+    this.$store.dispatch(`auth/${AuthActionTypes.AUTH_CHECK_REQUEST}`)
   },
   methods: {
-    createAuthModule() {
-      const accessTokenField = 'userToken'
-      const authUrl = 'http://localhost:8888/api/auth'
-      const authModuleName = 'auth'
-      const usersUrl = 'http://localhost:8888/api/auth'
-      const userFields = { username: 'email', password: 'password' }
+    registerStoreModule() {
       createAuthModule({
-        accessTokenField,
-        authUrl,
-        moduleName: authModuleName,
+        client: this.authProvider,
+        moduleName: 'auth',
         store: this.$store,
-        usersUrl,
-        userFields,
       })
     },
     loadAuthRoutes() {
@@ -68,6 +75,11 @@ export default {
       }
       routes.push(route)
       this.$router.addRoutes(routes)
+    }
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$store.getters[`auth/isAuthenticated`]
     }
   },
   render() {

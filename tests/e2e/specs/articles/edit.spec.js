@@ -12,6 +12,10 @@ describe('Articles: Edit Test', () => {
   const newArticle = Factory.createArticle()
   const utils = InitEntityUtils({ resourceName, view })
 
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser()
+  })
+
   before('Search an article to edit', () => {
     cy.fixture(resourceName).then(fixture => {
       Object.assign(article, fixture[0])
@@ -19,9 +23,12 @@ describe('Articles: Edit Test', () => {
     })
   })
 
-  before('Initialises the mocked server and visits the edit url', () => {
+  before('Initialises the mocked serve and visits the edit url', () => {
     const response = article
-    const routes = [{ name: 'edit', response }, { name: 'show', response }]
+    const routes = [
+      { name: 'edit', response },
+      { name: 'show', response }
+    ]
 
     cy.InitServer({ resourceName, routes })
     cy.visit(`/#/${resourceName}/edit/${article.id}`)

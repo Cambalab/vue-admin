@@ -1,5 +1,5 @@
 <template>
-  <Admin>
+  <Admin :authProvider="authProvider">
     <Resource name="articles" :resourceIdName="resourceIdName" :userPermissionsField="userPermissionsField" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
       <View slot="list"   :component="ListArticles" :permissions="['admin']" />
       <View slot="show"   :component="ShowArticles" :permissions="['admin']" />
@@ -17,8 +17,8 @@
 
 <script>
 
-import Resource from '@components/Resource'
 import Admin from '@components/Admin'
+import Resource from '@components/Resource'
 
 import ListArticles from './components/articles/ListArticles'
 import ShowArticles from './components/articles/ShowArticles'
@@ -29,6 +29,22 @@ import ListMagazines from './components/magazines/ListMagazines'
 import ShowMagazines from './components/magazines/ShowMagazines'
 import CreateMagazines from './components/magazines/CreateMagazines'
 import EditMagazines from './components/magazines/EditMagazines'
+
+import createAxiosAdapter from './va-auth-adapter/axios.adapter'
+import axios from 'axios'
+
+const authModuleName = 'auth'
+const authUrl = 'http://localhost:8888/api/auth'
+const client = axios
+const storageKey = 'token'
+const userFields = { username: 'username', password: 'password' }
+
+const authProvider = createAxiosAdapter(client, {
+  authModuleName,
+  authUrl,
+  storageKey,
+  userFields,
+})
 
 // Articles Views as Array
 
@@ -111,6 +127,7 @@ export default {
   },
   data() {
     return {
+      authProvider,
       resourceIdName,
       userPermissionsField,
       // Articles Views as Array

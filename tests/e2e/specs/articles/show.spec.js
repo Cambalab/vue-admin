@@ -7,6 +7,10 @@ describe('Articles: Show Test', () => {
   const view = 'show'
   const article = {}
 
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser()
+  })
+
   before('Search an article to show', () => {
     cy.fixture(resourceName).then(fixture => {
       // Takes the first element of the fixture to use as subject

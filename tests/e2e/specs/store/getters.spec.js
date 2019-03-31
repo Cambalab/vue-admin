@@ -3,12 +3,21 @@ import Factory from '../../factory'
 describe('Vuex Store Getters', () => {
   const getStore = () => cy.getStore()
   const initialGetters = {}
+  let isUserAuthenticated = false
 
   before('Initialises the store', () => {
     const _initialGetters = Factory.createInitialVuexStoreGetters()
     Object.assign(initialGetters, _initialGetters)
-    cy.visit('/#/')
-    cy.reload()
+  })
+
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser().then(authResponse => {
+      const { response: { body: { user } }, status } = authResponse
+      if (status === 200) {
+        isUserAuthenticated = true
+        Object.assign(initialGetters, { 'auth/getUser': user })
+      }
+    }).visit('/#/')
   })
 
   it('Should have attributes on initialisation', () => {
@@ -50,14 +59,12 @@ describe('Vuex Store Getters', () => {
    */
   function authGettersShouldHaveBeenInitialised(resource) {
     const authStatus = `${resource}/authStatus`
-    const getToken = `${resource}/getToken`
     const getUser = `${resource}/getUser`
     const isAuthenticated = `${resource}/isAuthenticated`
     getStore().its('getters').should(getters => {
       expect(getters[authStatus]).to.equal(initialGetters[authStatus])
-      expect(getters[getToken]).to.equal(initialGetters[getToken])
-      expect(getters[getUser]).to.be.empty
-      expect(getters[isAuthenticated]).to.equal(initialGetters[isAuthenticated])
+      expect(getters[getUser]).to.deep.equal(initialGetters[getUser])
+      expect(getters[isAuthenticated]).to.equal(isUserAuthenticated)
     })
   }
 

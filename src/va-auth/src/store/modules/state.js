@@ -1,18 +1,13 @@
 /**
- * Create Auth Module State - Given a set of data, creates the state for an
- * auth store module
- *
- * @param {String}   accessTokenField The name of the token in localStorage
+ * Create Auth Module State - Creates the state for an auth store module
  *
  * @return {Object} The state for the auth store
  */
-export default({
-  accessTokenField,
-}) => {
+export default () => {
   return {
     error: '',
+    isAuthenticated: false,
     status: 'idle',
-    token: localStorage.getItem(accessTokenField) || '',
     user: {},
   }
 }

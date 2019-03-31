@@ -24,7 +24,7 @@ export default ({
       create: createRequest,
       edit: editRequest,
       show: showRequest,
-      delete: deleteRequest
+      delete: deleteRequest,
     }
 
     /**
