@@ -18,8 +18,11 @@ const createInitialVuexStoreGetters = () => {
  */
 
 const createAuthResponse = (args = {}) => {
+  const status = 200
+  const user = createUser()
   const _args = {
-    status: 200,
+    status,
+    user
   }
   return Object.assign({}, _args, args)
 }
