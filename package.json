@@ -4,14 +4,15 @@
   "description": "An open source frontend Framework for building admin applications running in the browser, using ES6, Vue.js and Vuetify.js",
   "author": "Camba <info@camba.coop>",
   "scripts": {
-    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib ./src/index.js",
+    "changelog": "github_changelog_generator && git add CHANGELOG.md && git commit -am \"Updates changelog\"",
     "lint": "vue-cli-service lint",
     "prepublish": "npm run build",
-    "publish": "git push origin --tags && git push origin",
+    "publish": "git push origin --tags && npm run changelog && git push origin",
     "release:major": "npm version major && npm publish",
     "release:minor": "npm version minor && npm publish",
     "release:patch": "npm version patch && npm publish",
+    "serve": "vue-cli-service serve",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit"
   },
