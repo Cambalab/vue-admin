@@ -169,7 +169,7 @@ npm run test:unit
   <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">
     <img class="margin" width="20" src="public/camba_icon.png" />
   </a>
-  <strong>With :green_heart::purple_heart::heart: by <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">Cambá Coop</a> :earth_americas: Buenos Aires, Argentina</strong>
+  <strong>With :green_heart: :purple_heart: :heart: by <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">Cambá Coop</a> :earth_americas: Buenos Aires, Argentina</strong>
   <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">
     <img class="margin" width="20" src="public/camba_icon.png" />
   </a>
