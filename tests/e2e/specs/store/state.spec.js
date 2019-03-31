@@ -7,8 +7,14 @@ describe('Vuex Store State', () => {
   before('Initialises the store', () => {
     const _initialState = Factory.createInitialVuexStoreState()
     Object.assign(initialState, _initialState)
-    cy.visit('/#/')
-    cy.reload()
+  })
+  before('Initialises authenticated with a default user', () => {
+    cy.InitAuthenticatedUser().then(authResponse => {
+      const { response: { body: { user } }, status } = authResponse
+      if (status === 200) {
+        Object.assign(initialState.auth, { isAuthenticated: true, user })
+      }
+    }).visit('/#/')
   })
 
   it('Should have attributes on initialisation', () => {
