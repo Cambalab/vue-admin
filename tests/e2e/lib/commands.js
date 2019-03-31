@@ -1,6 +1,7 @@
 // Can't use aliases yet, without adding a custom webpack config, see https://github.com/vuejs/vue-cli/issues/2465 - @sgobotta
 import UI_NAMES from '../../../src/constants/ui.element.names'
 import { createUrlWithResource, createElementQueryWith } from './helpers'
+const { AUTH_LOGIN_REQUEST } = require('../../../src/va-auth/src/types')
 
 const storePath = 'app.$store'
 
@@ -138,3 +139,9 @@ export const getElement = ({
 }
 
 export const getStore = () => cy.window().its(storePath)
+
+export const authenticate = (args) => {
+  getStore().then(store => {
+    store.dispatch(`auth/${AUTH_LOGIN_REQUEST}`, args)
+  })
+}
