@@ -1,3 +1,4 @@
+const Factory = require('../../factory')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 
@@ -11,14 +12,22 @@ describe('Articles: Delete Test', () => {
     })
   })
 
-  before('initialise the server', () => {
-    const routes = [{ name: 'show', response: article }]
+  before('Initialises the server', () => {
+    const authResponse = Factory.createUser()
+    const routes = [
+      { name: 'show', response: article },
+      { name: 'auth', response: authResponse }
+    ]
     cy.InitServer({ resourceName, routes, response: article })
   })
 
   before('Visits the Show view url', () => {
     const url = `${resourceName}/show/${article.id}`
     cy.visit(`/#/${url}`)
+    cy.authenticate().wait(`@auth`).then(xmlHttpRequest => {
+      const { status } = xmlHttpRequest
+      expect(status).to.equal(200)
+    })
     cy.url().should('include', url)
     cy.server({ enable: false })
   })
