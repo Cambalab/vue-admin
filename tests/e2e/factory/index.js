@@ -27,6 +27,18 @@ const createCredentials = (args = {}) => {
   return Object.assign({}, _args, args)
 }
 
+const createUser = (args = {}) => {
+  const id = 234567
+  const email = 'dev@camba.coop'
+  const permissions = ['admin']
+  const _args = {
+    id,
+    email,
+    permissions,
+  }
+  return Object.assign({}, _args, args)
+}
+
 const createArticle = (args = {}) => {
   // Shortens the paragraph
   const title = ipsum.generateSentence()
@@ -75,6 +87,7 @@ export default {
   createMagazine,
   // Auth methods
   createCredentials,
+  createUser,
   // API related methods
   apiUrl
 }
