@@ -34,7 +34,7 @@ module.exports = function(app) {
         _user.token = token
         return _user
       }
-      return user
+      return _user
     })
     const newUser = Object.assign({}, user)
     delete newUser.password
