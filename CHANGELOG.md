@@ -1,5 +1,36 @@
 # Change Log
 
+## [v0.0.4](https://github.com/Cambalab/vue-admin/tree/v0.0.4) (2019-04-02)
+[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.13...v0.0.4)
+
+**Implemented enhancements:**
+
+- Expose Auth action Types in the distributed version [\#107](https://github.com/Cambalab/vue-admin/issues/107)
+
+**Merged pull requests:**
+
+- Updates index.js [\#108](https://github.com/Cambalab/vue-admin/pull/108) ([sgobotta](https://github.com/sgobotta))
+
+## [v0.0.13](https://github.com/Cambalab/vue-admin/tree/v0.0.13) (2019-04-02)
+[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.12...v0.0.13)
+
+## [v0.0.12](https://github.com/Cambalab/vue-admin/tree/v0.0.12) (2019-04-02)
+[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.3...v0.0.12)
+
+**Implemented enhancements:**
+
+- Integrate View's permissions to the route.hooks [\#96](https://github.com/Cambalab/vue-admin/issues/96)
+
+**Fixed bugs:**
+
+- Test Server: users removed from the whitelist [\#103](https://github.com/Cambalab/vue-admin/issues/103)
+
+**Merged pull requests:**
+
+- 96 integrate views permissions to the route hooks [\#106](https://github.com/Cambalab/vue-admin/pull/106) ([sgobotta](https://github.com/sgobotta))
+- Test serer: fixes lost users from the whitelist [\#104](https://github.com/Cambalab/vue-admin/pull/104) ([sgobotta](https://github.com/sgobotta))
+- 0.0.3 [\#102](https://github.com/Cambalab/vue-admin/pull/102) ([sgobotta](https://github.com/sgobotta))
+
 ## [v0.0.3](https://github.com/Cambalab/vue-admin/tree/v0.0.3) (2019-03-31)
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.2...v0.0.3)
 
