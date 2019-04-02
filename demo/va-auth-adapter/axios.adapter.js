@@ -9,12 +9,14 @@ export default (client, options = {}) => {
     } = AuthActionTypes
 
     const {
+      authFields,
       authUrl,
       storageKey,
-      userFields,
+      userField,
     } = Object.assign({
+      authFields: { username: 'username', password: 'password' },
       storageKey: 'token',
-      userFields: { username: 'username', password: 'password' },
+      userField: 'user',
     }, options);
 
     switch (type) {
@@ -22,8 +24,8 @@ export default (client, options = {}) => {
         return new Promise((resolve, reject) => {
           const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
-            [userFields.username]: params.username,
-            [userFields.password]: params.password
+            [authFields.username]: params.username,
+            [authFields.password]: params.password
           }
           const method = 'post'
           const url = authUrl
@@ -31,7 +33,7 @@ export default (client, options = {}) => {
           client({ url, headers, method })
             .then(response => {
               const { data } = response
-              const { [storageKey]: token, user } = data
+              const { [storageKey]: token, [userField]: user } = data
               // something more secure maybe?
               localStorage.setItem(storageKey, token)
               client.defaults.headers.common['Authorization'] = token
@@ -62,7 +64,9 @@ export default (client, options = {}) => {
           const method = 'get'
           client({ url, headers, method })
             .then(response => {
-              resolve(response)
+              const { data } = response
+              const { [userField]: user } = data
+              resolve(user)
             })
             .catch(error => {
               reject(error)

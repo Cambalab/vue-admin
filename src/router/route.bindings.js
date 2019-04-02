@@ -2,6 +2,7 @@ import listUtils from '@store/utils/list.utils'
 import showUtils from '@store/utils/show.utils'
 import createUtils from '@store/utils/create.utils'
 import editUtils from '@store/utils/edit.utils'
+import createAuthUtils from '@va-auth/utils'
 import createRouteHooks from './route.hooks'
 
 /**
@@ -37,6 +38,7 @@ export default ({
   const hasCreate = !!create
   const hasEdit = !!edit
   const resourcePath = `/${resourceName}`
+  const authUtils = createAuthUtils({ store })
   return {
 
     list: ({ wrapper }) => {
@@ -67,6 +69,12 @@ export default ({
       } else {
         // list is an Object
         const { component, isPublic, permissions } = list
+        const routeHooks = createRouteHooks({
+          isPublic,
+          permissions,
+          store: authUtils,
+          userPermissionsField
+        })
         return {
           path: resourcePath,
           name,
@@ -85,7 +93,8 @@ export default ({
           meta: {
             isPublic,
             permissions
-          }
+          },
+          ...routeHooks,
         }
       }
     },
@@ -115,6 +124,12 @@ export default ({
       } else {
         // show is an Object
         const { component, isPublic, permissions } = show
+        const routeHooks = createRouteHooks({
+          isPublic,
+          permissions,
+          store: authUtils,
+          userPermissionsField
+        })
         return {
           path: `${resourcePath}/show/:id`,
           name,
@@ -129,7 +144,8 @@ export default ({
           meta: {
             isPublic,
             permissions
-          }
+          },
+          ...routeHooks,
         }
       }
     },
@@ -162,6 +178,12 @@ export default ({
       } else {
         // create is an Object
         const { component, isPublic, permissions } = create
+        const routeHooks = createRouteHooks({
+          isPublic,
+          permissions,
+          store: authUtils,
+          userPermissionsField
+        })
         return {
           path: `${resourcePath}/create`,
           name,
@@ -176,7 +198,8 @@ export default ({
           meta: {
             isPublic,
             permissions
-          }
+          },
+          ...routeHooks
         }
       }
     },
@@ -209,6 +232,12 @@ export default ({
       } else {
         // edit is an Object
         const { component, isPublic, permissions } = edit
+        const routeHooks = createRouteHooks({
+          isPublic,
+          permissions,
+          store: authUtils,
+          userPermissionsField
+        })
         return {
           path: `${resourcePath}/edit/:id`,
           name,
@@ -223,7 +252,8 @@ export default ({
           meta: {
             isPublic,
             permissions
-          }
+          },
+          ...routeHooks
         }
       }
     }

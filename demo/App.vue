@@ -33,17 +33,17 @@ import EditMagazines from './components/magazines/EditMagazines'
 import createAxiosAdapter from './va-auth-adapter/axios.adapter'
 import axios from 'axios'
 
-const authModuleName = 'auth'
+const authFields = { username: 'username', password: 'password' }
 const authUrl = 'http://localhost:8888/api/auth'
 const client = axios
 const storageKey = 'token'
-const userFields = { username: 'username', password: 'password' }
+const userField = 'user'
 
 const authProvider = createAxiosAdapter(client, {
-  authModuleName,
+  authFields,
   authUrl,
   storageKey,
-  userFields,
+  userField,
 })
 
 // Articles Views as Array
