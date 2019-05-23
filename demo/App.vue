@@ -12,6 +12,15 @@
       <View slot="create" :component="CreateMagazines" :isPublic="true" />
       <View slot="edit"   :component="EditMagazines" :isPublic="true" />
     </Resource>
+    <!-- Authors Resource -->
+    <Resource name="authors"
+      :resourceIdName="resourceIdName"
+      :apiUrl="authorsApiUrl">
+      <View slot="list"   :component="ListAuthors"   :isPublic="true" />
+      <View slot="show"   :component="ShowAuthors"   :isPublic="true" />
+      <View slot="create" :component="CreateAuthors" :isPublic="true" />
+      <View slot="edit"   :component="EditAuthors"   :isPublic="true" />
+    </Resource>
   </Admin>
 </template>
 
@@ -29,6 +38,11 @@ import ListMagazines from './components/magazines/ListMagazines'
 import ShowMagazines from './components/magazines/ShowMagazines'
 import CreateMagazines from './components/magazines/CreateMagazines'
 import EditMagazines from './components/magazines/EditMagazines'
+
+import CreateAuthors from './components/authors/CreateAuthors'
+import EditAuthors from './components/authors/EditAuthors'
+import ListAuthors from './components/authors/ListAuthors'
+import ShowAuthors from './components/authors/ShowAuthors'
 
 import createAxiosAdapter from './va-auth-adapter/axios.adapter'
 import axios from 'axios'
@@ -90,7 +104,7 @@ const articlesRedirect = {
   }
 }
 
-const magazinesRedirect = articlesRedirect
+const magazinesRedirect = articlesRedirect;
 
 // The name of the id attribute
 const resourceIdName = 'id'
@@ -118,6 +132,7 @@ const userPermissionsField = 'permissions'
 
 const articlesApiUrl = 'http://localhost:8888/api/'
 const magazinesApiUrl = 'http://localhost:8888/api/'
+const authorsApiUrl = 'http://localhost:8888/api/'
 
 export default {
   name: 'App',
@@ -133,6 +148,7 @@ export default {
       // Articles Views as Array
       articlesApiUrl,
       magazinesApiUrl,
+      authorsApiUrl,
       articlesList,
       articlesShow,
       fieldsArticleCreate,
@@ -148,7 +164,12 @@ export default {
       ShowMagazines,
       CreateMagazines,
       EditMagazines,
-      magazinesRedirect
+      magazinesRedirect,
+      // Authors Views as Components
+      ListAuthors,
+      ShowAuthors,
+      CreateAuthors,
+      EditAuthors
 
       // #23 - To use a feathers server just add the parseResponses attribute
       // below, pass ':parseResponses='parseResponses' to Resource in the
