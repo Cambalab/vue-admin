@@ -5,15 +5,15 @@ module.exports = function (app) {
 
   const ipsum = new Ipsum();
 
-  const startDate  = new Date(1970, 1, 1); 
-  const finishDate = new Date(1980, 1, 1);
+  const startDate  = new Date(1970, 1, 1, 0, 0, 0, 0); 
+  const finishDate = new Date(1980, 1, 1, 0, 0, 0, 0);
 
   const generateRandomAuthor = id => {
     return {
       id,
       name: ipsum.generateWord(),
       lastname: ipsum.generateWord(),
-      bithdate: randomDate(startDate, finishDate)
+      birthdate: randomDate(startDate, finishDate).toISOString().substr(0,10)
     };
   }
 
@@ -86,7 +86,7 @@ module.exports = function (app) {
       id,
       name: body.name,
       lastname: body.lastname,
-      bithdate: body.birthdate
+      birthdate: body.birthdate
     };
 
     authors.push(author);

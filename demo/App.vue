@@ -15,7 +15,8 @@
     <!-- Authors Resource -->
     <Resource name="authors"
       :resourceIdName="resourceIdName"
-      :apiUrl="authorsApiUrl">
+      :apiUrl="authorsApiUrl"
+      :redirect="authorsRedirect">
       <View slot="list"   :component="ListAuthors"   :isPublic="true" />
       <View slot="show"   :component="ShowAuthors"   :isPublic="true" />
       <View slot="create" :component="CreateAuthors" :isPublic="true" />
@@ -105,6 +106,7 @@ const articlesRedirect = {
 }
 
 const magazinesRedirect = articlesRedirect;
+const authorsRedirect = articlesRedirect;
 
 // The name of the id attribute
 const resourceIdName = 'id'
@@ -169,7 +171,8 @@ export default {
       ListAuthors,
       ShowAuthors,
       CreateAuthors,
-      EditAuthors
+      EditAuthors,
+      authorsRedirect
 
       // #23 - To use a feathers server just add the parseResponses attribute
       // below, pass ':parseResponses='parseResponses' to Resource in the

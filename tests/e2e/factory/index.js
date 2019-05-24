@@ -1,6 +1,7 @@
 import {
   createArticle,
   createMagazine,
+  createAuthor,
 } from './resources'
 import {
   createAuthResponse,
@@ -24,6 +25,7 @@ export default {
   // Entities builders
   createArticle,
   createMagazine,
+  createAuthor,
   // Env builders
   createApiUrl,
   // Store builders

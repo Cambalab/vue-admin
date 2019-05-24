@@ -1,7 +1,8 @@
 <template>
   <Show>
     <h3 source="id" />
-    <span><h2 source="name" /><h2 source="lastname" /></span>
+    <h2 source="name" />
+    <h2 source="lastname" />
     <p source="birthdate" />
   </Show>
 </template>
