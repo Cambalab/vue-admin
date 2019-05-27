@@ -1,5 +1,5 @@
 <template>
-  <Admin :authProvider="authProvider">
+  <Admin :authProvider="authProvider" :unauthorized="UnauthorizedView">
     <Resource name="articles" :resourceIdName="resourceIdName" :userPermissionsField="userPermissionsField" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
       <View slot="list"   :component="ListArticles" :permissions="['admin']" />
       <View slot="show"   :component="ShowArticles" :permissions="['admin']" />
@@ -19,6 +19,9 @@
 
 import Admin from '@components/Admin'
 import Resource from '@components/Resource'
+
+import UnauthorizedView from './components/UnauthorizedView'
+import UnauthorizedCustomView from './components/UnauthorizedCustomView'
 
 import ListArticles from './components/articles/ListArticles'
 import ShowArticles from './components/articles/ShowArticles'
@@ -130,6 +133,8 @@ export default {
       authProvider,
       resourceIdName,
       userPermissionsField,
+      UnauthorizedView,
+      UnauthorizedCustomView,
       // Articles Views as Array
       articlesApiUrl,
       magazinesApiUrl,

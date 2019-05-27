@@ -26,6 +26,13 @@ export default {
    * Shared content inside List, Show, Create, Edit components
    */
 
+  /**
+   * Unauthorized component
+   */
+  UNAUTHORIZED_DEFAULT_HEADER: 'Unauthorized',
+  UNAUTHORIZED_DEFAULT_MESSAGE: 'You do not have permission to access this page.\
+  If you think you should be allowed to see this page, please contact the administrator.',
+
   // Any View Title (List, Show, Create, Edit)
   RESOURCE_VIEW_TITLE: {
     with: ({ resourceName }) => `${resourceName}`

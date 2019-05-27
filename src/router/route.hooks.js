@@ -42,9 +42,7 @@ export default({
           } else {
             // User is authenticated but does not have route permissions
             // TODO: Should redirect to an Anauthorized page - #90 - @sgobotta
-            next({
-              path: '/'
-            })
+            next('/unauthorized');
           }
         } else {
           // Route has no permissions restriction

@@ -18,6 +18,7 @@
 <script>
 import Core from "@components/Core";
 import Ui from "@components/Ui";
+import Unauthorized from '@components/Unauthorized'
 import resourceModule from "@store/modules/resource";
 import entitiesModule from "@store/modules/entities"
 import createAuthModule from '@va-auth/store'
@@ -42,6 +43,9 @@ export default {
       type: String,
       default: UI_CONTENT.MAIN_TOOLBAR_TITLE
     },
+    unauthorized: {
+      type: Object
+    }
   },
   components: {
     Auth,
@@ -51,6 +55,7 @@ export default {
   created() {
     this.$store.registerModule('resources', resourceModule)
     this.$store.registerModule('entities', entitiesModule)
+    this.registerUnauthorizedIfAny(this.unauthorized);
     this.registerStoreModule()
   },
   mounted: function() {
@@ -75,6 +80,14 @@ export default {
       }
       routes.push(route)
       this.$router.addRoutes(routes)
+    },
+    registerUnauthorizedIfAny(unauthorizedComponent) {
+      const routeForUnauthorized = {
+        path: '/unauthorized',
+        name: 'unauthorized',
+        component: unauthorizedComponent || Unauthorized
+      }
+      this.$router.addRoutes([routeForUnauthorized]);
     }
   },
   computed: {

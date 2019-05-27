@@ -88,5 +88,11 @@ export default {
        ? `${resourceName}-delete-button-${index}`
        : `${resourceName}-delete-button`
      }
-   }
+   },
+
+  /**
+   * Unauthorized
+   */
+   UNAUTHORIZED_DEFAULT_CONTAINER_HEADER: 'unauthorized-default-container-header',
+   UNAUTHORIZED_DEFAULT_CONTAINER_MESSAGE: 'unauthorized-default-container-message'
 }
