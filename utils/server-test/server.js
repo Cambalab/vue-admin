@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 
 const createMagazinesService = require("./services/magazines");
 const createArticlesService = require('./services/articles');
+const createAuthorsService = require('./services/authors');
 const createAuthService= require('./services/auth');
 
 /* eslint-enable */
@@ -20,7 +21,8 @@ app.use(bodyParser.json());
 
 createArticlesService(app);
 createMagazinesService(app);
-createAuthService(app)
+createAuthService(app);
+createAuthorsService(app);
 
 const port = process.env.PORT || 8080;
 
