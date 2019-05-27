@@ -9,7 +9,6 @@ export default {
     }
   },
   render(createElement, context) {
-    console.log('SimpleFormWrapper', 'Im wrapping and rendering the create form...')
     return createElement('div', context.children)
   }
 };

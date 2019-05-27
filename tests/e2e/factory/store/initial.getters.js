@@ -9,7 +9,8 @@ export default () => {
   // Initial vuex crud resources should be added here
   const initialResources = [
     'articles',
-    'magazines'
+    'magazines',
+    'authors'
   ]
   // Vuex initial entities getters should be added here
   const entitiesCrud = {
