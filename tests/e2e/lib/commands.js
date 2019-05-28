@@ -147,10 +147,12 @@ export const authenticate = (args) => {
   })
 }
 
-export const InitAuthenticatedUser = ({ credentials = {} } = {}) => {
+export const InitAuthenticatedUser = ({ credentials = {}, authResponse = {} } = {}) => {
   const _credentials = Factory.createCredentials()
   const authParams = Object.assign({}, _credentials, credentials)
-  const response = Factory.createAuthResponse()
+  const _response = Factory.createAuthResponse()
+  const response = Object.assign({}, _response, authResponse)
+  
   cy.visit('/#/login')
   cy.server()
   cy.route({
