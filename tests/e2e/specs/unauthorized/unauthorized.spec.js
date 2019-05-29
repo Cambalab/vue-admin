@@ -10,14 +10,14 @@ describe('Unauthorized User Test', () => {
   const createAuthResponse = (user) => Factory.createAuthResponse({ user })
   const authResponseWithUserWithoutPermissions = createAuthResponse(userWithoutPermissions)
   const authResponseWithUserWithPermissions = createAuthResponse(userWithPermissions)
-  
-  it('Not admin user should be redirected when trying to access unauthorized view', () => {
+
+  it('A user without admin privileges should be redirected when trying to access an unauthorized view', () => {
     cy.InitAuthenticatedUser({ authResponse: authResponseWithUserWithoutPermissions })
     cy.visit(`/#/${testResourceName}/`)
     cy.url().should('include', `/#/${unauthorizedPath}`)
   })
 
-  it('Admin user should not be redirected when trying to access unauthorized view', () => {
+  it('A user with admin privileges should not be redirected when trying to access an unauthorized view', () => {
     cy.InitAuthenticatedUser({ authResponse: authResponseWithUserWithPermissions })
     cy.visit(`/#/${testResourceName}/`)
     cy.url().should('include', `/#/${testResourceName}`)
