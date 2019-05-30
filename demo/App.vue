@@ -1,4 +1,6 @@
 <template>
+  <!-- If you want to use your own custom unauthorized page you just have to provide it like -->
+  <!-- <Admin :authProvider="authProvider" :unauthorized="UnauthorizedCustomView">           -->
   <Admin :authProvider="authProvider">
     <Resource name="articles" :resourceIdName="resourceIdName" :userPermissionsField="userPermissionsField" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
       <View slot="list"   :component="ListArticles" :permissions="['admin']" />
@@ -29,6 +31,9 @@
 
 import Admin from '@components/Admin'
 import Resource from '@components/Resource'
+
+import UnauthorizedView from './components/UnauthorizedView'
+import UnauthorizedCustomView from './components/UnauthorizedCustomView'
 
 import ListArticles from './components/articles/ListArticles'
 import ShowArticles from './components/articles/ShowArticles'
@@ -147,6 +152,8 @@ export default {
       authProvider,
       resourceIdName,
       userPermissionsField,
+      UnauthorizedView,
+      UnauthorizedCustomView,
       // Articles Views as Array
       articlesApiUrl,
       magazinesApiUrl,
