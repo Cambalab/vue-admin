@@ -9,6 +9,7 @@ import {
 import Admin from '@components/Admin'
 import AuthTypes from '@va-auth/types'
 import Resource from '@components/Resource'
+import Unauthorized from '@components/Unauthorized'
 import { name, description, version } from '../package.json'
 
 const components = [
@@ -41,6 +42,7 @@ export {
   // Exports Core components
   Admin,
   Resource,
+  Unauthorized,
   // Exports Types
   AuthTypes,
 }
