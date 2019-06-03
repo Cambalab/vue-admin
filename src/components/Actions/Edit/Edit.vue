@@ -74,6 +74,13 @@ export default {
       this.va.updateEntity({ resourceKey, value })
     },
 
+    storeValues() {
+      this.fields.forEach(field => {
+        const label = this.label(field)
+        this.storeValue(this.entity[label], label)
+      })
+    },
+
     submit() {
       this.va.submitEntity()
     },
@@ -97,7 +104,7 @@ export default {
   },
 
   created() {
-    this.va.fetchEntity()
+    this.va.fetchEntity().then(this.storeValues)
   }
 
 };
