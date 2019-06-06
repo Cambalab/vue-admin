@@ -36,6 +36,11 @@ export default () => {
     status: 'idle',
     user: {}
   }
+
+  // Vuex Initial State for request
+  const initialRequestState = {
+    isLoading: false
+  }
   // Vuex Initial State for entities
   const initialEntitiesState = {}
   // Vuex Initial State for resource routes
@@ -63,6 +68,7 @@ export default () => {
     ...initResourcesState(initialResources),
     auth: initialAuthState,
     entities: initialEntitiesState,
-    resources: initialResourcesState
+    resources: initialResourcesState,
+    requests: initialRequestState
   }
 }

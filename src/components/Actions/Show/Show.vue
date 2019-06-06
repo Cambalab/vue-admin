@@ -1,5 +1,6 @@
 <template>
   <v-card :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })}`">
+    <Spinner :spin="isLoading"></Spinner>
     <div class="text-xs-center d-flex right" :name="`${UI_NAMES.RESOURCE_VIEW_ACTIONS_CONTAINER.with({ resourceName, view })}`">
         <EditButton
           :resourceId="$route.params.id"
@@ -34,7 +35,7 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from "vuex";
-import { Input, TextField } from "../../UiComponents"
+import { Input, TextField, Spinner } from "../../UiComponents"
 import { EditButton, Delete } from "../../Actions";
 
 export default {
@@ -70,14 +71,19 @@ export default {
 
     ...mapState([
       "route" // vuex-router-sync
-    ])
+    ]),
+
+    isLoading() {
+      return this.$store.getters['requests/isLoading']
+    }
   },
 
   components: {
     Input: Input,
     TextField: TextField,
     Delete: Delete,
-    EditButton: EditButton
+    EditButton: EditButton,
+    Spinner
   },
 
   methods: {

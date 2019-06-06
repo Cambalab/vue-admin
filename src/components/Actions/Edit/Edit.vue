@@ -1,5 +1,6 @@
 <template>
   <v-card :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })}`">
+    <Spinner :spin="isLoading"></Spinner>
     <v-card-title primary-title :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`">
       <h3 class="headline mb-0 text-capitalize">{{UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName })}}</h3>
     </v-card-title>
@@ -31,13 +32,14 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from "vuex";
-import { Input, TextField } from "../../UiComponents"
+import { Input, TextField, Spinner } from "../../UiComponents"
 
 export default {
   name: "Edit",
   components: {
     Input: Input,
-    TextField: TextField
+    TextField: TextField,
+    Spinner: Spinner
   },
   props: {
     resourceName: {
@@ -66,6 +68,9 @@ export default {
     ]),
     entity() {
       return this.va.getEntity()
+    },
+    isLoading() {
+      return this.$store.getters['requests/isLoading'];
     }
   },
 
