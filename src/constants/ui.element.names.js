@@ -96,5 +96,10 @@ export default {
    UNAUTHORIZED_DEFAULT_CONTAINER_HEADER: 'unauthorized-default-container-header',
    UNAUTHORIZED_DEFAULT_CONTAINER_HEADER_DEFAULT: 'unauthorized-default-container-header-default',
    UNAUTHORIZED_DEFAULT_CONTAINER_MESSAGE: 'unauthorized-default-container-message',
-   UNAUTHORIZED_DEFAULT_CONTAINER_MESSAGE_DEFAULT: 'unauthorized-default-container-message-default'
+   UNAUTHORIZED_DEFAULT_CONTAINER_MESSAGE_DEFAULT: 'unauthorized-default-container-message-default',
+
+  /**
+   * Default Spinner
+   */
+  SPINNER_CONTAINER: 'spinner-container'
 }

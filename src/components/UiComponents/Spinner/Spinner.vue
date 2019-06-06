@@ -1,6 +1,6 @@
 <template>
   <div v-if="loading">
-    <v-container pos-absolute fill-height progress-bar-container>
+    <v-container :id="UI_NAMES.SPINNER_CONTAINER" pos-absolute fill-height progress-bar-container>
       <v-progress-circular
         class="progress-bar text-xs-center"
         indeterminate
@@ -11,6 +11,8 @@
   </div>
 </template>
 <script>
+import UI_NAMES from '@constants/ui.element.names'
+
 export default {
   name: "Spinner",
   props: {
@@ -19,6 +21,11 @@ export default {
   computed: {
     loading() {
       return this.spin
+    }
+  },
+  data() {
+    return {
+      UI_NAMES
     }
   }
 }
