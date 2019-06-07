@@ -21,6 +21,7 @@ import Ui from "@components/Ui";
 import Unauthorized from '@components/Unauthorized'
 import resourceModule from "@store/modules/resource";
 import entitiesModule from "@store/modules/entities"
+import requestsModule from "@store/modules/requests"
 import createAuthModule from '@va-auth/store'
 import UI_CONTENT from '@constants/ui.content.default'
 import Auth from '@components/Auth'
@@ -55,6 +56,7 @@ export default {
   created() {
     this.$store.registerModule('resources', resourceModule)
     this.$store.registerModule('entities', entitiesModule)
+    this.$store.registerModule('requests', requestsModule)
     this.registerUnauthorizedIfAny(this.unauthorized);
     this.registerStoreModule()
   },

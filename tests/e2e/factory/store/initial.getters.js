@@ -27,6 +27,11 @@ export default () => {
     'auth/getUser': '',
     'auth/isAuthenticated': false
   }
+
+  // Vuex auth getters
+  const requestGetters = {
+    'requests/isLoading': false
+  }
   /**
    * initResourcesCrud - Given a list of resources, creates mocked vuex crud
    * methods for each of them
@@ -50,6 +55,7 @@ export default () => {
     ...authGetters,
     ...initResourcesCrud(initialResources),
     ...entitiesCrud,
-    ...resourcesGetters
+    ...resourcesGetters,
+    ...requestGetters
   }
 }

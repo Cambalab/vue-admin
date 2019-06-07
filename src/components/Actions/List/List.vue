@@ -1,5 +1,6 @@
 <template>
   <v-card :name="UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })">
+    <Spinner :spin="isLoading"></Spinner>
     <div class="text-xs-center d-flex right">
       <router-link
         :name="`${UI_NAMES.RESOURCE_CREATE_BUTTON.with({ resourceName })}`"
@@ -85,7 +86,7 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import UI_ELEMENTS from '@constants/ui.elements.props'
-import { Input, TextField } from "../../UiComponents";
+import { Input, TextField, Spinner } from "../../UiComponents";
 import { EditButton, Delete } from "../../Actions";
 
 export default {
@@ -156,6 +157,9 @@ export default {
     },
     resourceList: function() {
       return this.va.getList()
+    },
+    isLoading() {
+      return this.$store.getters['requests/isLoading']
     }
   },
 
@@ -163,7 +167,8 @@ export default {
     Input: Input,
     TextField: TextField,
     Delete: Delete,
-    EditButton: EditButton
+    EditButton: EditButton,
+    Spinner: Spinner
   },
 
   methods: {
