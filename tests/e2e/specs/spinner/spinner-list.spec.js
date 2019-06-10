@@ -8,14 +8,6 @@ describe('Spinner on a List View Test', () => {
     cy.InitAuthenticatedUser()
   })
 
-  const setArticles = function (_articles) {
-    this.articles = _articles
-  }
-
-  before('Sets the articles fixture', () => {
-    cy.fixture(resourceName).then(setArticles)
-  })
-
   before('Visit the list url', () => {
     const routes = [{ name: view }]
     cy.InitServer({ resourceName, routes })
