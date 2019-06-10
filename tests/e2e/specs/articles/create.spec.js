@@ -73,4 +73,5 @@ describe('Articles: Create Test', () => {
     input.type(article[field])
     input.should('have.value', article[field])
   }
+
 })

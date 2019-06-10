@@ -1,4 +1,4 @@
-import createCrudModule from "vuex-crud";
+import createCrudModule, { client } from "vuex-crud";
 
 /**
  * Crud Module - Given a set of data, creates a vuex crud module and calls
@@ -22,6 +22,21 @@ export default ({
     const rootUrl =`${apiUrl}${resourceName}/`
     return id ? `${rootUrl}${id}` : rootUrl
   }
+  const setLoading = isLoading => () => store.commit('requests/setLoading', { isLoading })
+
+  // Requests Interceptors
+  const successCall = (injectedLogic) => (requestOrResponse) => {
+    injectedLogic()
+    return requestOrResponse
+  }
+  const errorCall = (injectedLogic) => (error) => {
+    injectedLogic()
+    return Promise.reject(error);
+  }
+
+  client.interceptors.request.use(successCall(setLoading(true)));
+  client.interceptors.response.use(successCall(setLoading(false)), errorCall(setLoading(false)));
+
   const module = createCrudModule({
     resource: resourceName,
     customUrlFn,
