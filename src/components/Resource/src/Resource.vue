@@ -44,8 +44,6 @@ export default {
     }
   },
   created: function() {
-    console.log(this.$store)
-    this.$store.unregisterModule(this.name)
     createCrudModule({
       apiUrl: this.apiUrl,
       resourceName: this.name,
