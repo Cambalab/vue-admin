@@ -44,6 +44,8 @@ export default {
     }
   },
   created: function() {
+    console.log(this.$store)
+    this.$store.unregisterModule(this.name)
     createCrudModule({
       apiUrl: this.apiUrl,
       resourceName: this.name,
@@ -82,6 +84,9 @@ export default {
       routes.push(bind.edit({ wrapper: Edit }))
       // Adds the routes to the global router
       this.$router.addRoutes(routes)
+    },
+    test() {
+      return 0
     }
   },
   mounted: function() {

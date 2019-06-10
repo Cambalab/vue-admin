@@ -1,4 +1,6 @@
 import "@babel/polyfill"
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import './assets/fonts/Montserrat/Montserrat.css'
 import Vue from "vue"
 import "@plugins/vuetify"
 import VueRouter from "vue-router"
