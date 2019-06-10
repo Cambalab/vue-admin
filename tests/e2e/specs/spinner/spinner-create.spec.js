@@ -1,4 +1,3 @@
-const Factory = require('../../factory')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 describe('Spinner on a Create View Test', () => {

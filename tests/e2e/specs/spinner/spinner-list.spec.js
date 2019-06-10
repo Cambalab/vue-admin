@@ -1,19 +1,19 @@
-const Factory = require('../../factory')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 describe('Spinner on a List View Test', () => {
   const resourceName = 'articles'
   const view = 'list'
-  let articles
 
   before('Initialises authenticated with a default user', () => {
     cy.InitAuthenticatedUser()
   })
 
+  const setArticles = function (_articles) {
+    this.articles = _articles
+  }
+
   before('Sets the articles fixture', () => {
-    cy.fixture(resourceName).then(fixture => {
-      articles = fixture
-    })
+    cy.fixture(resourceName).then(setArticles)
   })
 
   before('Visit the list url', () => {
