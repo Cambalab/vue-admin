@@ -1,4 +1,4 @@
-import { submitEntity, updateEntity, getEntityForm } from './common.utils'
+import { submitEntity, initEntity, updateEntity, getEntityForm } from './common.utils'
 
 /**
  * Create View Utils - A function used to create utilities
@@ -45,6 +45,18 @@ export default ({
       updateEntity({
         resourceKey,
         value,
+        store,
+        resourceName,
+        formType
+      })
+    },
+
+    /**
+     * initEntity - Init the 'resourceName' entity in the store.
+     */
+    initEntity() {
+      const formType = 'createForm'
+      initEntity({
         store,
         resourceName,
         formType
