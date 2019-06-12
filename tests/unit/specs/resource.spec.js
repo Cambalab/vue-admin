@@ -94,7 +94,8 @@ describe('Resource.vue', () => {
     const { storeMethods } = resourceFixture.methods
     const { params } = storeMethods[methodName]
     expect(storeSpy.addRoute).toHaveBeenCalledTimes(1)
-    expect(storeSpy.addRoute).toHaveBeenCalledWith(methodName, params)
+    const addedRouteCallbackExpectation = { addedRouteCallback: expect.any(Function) }
+    expect(storeSpy.addRoute).toHaveBeenCalledWith(methodName, { ...params, ...addedRouteCallbackExpectation })
   })
 
   it('should have the store initialised with {initialResources} getters', () => {
