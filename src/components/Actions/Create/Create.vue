@@ -77,6 +77,10 @@ export default {
     }
   },
 
+  mounted: function() {
+    this.va.initEntity()
+  },
+
   methods: {
     storeValue(value, resourceKey) {
       this.va.updateEntity({ resourceKey, value })

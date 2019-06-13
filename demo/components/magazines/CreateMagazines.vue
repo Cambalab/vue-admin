@@ -136,7 +136,10 @@ export default {
       // your apiUrl
       this.va.submitEntity()
     }
-  }
+  },
+  mounted: function() {
+    this.va.initEntity()
+  },
 };
 
 </script>
