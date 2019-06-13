@@ -82,9 +82,6 @@ export default {
       routes.push(bind.edit({ wrapper: Edit }))
       // Adds the routes to the global router
       this.$router.addRoutes(routes)
-    },
-    test() {
-      return 0
     }
   },
   mounted: function() {
