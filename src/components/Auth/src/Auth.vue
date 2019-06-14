@@ -54,14 +54,9 @@
 <script>
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
-import AuthTypes from '@va-auth/types'
 
 export default {
   name: 'Login',
-
-  props: {
-
-  },
 
   data: () => {
     const {
@@ -85,11 +80,17 @@ export default {
     }
   },
 
+  props: {
+    va: {
+      type: Object,
+      required: true
+    }
+  },
+
   methods: {
     validate () {
       if (this.$refs.form.validate()) {
-        const params = { username: this.email, password: this.password }
-        this.$store.dispatch(`auth/${AuthTypes.AUTH_LOGIN_REQUEST}`, params)
+        this.va.login(this.email, this.password)
       }
     },
   }

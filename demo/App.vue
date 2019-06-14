@@ -1,7 +1,7 @@
 <template>
   <!-- If you want to use your own custom unauthorized page you just have to provide it like -->
   <!-- <Admin :authProvider="authProvider" :unauthorized="UnauthorizedCustomView">           -->
-  <Admin :authProvider="authProvider">
+  <Admin :authProvider="authProvider" >
     <Resource name="articles" :resourceIdName="resourceIdName" :userPermissionsField="userPermissionsField" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
       <View slot="list"   :component="ListArticles" :permissions="['admin']" />
       <View slot="show"   :component="ShowArticles" :permissions="['admin']" />
@@ -49,6 +49,8 @@ import CreateAuthors from './components/authors/CreateAuthors'
 import EditAuthors from './components/authors/EditAuthors'
 import ListAuthors from './components/authors/ListAuthors'
 import ShowAuthors from './components/authors/ShowAuthors'
+
+import AuthCustomView from './components/AuthCustomView'
 
 import createAxiosAdapter from './va-auth-adapter/axios.adapter'
 import axios from 'axios'
@@ -145,7 +147,8 @@ export default {
   name: 'App',
   components: {
     Admin: Admin,
-    Resource: Resource
+    Resource: Resource,
+    AuthCustomView
   },
   data() {
     return {
@@ -154,6 +157,7 @@ export default {
       userPermissionsField,
       UnauthorizedView,
       UnauthorizedCustomView,
+      AuthCustomView,
       // Articles Views as Array
       articlesApiUrl,
       magazinesApiUrl,
