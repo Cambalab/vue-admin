@@ -4,11 +4,16 @@ export default {
     routes: []
   },
   mutations: {
-    addRoute({ routes }, payload) {
-      routes.push({
-        path: payload.path,
-        name: payload.name
-      });
+    addRoute({ routes }, { path, name, addedRouteCallback }) {
+      let matchingPathRouteIndex
+      let newRoute = { path, name }
+      routes.forEach((route, index) => (route.name === name) && (matchingPathRouteIndex = index))
+      if (matchingPathRouteIndex !== undefined) {
+        routes[matchingPathRouteIndex] = newRoute
+      } else {
+        routes.push(newRoute)
+        addedRouteCallback()
+      }
     }
   },
   getters: {

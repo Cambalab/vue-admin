@@ -14,7 +14,9 @@ export default ({ snapshot = 'default' }) => {
     Resource: initMutationsForResource
   }
   const resourcesMutations = {
-    'resources/addRoute': () => {}
+    'resources/addRoute': (state, args) => {
+      args.addedRouteCallback && args.addedRouteCallback()
+    }
   }
 
   // Initialises default mutations
