@@ -1,5 +1,5 @@
 <template>
-  <div fill-height>
+  <div fill-height :name="UI_NAMES.CUSTOM_AUTH">
     <v-layout>
       <v-flex xs12 sm8 md4 class="text-xs-center">
         <v-card :name="UI_NAMES.CUSTOM_AUTH_CONTAINER">
@@ -50,7 +50,7 @@
       <v-flex hidden-xs-only sm4 md8 class="va-img-sector text-xs-center">
         <div class="va-img-container">
           <img class="va-img"
-            src="https://raw.githubusercontent.com/Cambalab/vue-admin/master/public/logo.png"
+            src="../assets/vue-admin-logo.png"
           />
           <h3 class="headline mt-3">
             Welcome to Vue-Admin!
@@ -58,14 +58,14 @@
         </div>
         <div class="credit-container">
           <p>
-            <img class="camba-icon" src="https://github.com/Cambalab/vue-admin/raw/master/public/camba_icon.png" />
+            <img class="camba-icon" src="../assets/camba-icon.png" />
             With
             <v-icon small color="green darken-2">favorite</v-icon>
             <v-icon small color="purple darken-2">favorite</v-icon>
             <v-icon small color="red darken-2">favorite</v-icon> by
             <a href="https://camba.coop/" target="_blank" rel="noopener noreferrer">Cambá Coop</a>
             in Buenos Aires, Argentina
-            <img class="camba-icon" src="https://github.com/Cambalab/vue-admin/raw/master/public/camba_icon.png" />
+            <img class="camba-icon" src="../assets/camba-icon.png" />
           </p>
         </div>
       </v-flex>
@@ -153,5 +153,9 @@ export default {
       bottom: 0;
       margin-bottom: 25px;
       width: 100%;
+  }
+
+  a {
+    text-decoration: none;
   }
 </style>

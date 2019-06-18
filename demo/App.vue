@@ -3,7 +3,7 @@
   <!-- <Admin :authProvider="authProvider" :unauthorized="UnauthorizedCustomView">             -->
   <!-- If you want to use your own custom authentication page you just have to provide it like -->
   <!-- <Admin :authProvider="authProvider" :authLayout="AuthCustomView">                       -->
-  <Admin :authProvider="authProvider">
+  <Admin :authProvider="authProvider" >
     <Resource name="articles" :resourceIdName="resourceIdName" :userPermissionsField="userPermissionsField" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
       <View slot="list"   :component="ListArticles" :permissions="['admin']" />
       <View slot="show"   :component="ShowArticles" :permissions="['admin']" />

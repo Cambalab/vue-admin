@@ -24,6 +24,7 @@ export default {
    * Custom Auth component
    */
 
+  CUSTOM_AUTH: 'va-custon-auth',
   CUSTOM_AUTH_CONTAINER: 'va-login-container',
   CUSTOM_AUTH_CONTAINER_TITLE: 'va-login-container-title',
   CUSTOM_AUTH_USERNAME_INPUT: 'va-login-username',
