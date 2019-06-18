@@ -126,20 +126,21 @@ export default {
     };
   },
   mounted() {
-    // Listen to addRoutes mutations
-    let whitelist = ["resources/addRoute"];
-    this.$store.subscribe(mutation => {
-      if (whitelist.includes(mutation.type)) {
-        this.menuItems[0].children.push({
-          icon: "list",
-          title: mutation.payload.name,
-          link: mutation.payload.path
-        });
-      }
-    });
+    this.mapCurrentRegisteredRoutes()
   },
-  computed: {},
   methods: {
+    // Listen to addRoutes mutations
+    mapCurrentRegisteredRoutes() {
+      let whitelist = ["resources/addRoute"];
+      this.$store.subscribe((mutation, state) => {
+        if (whitelist.includes(mutation.type)) {
+          const currentRoutes = state.resources.routes.map(route => {
+            return { icon: 'list', title: route.name, link: route.path }
+          })
+          this.menuItems[0].children = currentRoutes
+        }
+      });
+    }
   }
 };
 </script>

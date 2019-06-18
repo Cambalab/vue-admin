@@ -44,24 +44,23 @@ export default {
     }
   },
   created: function() {
-    createCrudModule({
-      apiUrl: this.apiUrl,
-      resourceName: this.name,
-      resourceIdName: this.resourceIdName,
-      parseResponses: this.parseResponses,
-      store: this.$store
-    })
+    if (!this.storeHasModule(this.name)) {
+      createCrudModule({
+        apiUrl: this.apiUrl,
+        resourceName: this.name,
+        resourceIdName: this.resourceIdName,
+        parseResponses: this.parseResponses,
+        store: this.$store
+      })
+    }
   },
   methods: {
-    addRoute: function(path, name) {
+    addRoute: function(path, name, addedRouteCallback) {
       const resourceName = "resources/addRoute"
-      this.$store.commit(resourceName, { path, name })
+      return this.$store.commit(resourceName, { path, name, addedRouteCallback })
     },
-    loadRoutes() {
-      const resourcePath = `/${this.name}`
+    bindComponentsOnRoutes: function() {
       const routes = []
-      // Adds the 'resourceName' path, mainly used for the drawer
-      this.addRoute(resourcePath, this.name)
       // Initialises bindings to create the navigation routes
       const bind = createRouteBindings({
         list: this.list,
@@ -82,6 +81,15 @@ export default {
       routes.push(bind.edit({ wrapper: Edit }))
       // Adds the routes to the global router
       this.$router.addRoutes(routes)
+    },
+    loadRoutes() {
+      const resourcePath = `/${this.name}`
+      // Adds the 'resourceName' path, mainly used for the drawer
+      // and if the route was successfully added then it bind the components with their route
+      this.addRoute(resourcePath, this.name, this.bindComponentsOnRoutes)
+    },
+    storeHasModule(moduleName) {
+      return !!this.$store.state[moduleName]
     }
   },
   mounted: function() {
