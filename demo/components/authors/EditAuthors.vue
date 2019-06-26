@@ -3,17 +3,39 @@
     <input source="id" placeHolder="Id" />
     <input source="name" placeHolder="Name" />
     <input source="lastname" placeHolder="LastName" />
-    <input source="birthdate" placeHolder="Birthdate" />
+    <input source="birthdate" placeHolder="Birthdate" type="DateInput"
+      :datePickerProps="datePickerProps"
+      :vMenuProps="vMenuProps"
+      :parse="parseDate"
+      :format="formatDate"
+      :valid="validDate" />
   </Edit>
 </template>
 
 <script>
 import Edit from '@components/Actions/Edit'
+import dateInputMethods from './authors-date-input-methods'
 
 export default {
   name: 'EditAuthors',
   components: {
     Edit
+  },
+  data() {
+    const { parseDate, formatDate, validDate } = dateInputMethods
+    return {
+      datePickerProps: {
+        locale: 'en-us',
+        type: 'date'
+      },
+      vMenuProps: {
+        nudgeRight: 40,
+        closeOnContentClick: true
+      },
+      parseDate,
+      formatDate,
+      validDate
+    }
   }
 }
 </script>
