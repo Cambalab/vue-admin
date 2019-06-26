@@ -32,14 +32,15 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from "vuex";
-import { Input, TextField, Spinner } from "../../UiComponents"
+import { Input, TextField, Spinner, DateInput } from "../../UiComponents"
 
 export default {
   name: "Edit",
   components: {
     Input: Input,
     TextField: TextField,
-    Spinner: Spinner
+    Spinner: Spinner,
+    DateInput
   },
   props: {
     resourceName: {
