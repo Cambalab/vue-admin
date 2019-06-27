@@ -13,6 +13,7 @@
     <v-text-field
       slot="activator"
       :label="placeHolder"
+      :name="name"
       :readonly="readonly"
       :disabled="disabled"
       v-model="formattedDate"

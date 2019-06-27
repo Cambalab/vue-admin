@@ -44,7 +44,7 @@ describe('Authors: Create Test', () => {
   })
 
   it('The {Birthdate} input is filled when an user types in', () => {
-    theFieldInputIsFilledWhenAnUserTypesIn('birthdate')
+    theFieldInputIsFilledWhenAnUserTypesIn('birthdate').click()
   })
 
   it('Authors Create View should redirect to the List View on a create submit', () => {
@@ -76,5 +76,7 @@ describe('Authors: Create Test', () => {
 
     input.type(author[field])
     input.should('have.value', author[field])
+
+    return input
   }
 })

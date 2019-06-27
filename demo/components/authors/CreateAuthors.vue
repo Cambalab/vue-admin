@@ -7,7 +7,8 @@
       :vMenuProps="vMenuProps"
       :parse="parseDate"
       :format="formatDate"
-      :valid="validDate" />
+      :valid="validDate"
+      :readonly="readonly" />
   </Create>
 </template>
 
@@ -32,6 +33,7 @@ export default {
         nudgeRight: 40,
         closeOnContentClick: true
       },
+      readonly: false,
       parseDate,
       formatDate,
       validDate

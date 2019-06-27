@@ -26,7 +26,8 @@ export default {
     return {
       datePickerProps: {
         locale: 'en-us',
-        type: 'date'
+        type: 'date',
+        noTitle: true
       },
       vMenuProps: {
         nudgeRight: 40,
