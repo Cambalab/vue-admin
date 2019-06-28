@@ -2,7 +2,6 @@
 
 const { queryElementByProp } = require('../../helpers')
 
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 

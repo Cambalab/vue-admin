@@ -24,7 +24,6 @@
 <script>
 import UI_CONTENT from '../../../constants/ui.content.default'
 import UI_NAMES from '../../../constants/ui.element.names'
-import AuthActionTypes from '@va-auth/types'
 import { DefaultSidebar } from '@components/UiComponents';
 
 export default {

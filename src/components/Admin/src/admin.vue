@@ -56,8 +56,7 @@ export default {
   },
   components: {
     Auth,
-    Core,
-    Ui
+    Core
   },
   created() {
     this.$store.registerModule('resources', resourceModule)

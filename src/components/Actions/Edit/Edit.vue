@@ -8,16 +8,17 @@
       <v-card-text :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({ resourceName, view })}`">
         <v-layout wrap>
           <v-flex xs8>
-            <component
-              :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({ resourceName, view, field: label(field) })}`"
-              v-if="entity"
-              v-for="field in fields"
-              :key="key(label(field))"
-              :is="type(field.type)"
-              v-bind="args(field)"
-              :value="entity[label(field)]"
-              @change="storeValue($event, label(field))">
-            </component>
+            <span v-if="entity">
+              <component
+                :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({ resourceName, view, field: label(field) })}`"
+                v-for="field in fields"
+                :key="key(label(field))"
+                :is="type(field.type)"
+                v-bind="args(field)"
+                :value="entity[label(field)]"
+                @change="storeValue($event, label(field))">
+              </component>
+            </span>
           </v-flex>
           <v-flex xs12>
             <v-btn :name="`${UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({ resourceName, view })}`" color="success" v-on:click="submit">{{UI_CONTENT.EDIT_SUBMIT_BUTTON}}</v-btn>
