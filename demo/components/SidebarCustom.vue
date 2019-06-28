@@ -1,6 +1,6 @@
 <template>
   <Sidebar>
-    <Heading key="A Heading" heading="A Heading" href="/!#/"/>
+    <Heading heading="A Heading" href="/!#/"/>
     <Node title="Entities" icon="keyboard_arrow_up" icon-alt="keyboard_arrow_down">
       <Link title="Articles" path="/articles" icon="list" />
       <Link title="Magazines" path="/magazines" icon="list" />
