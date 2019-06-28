@@ -44,21 +44,4 @@ describe('UI Test', () => {
     })
     cy.get(`${mainToolbarTitleElement} button`).click()
   })
-
-  it('Drawer should redirect to Articles list view on article tile click', () => {
-    const routes = [{ name: 'list' }]
-    cy.InitServer({ resourceName: 'articles', routes })
-    const drawerArticlesTileName = UI_NAMES.DRAWER_RESOURCE_TILE.with({
-      resourceName: 'articles'
-    })
-
-    const drawerArticlesTileElement = queryElementByProp({
-      type: 'a',
-      prop: 'name',
-      value: drawerArticlesTileName
-    })
-    cy.get(drawerArticlesTileElement).click()
-
-    cy.url().should('include', '/articles')
-  })
 })
