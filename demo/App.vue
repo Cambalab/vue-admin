@@ -57,8 +57,6 @@ import ShowAuthors from './components/authors/ShowAuthors'
 import createAxiosAdapter from './va-auth-adapter/axios.adapter'
 import axios from 'axios'
 
-import Vue from 'vue'
-
 const authFields = { username: 'username', password: 'password' }
 const authUrl = 'http://localhost:8888/api/auth'
 const client = axios
