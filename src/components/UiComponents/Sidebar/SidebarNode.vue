@@ -18,7 +18,7 @@
 </template>
 <script>
 export default {
-  name: "Node",
+  name: "SidebarNode",
   props: {
     title: String,
     icon: String,

@@ -38,7 +38,7 @@ describe('UI Test', () => {
     cy.url().should('include', '/articles')
   })
 
-  it('Drawer should redirect to Magazines list view on article tile click', () => {
+  it('Drawer should redirect to Magazines list view on magazine tile click', () => {
     const routes = [{ name: 'list' }]
     cy.InitServer({ resourceName: 'magazines', routes })
     const drawerMagazinesTileName = UI_NAMES.DRAWER_RESOURCE_TILE.with({
@@ -55,7 +55,7 @@ describe('UI Test', () => {
     cy.url().should('include', '/magazines')
   })
 
-  it('Drawer should redirect to Authors list view on article tile click', () => {
+  it('Drawer should redirect to Authors list view on authors tile click', () => {
     const routes = [{ name: 'list' }]
     cy.InitServer({ resourceName: 'authors', routes })
     const drawerAuthorsTileName = UI_NAMES.DRAWER_RESOURCE_TILE.with({
@@ -72,7 +72,7 @@ describe('UI Test', () => {
     cy.url().should('include', '/authors')
   })
 
-  it('Drawer should redirect to Authors list view on article tile click', () => {
+  it('Drawer should redirect to Authors list view on authors tile click', () => {
     const routes = [{ name: 'list' }]
     cy.InitServer({ resourceName: 'authors', routes })
     const drawerAuthorsTileName = UI_NAMES.DRAWER_RESOURCE_TILE.with({

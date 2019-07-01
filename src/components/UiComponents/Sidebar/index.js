@@ -1,10 +1,10 @@
-import Sidebar from './Sidebar.vue'
-import Link from './Link.vue'
-import Node from './Node.vue'
-import Action from './Action.vue'
-import Heading from './Heading.vue'
+import Sidebar        from './Sidebar.vue'
+import SidebarLink    from './SidebarLink.vue'
+import SidebarNode    from './SidebarNode.vue'
+import SidebarAction  from './SidebarAction.vue'
+import SidebarHeading from './SidebarHeading.vue'
 
-[Sidebar, Link, Node, Action, Heading].forEach(component => {
+[Sidebar, SidebarLink, SidebarNode, SidebarAction, SidebarHeading].forEach(component => {
   component.install = function(Vue) {
     Vue.component(component.name, component);
   };
@@ -12,8 +12,8 @@ import Heading from './Heading.vue'
 
 export {
     Sidebar,
-    Link,
-    Node,
-    Action,
-    Heading
+    SidebarLink,
+    SidebarNode,
+    SidebarAction,
+    SidebarHeading
 }

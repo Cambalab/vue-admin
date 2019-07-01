@@ -1,6 +1,5 @@
 <template>
-  <v-list-tile :to="path"
-    :name="`${DRAWER_RESOURCE_TILE.with({ resourceName: title })}`">
+  <v-list-tile @click="action()">
     <v-list-tile-action>
       <v-icon>{{ icon }}</v-icon>
     </v-list-tile-action>
@@ -12,20 +11,12 @@
   </v-list-tile>
 </template>
 <script>
-import UI_NAMES from '@constants/ui.element.names'
-
 export default {
-  name: "Link",
+  name: "SidebarAction",
   props: {
     title: String,
-    path: String,
+    action: Function,
     icon: String
-  },
-  data() {
-    const { DRAWER_RESOURCE_TILE } = UI_NAMES
-    return {
-      DRAWER_RESOURCE_TILE
-    }
   }
 }
 </script>

@@ -15,12 +15,12 @@
 </template>
 <script>
 export default {
-  name: "Heading",
+  name: "SidebarHeading",
   props: {
     heading: String,
     href: {
       type: String,
-      default: '!#'
+      default: '/'
     }
   }
 }

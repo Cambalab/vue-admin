@@ -1,9 +1,7 @@
 <template>
   <!-- If you want to use your own custom unauthorized page you just have to provide it like -->
   <!-- <Admin :authProvider="authProvider" :unauthorized="UnauthorizedCustomView">           -->
-  <!-- You can also customize the navigation sidebar. Try it out!                            -->
-  <!-- <Admin :authProvider="authProvider" :sidebar="SidebarCustom">                         -->
-  <Admin :authProvider="authProvider">
+  <Admin :authProvider="authProvider" :sidebar="CustomSidebar">
     <Resource name="articles" :resourceIdName="resourceIdName" :userPermissionsField="userPermissionsField" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
       <View slot="list"   :component="ListArticles" :permissions="['admin']" />
       <View slot="show"   :component="ShowArticles" :permissions="['admin']" />
@@ -37,7 +35,7 @@ import Resource from '@components/Resource'
 import UnauthorizedView from './components/UnauthorizedView'
 import UnauthorizedCustomView from './components/UnauthorizedCustomView'
 
-import SidebarCustom from './components/SidebarCustom.vue'
+import CustomSidebar from './components/CustomSidebar.vue'
 
 import ListArticles from './components/articles/ListArticles'
 import ShowArticles from './components/articles/ShowArticles'
@@ -158,7 +156,7 @@ export default {
       userPermissionsField,
       UnauthorizedView,
       UnauthorizedCustomView,
-      SidebarCustom,
+      CustomSidebar,
       // Articles Views as Array
       articlesApiUrl,
       magazinesApiUrl,

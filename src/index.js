@@ -6,6 +6,9 @@ import {
   List,
   Show
 } from '@components/Actions'
+import {
+  Sidebar, SidebarLink, SidebarNode, SidebarAction, SidebarHeading
+} from '@components/UiComponents'
 import Admin from '@components/Admin'
 import AuthTypes from '@va-auth/types'
 import Resource from '@components/Resource'
@@ -43,6 +46,12 @@ export {
   Admin,
   Resource,
   Unauthorized,
+  // Exports Ui Components
+  Sidebar,
+  SidebarLink,
+  SidebarNode,
+  SidebarAction,
+  SidebarHeading,
   // Exports Types
   AuthTypes,
 }
