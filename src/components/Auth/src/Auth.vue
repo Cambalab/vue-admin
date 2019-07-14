@@ -12,12 +12,12 @@
             class="input-padding"
             ref="form"
             v-model="valid"
-            lazy-validation
           >
 
             <v-text-field
               color="teal"
               :label="UI_CONTENT.AUTH_LABEL_USERNAME"
+              :ref="UI_NAMES.AUTH_USERNAME_INPUT"
               :name="UI_NAMES.AUTH_USERNAME_INPUT"
               required
               :rules="emailRules"
@@ -27,6 +27,7 @@
             <v-text-field
               color="teal"
               :label="UI_CONTENT.AUTH_LABEL_PASSWORD"
+              :ref="UI_NAMES.AUTH_PASSWORD_INPUT"
               :name="UI_NAMES.AUTH_PASSWORD_INPUT"
               required
               :rules="passwordRules"
@@ -65,7 +66,7 @@ export default {
       AUTH_ALERT_PASSWORD_REQUIRED,
     } = UI_CONTENT
     return {
-      valid: true,
+      valid: false,
       email: '',
       emailRules: [
         v => !!v || AUTH_ALERT_EMAIL_REQUIRED,
