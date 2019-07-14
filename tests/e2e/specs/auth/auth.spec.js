@@ -55,7 +55,7 @@ describe('Auth Test', () => {
       elementType: 'button',
       elementProp: 'name'
     })
-    button.click()
+
     button.should('be.disabled')
   })
 })
