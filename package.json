@@ -24,7 +24,7 @@
     "@vue/cli-plugin-eslint": "^3.0.0-rc.10",
     "@vue/cli-plugin-unit-jest": "^3.3.0",
     "@vue/cli-service": "^3.1.0",
-    "@vue/test-utils": "^1.0.0-beta.20",
+    "@vue/test-utils": "^1.0.0-beta.29",
     "axios": "^0.18.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
