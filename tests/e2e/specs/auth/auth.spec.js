@@ -4,8 +4,22 @@ const UI_NAMES = require('../../../../src/constants/ui.element.names')
 describe('Auth Test', () => {
   const view = 'login'
   const user = {
-    username: 'vue-admin@camba.coop',
+    username: 'dev@camba.coop',
     password: '123456'
+  }
+
+  const findInput = ({ constant }) => (
+    cy.getElement({ constant, elementType: 'input', elementProp: 'name' })
+  )
+
+  const findButton = ({ constant }) => (
+    cy.getElement({ constant, elementType: 'button', elementProp: 'name' })
+  )
+
+  const findTypeAndAssert = ({ element, value, condition }) => {
+    const input = findInput({ constant: element })
+    input.type(value)
+    input.should(condition, value)
   }
 
   beforeEach('Visits the auth url', () => {
@@ -28,34 +42,38 @@ describe('Auth Test', () => {
   })
 
   it('The {username} input is filled when a user types in', () => {
-    const input = cy.getElement({
-      constant: UI_NAMES.AUTH_USERNAME_INPUT,
-      elementType: 'input',
-      elementProp: 'name'
+    findTypeAndAssert({
+      element: UI_NAMES.AUTH_USERNAME_INPUT,
+      value: user.username,
+      condition: 'have.value'
     })
-
-    input.type(user.username)
-    input.should('have.value', user.username)
   })
 
-  it('The {username} input is filled when a user types in', () => {
-    const input = cy.getElement({
-      constant: UI_NAMES.AUTH_PASSWORD_INPUT,
-      elementType: 'input',
-      elementProp: 'name'
+  it('The {password} input is filled when a user types in', () => {
+    findTypeAndAssert({
+      element: UI_NAMES.AUTH_PASSWORD_INPUT,
+      value: user.password,
+      condition: 'have.value'
     })
-
-    input.type(user.password)
-    input.should('have.value', user.password)
   })
 
   it('The Sign In button is disabled when no username and password were given', () => {
-    const button = cy.getElement({
-      constant: UI_NAMES.AUTH_SIGN_IN_BUTTON,
-      elementType: 'button',
-      elementProp: 'name'
-    })
-
+    const button = findButton({ constant: UI_NAMES.AUTH_SIGN_IN_BUTTON })
     button.should('be.disabled')
+  })
+
+  it('When a user types a valid username and password, the button is enabled', () => {
+    findTypeAndAssert({
+      element: UI_NAMES.AUTH_USERNAME_INPUT,
+      value: user.username,
+      condition: 'have.value'
+    })
+    findTypeAndAssert({
+      element: UI_NAMES.AUTH_PASSWORD_INPUT,
+      value: user.password,
+      condition: 'have.value'
+    })
+    const button = findButton({ constant: UI_NAMES.AUTH_SIGN_IN_BUTTON })
+    button.should('be.enabled')
   })
 })
