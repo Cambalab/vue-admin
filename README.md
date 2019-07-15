@@ -117,6 +117,39 @@ export default {
 </script>
 ```
 
+## Using your own custom authentication component
+
+By default Vue-Admin provides you with a default authentication view, but you may desire to use your own custom view to authenticate. In that case, you just need to pass it as a property in the *Admin* component like the following.
+
+***Example of custom authentication component usage***
+```vue
+  ...
+  <Admin :authProvider="authProvider" :authLayout="AuthCustomView">
+  ...
+```
+
+In order to use the available authentication mechanism you have to declare a *prop* with a *va* object field which will contain the bounded `login` function.
+
+***Example of provided login mechanism usage in custom auth component***
+```vue
+  ...
+  props: {
+    va: {
+      type: Object,
+      required: true
+    }
+  },
+  ...
+  methods: {
+    simpleLoginExample() {
+      this.va.login(this.username, this.password)
+    }
+  }
+  ...
+```
+
+### Examples
+
 ##### For a complete example take a look at the [demo files](/demo)
 
 ##### User custom components examples can be found in the [magazines example](/demo/components/magazines)

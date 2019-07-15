@@ -22,6 +22,17 @@ export default {
   AUTH_ALERT_EMAIL_REQUIRED: 'E-mail is required',
   AUTH_ALERT_PASSWORD_REQUIRED: 'Password is required',
   AUTH_ALERT_INVALID_EMAIL: 'E-mail must be valid',
+
+  /**
+   * Auth component
+   */
+  CUSTOM_AUTH_CONTAINER_TITLE: 'Sign In',
+  CUSTOM_AUTH_LABEL_USERNAME: 'Username',
+  CUSTOM_AUTH_LABEL_PASSWORD: 'Password',
+  CUSTOM_AUTH_LABEL_SIGN_IN_BUTTON: 'Sign In',
+
+  CUSTOM_AUTH_ALERT_USERNAME_REQUIRED: 'Username is required',
+  CUSTOM_AUTH_ALERT_PASSWORD_REQUIRED: 'Password is required',
   /**
    * Shared content inside List, Show, Create, Edit components
    */
