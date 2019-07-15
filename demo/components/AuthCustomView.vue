@@ -12,7 +12,6 @@
             class="input-padding"
             ref="form"
             v-model="valid"
-            lazy-validation
           >
 
             <v-text-field
@@ -80,21 +79,21 @@ export default {
   name: 'AuthCustomView',
   data: function () {
     const {
-        CUSTOM_AUTH_ALERT_USERNAME_REQUIRED,
-        CUSTOM_AUTH_ALERT_PASSWORD_REQUIRED,
+      CUSTOM_AUTH_ALERT_USERNAME_REQUIRED,
+      CUSTOM_AUTH_ALERT_PASSWORD_REQUIRED,
     } = UI_CONTENT
     return {
-        username: '',
-        password: '',
-        valid: false,
-        usernameRules: [
-            v => !!v || CUSTOM_AUTH_ALERT_USERNAME_REQUIRED
-        ],
-        passwordRules: [
-            v => !!v || CUSTOM_AUTH_ALERT_PASSWORD_REQUIRED,
-        ],
-        UI_NAMES,
-        UI_CONTENT,
+      username: '',
+      password: '',
+      valid: false,
+      usernameRules: [
+        v => !!v || CUSTOM_AUTH_ALERT_USERNAME_REQUIRED
+      ],
+      passwordRules: [
+        v => !!v || CUSTOM_AUTH_ALERT_PASSWORD_REQUIRED,
+      ],
+      UI_NAMES,
+      UI_CONTENT,
     }
   },
   props: {
@@ -128,7 +127,7 @@ export default {
   }
 
   .v-card {
-      height: 100%;
+    height: 100%;
   }
 
   .va-img-sector {
@@ -145,14 +144,14 @@ export default {
   }
 
   .camba-icon {
-      height: 16px;
+    height: 16px;
   }
 
   .credit-container {
-      position: absolute;
-      bottom: 0;
-      margin-bottom: 25px;
-      width: 100%;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 25px;
+    width: 100%;
   }
 
   a {

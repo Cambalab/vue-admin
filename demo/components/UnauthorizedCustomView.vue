@@ -1,10 +1,10 @@
 <template>
   <v-card>
     <v-card-title>
-      <h2>[Custom] You do not have permissions for accessing this view</h2>
+      <h2>You do not have permissions for accessing this view</h2>
     </v-card-title>
     <v-card-text>
-      <p>If you think you should be allowed to see this view, please contact the page administrator.</p>
+      <p>If you think you should, please contact an administrator.</p>
       <v-btn class="m-0" color="success" v-on:click="goBack">
           BACK
       </v-btn>
