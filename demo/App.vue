@@ -116,8 +116,8 @@ const authorsApiUrl   = 'http://localhost:8888/api/'
 export default {
   name: 'App',
   components: {
-    Admin: Admin,
-    Resource: Resource,
+    Admin,
+    Resource,
     AuthCustomView
   },
   data() {
