@@ -1,6 +1,9 @@
 import { InitEntityUtils } from '../../lib/commands'
 import { rowsPerPage } from '../../../../src/constants/ui.elements.props'
-import dateInputMethods from '../../../../demo/components/authors/authors-date-input-methods'
+import {
+  formatDate,
+  parseDate
+} from '../../../../demo/components/authors/authors-date-input-methods'
 
 import UI_CONTENT from '../../../../src/constants/ui.content.default'
 import UI_NAMES from '../../../../src/constants/ui.element.names'
@@ -92,7 +95,6 @@ describe('Authors: List Test', () => {
   })
 
   it('The list should contain authors with an {birthdate} attribute', () => {
-    const { formatDate, parseDate } = dateInputMethods
     const field = 'birthdate'
     const parseValue = (value) => formatDate(parseDate(value))
     assertListElementsByField(authors, field, rowsPerPage, { parseValue })

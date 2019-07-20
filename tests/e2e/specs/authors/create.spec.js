@@ -1,5 +1,8 @@
 import Factory from '../../factory'
-import dateInputMethods from '../../../../demo/components/authors/authors-date-input-methods'
+import {
+  formatDate,
+  parseDate
+} from '../../../../demo/components/authors/authors-date-input-methods'
 
 import UI_CONTENT from '../../../../src/constants/ui.content.default'
 import UI_NAMES from '../../../../src/constants/ui.element.names'
@@ -46,7 +49,6 @@ describe('Authors: Create Test', () => {
   })
 
   it('The {Birthdate} input is filled when an user types in', () => {
-    const { formatDate, parseDate } = dateInputMethods
     const birthdate = formatDate(parseDate(author.birthdate))
     theInputFieldIsFilledWhenAnUserTypesIn('birthdate', birthdate).click()
   })

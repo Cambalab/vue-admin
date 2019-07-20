@@ -1,6 +1,9 @@
 import Factory from '../../factory'
 import { InitEntityUtils } from '../../lib/commands'
-import dateInputMethods from '../../../../demo/components/authors/authors-date-input-methods'
+import {
+  formatDate,
+  parseDate
+} from '../../../../demo/components/authors/authors-date-input-methods'
 
 import UI_CONTENT from '../../../../src/constants/ui.content.default'
 import UI_NAMES from '../../../../src/constants/ui.element.names'
@@ -57,7 +60,6 @@ describe('Authors: Edit Test', () => {
   })
 
   it('Authors Edit view should contain a birthdate field', () => {
-    const { formatDate, parseDate } = dateInputMethods
     const birthdate = formatDate(parseDate(author.birthdate))
     shouldHaveFieldWithValue('birthdate', birthdate)
   })
@@ -73,7 +75,6 @@ describe('Authors: Edit Test', () => {
   })
 
   it('Authors Edit view should edit a birthdate field', () => {
-    const { formatDate, parseDate } = dateInputMethods
     const value = formatDate(parseDate(newAuthor.birthdate))
     editField('birthdate', value)
     shouldHaveFieldWithValue('birthdate', value)
