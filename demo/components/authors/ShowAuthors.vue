@@ -3,17 +3,26 @@
     <h3 source="id" />
     <h2 source="name" />
     <h2 source="lastname" />
-    <p source="birthdate" />
+    <p source="birthdate" type="TextField" :parse="parse" />
   </Show>
 </template>
 
 <script>
 import Show from '@components/Actions/Show'
+import dateInputMethods from './authors-date-input-methods'
+
+const { formatDate, parseDate, validDate } = dateInputMethods
 
 export default {
   name: 'ShowAuthors',
   components: {
     Show
+  },
+  methods: {
+    parse(date) {
+      const parsedDate = parseDate(date)
+      return formatDate(parsedDate)
+    }
   }
 }
 </script>

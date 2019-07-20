@@ -8,7 +8,6 @@
       :vMenuProps="vMenuProps"
       :parse="parseDate"
       :format="formatDate"
-      :readonly="readonly"
       :valid="validDate" />
   </Edit>
 </template>

@@ -23,17 +23,28 @@
       headerText="Birthdate"
       alignHeader="center"
       alignContent="right"
+      type="TextField"
+      :parse="parse"
     />
   </List>
 </template>
 
 <script>
 import List from '@components/Actions/List'
+import dateInputMethods from './authors-date-input-methods'
+
+const { formatDate, parseDate, validDate } = dateInputMethods
 
 export default {
   name: 'ListAuthors',
   components: {
     List
+  },
+  methods: {
+    parse(date) {
+      const parsedDate = parseDate(date)
+      return formatDate(parsedDate)
+    }
   }
 }
 </script>
