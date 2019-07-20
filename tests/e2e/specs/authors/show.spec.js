@@ -1,8 +1,5 @@
 import { queryElementByProp } from '../../helpers'
-import {
-  formatDate,
-  parseDate
-} from '../../../../demo/components/authors/authors-date-input-methods'
+import { formatDate, parseDate } from '../../../../demo/utils/dates'
 
 import UI_CONTENT from '../../../../src/constants/ui.content.default'
 import UI_NAMES from '../../../../src/constants/ui.element.names'

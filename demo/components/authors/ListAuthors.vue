@@ -31,9 +31,9 @@
 
 <script>
 import List from '@components/Actions/List'
-import dateInputMethods from './authors-date-input-methods'
+import dateUtils from '@demo/utils/dates'
 
-const { formatDate, parseDate } = dateInputMethods
+const { formatDate, parseDate } = dateUtils
 
 export default {
   name: 'ListAuthors',

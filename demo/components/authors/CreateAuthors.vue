@@ -14,7 +14,7 @@
 
 <script>
 import Create from '@components/Actions/Create'
-import dateInputMethods from './authors-date-input-methods'
+import dateUtils from '@demo/utils/dates'
 
 export default {
   name: 'CreateAuthors',
@@ -22,7 +22,7 @@ export default {
     Create
   },
   data() {
-    const { parseDate, formatDate, validDate } = dateInputMethods
+    const { parseDate, formatDate, validDate } = dateUtils
     return {
       datePickerProps: {
         locale: 'en-us',

@@ -9,9 +9,9 @@
 
 <script>
 import Show from '@components/Actions/Show'
-import dateInputMethods from './authors-date-input-methods'
+import dateUtils from '@demo/utils/dates'
 
-const { formatDate, parseDate } = dateInputMethods
+const { formatDate, parseDate } = dateUtils
 
 export default {
   name: 'ShowAuthors',

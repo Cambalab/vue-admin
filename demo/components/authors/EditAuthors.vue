@@ -14,7 +14,7 @@
 
 <script>
 import Edit from '@components/Actions/Edit'
-import dateInputMethods from './authors-date-input-methods'
+import dateUtils from '@demo/utils/dates'
 
 export default {
   name: 'EditAuthors',
@@ -22,7 +22,7 @@ export default {
     Edit
   },
   data() {
-    const { parseDate, formatDate, validDate } = dateInputMethods
+    const { parseDate, formatDate, validDate } = dateUtils
     return {
       datePickerProps: {
         locale: 'en-us',
