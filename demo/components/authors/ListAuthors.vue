@@ -33,7 +33,7 @@
 import List from '@components/Actions/List'
 import dateInputMethods from './authors-date-input-methods'
 
-const { formatDate, parseDate, validDate } = dateInputMethods
+const { formatDate, parseDate } = dateInputMethods
 
 export default {
   name: 'ListAuthors',
@@ -42,8 +42,7 @@ export default {
   },
   methods: {
     parse(date) {
-      const parsedDate = parseDate(date)
-      return formatDate(parsedDate)
+      return formatDate(parseDate(date))
     }
   }
 }

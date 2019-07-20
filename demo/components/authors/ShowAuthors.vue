@@ -11,7 +11,7 @@
 import Show from '@components/Actions/Show'
 import dateInputMethods from './authors-date-input-methods'
 
-const { formatDate, parseDate, validDate } = dateInputMethods
+const { formatDate, parseDate } = dateInputMethods
 
 export default {
   name: 'ShowAuthors',
@@ -20,8 +20,7 @@ export default {
   },
   methods: {
     parse(date) {
-      const parsedDate = parseDate(date)
-      return formatDate(parsedDate)
+      return formatDate(parseDate(date))
     }
   }
 }
