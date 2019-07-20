@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!isAuthenticated">
-      <Auth />
+      <component :is="authLayout" :va="va"/>
     </div>
     <div v-else>
       <Core
@@ -52,6 +52,14 @@ export default {
     Auth,
     Core
   },
+  data: function() {
+    const va = {
+      login: this.login
+    }
+    return {
+      va
+    }
+  },
   created() {
     this.$store.registerModule('resources', resourceModule)
     this.$store.registerModule('entities', entitiesModule)
@@ -76,7 +84,7 @@ export default {
       const route = {
         path: '/login',
         name: 'login',
-        component: Auth,
+        component: this.authLayout,
         props: {}
       }
       routes.push(route)
@@ -89,6 +97,10 @@ export default {
         component: unauthorizedComponent || Unauthorized
       }
       this.$router.addRoutes([routeForUnauthorized]);
+    },
+    login: function (username, password) {
+      const params = { username, password }
+      this.$store.dispatch(`auth/${AuthActionTypes.AUTH_LOGIN_REQUEST}`, params)
     }
   },
   computed: {
