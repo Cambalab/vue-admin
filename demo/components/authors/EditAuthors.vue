@@ -2,12 +2,13 @@
   <Edit>
     <input source="id" placeHolder="Id" />
     <input source="name" placeHolder="Name" />
-    <input source="lastname" placeHolder="LastName" />
+    <input source="lastname" placeHolder="Last name" />
     <input source="birthdate" placeHolder="Birthdate" type="DateInput"
       :datePickerProps="datePickerProps"
       :vMenuProps="vMenuProps"
       :parse="parseDate"
       :format="formatDate"
+      :readonly="readonly"
       :valid="validDate" />
   </Edit>
 </template>
@@ -30,7 +31,7 @@ export default {
         noTitle: true
       },
       vMenuProps: {
-        nudgeRight: 40,
+        nudgeRight: 0,
         closeOnContentClick: true
       },
       parseDate,

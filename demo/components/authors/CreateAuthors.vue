@@ -1,7 +1,7 @@
 <template>
   <Create>
     <input source="name" placeHolder="Name" />
-    <input source="lastname" placeHolder="LastName" />
+    <input source="lastname" placeHolder="Last name" />
     <input source="birthdate" placeHolder="Birthdate" type="DateInput"
       :datePickerProps="datePickerProps"
       :vMenuProps="vMenuProps"
@@ -30,10 +30,10 @@ export default {
         noTitle: true
       },
       vMenuProps: {
-        nudgeRight: 40,
+        nudgeRight: 0,
         closeOnContentClick: true
       },
-      readonly: false,
+      readonly: true,
       parseDate,
       formatDate,
       validDate

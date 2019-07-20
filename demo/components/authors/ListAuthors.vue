@@ -1,6 +1,6 @@
 <template>
   <List>
-    <p source="id"
+    <h3 source="id"
       :sortable="true"
       headerText="ID"
       alignHeader="left"
@@ -12,13 +12,13 @@
       alignHeader="center"
       alignContent="left"
     />
-    <p source="lastname"
+    <h3 source="lastname"
       :sortable="true"
-      headerText="LastName"
+      headerText="Last name"
       alignHeader="center"
-      alignContent="right"
+      alignContent="left"
     />
-    <p source="birthdate"
+    <a source="birthdate"
       :sortable="true"
       headerText="Birthdate"
       alignHeader="center"
