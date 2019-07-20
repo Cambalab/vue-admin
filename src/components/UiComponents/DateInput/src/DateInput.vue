@@ -32,7 +32,10 @@ export default {
     placeHolder: {
       type: String
     },
-    value: [String, Number],
+    value: {
+      type: [String, Number],
+      default: new Date().toISOString()
+    },
     name: {
       type: String,
       default: 'va-date-input'
@@ -67,9 +70,10 @@ export default {
     }
   },
   data() {
+    const formattedDate = this.format(this.parse(this.value))
     return {
       date: this.constructDate(this.value),
-      formattedDate: this.value,
+      formattedDate,
       menu: false,
       dateInputMaxWidth: this.calculateCorrectDefaultMaxWidth()
     }
@@ -81,7 +85,8 @@ export default {
         const [year, month, day] = newVal.split('-')
         formattedDate = this.format({ year, month, day })
         this.formattedDate = formattedDate
-        this.$emit('change', formattedDate);
+        const value = new Date(formattedDate).toISOString()
+        this.$emit('change', value);
       }
     },
     formattedDate: function(newVal) {
