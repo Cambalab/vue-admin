@@ -10,6 +10,10 @@ describe('UI Test', () => {
     cy.InitAuthenticatedUser()
   })
 
+  it('Visits the app root url', () => {
+    cy.visit('/#/')
+  })
+
   beforeEach('Open drawer on toolbar hamburger button click', () => {
     const mainToolbarTitleName = UI_NAMES.MAIN_TOOLBAR_TITLE
 

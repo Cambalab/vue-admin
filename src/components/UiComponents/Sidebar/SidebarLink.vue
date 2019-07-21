@@ -1,6 +1,6 @@
 <template>
   <v-list-tile :to="path"
-    :name="`${DRAWER_RESOURCE_TILE.with({ resourceName: title })}`">
+    :name="NAME_DRAWER_RESOURCE_TILE">
     <v-list-tile-action>
       <v-icon>{{ icon }}</v-icon>
     </v-list-tile-action>
@@ -24,7 +24,9 @@ export default {
   data() {
     const { DRAWER_RESOURCE_TILE } = UI_NAMES
     return {
-      DRAWER_RESOURCE_TILE
+      NAME_DRAWER_RESOURCE_TILE: DRAWER_RESOURCE_TILE.with({
+        resourceName: this.title.toLowerCase()
+      })
     }
   }
 }

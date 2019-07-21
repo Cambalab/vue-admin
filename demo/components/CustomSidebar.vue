@@ -1,6 +1,6 @@
 <template>
   <Sidebar>
-    <SidebarHeading heading="Home" href="/"/>
+    <SidebarHeading heading="Menu" href="/"/>
     <SidebarNode title="Entities" icon="keyboard_arrow_up" icon-alt="keyboard_arrow_down">
       <SidebarLink title="Articles" path="/articles" icon="list" />
       <SidebarLink title="Magazines" path="/magazines" icon="list" />
