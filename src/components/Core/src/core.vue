@@ -3,6 +3,8 @@
     <component
       :is="appLayout"
       :title="title"
+      :sidebar="sidebar"
+      :va="va"
     >
       <slot></slot>
     </component>
@@ -15,8 +17,9 @@ export default {
   props: {
     appLayout: {},
     title: String,
-  },
-  components: {}
+    sidebar: Object,
+    va: Object
+  }
 };
 </script>
 

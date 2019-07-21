@@ -40,9 +40,8 @@ export default {
   /**
    * Unauthorized component
    */
-  UNAUTHORIZED_DEFAULT_HEADER: 'Unauthorized',
-  UNAUTHORIZED_DEFAULT_MESSAGE: 'You do not have permission to access this page.\
-  If you think you should be allowed to see this page, please contact the administrator.',
+  UNAUTHORIZED_HEADER: 'You do not have permission to access this page.',
+  UNAUTHORIZED_MESSAGE: 'If you think you should be allowed to see this page, please contact the administrator.',
 
   // Any View Title (List, Show, Create, Edit)
   RESOURCE_VIEW_TITLE: {
@@ -61,5 +60,10 @@ export default {
   CREATE_SUBMIT_BUTTON: 'save',
 
   // Edit Save button
-  EDIT_SUBMIT_BUTTON: 'save'
+  EDIT_SUBMIT_BUTTON: 'save',
+
+  /**
+  * Other buttons
+  */
+  BUTTON_GO_BACK: 'back',
 }

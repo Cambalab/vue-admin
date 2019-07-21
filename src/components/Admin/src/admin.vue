@@ -7,6 +7,8 @@
       <Core
         v-bind:appLayout="appLayout"
         :title="title"
+        :sidebar="sidebar"
+        :va="va"
       >
         <router-view></router-view>
       </Core>
@@ -26,6 +28,7 @@ import createAuthModule from '@va-auth/store'
 import UI_CONTENT from '@constants/ui.content.default'
 import Auth from '@components/Auth'
 import AuthActionTypes from '@va-auth/types'
+import { DefaultSidebar } from '@components/UiComponents';
 
 export default {
   name: "Admin",
@@ -44,6 +47,9 @@ export default {
       type: String,
       default: UI_CONTENT.MAIN_TOOLBAR_TITLE
     },
+    sidebar: {
+      default: () => DefaultSidebar
+    },
     unauthorized: {
       type: Object
     }
@@ -52,9 +58,10 @@ export default {
     Auth,
     Core
   },
-  data: function() {
+  data() {
     const va = {
-      login: this.login
+      login: this.login,
+      logout: this.logout
     }
     return {
       va
@@ -72,6 +79,9 @@ export default {
     this.$store.dispatch(`auth/${AuthActionTypes.AUTH_CHECK_REQUEST}`)
   },
   methods: {
+    logout() {
+      this.$store.dispatch(`auth/${AuthActionTypes.AUTH_LOGOUT_REQUEST}`)
+    },
     registerStoreModule() {
       createAuthModule({
         client: this.authProvider,

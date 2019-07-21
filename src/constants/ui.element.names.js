@@ -104,10 +104,13 @@ export default {
   /**
    * Unauthorized
    */
-   UNAUTHORIZED_DEFAULT_CONTAINER_HEADER: 'unauthorized-default-container-header',
-   UNAUTHORIZED_DEFAULT_CONTAINER_HEADER_DEFAULT: 'unauthorized-default-container-header-default',
-   UNAUTHORIZED_DEFAULT_CONTAINER_MESSAGE: 'unauthorized-default-container-message',
-   UNAUTHORIZED_DEFAULT_CONTAINER_MESSAGE_DEFAULT: 'unauthorized-default-container-message-default',
+   UNAUTHORIZED_HEADER_CONTAINER: 'va-unauthorized-header-container',
+   UNAUTHORIZED_MESSAGE_CONTAINER: 'va-unauthorized-message-container',
+
+  /**
+   * Other Buttons
+   */
+  BUTTON_GO_BACK: 'va-go-back-button',
 
   /**
    * Default Spinner

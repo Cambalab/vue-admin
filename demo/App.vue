@@ -1,7 +1,11 @@
 <template>
   <!-- If you want to use your own custom unauthorized page you just have to provide it like:  -->
   <!-- <Admin :authProvider="authProvider" :unauthorized="UnauthorizedCustomView">             -->
-  <Admin :authProvider="authProvider" :authLayout="AuthCustomView">
+  <Admin
+    :authLayout="AuthCustomView"
+    :authProvider="authProvider"
+    :sidebar="CustomSidebar"
+    :unauthorized="UnauthorizedCustomView">
     <!-- Articles Resource -->
     <Resource
       name="articles" :resourceIdName="resourceIdName"
@@ -39,6 +43,8 @@ import Resource from '@components/Resource'
 
 import UnauthorizedView from './components/UnauthorizedView'
 import UnauthorizedCustomView from './components/UnauthorizedCustomView'
+
+import CustomSidebar from './components/CustomSidebar.vue'
 
 import ListArticles from './components/articles/ListArticles'
 import ShowArticles from './components/articles/ShowArticles'
@@ -125,12 +131,13 @@ export default {
       // Admin props
       authProvider,
       AuthCustomView,
+      UnauthorizedView,
+      UnauthorizedCustomView,
+      CustomSidebar,
 
       // Common Resource props
       resourceIdName,
       userPermissionsField,
-      UnauthorizedView,
-      UnauthorizedCustomView,
 
       // Server Urls
       articlesApiUrl,

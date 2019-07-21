@@ -1,77 +1,8 @@
 <template>
   <v-app>
     <v-navigation-drawer app clipped v-model="drawer" fixed>
-      <v-list dense>
-        <template v-for="(item, i) in menuItems">
-          <v-layout row
-            v-if="item.heading"
-            align-center
-            :key="item.heading"
-          >
-            <v-flex xs6>
-              <v-subheader v-if="item.heading">
-                {{ item.heading }}
-              </v-subheader>
-            </v-flex>
-            <v-flex xs6 class="text-xs-center">
-              <a href="#!" class="body-2 black--text">EDIT</a>
-            </v-flex>
-          </v-layout>
-
-          <v-list-group
-            :key="i"
-            v-else-if="item.children"
-            v-model="item.model"
-            no-action
-            :prepend-icon="item.model ? item.icon : item['icon-alt']"
-            append-icon=""
-            :value="item.value"
-          >
-            <v-list-tile slot="activator">
-              <v-list-tile-content>
-                <v-list-tile-title>
-                  {{ item.title }}
-                </v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile
-              v-for="(child, i) in item.children"
-              :key="i"
-              :to="child.link"
-              :name="`${UI_NAMES.DRAWER_RESOURCE_TILE.with({ resourceName: child.title })}`"
-            >
-              <v-list-tile-action v-if="child.icon">
-                <v-icon>{{ child.icon }}</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>
-                  {{ child.title }}
-                </v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list-group>
-          <v-list-tile v-else-if="item.link" :to="item.link" :key="item.title">
-            <v-list-tile-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>
-                {{ item.title }}
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile v-else-if="item.click" @click="item.click()" :key="item.title">
-            <v-list-tile-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>
-                {{ item.title }}
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </template>
-      </v-list>
+      <component :is="sidebar" :va="va">
+      </component>
     </v-navigation-drawer>
     <v-toolbar class="success" dark app fixed clipped-left dense>
       <v-toolbar-title :name="UI_NAMES.MAIN_TOOLBAR_TITLE">
@@ -93,55 +24,27 @@
 <script>
 import UI_CONTENT from '../../../constants/ui.content.default'
 import UI_NAMES from '../../../constants/ui.element.names'
-import AuthActionTypes from '@va-auth/types'
+import { DefaultSidebar } from '@components/UiComponents';
 
 export default {
   name: "Ui",
   props: {
-    title: String
+    title: String,
+    sidebar: {
+      type: Object,
+      default: () => DefaultSidebar
+    },
+    va: Object
   },
   data() {
     return {
       selectedLocale: "EN",
       locales: ["EN", "ID"],
       drawer: false,
-      menuItems: [
-        {
-          click: () => {},
-          icon: "keyboard_arrow_up",
-          "icon-alt": "keyboard_arrow_down",
-          title: "Crud",
-          children: [],
-          model: {},
-          value: true,
-        },
-        {
-          click: () => this.$store.dispatch(`auth/${AuthActionTypes.AUTH_LOGOUT_REQUEST}`),
-          icon: "power_settings_new",
-          title: "Sign Out",
-        }
-      ],
       UI_CONTENT,
       UI_NAMES
     };
   },
-  mounted() {
-    this.mapCurrentRegisteredRoutes()
-  },
-  methods: {
-    // Listen to addRoutes mutations
-    mapCurrentRegisteredRoutes() {
-      let whitelist = ["resources/addRoute"];
-      this.$store.subscribe((mutation, state) => {
-        if (whitelist.includes(mutation.type)) {
-          const currentRoutes = state.resources.routes.map(route => {
-            return { icon: 'list', title: route.name, link: route.path }
-          })
-          this.menuItems[0].children = currentRoutes
-        }
-      });
-    }
-  }
 };
 </script>
 
