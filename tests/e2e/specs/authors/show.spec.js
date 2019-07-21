@@ -1,6 +1,8 @@
-const { queryElementByProp } = require('../../helpers')
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
-const UI_NAMES = require('../../../../src/constants/ui.element.names')
+import { queryElementByProp } from '../../helpers'
+import { formatDate, parseDate } from '../../../../demo/utils/dates'
+
+import UI_CONTENT from '../../../../src/constants/ui.content.default'
+import UI_NAMES from '../../../../src/constants/ui.element.names'
 
 describe('Authors: Show Test', () => {
   const resourceName = 'authors'
@@ -44,19 +46,20 @@ describe('Authors: Show Test', () => {
   })
 
   it('Authors Show View should contain the id field', () => {
-    authorsShowViewShouldContainTheField('id')
+    shouldContainFieldWithValue('id', author.id)
   })
 
   it('Authors Show View should contain the name field', () => {
-    authorsShowViewShouldContainTheField('name')
+    shouldContainFieldWithValue('name', author.name)
   })
 
   it('Authors Show View should contain the lastname field', () => {
-    authorsShowViewShouldContainTheField('lastname')
+    shouldContainFieldWithValue('lastname', author.lastname)
   })
 
   it('Authors Show View should contain the birthdate field', () => {
-    authorsShowViewShouldContainTheField('birthdate')
+    const birthdate = formatDate(parseDate(author.birthdate))
+    shouldContainFieldWithValue('birthdate', birthdate)
   })
 
   /**
@@ -75,7 +78,7 @@ describe('Authors: Show Test', () => {
     return queryToElementWith(containerType, { resourceName, view })
   }
 
-  function authorsShowViewShouldContainTheField(field) {
+  function shouldContainFieldWithValue(field, value) {
     cy.get(queryToElement('RESOURCE_VIEW_CONTAINER_FIELDS'))
       .should((fieldsContainerRes) => {
         const fieldContainerElement = queryToElementWith('RESOURCE_VIEW_CONTAINER_FIELD', {
@@ -84,7 +87,7 @@ describe('Authors: Show Test', () => {
           field
         })
         const fieldContainer = fieldsContainerRes.find(fieldContainerElement)
-        expect(fieldContainer).to.contain(author[field])
+        expect(fieldContainer).to.contain(value)
       })
   }
 })

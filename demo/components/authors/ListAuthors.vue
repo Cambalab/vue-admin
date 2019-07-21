@@ -1,6 +1,6 @@
 <template>
   <List>
-    <p source="id"
+    <h3 source="id"
       :sortable="true"
       headerText="ID"
       alignHeader="left"
@@ -12,28 +12,38 @@
       alignHeader="center"
       alignContent="left"
     />
-    <p source="lastname"
+    <h3 source="lastname"
       :sortable="true"
-      headerText="LastName"
+      headerText="Last name"
       alignHeader="center"
-      alignContent="right"
+      alignContent="left"
     />
-    <p source="birthdate"
+    <a source="birthdate"
       :sortable="true"
       headerText="Birthdate"
       alignHeader="center"
       alignContent="right"
+      type="TextField"
+      :parse="parse"
     />
   </List>
 </template>
 
 <script>
 import List from '@components/Actions/List'
+import dateUtils from '@demo/utils/dates'
+
+const { formatDate, parseDate } = dateUtils
 
 export default {
   name: 'ListAuthors',
   components: {
     List
+  },
+  methods: {
+    parse(date) {
+      return formatDate(parseDate(date))
+    }
   }
 }
 </script>

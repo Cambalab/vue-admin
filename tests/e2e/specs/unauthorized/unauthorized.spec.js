@@ -23,24 +23,35 @@ describe('Unauthorized User Test', () => {
     cy.url().should('include', `/#/${testResourceName}`)
   })
 
-  it('Default unauthorized view should have a title', () => {
-    const defaultHeader = UI_CONTENT.UNAUTHORIZED_DEFAULT_HEADER;
+  it('Unauthorized view should have a title', () => {
+    const defaultHeader = UI_CONTENT.UNAUTHORIZED_HEADER;
     cy.InitAuthenticatedUser({ authResponse: authResponseWithUserWithoutPermissions })
     cy.visit(`/#/${testResourceName}/`)
     cy.getElement({
-      constant: UI_NAMES.UNAUTHORIZED_DEFAULT_CONTAINER_HEADER_DEFAULT,
+      constant: UI_NAMES.UNAUTHORIZED_HEADER_CONTAINER,
       elementType: 'h2',
       elementProp: 'name'
     }).should('contain', defaultHeader)
   })
 
-  it('Default unauthorized view should have a text', () => {
-    const defaultMessage = UI_CONTENT.UNAUTHORIZED_DEFAULT_MESSAGE;
+  it('Unauthorized view should have a text', () => {
+    const defaultMessage = UI_CONTENT.UNAUTHORIZED_MESSAGE;
     cy.InitAuthenticatedUser({ authResponse: authResponseWithUserWithoutPermissions })
     cy.visit(`/#/${testResourceName}/`)
     cy.getElement({
-      constant: UI_NAMES.UNAUTHORIZED_DEFAULT_CONTAINER_MESSAGE_DEFAULT,
+      constant: UI_NAMES.UNAUTHORIZED_MESSAGE_CONTAINER,
       elementType: 'p',
+      elementProp: 'name'
+    }).should('contain', defaultMessage)
+  })
+
+  it('Unauthorized view should have a button', () => {
+    const defaultMessage = UI_CONTENT.BUTTON_GO_BACK;
+    cy.InitAuthenticatedUser({ authResponse: authResponseWithUserWithoutPermissions })
+    cy.visit(`/#/${testResourceName}/`)
+    cy.getElement({
+      constant: UI_NAMES.BUTTON_GO_BACK,
+      elementType: 'button',
       elementProp: 'name'
     }).should('contain', defaultMessage)
   })

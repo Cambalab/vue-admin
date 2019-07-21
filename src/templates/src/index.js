@@ -5,7 +5,8 @@ const errorFooter = '{errorMessage}\tTake a look at our documentation at {url}\n
 
 // Component doc paths should be added here
 const componentsDocs = {
-  Resource: '{docsUrl}/Resource.md#resource-props'
+  Resource: '{docsUrl}/Resource.md#resource-props',
+  DateInput: '{docsUrl}/Ui-Components/DateInput.md'
 }
 
 /**

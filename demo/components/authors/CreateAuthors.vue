@@ -1,18 +1,43 @@
 <template>
   <Create>
     <input source="name" placeHolder="Name" />
-    <input source="lastname" placeHolder="LastName" />
-    <input source="birthdate" placeHolder="Birthdate" />
+    <input source="lastname" placeHolder="Last name" />
+    <input source="birthdate" placeHolder="Birthdate" type="DateInput"
+      :datePickerProps="datePickerProps"
+      :vMenuProps="vMenuProps"
+      :parse="parseDate"
+      :format="formatDate"
+      :valid="validDate"
+      :readonly="readonly" />
   </Create>
 </template>
 
 <script>
 import Create from '@components/Actions/Create'
+import dateUtils from '@demo/utils/dates'
 
 export default {
   name: 'CreateAuthors',
   components: {
     Create
+  },
+  data() {
+    const { parseDate, formatDate, validDate } = dateUtils
+    return {
+      datePickerProps: {
+        locale: 'en-us',
+        type: 'date',
+        noTitle: true
+      },
+      vMenuProps: {
+        nudgeRight: 0,
+        closeOnContentClick: true
+      },
+      readonly: true,
+      parseDate,
+      formatDate,
+      validDate
+    }
   }
 }
 </script>

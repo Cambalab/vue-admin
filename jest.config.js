@@ -18,6 +18,7 @@ module.exports = {
     '@router(.*)$': '<rootDir>/src/router/$1',
     '@store(.*)$': '<rootDir>/src/store/$1',
     '@templates(.*)$': '<rootDir>/src/templates/src/$1',
+    '@unit(.*)$': '<rootDir>/tests/unit/$1',
     '@va-auth(.*)$': '<rootDir>/src/va-auth/src/$1',
     '@validators(.*)$': '<rootDir>/src/validators/src/$1',
   },

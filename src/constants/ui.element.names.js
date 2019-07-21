@@ -21,6 +21,17 @@ export default {
    AUTH_SIGN_IN_BUTTON: 'va-login-submit-button',
 
   /**
+   * Custom Auth component
+   */
+
+  CUSTOM_AUTH: 'va-custon-auth',
+  CUSTOM_AUTH_CONTAINER: 'va-login-container',
+  CUSTOM_AUTH_CONTAINER_TITLE: 'va-login-container-title',
+  CUSTOM_AUTH_USERNAME_INPUT: 'va-login-username',
+  CUSTOM_AUTH_PASSWORD_INPUT: 'va-login-password',
+  CUSTOM_AUTH_SIGN_IN_BUTTON: 'va-login-submit-button',
+
+  /**
    * List
    */
   // The whole container of a Resource List
@@ -93,10 +104,13 @@ export default {
   /**
    * Unauthorized
    */
-   UNAUTHORIZED_DEFAULT_CONTAINER_HEADER: 'unauthorized-default-container-header',
-   UNAUTHORIZED_DEFAULT_CONTAINER_HEADER_DEFAULT: 'unauthorized-default-container-header-default',
-   UNAUTHORIZED_DEFAULT_CONTAINER_MESSAGE: 'unauthorized-default-container-message',
-   UNAUTHORIZED_DEFAULT_CONTAINER_MESSAGE_DEFAULT: 'unauthorized-default-container-message-default',
+   UNAUTHORIZED_HEADER_CONTAINER: 'va-unauthorized-header-container',
+   UNAUTHORIZED_MESSAGE_CONTAINER: 'va-unauthorized-message-container',
+
+  /**
+   * Other Buttons
+   */
+  BUTTON_GO_BACK: 'va-go-back-button',
 
   /**
    * Default Spinner

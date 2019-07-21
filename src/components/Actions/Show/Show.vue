@@ -17,16 +17,15 @@
       </h3>
     </v-card-title>
     <v-card-text :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({ resourceName, view })}`">
-      <span v-if="resourceShow !== undefined">
-        <component
-          :name="componentName(field)"
-          v-for="field in fields"
-          :key="key(label(field))"
-          :is="type(field.type)"
-          v-bind:content="resourceShow[label(field)]"
-          v-bind="args(field)">
-        </component>
-      </span>
+      <component
+        :name="componentName(field)"
+        v-for="field in fields"
+        v-if="resourceShow !== undefined"
+        :key="key(label(field))"
+        :is="type(field.type)"
+        v-bind:value="resourceShow[label(field)]"
+        v-bind="args(field)">
+      </component>
     </v-card-text>
   </v-card>
 </template>

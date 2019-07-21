@@ -21,15 +21,15 @@
 <script>
 import UI_CONTENT from '../../../constants/ui.content.default'
 import UI_NAMES from '../../../constants/ui.element.names'
-import { Sidebar, Node, Link, Action } from '@components/UiComponents'
+import { Sidebar, SidebarNode, SidebarLink, SidebarAction } from '@components/UiComponents'
 
 export default {
   name: "DefaultSidebar",
   components: {
     Sidebar,
-    Node,
-    Link,
-    Action
+    SidebarNode,
+    SidebarLink,
+    SidebarAction
   },
   props: {
     va: Object
