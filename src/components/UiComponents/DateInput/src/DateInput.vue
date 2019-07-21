@@ -14,6 +14,7 @@
       slot="activator"
       :label="placeHolder"
       :name="name"
+      :ref="name"
       :readonly="readonly"
       :disabled="disabled"
       v-model="formattedDate"
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+import defaults from './defaults'
 import ELEMENTS_PROPS from '@constants/ui.elements.props'
 
 export default {
@@ -31,39 +33,40 @@ export default {
   props: {
     disabled: {
       type: Boolean,
-      default: false
+      default: defaults().props.disabled
     },
     format: {
       type: Function,
+      default: defaults().props.format,
       required: true
     },
     name: {
       type: String,
-      default: 'va-date-input'
+      default: defaults().props.name
     },
     placeHolder: {
       type: String
     },
     readonly: {
       type: Boolean,
-      default: true
+      default: defaults().props.readonly
     },
     parse: {
       type: Function,
+      default: defaults().props.parse,
       required: true
     },
     vDatePickerProps: {
       type: Object,
-      default: () => ({
-        noTitle: true
-      })
+      default: defaults().props.vDatePickerProps
     },
     vMenuProps: {
       type: Object,
-      default: () => ({})
+      default: defaults().props.vMenuProps
     },
     valid: {
       type: Function,
+      default: defaults().props.valid,
       required: true
     },
     value: {
