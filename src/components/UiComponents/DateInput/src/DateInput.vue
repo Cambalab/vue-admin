@@ -18,7 +18,7 @@
       :disabled="disabled"
       v-model="formattedDate"
     ></v-text-field>
-    <v-date-picker v-model="date" v-bind="datePickerProps">
+    <v-date-picker v-model="date" v-bind="vDatePickerProps">
     </v-date-picker>
   </v-menu>
 </template>
@@ -29,44 +29,46 @@ import ELEMENTS_PROPS from '@constants/ui.elements.props'
 export default {
   name: "DateInput",
   props: {
-    placeHolder: {
-      type: String
+    disabled: {
+      type: Boolean,
+      default: false
     },
-    value: {
-      type: [String, Number],
-      default: new Date().toISOString()
+    format: {
+      type: Function,
+      required: true
     },
     name: {
       type: String,
       default: 'va-date-input'
     },
+    placeHolder: {
+      type: String
+    },
     readonly: {
       type: Boolean,
       default: true
     },
-    disabled: {
-      type: Boolean,
-      default: false
+    parse: {
+      type: Function,
+      required: true
     },
-    datePickerProps: {
+    vDatePickerProps: {
       type: Object,
-      default: null
+      default: () => ({
+        noTitle: true
+      })
     },
     vMenuProps: {
       type: Object,
-      default: null
-    },
-    format: {
-      type: Function,
-      default: null
-    },
-    parse: {
-      type: Function,
-      default: null
+      default: () => ({})
     },
     valid: {
       type: Function,
-      default: null
+      required: true
+    },
+    value: {
+      type: [String, Number],
+      default: new Date().toISOString()
     }
   },
   data() {
@@ -80,10 +82,8 @@ export default {
   },
   watch: {
     date: function(newVal) {
-      let formattedDate = newVal
-      if (newVal && this.format) {
-        const [year, month, day] = newVal.split('-')
-        formattedDate = this.format({ year, month, day })
+      if (newVal) {
+        const formattedDate = this.format(this.parse(newVal))
         this.formattedDate = formattedDate
         const value = new Date(formattedDate).toISOString()
         this.$emit('change', value);
@@ -104,10 +104,14 @@ export default {
     },
     constructDate(aDate) {
       if (this.canParse(aDate)) {
-        const { day, year, month } = this.parse(aDate)
+        const { day, year, month } = this.vDateInputParse(aDate)
         return [year, month, day].join('-')
       }
       return this.value
+    },
+    vDateInputParse(aDate) {
+      const [year, month, day] = aDate.substr(0, 10).split('-')
+      return { day, month, year }
     },
     calculateCorrectDefaultMaxWidth() {
       return this.datePickerProps && this.datePickerProps.landscape
