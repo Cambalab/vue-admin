@@ -12,5 +12,5 @@ export default {
   createUrlWithResource: ({
     resourceName,
     path = ''
-  }) => `${Cypress.config().baseUrl}/#/${resourceName}/${path}`
+  }) => `${Cypress.config().baseUrl}#/${resourceName}/${path}`
 }

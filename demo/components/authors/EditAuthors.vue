@@ -2,7 +2,7 @@
   <Edit>
     <input source="id" placeHolder="Id" />
     <input source="name" placeHolder="Name" />
-    <input source="lastname" placeHolder="LastName" />
+    <input source="lastname" placeHolder="Last name" />
     <input source="birthdate" placeHolder="Birthdate" type="DateInput"
       :datePickerProps="datePickerProps"
       :vMenuProps="vMenuProps"
@@ -14,7 +14,7 @@
 
 <script>
 import Edit from '@components/Actions/Edit'
-import dateInputMethods from './authors-date-input-methods'
+import dateUtils from '@demo/utils/dates'
 
 export default {
   name: 'EditAuthors',
@@ -22,7 +22,7 @@ export default {
     Edit
   },
   data() {
-    const { parseDate, formatDate, validDate } = dateInputMethods
+    const { parseDate, formatDate, validDate } = dateUtils
     return {
       datePickerProps: {
         locale: 'en-us',
@@ -30,7 +30,7 @@ export default {
         noTitle: true
       },
       vMenuProps: {
-        nudgeRight: 40,
+        nudgeRight: 0,
         closeOnContentClick: true
       },
       parseDate,

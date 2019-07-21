@@ -5,13 +5,11 @@ module.exports = function (app) {
 
   const ipsum = new Ipsum();
 
-  const startDate  = new Date(1970, 1, 1, 0, 0, 0, 0); 
+  const startDate  = new Date(1970, 1, 1, 0, 0, 0, 0);
   const finishDate = new Date(1980, 1, 1, 0, 0, 0, 0);
 
   const formatDate = aIsoDate => {
-    const aDate = aIsoDate.toISOString().substr(0,10)
-    const [year, month, day] = aDate.split('-')
-    return `${day}/${month}/${year}`
+    return aIsoDate.toISOString()
   }
 
   const generateRandomAuthor = id => {

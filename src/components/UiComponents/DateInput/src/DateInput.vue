@@ -14,74 +14,82 @@
       slot="activator"
       :label="placeHolder"
       :name="name"
+      :ref="name"
       :readonly="readonly"
       :disabled="disabled"
       v-model="formattedDate"
     ></v-text-field>
-    <v-date-picker v-model="date" v-bind="datePickerProps">
+    <v-date-picker v-model="date" v-bind="vDatePickerProps">
     </v-date-picker>
   </v-menu>
 </template>
 
 <script>
+import defaults from './defaults'
 import ELEMENTS_PROPS from '@constants/ui.elements.props'
 
 export default {
   name: "DateInput",
   props: {
-    placeHolder: {
-      type: String
-    },
-    value: [String, Number],
-    name: {
-      type: String,
-      default: 'va-date-input'
-    },
-    readonly: {
-      type: Boolean,
-      default: true
-    },
     disabled: {
       type: Boolean,
-      default: false
-    },
-    datePickerProps: {
-      type: Object,
-      default: null
-    },
-    vMenuProps: {
-      type: Object,
-      default: null
+      default: defaults().props.disabled
     },
     format: {
       type: Function,
-      default: null
+      default: defaults().props.format,
+      required: true
+    },
+    name: {
+      type: String,
+      default: defaults().props.name
+    },
+    placeholder: {
+      type: String
+    },
+    readonly: {
+      type: Boolean,
+      default: defaults().props.readonly
     },
     parse: {
       type: Function,
-      default: null
+      default: defaults().props.parse,
+      required: true
+    },
+    vDatePickerProps: {
+      type: Object,
+      default: defaults().props.vDatePickerProps
+    },
+    vMenuProps: {
+      type: Object,
+      default: defaults().props.vMenuProps
     },
     valid: {
       type: Function,
-      default: null
+      default: defaults().props.valid,
+      required: true
+    },
+    value: {
+      type: [String, Number],
+      default: new Date().toISOString()
     }
   },
   data() {
+    const formattedDate = this.format(this.parse(this.value))
     return {
       date: this.constructDate(this.value),
-      formattedDate: this.value,
+      formattedDate,
       menu: false,
       dateInputMaxWidth: this.calculateCorrectDefaultMaxWidth()
     }
   },
   watch: {
     date: function(newVal) {
-      let formattedDate = newVal
-      if (newVal && this.format) {
-        const [year, month, day] = newVal.split('-')
-        formattedDate = this.format({ year, month, day })
+      if (newVal) {
+        const formattedDate = this.format(this.parse(newVal))
         this.formattedDate = formattedDate
-        this.$emit('change', formattedDate);
+        const value = new Date(formattedDate).toISOString()
+        this.$emit('change', value);
       }
     },
     formattedDate: function(newVal) {
@@ -99,10 +107,14 @@ export default {
     },
     constructDate(aDate) {
       if (this.canParse(aDate)) {
-        const { day, year, month } = this.parse(aDate)
+        const { day, year, month } = this.vDateInputParse(aDate)
         return [year, month, day].join('-')
       }
       return this.value
+    },
+    vDateInputParse(aDate) {
+      const [year, month, day] = aDate.substr(0, 10).split('-')
+      return { day, month, year }
     },
     calculateCorrectDefaultMaxWidth() {
       return this.datePickerProps && this.datePickerProps.landscape
