@@ -50,8 +50,7 @@ export default {
   },
   components: {
     Auth,
-    Core,
-    Ui
+    Core
   },
   data: function() {
     const va = {

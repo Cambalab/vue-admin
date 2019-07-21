@@ -1,6 +1,8 @@
-const Factory = require('../../factory')
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
-const UI_NAMES = require('../../../../src/constants/ui.element.names')
+import Factory from '../../factory'
+import { formatDate, parseDate } from '../../../../demo/utils/dates'
+
+import UI_CONTENT from '../../../../src/constants/ui.content.default'
+import UI_NAMES from '../../../../src/constants/ui.element.names'
 
 describe('Authors: Create Test', () => {
   const resourceName = 'authors'
@@ -36,15 +38,16 @@ describe('Authors: Create Test', () => {
   })
 
   it('The {Name} input is filled when an user types in', () => {
-    theFieldInputIsFilledWhenAnUserTypesIn('name')
+    theInputFieldIsFilledWhenAnUserTypesIn('name', author.name)
   })
 
   it('The {LastName} input is filled when an user types in', () => {
-    theFieldInputIsFilledWhenAnUserTypesIn('lastname')
+    theInputFieldIsFilledWhenAnUserTypesIn('lastname', author.lastname)
   })
 
   it('The {Birthdate} input is filled when an user types in', () => {
-    theFieldInputIsFilledWhenAnUserTypesIn('birthdate')
+    const birthdate = formatDate(parseDate(author.birthdate))
+    theInputFieldIsFilledWhenAnUserTypesIn('birthdate', birthdate).click()
   })
 
   it('Authors Create View should redirect to the List View on a create submit', () => {
@@ -66,7 +69,7 @@ describe('Authors: Create Test', () => {
     cy.url().should('include', '/authors')
   })
 
-  function theFieldInputIsFilledWhenAnUserTypesIn(field) {
+  function theInputFieldIsFilledWhenAnUserTypesIn(field, value) {
     const input = cy.getElement({
       constant: UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD,
       constantParams: { resourceName, view, field },
@@ -74,7 +77,9 @@ describe('Authors: Create Test', () => {
       elementProp: 'name'
     })
 
-    input.type(author[field])
-    input.should('have.value', author[field])
+    input.clear().type(value)
+    input.should('have.value', value)
+
+    return input
   }
 })

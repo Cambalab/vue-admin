@@ -1,8 +1,9 @@
-const Factory = require('../../factory')
-const { InitEntityUtils } = require('../../lib/commands')
+import Factory from '../../factory'
+import { InitEntityUtils } from '../../lib/commands'
+import { formatDate, parseDate } from '../../../../demo/utils/dates'
 
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
-const UI_NAMES = require('../../../../src/constants/ui.element.names')
+import UI_CONTENT from '../../../../src/constants/ui.content.default'
+import UI_NAMES from '../../../../src/constants/ui.element.names'
 
 describe('Authors: Edit Test', () => {
 
@@ -48,30 +49,32 @@ describe('Authors: Edit Test', () => {
   })
 
   it('Authors Edit view should contain a name field', () => {
-    articlesEditViewShouldContainsTheField('name', author.name)
+    shouldHaveFieldWithValue('name', author.name)
   })
 
   it('Authors Edit view should contain a lastname field', () => {
-    articlesEditViewShouldContainsTheField('lastname', author.lastname)
+    shouldHaveFieldWithValue('lastname', author.lastname)
   })
 
   it('Authors Edit view should contain a birthdate field', () => {
-    articlesEditViewShouldContainsTheField('birthdate', author.birthdate)
+    const birthdate = formatDate(parseDate(author.birthdate))
+    shouldHaveFieldWithValue('birthdate', birthdate)
   })
 
   it('Authors Edit view should edit a name field', () => {
     editField('name', newAuthor.name)
-    articlesEditViewShouldContainsTheField('name', newAuthor.name)
+    shouldHaveFieldWithValue('name', newAuthor.name)
   })
 
   it('Authors Edit view should edit a lastname field', () => {
     editField('lastname', newAuthor.lastname)
-    articlesEditViewShouldContainsTheField('lastname', newAuthor.lastname)
+    shouldHaveFieldWithValue('lastname', newAuthor.lastname)
   })
 
   it('Authors Edit view should edit a birthdate field', () => {
-    editField('birthdate', newAuthor.birthdate)
-    articlesEditViewShouldContainsTheField('birthdate', newAuthor.birthdate)
+    const value = formatDate(parseDate(newAuthor.birthdate))
+    editField('birthdate', value)
+    shouldHaveFieldWithValue('birthdate', value)
   })
 
   it('An author is updated when the user submits the form', () => {
@@ -112,7 +115,7 @@ describe('Authors: Edit Test', () => {
     })
   }
 
-  function articlesEditViewShouldContainsTheField(field, expectedContent) {
+  function shouldHaveFieldWithValue(field, expectedContent) {
     queryToField(field).should('have.value', expectedContent)
   }
 })

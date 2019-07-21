@@ -49,7 +49,7 @@
             <component
               :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index: props.index })}`"
               :is="type(field.type)"
-              v-bind:content="props.item[label(field)]"
+              v-bind:value="props.item[label(field)]"
               v-bind="args(field)">
             </component>
           </router-link>
@@ -57,7 +57,7 @@
             <component
               :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index: props.index })}`"
               :is="type(field.type)"
-              v-bind:content="props.item[label(field)]"
+              v-bind:value="props.item[label(field)]"
               v-bind="args(field)">
             </component>
           </span>
@@ -86,7 +86,7 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import UI_ELEMENTS from '@constants/ui.elements.props'
-import { Input, TextField, Spinner } from "../../UiComponents";
+import { Input, TextField, Spinner, DateInput } from "../../UiComponents";
 import { EditButton, Delete } from "../../Actions";
 
 export default {
@@ -165,6 +165,7 @@ export default {
 
   components: {
     Input: Input,
+    DateInput,
     TextField: TextField,
     Delete: Delete,
     EditButton: EditButton,

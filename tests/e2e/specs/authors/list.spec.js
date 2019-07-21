@@ -1,9 +1,9 @@
 import { InitEntityUtils } from '../../lib/commands'
 import { rowsPerPage } from '../../../../src/constants/ui.elements.props'
+import { formatDate, parseDate } from '../../../../demo/utils/dates'
 
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
-const UI_NAMES = require('../../../../src/constants/ui.element.names')
-
+import UI_CONTENT from '../../../../src/constants/ui.content.default'
+import UI_NAMES from '../../../../src/constants/ui.element.names'
 
 describe('Authors: List Test', () => {
   const resourceName = 'authors'
@@ -93,7 +93,8 @@ describe('Authors: List Test', () => {
 
   it('The list should contain authors with an {birthdate} attribute', () => {
     const field = 'birthdate'
-    assertListElementsByField(authors, field, rowsPerPage)
+    const parseValue = (value) => formatDate(parseDate(value))
+    assertListElementsByField(authors, field, rowsPerPage, { parseValue })
   })
 
   it('Authors List View should go to the Create View when the Create button is clicked', () => {
@@ -123,7 +124,9 @@ describe('Authors: List Test', () => {
    * @param {Number} rowsPerPage A quantity representing the rows per page of a
    * table.
    */
-  const assertListElementsByField = (list, field, rowsPerPage) => {
+  const assertListElementsByField = (list, field, rowsPerPage, {
+    parseValue = undefined
+  } = {}) => {
     list.forEach((element, index) => {
       // Navigates to next page if necessary
       navigateToNextPage(index)
@@ -133,7 +136,8 @@ describe('Authors: List Test', () => {
         index: index % rowsPerPage
       })
       // Assertion: the input contains the author issue content
-      row.should('contain', element[field])
+      const value = parseValue ? parseValue(element[field]) : element[field]
+      row.should('contain', value)
     })
   }
 
