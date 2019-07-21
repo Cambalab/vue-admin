@@ -44,7 +44,7 @@ export default {
       type: String,
       default: defaults().props.name
     },
-    placeHolder: {
+    placeholder: {
       type: String
     },
     readonly: {
