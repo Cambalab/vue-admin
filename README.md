@@ -4,25 +4,29 @@
   </a>
 </p>
 
-<h1 align="center">Vue Admin</h1>
+<h4 align="center">Vue Admin is desgined to let you easily build admin applications for the browser using Vue, Javascript and REST services.</h4>
 
-<h4 align="center">A frontend Framework for building admin applications running in the browser on top of REST services, using ES6, vue-router, vuex, vuex-crud and vuetify.</h4>
+<p align="center">
+  <a href="https://travis-ci.com/Cambalab/vue-admin"><img src="https://travis-ci.com/Cambalab/vue-admin.svg?branch=develop" alt="Build Status"></a>
+  <a href="https://www.npmjs.com/package/vue-admin-js"><img src="https://img.shields.io/npm/v/vue-admin-js.svg" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/vue-admin-js"><img src="https://img.shields.io/npm/l/vue-admin-js.svg" alt="License"></a>
+</p>
 
 ## Introduction
 
-***We've been working a lot with other libraries that generate administration dashboards, routes, resources in other javascript frameworks, but did not find any Vue library capable of performing this kind of solution, except of many really impressive Vue libraries that provide UI components for admin dashboards. We are pretty convinced Vue's learning curve is gentle, so we thought we could try and build our own tool to help building administration applications.***
+*We've been working a lot with other libraries that generate administration dashboards, routes, resources in other javascript frameworks, but did not find any Vue library capable of performing this kind of solution, except of many really impressive Vue libraries that provide UI components for admin dashboards. We are pretty convinced Vue's learning curve is gentle, so we thought we could try and build our own tool to help building administration applications.*
 
 ## Dependencies and third party libraries
 
-***We assume your project is currently shipped with the following dependencies:***
+*We assume your project is currently shipped with the following dependencies:*
 
-+   [**vue-router:**](https://github.com/vuejs/vue-router) ***used to dynamically create routes and bind components to them. We also take advantage of some of the route hooks.***
-+   [**vuex:**](https://github.com/vuejs/vuex) ***lets us globally share information between the core application and component customizations of a library user.***
++   [**vue-router:**](https://github.com/vuejs/vue-router) used to dynamically create routes and bind components to them. We also take advantage of some of the route hooks.
++   [**vuex:**](https://github.com/vuejs/vuex) lets us globally share information between the core application and component customizations of a library user.
++   [**vuetify:**](https://github.com/vuetifyjs/vuetify) we basically don't want to implement UI components from scratch, plus their widgets are awesome. The drawer, buttons, cards and CRUD views are implemented with Vuetify, but you could use any other UI framework if you want to build your own CRUD views. Take the [magazines](/demo/components/magazines) view as example.
 
-***Core Libaries vue-admin-js depends on***
+*Core Libaries vue-admin-js depends on*
 
-+   [**vuex-crud:**](https://github.com/JiriChara/vuex-crud) ***this lightweight tool creates the resources crud store state, mutations and getters for us.***
-+   [**vuetify:**](https://github.com/vuetifyjs/vuetify) **we basically don't want to implement UI components from scratch, plus their widgets are awesome. The drawer, buttons, cards and CRUD views are implemented with Vuetify, but you could use any other UI framework if you want to build your own CRUD views. Take a look at the [magazines example](/demo/components/magazines)**.
++   [**vuex-crud:**](https://github.com/JiriChara/vuex-crud) this lightweight tool creates the resources crud store state, mutations and getters for us.
 
 ## Installation
 
@@ -34,15 +38,15 @@ npm i --save vue-admin-js
 ## Configuration
 
 ### Auth Provider
-**You will have to configure a simple adapter to communicate with your REST api.**
+You will have to configure an adapter to communicate with your REST api.
 
-**We currently provide a simple example using an axios client in the demo app. Though we intend to keep developing other kind of adapters for different node backend frameworks, they will live in separate packages.**
+We currently provide a simple example using an axios client in the demo app. Though we intend to keep developing other kind of adapters for different node backend frameworks, they will live in separate packages.
 
-**Anyways, we hope the axios example encourages you to write your own adapter until we release the adapters guide. The @va-auth module uses the vuex store and expects a user to make use of the action types it provides.**
+Anyways, we hope the axios example encourages you to write your own adapter until we release the adapters guide. The @va-auth module uses the vuex store and expects a user to make use of the action types it provides.
 
 ## Usage
 
-***Your App.vue file***
+***App.vue***
 ```vue
 <template>
   <Admin :authProvider="authProvider">
@@ -95,7 +99,7 @@ npm i --save vue-admin-js
 </script>
 ```
 
-***Example of a ListArticles.vue component***
+***ListArticles.vue***
 ```vue
 <template>
   <List>
@@ -121,7 +125,7 @@ export default {
 
 By default Vue-Admin provides you with a default authentication view, but you may desire to use your own custom view to authenticate. In that case, you just need to pass it as a property in the *Admin* component like the following.
 
-***Example of custom authentication component usage***
+*Example of custom authentication component usage*
 ```vue
   ...
   <Admin :authProvider="authProvider" :authLayout="AuthCustomView">
@@ -130,7 +134,7 @@ By default Vue-Admin provides you with a default authentication view, but you ma
 
 In order to use the available authentication mechanism you have to declare a *prop* with a *va* object field which will contain the bounded `login` function.
 
-***Example of provided login mechanism usage in custom auth component***
+*Example of provided login mechanism usage in custom auth component*
 ```vue
   ...
   props: {
@@ -141,7 +145,7 @@ In order to use the available authentication mechanism you have to declare a *pr
   },
   ...
   methods: {
-    simpleLoginExample() {
+    login() {
       this.va.login(this.username, this.password)
     }
   }
@@ -150,26 +154,43 @@ In order to use the available authentication mechanism you have to declare a *pr
 
 ### Examples
 
-##### For a complete example take a look at the [demo files](/demo)
+For a complete example take a look at the [demo files](/demo)
 
-##### User custom components examples can be found in the [magazines example](/demo/components/magazines)
+Some of the custom components examples can be found in the [magazines views](/demo/components/magazines)
 
-## Try it out (forks are more than welcomed :D)
+## Contributing and Future features
+
+*Nothing could make us happier than the community involvement into this framework, so if you feel like contributing or just sharing an idea for us to improve the library, please do not hesitate to [fork vue-admin-js](https://github.com/Cambalab/vue-admin) from our repository, comment or open an issue with the available labels.*
+
+## Starting a new project
+
+*Using the official Vue cli*
+```bash
+# install the official vue cli
+npm install -g @vue/cli-init
+# initialise the project
+vue init webpack my-project
+cd my-project
+# install required dependencies
+npm install --save vue-admin-js vue-router vuex vuex-crud vuetify
+# run the project
+npm run dev
+```
+
+*...and start customizing your [App.vue](https://github.com/Cambalab/vue-admin/blob/master/demo/App.vue)*
+
+## Getting it running
 
 ```bash
 # clone the repository
-git clone https://github.com/yourgithubuser/vue-admin.git
-
+git clone https://github.com/Cambalab/vue-admin.git
 # navigate to the repository and install npm dependencies
 cd vue-admin && npm install
-
 # install the test server dependencies
 cd ../utils/server-test && npm install
-
 # run the server (we prefer to use the same port as Cypress server)
 PORT=8888 node server
-
-# in another terminal go to the repo directory and run the Vue application
+# in another terminal go to the repository directory and run the Vue application
 npm run serve
 ```
 
@@ -189,13 +210,6 @@ npm run test:e2e
 # in the root of the project run the unit tests script
 npm run test:unit
 ```
-
-## Contributing and Future features
-
-**We are currently working on this project while learning new stuff day after day. We also receive ideas and improvements from Vue meetings and people we work with everyday.**
-
-**Nothing could make us happier than the community involvement into this framework, so**
-***if you feel like contributing or just sharing an idea for us to improve the library, please do not hesitate to comment our issues or open an issue with the available labels.***
 
 ---
 <p align="center">
