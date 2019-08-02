@@ -34,7 +34,7 @@
             />
 
             <v-btn
-              class="text-xs-center extra-spacing"
+              class="extra-spacing"
               @click="validate"
               color="green"
               :disabled="!valid"
@@ -46,7 +46,7 @@
           </v-form>
         </v-card>
       </v-flex>
-      <v-flex hidden-xs-only sm4 md8 class="va-img-sector text-xs-center">
+      <v-flex hidden-xs-only sm4 md8 class="va-img-sector">
         <div class="va-img-container">
           <img class="va-img"
             src="../assets/vue-admin-logo.png"
@@ -132,6 +132,7 @@ export default {
 
   .va-img-sector {
     position: relative;
+    text-align: center;
     background-color: #edfcde;
   }
 
