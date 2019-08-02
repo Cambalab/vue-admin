@@ -19,8 +19,8 @@
   </Sidebar>
 </template>
 <script>
-import UI_CONTENT from '../../../constants/ui.content.default'
-import UI_NAMES from '../../../constants/ui.element.names'
+import UI_CONTENT from '@constants/ui.content.default'
+import UI_NAMES from '@constants/ui.element.names'
 import { Sidebar, SidebarNode, SidebarLink, SidebarAction } from '@components/UiComponents'
 
 export default {

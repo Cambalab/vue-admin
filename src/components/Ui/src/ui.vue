@@ -1,16 +1,16 @@
 <template>
   <v-app>
-    <v-navigation-drawer app clipped v-model="drawer" fixed>
-      <component :is="sidebar" :va="va">
-      </component>
+    <v-navigation-drawer v-model="drawer" app>
+      <component :is="sidebar" :va="va" />
     </v-navigation-drawer>
-    <v-toolbar class="success" dark app fixed clipped-left dense>
+
+    <v-app-bar app color="indigo" dark>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title :name="UI_NAMES.MAIN_TOOLBAR_TITLE">
-        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        {{title}}
+        {{ title }}
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-toolbar>
+    </v-app-bar>
+
     <main>
       <v-content>
         <v-container class="no-padding">
