@@ -1,18 +1,17 @@
 <template>
-  <div>
-    <v-tooltip bottom>
+  <v-tooltip bottom>
+    <template v-slot:activator="{ on }">
       <v-btn
-        :name="`${UI_NAMES.RESOURCE_DELETE_BUTTON.with({ resourceName: this.resourceName })}`"
+        :name="`${UI_NAMES.RESOURCE_DELETE_BUTTON.with({ resourceName })}`"
         @click="onDelete()"
-        slot="activator"
-        icon>
-        <i class="v-icon material-icons">
-          {{UI_CONTENT.RESOURCE_DELETE_BUTTON}}
-        </i>
+        icon
+        v-on="on"
+      >
+        <v-icon>{{UI_CONTENT.RESOURCE_DELETE_BUTTON}}</v-icon>
       </v-btn>
-      <span>Delete</span>
-    </v-tooltip>
-  </div>
+    </template>
+    Delete
+  </v-tooltip>
 </template>
 
 <script>

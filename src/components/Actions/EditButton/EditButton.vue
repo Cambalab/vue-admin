@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <v-tooltip
-    bottom>
+  <v-tooltip bottom>
+    <template v-slot:activator="{ on }">
       <v-btn
-      :name="`${UI_NAMES.RESOURCE_EDIT_BUTTON.with({ resourceName, index })}`"
-      @click="onEdit()"
-      slot="activator"
-      icon>
-        <i class="v-icon material-icons">
-          {{UI_CONTENT.RESOURCE_EDIT_BUTTON}}
-        </i>
+        :name="`${UI_NAMES.RESOURCE_EDIT_BUTTON.with({ resourceName, index })}`"
+        @click="onEdit()"
+        icon
+        v-on="on"
+      >
+        <v-icon>{{UI_CONTENT.RESOURCE_EDIT_BUTTON}}</v-icon>
       </v-btn>
-      <span>Edit</span>
-    </v-tooltip>
-  </div>
+    </template>
+    Edit
+  </v-tooltip>
 </template>
 
 <script>
