@@ -2,7 +2,7 @@
 
   <v-list-item two-line>
     <v-list-item-avatar>
-      <img src="https://randomuser.me/api/portraits/men/81.jpg">
+      <img :src="avatar">
     </v-list-item-avatar>
 
     <v-list-item-content>
@@ -16,6 +16,7 @@
 export default {
   name: "SidebarHeading",
   props: {
+    avatar: String,
     heading: String,
     href: {
       type: String,
