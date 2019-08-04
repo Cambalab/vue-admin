@@ -15,7 +15,7 @@
           >
 
             <v-text-field
-              color="teal"
+              color="#009688"
               :label="UI_CONTENT.CUSTOM_AUTH_LABEL_USERNAME"
               :name="UI_NAMES.CUSTOM_AUTH_USERNAME_INPUT"
               required
@@ -24,7 +24,7 @@
             />
 
             <v-text-field
-              color="teal"
+              color="#009688"
               :label="UI_CONTENT.CUSTOM_AUTH_LABEL_PASSWORD"
               :name="UI_NAMES.CUSTOM_AUTH_PASSWORD_INPUT"
               required
@@ -34,9 +34,10 @@
             />
 
             <v-btn
+              absolute
               class="extra-spacing"
               @click="validate"
-              color="green"
+              color="#4CAF50"
               :disabled="!valid"
               :name="UI_NAMES.CUSTOM_AUTH_SIGN_IN_BUTTON"
             >
@@ -59,9 +60,9 @@
           <p>
             <img class="camba-icon" src="../assets/camba-icon.png" />
             With
-            <v-icon small color="green darken-2">favorite</v-icon>
-            <v-icon small color="purple darken-2">favorite</v-icon>
-            <v-icon small color="red darken-2">favorite</v-icon> by
+            <v-icon small color="#388E3C">favorite</v-icon>
+            <v-icon small color="#7B1FA2">favorite</v-icon>
+            <v-icon small color="#D32F2F">favorite</v-icon> by
             <a href="https://camba.coop/" target="_blank" rel="noopener noreferrer">Cambá Coop</a>
             in Buenos Aires, Argentina
             <img class="camba-icon" src="../assets/camba-icon.png" />

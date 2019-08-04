@@ -1,6 +1,6 @@
 <template>
   <Sidebar>
-    <SidebarHeading heading="Menu" href="/"/>
+    <SidebarHeading :avatar="avatarUrl" heading="Menu" href="/" />
     <SidebarNode title="Entities" icon="keyboard_arrow_up" icon-alt="keyboard_arrow_down">
       <SidebarLink title="Articles" path="/articles" icon="list" />
       <SidebarLink title="Magazines" path="/magazines" icon="list" />
@@ -16,6 +16,11 @@ export default {
   name: 'CustomSidebar',
   components: {
     Sidebar, SidebarLink, SidebarNode, SidebarAction, SidebarHeading
+  },
+  data() {
+    return {
+      avatarUrl: 'https://randomuser.me/api/portraits/thumb/women/23.jpg'
+    }
   },
   props: {
     va: {
