@@ -19,6 +19,7 @@
   "dependencies": {},
   "devDependencies": {
     "@babel/polyfill": "^7.0.0-beta.49",
+    "@mdi/font": "^3.8.95",
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-e2e-cypress": "^3.0.0-rc.10",
     "@vue/cli-plugin-eslint": "^3.9.0",
