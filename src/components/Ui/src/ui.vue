@@ -4,7 +4,7 @@
       <component :is="sidebar" :va="va" />
     </v-navigation-drawer>
 
-    <v-app-bar app color="indigo" dark>
+    <v-app-bar app color="teal" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title :name="UI_NAMES.MAIN_TOOLBAR_TITLE">
         {{ title }}
