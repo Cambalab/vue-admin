@@ -12,8 +12,11 @@
 
       <template v-slot:top>
         <v-toolbar flat color="white">
-          <v-toolbar-title :name="names.viewContainerTitle">
-            <h3 class="headline mb-0 text-capitalize">{{resourceName}}</h3>
+          <v-toolbar-title
+            :name="names.viewContainerTitle"
+            class="headline mb-0 text-capitalize"
+          >
+            {{resourceName}}
           </v-toolbar-title>
           <v-divider class="mx-4" inset vertical />
           <v-spacer/>
