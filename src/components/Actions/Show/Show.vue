@@ -1,21 +1,20 @@
 <template>
   <v-card :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })}`">
     <Spinner :spin="isLoading"></Spinner>
+    <v-toolbar flat color="white">
+      <v-spacer/>
+      <EditButton
+        :resourceId="$route.params.id"
+        :resourceName="resourceName">
+      </EditButton>
+      <Delete
+        :resourceId="$route.params.id"
+        :resourceName="resourceName">
+      </Delete>
+    </v-toolbar>
     <div class="text-xs-center d-flex right" :name="`${UI_NAMES.RESOURCE_VIEW_ACTIONS_CONTAINER.with({ resourceName, view })}`">
-        <EditButton
-          :resourceId="$route.params.id"
-          :resourceName="resourceName">
-        </EditButton>
-        <Delete
-          :resourceId="$route.params.id"
-          :resourceName="resourceName">
-        </Delete>
+
     </div>
-    <v-card-title primary-title :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`">
-      <h3 class="headline mb-0 text-capitalize">
-        {{UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })}}
-      </h3>
-    </v-card-title>
     <v-card-text :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({ resourceName, view })}`">
       <component
         :name="componentName(field)"
