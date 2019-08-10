@@ -32,14 +32,14 @@ export default {
   CUSTOM_AUTH_SIGN_IN_BUTTON: 'va-login-submit-button',
 
   /**
-   * List
+   * Actions
    */
+
   // The whole container of a Resource List
   RESOURCE_VIEW_CONTAINER: {
     with: ({ resourceName, view }) => `${resourceName}-${view}-container`
   },
 
-  // The whole container of a Resource List
   RESOURCE_VIEW_ACTIONS_CONTAINER: {
     with: ({ resourceName, view }) => `${resourceName}-${view}-actions-container`
   },
@@ -49,7 +49,11 @@ export default {
   },
 
   RESOURCE_VIEW_CONTAINER_FIELDS: {
-    with: ({ resourceName, view }) => `${resourceName}-${view}-container-fields`
+    with: ({ resourceName, view, index }) => {
+      return index !== undefined
+      ? `${resourceName}-${view}-container-fields-${index}`
+      : `${resourceName}-${view}-container-fields`
+    }
   },
 
   RESOURCE_VIEW_CONTAINER_FIELD: {
@@ -64,7 +68,7 @@ export default {
   RESOURCE_EDIT_BUTTON: {
     with: ({ resourceName, index }) => {
       return index !== undefined
-      ? `${resourceName}-${index}-edit-button`
+      ? `${resourceName}-edit-button-${index}`
       : `${resourceName}-edit-button`
     }
   },
