@@ -2,7 +2,7 @@
   <v-tooltip bottom>
     <template v-slot:activator="{ on }">
       <v-btn
-        :name="`${UI_NAMES.RESOURCE_EDIT_BUTTON.with({ resourceName, index })}`"
+        :name="name"
         @click="onEdit()"
         icon
         v-on="on"
@@ -31,9 +31,6 @@ export default {
     },
     resourceName: {
       type: String
-    },
-    index: {
-      type: Number
     }
   },
   data() {

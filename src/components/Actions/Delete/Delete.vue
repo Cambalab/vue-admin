@@ -2,7 +2,7 @@
   <v-tooltip bottom>
     <template v-slot:activator="{ on }">
       <v-btn
-        :name="`${UI_NAMES.RESOURCE_DELETE_BUTTON.with({ resourceName })}`"
+        :name="name"
         @click="onDelete()"
         icon
         v-on="on"
