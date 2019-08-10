@@ -48,7 +48,7 @@
     "vue-cli-plugin-vuetify": "^0.6.1",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.6.10",
-    "vuetify": "^2.0.0",
+    "vuetify": "^2.0.5",
     "vuetify-loader": "^1.2.2",
     "vuex": "^3.0.1",
     "vuex-crud": "^0.3.2"
