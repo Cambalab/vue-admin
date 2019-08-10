@@ -1,5 +1,5 @@
 <template>
-  <v-card :name="UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })">
+  <v-card :name="names.viewContainer">
     <Spinner :spin="isLoading"></Spinner>
 
     <v-data-table
@@ -7,81 +7,78 @@
       :items="resourceList"
       class="elevation-1"
       :options.sync="options"
+      dense
     >
 
       <template v-slot:top>
         <v-toolbar flat color="white">
-          <v-toolbar-title :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`">
+          <v-toolbar-title :name="names.viewContainerTitle">
             <h3 class="headline mb-0 text-capitalize">{{resourceName}}</h3>
           </v-toolbar-title>
-          <v-divider
-            class="mx-4"
-            inset
-            vertical
-          />
+          <v-divider class="mx-4" inset vertical />
           <v-spacer/>
-          <div class="text-xs-center d-flex right">
-            <router-link
-              :name="`${UI_NAMES.RESOURCE_CREATE_BUTTON.with({ resourceName })}`"
-              v-if="hasCreate"
-              :to="{ name: `${resourceName}/create` }">
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn icon v-on="on">
-                    <v-icon color="teal">
-                      {{UI_CONTENT.RESOURCE_CREATE_BUTTON}}
-                    </v-icon>
-                  </v-btn>
-                </template>
-                <span>Create</span>
-              </v-tooltip>
-            </router-link>
-          </div>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                v-if="hasCreate"
+                v-on="on"
+                :name="names.createButton"
+                @click="onCreateClick()"
+                icon
+              >
+                <v-icon color="teal">{{content.createButton}}</v-icon>
+              </v-btn>
+            </template>
+            <span>Create</span>
+          </v-tooltip>
         </v-toolbar>
       </template>
 
       <template v-slot:body="{ items }">
         <tbody>
-           <tr v-for="(item, index) in items">
-             <td class="text-xs-left"
-               v-for="field in fields"
-               :key="key(label(field))"
-               :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index })"
-               >
-               <router-link
-                 :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: resourceIdName, index })"
-                 v-if="label(field) === resourceIdName && hasShow"
-                 :to="{ name: `${resourceName}/show`, params: { id: item[resourceIdName] } }"
-               >
-                 <component
-                   :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index })"
-                   :is="type(field.type)"
-                   v-bind:value="item[label(field)]"
-                   v-bind="args(field)"
-                 />
-               </router-link>
-               <span v-else>
-                 <component
-                   :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field), index })"
-                   :is="type(field.type)"
-                   v-bind:value="item[label(field)]"
-                   v-bind="args(field)"
-                 />
-               </span>
-             </td>
-             <td>
-               <EditButton
-                 :resourceId="item[resourceIdName]"
-                 :resourceName="resourceName"
-                 :index="index"
-               />
-               <Delete
-                 :resourceId="item[resourceIdName]"
-                 :resourceName="resourceName"
-                 :index="index"
-               />
-             </td>
-           </tr>
+          <tr v-for="(item, index) in items"
+            :key="keys.containerFields(item.id)"
+            :name="names.containerFields(index)"
+          >
+            <td class="text-xs-left"
+              v-for="field in fields"
+              :key="keys.elementField(label(field), index)"
+              :name="names.elementField(label(field), index)"
+            >
+                <v-chip
+                  :name="names.elementField(resourceIdName, index)"
+                  v-if="label(field) === resourceIdName && hasShow"
+                  @click="onIdClick(item[resourceIdName])"
+                >
+                  <component
+                    :name="names.elementField(label(field))"
+                    :is="type(field)"
+                    v-bind:value="item[label(field)]"
+                    v-bind="args(field)"
+                  />
+                </v-chip>
+              <span v-else>
+                <component
+                  :name="names.elementField(label(field), index)"
+                  :is="type(field)"
+                  v-bind:value="item[label(field)]"
+                  v-bind="args(field)"
+                />
+              </span>
+            </td>
+            <td>
+              <EditButton
+                :name="names.editButton(index)"
+                :resourceId="item[resourceIdName]"
+                :resourceName="resourceName"
+              />
+              <Delete
+                :name="names.deleteButton(index)"
+                :resourceId="item[resourceIdName]"
+                :resourceName="resourceName"
+              />
+            </td>
+          </tr>
         </tbody>
       </template>
 
@@ -93,8 +90,8 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import UI_ELEMENTS from '@constants/ui.elements.props'
-import { Input, TextField, Spinner, DateInput } from "../../UiComponents";
-import { EditButton, Delete } from "../../Actions";
+import { Input, TextField, Spinner, DateInput } from "../../UiComponents"
+import { EditButton, Delete } from "../../Actions"
 
 export default {
   name: "List",
@@ -127,13 +124,30 @@ export default {
   },
   data() {
     const { rowsPerPage } = UI_ELEMENTS
+    const resourceName = this.resourceName
+    const view = 'list'
+    const content = {
+      createButton: UI_CONTENT.RESOURCE_CREATE_BUTTON
+    }
+    const keys = {
+      containerFields: (index) => UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({ resourceName, view, index }),
+      elementField: (field, index) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field, index })
+    }
+    const names = {
+      containerFields: (index) => UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({ resourceName, view, index }),
+      createButton: UI_NAMES.RESOURCE_CREATE_BUTTON.with({ resourceName }),
+      deleteButton: (index) => UI_NAMES.RESOURCE_DELETE_BUTTON.with({ resourceName, index }),
+      editButton: (index) => UI_NAMES.RESOURCE_EDIT_BUTTON.with({ resourceName, index }),
+      elementField: (field, index) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field, index }),
+      viewContainer: UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view }),
+      viewContainerTitle: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view }),
+    }
     return {
-      view: 'list',
-      UI_CONTENT,
-      UI_NAMES,
+      content,
+      keys,
+      names,
       options: {
         pagination: {
-          page: 1,
           itemsPerPage: rowsPerPage
         }
       }
@@ -157,8 +171,8 @@ export default {
         sortable: false,
         value: 'action',
         width: '150px'
-      });
-      return newHeaders;
+      })
+      return newHeaders
     },
     resourceList: function() {
       return this.va.getList()
@@ -167,37 +181,34 @@ export default {
       return this.$store.getters['requests/isLoading']
     }
   },
-
   components: {
-    Input: Input,
     DateInput,
-    TextField: TextField,
-    Delete: Delete,
-    EditButton: EditButton,
-    Spinner: Spinner
+    Delete,
+    EditButton,
+    Input,
+    TextField,
+    Spinner
   },
-
   methods: {
-    type(type) {
-      return type || 'TextField'
+    type(field) {
+      return 'TextField'
     },
-
-    key(label) {
-      return `${this.resourceName}_${label}`
-    },
-
     label(field) {
       return field.label || field
     },
-
     args(field) {
       const args = typeof(field) === 'string' ? { 'label': field } : field
       return args
+    },
+    onCreateClick() {
+      this.$router.push({ name: `${this.resourceName}/create` })
+    },
+    onIdClick(id) {
+      this.$router.push({ name: `${this.resourceName}/show`, params: { id } })
     }
   },
-
   created() {
     this.va.fetchList()
   }
-};
+}
 </script>
