@@ -7,7 +7,7 @@
         icon
         v-on="on"
       >
-        <v-icon>{{UI_CONTENT.RESOURCE_EDIT_BUTTON}}</v-icon>
+        <v-icon v-bind="iconProps">{{UI_CONTENT.RESOURCE_EDIT_BUTTON}}</v-icon>
       </v-btn>
     </template>
     Edit
@@ -24,13 +24,16 @@ export default {
   props: {
     name: {
       type: String,
-      default: null
+      default: 'va-edit-button'
     },
     resourceId: {
       type: [Number, String]
     },
     resourceName: {
       type: String
+    },
+    iconProps: {
+      type: Object
     }
   },
   data() {

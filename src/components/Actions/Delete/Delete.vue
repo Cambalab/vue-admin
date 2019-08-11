@@ -7,7 +7,9 @@
         icon
         v-on="on"
       >
-        <v-icon>{{UI_CONTENT.RESOURCE_DELETE_BUTTON}}</v-icon>
+        <v-icon v-bind="iconProps">
+          {{UI_CONTENT.RESOURCE_DELETE_BUTTON}}
+        </v-icon>
       </v-btn>
     </template>
     Delete
@@ -24,7 +26,7 @@ export default {
   props: {
     name: {
       type: String,
-      default: null
+      default: 'va-delete-button'
     },
     resourceId: {
       type: [Number, String]
@@ -32,6 +34,9 @@ export default {
     resourceName: {
       type: String,
       default: null
+    },
+    iconProps: {
+      type: Object
     }
   },
 

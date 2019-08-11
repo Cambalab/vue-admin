@@ -93,8 +93,8 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import UI_ELEMENTS from '@constants/ui.elements.props'
-import { Input, TextField, Spinner, DateInput } from "../../UiComponents"
-import { EditButton, Delete } from "../../Actions"
+import { Input, TextField, Spinner, DateInput } from "@components/UiComponents"
+import { EditButton, Delete } from "@components/Actions"
 
 export default {
   name: "List",
@@ -124,6 +124,14 @@ export default {
       type: Object,
       required: true
     }
+  },
+  components: {
+    DateInput,
+    Delete,
+    EditButton,
+    Input,
+    TextField,
+    Spinner
   },
   data() {
     const { rowsPerPage } = UI_ELEMENTS
@@ -183,14 +191,6 @@ export default {
     isLoading() {
       return this.$store.getters['requests/isLoading']
     }
-  },
-  components: {
-    DateInput,
-    Delete,
-    EditButton,
-    Input,
-    TextField,
-    Spinner
   },
   methods: {
     type(field) {
