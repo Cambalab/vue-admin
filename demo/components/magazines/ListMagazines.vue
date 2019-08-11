@@ -8,7 +8,7 @@
 
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="magazines"
       class="elevation-1"
       :footer-props="footerProps"
       :options.sync="options"
@@ -31,11 +31,35 @@
         </v-alert>
       </template>
 
-      <template slot="items" slot-scope="props">
-        <td :name="idRowName(props.index)">{{ props.item.id }}</td>
-        <td :name="nameRowName(props.index)" class="text-xs-left">{{ props.item.name }}</td>
-        <td :name="issueRowName(props.index)" class="text-xs-center">{{ props.item.issue }}</td>
-        <td :name="publisherRowName(props.index)" class="text-xs-right">{{ props.item.publisher }}</td>
+      <template v-slot:body="{ items }">
+        <tbody>
+          <tr v-for="(item, index) in items">
+            <td :name="idRowName(index)">{{ item.id }}</td>
+            <td :name="nameRowName(index)" class="text-xs-left">
+              {{ item.name }}
+            </td>
+            <td :name="issueRowName(index)" class="text-xs-center">
+              {{ item.issue }}
+            </td>
+            <td :name="publisherRowName(index)" class="text-xs-right">
+              {{ item.publisher }}
+            </td>
+            <td class="text-xs-center">
+              <EditButton
+                :iconProps="iconProps"
+                :name="editButtonName(index)"
+                :resourceId="item.id"
+                resourceName="magazines"
+              />
+              <Delete
+                :iconProps="iconProps"
+                :name="deleteButtonName(index)"
+                :resourceId="item.id"
+                resourceName="magazines"
+              />
+            </td>
+          </tr>
+        </tbody>
       </template>
 
     </v-data-table>
@@ -45,6 +69,7 @@
 <script>
   import UI_NAMES from '@constants/ui.element.names'
   import { rowsPerPage } from '../../constants'
+  import { EditButton, Delete } from '@components/Actions'
 
   export default {
     name: 'ListMagazines',
@@ -55,6 +80,10 @@
         type: Object,
         required: true
       }
+    },
+    components: {
+      EditButton,
+      Delete
     },
     data() {
       // This is only needed for e2e demo tests
@@ -71,6 +100,14 @@
         nameRowName: (index) => buildName('name', index),
         issueRowName: (index) => buildName('issue', index),
         publisherRowName: (index) => buildName('publisher', index),
+        editButtonName: (index) => UI_NAMES.RESOURCE_EDIT_BUTTON.with({
+          resourceName,
+          index
+        }),
+        deleteButtonName: (index) => UI_NAMES.RESOURCE_DELETE_BUTTON.with({
+          resourceName,
+          index
+        }),
         footerProps: {
           itemsPerPageText: 'Magazines per page'
         },
@@ -78,6 +115,9 @@
           pagination: {
             itemsPerPage: rowsPerPage
           }
+        },
+        iconProps: {
+          small: true
         }
       }
     },
@@ -87,10 +127,11 @@
           { text: 'ID', align: 'left', sortable: true, value: 'id' },
           { text: 'Name', value: 'name' },
           { text: 'Issue', value: 'issue' },
-          { text: 'Publisher', value: 'publisher' }
+          { text: 'Publisher', value: 'publisher' },
+          { text: 'Actions', align: 'center', value: 'action', sortable: false, width: '160px' }
         ]
       },
-      desserts: function() {
+      magazines: function() {
         return this.va.getList()
       }
     },

@@ -110,6 +110,6 @@ export default {
   mounted: function() {
     this.va.initEntity()
   },
-};
+}
 
 </script>
