@@ -8,23 +8,21 @@
   >
     <template v-slot:activator="{ on }">
       <v-text-field
-        :value="computedDateFormattedMomentjs"
+        :value="formattedDate"
         clearable
         :label="placeholder"
         readonly
         v-on="on"
-      ></v-text-field>
+      />
     </template>
     <v-date-picker
       v-model="date"
       v-bind="vDatePickerProps"
-      @change="menu = false"
-    ></v-date-picker>
+    />
   </v-menu>
 </template>
 
 <script>
-import moment from 'moment'
 import defaults from './defaults'
 import ELEMENTS_PROPS from '@constants/ui.elements.props'
 
@@ -64,31 +62,38 @@ export default {
       type: Object,
       default: defaults().props.vMenuProps
     },
-    valid: {
-      type: Function,
-      default: defaults().props.valid,
-      required: true
-    },
     value: {
       type: [String, Number],
-      default: new Date().toISOString()
+      default: new Date().toISOString(true)
     }
   },
   data() {
     return {
-      date: new Date().toISOString().substr(0, 10),
+      date: this.parseDate(this.value),
+      dateInputMaxWidth: this.calculateCorrectDefaultMaxWidth(),
+      formattedDate: this.formatDate(this.value),
       menu: false,
-      dateInputMaxWidth: this.calculateCorrectDefaultMaxWidth()
     }
   },
 
-  computed: {
-    computedDateFormattedMomentjs () {
-      return this.date ? moment(this.date).format('dddd, MMMM Do YYYY') : ''
+  watch: {
+    date: function(newDate) {
+      if (newDate) {
+        const formattedDate = this.formatDate(newDate)
+        this.formattedDate = formattedDate
+        const value = this.parseDate(newDate)
+        this.$emit('change', value)
+      }
     },
   },
 
   methods: {
+    parseDate(date) {
+      return date ? this.parse(date) : date
+    },
+    formatDate(date) {
+      return this.format(date)
+    },
     calculateCorrectDefaultMaxWidth() {
       return this.datePickerProps && this.datePickerProps.landscape
         ? ELEMENTS_PROPS.dateInputMaxWidthLandscape
