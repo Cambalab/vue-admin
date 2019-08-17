@@ -33,6 +33,8 @@ export default {
 
   CUSTOM_AUTH_ALERT_USERNAME_REQUIRED: 'Username is required',
   CUSTOM_AUTH_ALERT_PASSWORD_REQUIRED: 'Password is required',
+  CUSTOM_AUTH_ALERT_INVALID_EMAIL: 'E-mail is required',
+
   /**
    * Shared content inside List, Show, Create, Edit components
    */
