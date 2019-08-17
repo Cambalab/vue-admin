@@ -16,11 +16,12 @@
         :resourceName="resourceName"
       />
     </v-toolbar>
-    <v-card-text :name="names.containerFields">
+    <v-card-text :name="names.containerFields"
+      v-if="resourceShow !== undefined"
+    >
       <component
         :name="names.containerField(label(field))"
         v-for="field in fields"
-        v-if="resourceShow !== undefined"
         :key="names.containerField(label(field))"
         :is="type(field)"
         v-bind:value="resourceShow[label(field)]"
@@ -31,7 +32,6 @@
 </template>
 
 <script>
-import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from "vuex"
 import { Input, TextField, Spinner } from "../../UiComponents"
