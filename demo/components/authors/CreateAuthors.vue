@@ -2,8 +2,8 @@
   <Create>
     <input source="name" placeHolder="Name" />
     <input source="lastname" placeHolder="Last name" />
-    <input source="birthdate" placeHolder="Birthdate" type="DateInput"
-      :datePickerProps="datePickerProps"
+    <input source="birthdate" placeholder="Birthdate" type="DateInput"
+      :vDatePickerProps="vDatePickerProps"
       :vMenuProps="vMenuProps"
       :parse="parseDate"
       :format="formatDate"
@@ -24,7 +24,7 @@ export default {
   data() {
     const { parseDate, formatDate, validDate } = dateUtils
     return {
-      datePickerProps: {
+      vDatePickerProps: {
         locale: 'en-us',
         type: 'date',
         noTitle: true
