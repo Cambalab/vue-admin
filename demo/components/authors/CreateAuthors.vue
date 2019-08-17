@@ -7,8 +7,8 @@
       :vMenuProps="vMenuProps"
       :parse="parseDate"
       :format="formatDate"
-      :valid="validDate"
-      :readonly="readonly" />
+      :readonly="readonly"
+    />
   </Create>
 </template>
 
@@ -22,7 +22,7 @@ export default {
     Create
   },
   data() {
-    const { parseDate, formatDate, validDate } = dateUtils
+    const { parseDate, formatDate } = dateUtils
     return {
       vDatePickerProps: {
         locale: 'en-us',
@@ -35,8 +35,7 @@ export default {
       },
       readonly: true,
       parseDate,
-      formatDate,
-      validDate
+      formatDate
     }
   }
 }

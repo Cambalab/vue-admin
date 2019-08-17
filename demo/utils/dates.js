@@ -1,19 +1,18 @@
-function parseDate (aDate) {
-  const [year, month, day] = aDate.substr(0, 10).split('-')
-  return { day, month, year }
+import moment from 'moment'
+
+function parseDate(date) {
+  return new Date(date).toISOString(true)
 }
 
-function formatDate ({ day, month, year }) {
-  return `${month}/${day}/${year}`
-}
-
-function validDate (aDate) {
-  const rgx = new RegExp(/\d{4}\/\d{2}\/\d{2}/)
-  return rgx.test(aDate)
+function formatDate(date) {
+  const momentDate = moment(date)
+  const day = momentDate.date()
+  const month = momentDate.month() + 1
+  const year = momentDate.year()
+  return `${day}/${month}/${year}`
 }
 
 export default {
   parseDate,
-  formatDate,
-  validDate
+  formatDate
 }

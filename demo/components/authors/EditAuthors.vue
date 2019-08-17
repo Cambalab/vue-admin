@@ -3,12 +3,12 @@
     <input source="id" placeHolder="Id" />
     <input source="name" placeHolder="Name" />
     <input source="lastname" placeHolder="Last name" />
-    <input source="birthdate" placeHolder="Birthdate" type="DateInput"
-      :datePickerProps="datePickerProps"
+    <input source="birthdate" placeholder="Birthdate" type="DateInput"
+      :vDatePickerProps="vDatePickerProps"
       :vMenuProps="vMenuProps"
       :parse="parseDate"
       :format="formatDate"
-      :valid="validDate" />
+    />
   </Edit>
 </template>
 
@@ -22,10 +22,10 @@ export default {
     Edit
   },
   data() {
-    const { parseDate, formatDate, validDate } = dateUtils
+    const { parseDate, formatDate } = dateUtils
     return {
-      datePickerProps: {
-        locale: 'en-us',
+      vDatePickerProps: {
+        locale: 'en',
         type: 'date',
         noTitle: true
       },
@@ -34,8 +34,7 @@ export default {
         closeOnContentClick: true
       },
       parseDate,
-      formatDate,
-      validDate
+      formatDate
     }
   }
 }
