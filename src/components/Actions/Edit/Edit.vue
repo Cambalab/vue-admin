@@ -115,7 +115,7 @@ export default {
       this.va.submitEntity()
     },
     type(field) {
-      return field.field || 'Input'
+      return field.type || 'Input'
     },
     key(label) {
       return `${this.resourceName}_${label}`

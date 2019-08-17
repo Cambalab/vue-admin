@@ -102,7 +102,7 @@ export default {
       return this.va.fetchEntity()
     },
     type(field) {
-      return field.field || 'TextField'
+      return field.type || 'TextField'
     },
     label(field) {
       return field.label || field

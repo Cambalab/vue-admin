@@ -194,7 +194,7 @@ export default {
   },
   methods: {
     type(field) {
-      return 'TextField'
+      return field.type || 'TextField'
     },
     label(field) {
       return field.label || field

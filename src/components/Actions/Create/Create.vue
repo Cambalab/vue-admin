@@ -14,7 +14,7 @@
               :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field) })}`"
               v-for="field in fields"
               :key="key(label(field))"
-              :is="type(field.type)"
+              :is="type(field)"
               v-bind="args(field)"
               @change="storeValue($event, label(field))">
             </component>
@@ -91,8 +91,8 @@ export default {
       this.va.submitEntity()
     },
 
-    type(type) {
-      return type || 'Input'
+    type(field) {
+      return field.type || 'Input'
     },
 
     key(label) {
