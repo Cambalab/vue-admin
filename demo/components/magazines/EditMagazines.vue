@@ -7,36 +7,7 @@
           aspect-ratio="4"
         />
         <v-card-title primary-title>
-          <div>
-            <h3 class="headline mb-2">This is a Custom Edit Form</h3>
-            <p>
-              Although we provide default components for Edit views, Vue Admin
-              ships with a <i>kind of injected</i> set of functions for those
-              components declared in <b>Resource</b> as a view, that can be used
-              for updating your resource entity and submitting it to your api.
-            </p>
-            <p>
-              The Vuex store is the middleware where data is saved until a
-              submit action is triggered. This seems to be the easiest way to
-              save data and call actions from <b>any</b> custom component, such
-              as inputs, textfields, buttons, etc...
-            </p>
-            <p>
-              This is one of the two proposals when we thought about user
-              customization:
-              <ul>
-                <li>
-                  letting a user build their own components with any UI
-                  frameworkand provide a simple API for updating and storing
-                </li>
-                <li>
-                  build our own UI components with a single framework (possibly
-                  Vuetify) and expose them to the user in the form of Buttons,
-                  Inputs, TextFields, DataTables, ..., as fixed templates.
-                </li>
-              </ul>
-            </p>
-          </div>
+          <h3 class="headline mb-2">Edit Magazine</h3>
         </v-card-title>
         <div>
           <v-form v-if="entity">

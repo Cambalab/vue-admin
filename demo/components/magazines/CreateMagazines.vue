@@ -15,29 +15,17 @@
               <v-layout column>
                 <v-flex xs12>
                   <v-text-field
-                    :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-                      resourceName,
-                      view,
-                      field: 'name'
-                    })"
+                    :name="names.elementField('name')"
                     @input="storeValue($event, 'name')"
                     label="Name"
                   />
                   <v-text-field
-                    :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-                      resourceName,
-                      view,
-                      field: 'issue'
-                    })"
+                    :name="names.elementField('issues')"
                     @input="storeValue($event, 'issue')"
                     label="Issue"
                   />
                 <v-text-field
-                  :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-                    resourceName,
-                    view,
-                    field: 'publisher'
-                  })"
+                  :name="names.elementField('publisher')"
                   @input="storeValue($event, 'publisher')"
                   label="Publisher"
                 />
@@ -48,10 +36,7 @@
         </div>
         <v-card-actions>
           <v-btn
-            :name="UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
-              resourceName,
-              view
-            })"
+            :name="names.submitButton"
             color="orange"
             @click="submit"
           >
@@ -88,10 +73,21 @@ export default {
   },
   data() {
     // This is only needed for e2e demo tests
+    const resourceName = 'magazines'
+    const view = 'create'
+    const names = {
+      elementField: (field) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+        resourceName,
+        view,
+        field: 'name'
+      }),
+      submitButton: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
+        resourceName,
+        view
+      })
+    }
     return {
-      resourceName: 'magazines',
-      view: 'create',
-      UI_NAMES
+      names
     }
   },
   methods: {
