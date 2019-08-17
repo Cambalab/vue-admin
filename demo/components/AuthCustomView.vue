@@ -88,7 +88,8 @@ export default {
       password: '',
       valid: false,
       usernameRules: [
-        v => !!v || CUSTOM_AUTH_ALERT_USERNAME_REQUIRED
+        v => !!v || CUSTOM_AUTH_ALERT_USERNAME_REQUIRED,
+        v =>  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(v) || AUTH_ALERT_INVALID_EMAIL
       ],
       passwordRules: [
         v => !!v || CUSTOM_AUTH_ALERT_PASSWORD_REQUIRED,
