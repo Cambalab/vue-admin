@@ -10,12 +10,15 @@ import authFixture from '@unit/fixtures/auth'
 import { findButtonByName, findRef, nextTick } from '@unit/lib/utils/wrapper'
 
 describe('Auth.vue', () => {
+  const subject = 'Auth'
   Vue.use(Vuetify)
   // Silences warnings from vuetify prop mutations
   Vue.config.silent = true
 
+  let propsData
   let wrapper
   let vaPropSpy
+  let vuetify
 
   const { username, password } = Factory.createCredentials()
 
@@ -31,23 +34,38 @@ describe('Auth.vue', () => {
   }
 
   beforeEach(() => {
-    const propsData = authFixture.props
-
+    propsData = authFixture.props
+    vuetify = new Vuetify()
     vaPropSpy = {
       login: jest.spyOn(propsData.va, 'login')
     }
 
-    _mount({ propsData })
+    _mount({ propsData, vuetify })
   })
 
   afterEach(() => {
     wrapper = {}
   })
 
+  it('should have default props', () => {
+    const props = wrapper.props()
+    expect(wrapper.name()).toMatch(subject)
+    expect(props.authFormTitle).toMatchObject(propsData.authFormTitle)
+    expect(props.authFooter).toMatchObject(propsData.authFooter)
+    expect(props.authMainContent).toMatchObject(propsData.authMainContent)
+    expect(props.usernameRules).toMatchObject(propsData.usernameRules)
+    expect(props.passwordRules).toMatchObject(propsData.passwordRules)
+  })
+
+  it('should have non default props', () => {
+    const props = wrapper.props()
+    expect(props.va).toMatchObject(propsData.va)
+  })
+
   it('should render a text field with a username text label', () => {
     const textFieldText = UI_CONTENT.AUTH_LABEL_USERNAME
     const textFieldName = UI_NAMES.AUTH_USERNAME_INPUT
-    const textField = wrapper.find({ ref: textFieldName })
+    const textField = findRef({ wrapper, ref: textFieldName })
 
     expect(textField.text()).toBe(textFieldText)
   })
@@ -55,7 +73,7 @@ describe('Auth.vue', () => {
   it('should render a text field with a password text label', () => {
     const textFieldText = UI_CONTENT.AUTH_LABEL_PASSWORD
     const textFieldName = UI_NAMES.AUTH_PASSWORD_INPUT
-    const textField = findRef({ wrapper, ref: textFieldName})
+    const textField = findRef({ wrapper, ref: textFieldName })
 
     expect(textField.text()).toBe(textFieldText)
   })
@@ -63,7 +81,7 @@ describe('Auth.vue', () => {
   it('should render a submit button with a submit text label', () => {
     const buttonText = UI_CONTENT.AUTH_LABEL_SIGN_IN_BUTTON
     const buttonName = UI_NAMES.AUTH_SIGN_IN_BUTTON
-    const button = findButtonByName({ wrapper, name: buttonName})
+    const button = findButtonByName({ wrapper, name: buttonName })
 
     expect(button.text()).toBe(buttonText)
   })
@@ -131,7 +149,7 @@ describe('Auth.vue', () => {
   })
 
   it('should show an error message on invalid email input', async () => {
-    const value = username.split('.')[0]
+    const value = 'a'
     const textFieldName = UI_NAMES.AUTH_USERNAME_INPUT
     const buttonName = UI_NAMES.AUTH_SIGN_IN_BUTTON
     const errorMessage = UI_CONTENT.AUTH_ALERT_INVALID_EMAIL
@@ -140,6 +158,8 @@ describe('Auth.vue', () => {
 
     textField.vm.$emit('input', value)
     await nextTick(wrapper)
+    await nextTick(wrapper)
+
     const textFieldLabel = wrapper.find(TEXT_FIELD_LABEL)
 
     expect(textFieldLabel.text()).toBe(errorMessage)
@@ -154,13 +174,13 @@ describe('Auth.vue', () => {
     const buttonName = UI_NAMES.AUTH_SIGN_IN_BUTTON
     const usernameTextField = findRef({ wrapper, ref: usernameTextFieldName })
     const passwordTextField = findRef({ wrapper, ref: passwordTextFieldName })
-    const button = findButtonByName({ wrapper, name: buttonName })
+    const button = findRef({ wrapper, ref: buttonName })
 
     usernameTextField.vm.$emit('input', username)
     await nextTick(wrapper)
     passwordTextField.vm.$emit('input', password)
     await nextTick(wrapper)
-    button.trigger('click')
+    button.vm.$emit('click')
     await nextTick(wrapper)
 
     expect(vaPropSpy.login).toHaveBeenCalledTimes(1)
