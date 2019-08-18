@@ -18,6 +18,11 @@ import { name, description, version } from '../package.json'
 const components = [
   Admin, Resource,
   Create, Delete, Edit, EditButton, List, Show,
+  Sidebar,
+  SidebarLink,
+  SidebarNode,
+  SidebarAction,
+  SidebarHeading
 ]
 
 const install = function(Vue) {
