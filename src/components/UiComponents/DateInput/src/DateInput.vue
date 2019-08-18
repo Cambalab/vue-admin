@@ -8,10 +8,10 @@
   >
     <template v-slot:activator="{ on }">
       <v-text-field
+        :label="placeholder"
+        :ref="name"
         :value="formattedDate"
         clearable
-        :label="placeholder"
-        readonly
         v-on="on"
       />
     </template>
