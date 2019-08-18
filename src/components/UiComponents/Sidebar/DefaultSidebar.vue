@@ -1,30 +1,37 @@
 <template>
   <Sidebar>
-    <template v-for="(item, i) in menuItems">
-      <Node v-if="item.children" :key="i"
-        :title="item.title" icon="keyboard_arrow_up" icon-alt="keyboard_arrow_down">
-        <Link v-for="(child, i) in item.children" :key="i"
+    <template v-for="(item, index) in menuItems">
+      <SidebarNode v-if="item.children" :key="index"
+        :title="item.title"
+        icon="keyboard_arrow_up"
+        icon-alt="keyboard_arrow_down"
+      >
+        <SidebarLink v-for="(child, i) in item.children" :key="i"
           :title="child.title" :path="child.link" :icon="child.icon"
         />
-      </Node>
+      </SidebarNode>
 
-      <Link v-else-if="item.link" :key="item.title"
+      <SidebarLink v-else-if="item.link" :key="item.title"
         :title="item.title" :path="item.link" :icon="item.icon"
       />
 
-      <Action v-else-if="item.click" :key="item.title"
+      <SidebarAction v-else-if="item.click" :key="item.title"
         :title="item.title" :action="item.click" :icon="item.icon"
       />
     </template>
   </Sidebar>
 </template>
+
 <script>
-import UI_CONTENT from '@constants/ui.content.default'
-import UI_NAMES from '@constants/ui.element.names'
-import { Sidebar, SidebarNode, SidebarLink, SidebarAction } from '@components/UiComponents'
+import {
+  Sidebar,
+  SidebarNode,
+  SidebarLink,
+  SidebarAction
+} from '@components/UiComponents'
 
 export default {
-  name: "DefaultSidebar",
+  name: 'DefaultSidebar',
   components: {
     Sidebar,
     SidebarNode,
@@ -36,26 +43,22 @@ export default {
   },
   data() {
     return {
-      selectedLocale: "EN",
-      locales: ["EN", "ID"],
       menuItems: [
         {
           click: () => {},
-          icon: "keyboard_arrow_up",
-          "icon-alt": "keyboard_arrow_down",
-          title: "Crud",
+          icon: 'keyboard_arrow_up',
+          'icon-alt': 'keyboard_arrow_down',
+          title: 'Resources',
           children: [],
           model: {},
           value: true,
         },
         {
           click: () => this.va.logout(),
-          icon: "power_settings_new",
-          title: "Sign Out",
+          icon: 'power_settings_new',
+          title: 'Sign Out',
         }
       ],
-      UI_CONTENT,
-      UI_NAMES
     }
   },
   mounted() {
@@ -64,7 +67,7 @@ export default {
   methods: {
     // Listen to addRoutes mutations
     mapCurrentRegisteredRoutes() {
-      let whitelist = ["resources/addRoute"];
+      let whitelist = ['resources/addRoute'];
       this.$store.subscribe((mutation, state) => {
         if (whitelist.includes(mutation.type)) {
           const currentRoutes = state.resources.routes.map(route => {
