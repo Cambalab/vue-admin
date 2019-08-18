@@ -1,6 +1,11 @@
 <template>
   <v-card :name="names.viewContainer">
     <Spinner :spin="isLoading"></Spinner>
+    <v-card-title primary-title :name="names.titleContainer">
+      <h3 class="headline mb-0 text-capitalize">
+        {{content.title}}
+      </h3>
+    </v-card-title>
     <v-form>
       <v-card-text :name="names.containerFields">
         <v-layout wrap>
@@ -64,7 +69,8 @@ export default {
     const resourceName = this.resourceName
     const view = 'edit'
     const content = {
-      submitButton: UI_CONTENT.EDIT_SUBMIT_BUTTON
+      submitButton: UI_CONTENT.EDIT_SUBMIT_BUTTON,
+      title: UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })
     }
     const names = {
       containerField: (field) => UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({
@@ -77,6 +83,10 @@ export default {
         view
       }),
       submitButton: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
+        resourceName,
+        view
+      }),
+      titleContainer: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({
         resourceName,
         view
       }),
