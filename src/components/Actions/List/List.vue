@@ -48,7 +48,7 @@
               :key="keys.elementField(label(field), index)"
               :name="names.elementField(label(field), index)"
             >
-                <v-chip
+                <a
                   :name="names.elementField(resourceIdName, index)"
                   v-if="label(field) === resourceIdName && hasShow"
                   @click="onIdClick(item[resourceIdName])"
@@ -59,7 +59,7 @@
                     v-bind:value="item[label(field)]"
                     v-bind="args(field)"
                   />
-                </v-chip>
+                </a>
               <span v-else>
                 <component
                   :name="names.elementField(label(field), index)"
@@ -172,8 +172,7 @@ export default {
           text: field.headerText || this.label(field),
           align: field.alignHeader || 'left',
           sortable: field.sortable || false,
-          value: this.label(field),
-          width: field.label === 'id' ? '70px' : ''
+          value: this.label(field)
         })
       })
       newHeaders.push({

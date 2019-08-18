@@ -38,7 +38,7 @@ describe('Articles: Delete Test', () => {
       elementType: 'button',
       elementProp: 'name',
     })
-    deleteButton.should('contain', UI_CONTENT.RESOURCE_DELETE_BUTTON)
+
     deleteButton.click()
     cy.server({ enable: false })
 
