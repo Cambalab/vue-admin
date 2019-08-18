@@ -100,11 +100,6 @@ export default {
     }
   },
   data: () => {
-    const {
-      AUTH_ALERT_EMAIL_REQUIRED,
-      AUTH_ALERT_INVALID_EMAIL,
-      AUTH_ALERT_PASSWORD_REQUIRED,
-    } = UI_CONTENT
     return {
       valid: false,
       username: '',

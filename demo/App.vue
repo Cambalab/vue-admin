@@ -124,7 +124,6 @@ export default {
   components: {
     Admin,
     Resource,
-    AuthCustomView
   },
   data() {
     return {
