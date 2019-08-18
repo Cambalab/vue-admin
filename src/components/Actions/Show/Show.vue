@@ -6,6 +6,11 @@
       color="white"
       :name="names.viewActionsContainer"
     >
+      <v-card-title primary-title :name="names.titleContainer">
+        <h3 class="headline mb-0 text-capitalize">
+          {{content.title}}
+        </h3>
+      </v-card-title>
       <v-spacer />
       <EditButton
         :resourceId="$route.params.id"
@@ -33,6 +38,7 @@
 
 <script>
 import UI_NAMES from '@constants/ui.element.names'
+import UI_CONTENT from '@constants/ui.content.default'
 import { mapState } from "vuex"
 import { Input, TextField, Spinner } from "../../UiComponents"
 import { EditButton, Delete } from "../../Actions"
@@ -63,6 +69,9 @@ export default {
   data() {
     const resourceName = this.resourceName
     const view = 'show'
+    const content = {
+      title: UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })
+    }
     const names = {
       containerField: (field) => UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({
         resourceName,
@@ -70,6 +79,10 @@ export default {
         field
       }),
       containerFields: UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
+        resourceName,
+        view
+      }),
+      titleContainer: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({
         resourceName,
         view
       }),
@@ -83,6 +96,7 @@ export default {
       })
     }
     return {
+      content,
       names
     }
   },

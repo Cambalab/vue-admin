@@ -43,10 +43,6 @@ describe('Articles: Show Test', () => {
     }).should('contain', showViewTitleText)
   })
 
-  it('Articles Show View should contain the id field', () => {
-    articlesShowViewShouldContainTheField('id')
-  })
-
   it('Articles Show View should contain the title field', () => {
     articlesShowViewShouldContainTheField('title')
   })
