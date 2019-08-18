@@ -1,57 +1,58 @@
 <template>
   <div fill-height :name="UI_NAMES.CUSTOM_AUTH">
     <v-layout>
-      <v-flex xs12 sm8 md4 class="text-xs-center">
+      <v-flex xs12 sm8 md4>
         <v-card :name="UI_NAMES.CUSTOM_AUTH_CONTAINER">
-          <v-card-title primary-title :name="UI_NAMES.CUSTOM_AUTH_CONTAINER_TITLE">
-            <h3 class="headline mb-0 text-capitalize">
+          <v-card-title
+            class="va-auth-title-container"
+            :name="UI_NAMES.CUSTOM_AUTH_CONTAINER_TITLE"
+          >
+            <p class="va-auth-form-title">
               {{UI_CONTENT.CUSTOM_AUTH_CONTAINER_TITLE}}
-            </h3>
+            </p>
           </v-card-title>
           <v-form
-            class="input-padding"
+          class="va-auth-form input-padding"
             ref="form"
             v-model="valid"
           >
+            <v-flex container sm4 md8 lg8>
+              <v-text-field
+                color="#009688"
+                :label="UI_CONTENT.CUSTOM_AUTH_LABEL_USERNAME"
+                :name="UI_NAMES.CUSTOM_AUTH_USERNAME_INPUT"
+                required
+                :rules="usernameRules"
+                v-model="username"
+              />
 
-            <v-text-field
-              color="#009688"
-              :label="UI_CONTENT.CUSTOM_AUTH_LABEL_USERNAME"
-              :name="UI_NAMES.CUSTOM_AUTH_USERNAME_INPUT"
-              required
-              :rules="usernameRules"
-              v-model="username"
-            />
-
-            <v-text-field
-              color="#009688"
-              :label="UI_CONTENT.CUSTOM_AUTH_LABEL_PASSWORD"
-              :name="UI_NAMES.CUSTOM_AUTH_PASSWORD_INPUT"
-              required
-              :rules="passwordRules"
-              type="password"
-              v-model="password"
-            />
-
-            <v-btn
-              absolute
-              class="extra-spacing"
-              @click="validate"
-              color="#4CAF50"
-              :disabled="!valid"
-              :name="UI_NAMES.CUSTOM_AUTH_SIGN_IN_BUTTON"
-            >
-              {{UI_CONTENT.CUSTOM_AUTH_LABEL_SIGN_IN_BUTTON}}
-            </v-btn>
+              <v-text-field
+                color="#009688"
+                :label="UI_CONTENT.CUSTOM_AUTH_LABEL_PASSWORD"
+                :name="UI_NAMES.CUSTOM_AUTH_PASSWORD_INPUT"
+                required
+                :rules="passwordRules"
+                type="password"
+                v-model="password"
+              />
+              <v-btn
+                absolute
+                class="va-auth-submit-button"
+                @click="validate"
+                color="#009688"
+                :disabled="!valid"
+                :name="UI_NAMES.CUSTOM_AUTH_SIGN_IN_BUTTON"
+              >
+                {{UI_CONTENT.CUSTOM_AUTH_LABEL_SIGN_IN_BUTTON}}
+              </v-btn>
+            </v-flex>
 
           </v-form>
         </v-card>
       </v-flex>
       <v-flex hidden-xs-only sm4 md8 class="va-img-sector">
         <div class="va-img-container">
-          <img class="va-img"
-            src="../assets/vue-admin-logo.png"
-          />
+          <img class="va-logo" src="../assets/logo.png" />
           <h3 class="headline mt-3">
             Welcome to Vue-Admin!
           </h3>
@@ -85,8 +86,8 @@ export default {
       CUSTOM_AUTH_ALERT_INVALID_EMAIL
     } = UI_CONTENT
     return {
-      username: '',
-      password: '',
+      username: 'dev@camba.coop',
+      password: '123456',
       valid: false,
       usernameRules: [
         v => !!v || CUSTOM_AUTH_ALERT_USERNAME_REQUIRED,
@@ -143,8 +144,9 @@ export default {
     margin-top: 20vh;
   }
 
-  .va-img {
+  .va-logo {
     margin: auto;
+    width: 140px;
   }
 
   .camba-icon {
@@ -156,6 +158,27 @@ export default {
     bottom: 0;
     margin-bottom: 25px;
     width: 100%;
+  }
+
+  .va-auth-title-container {
+    justify-content: center
+  }
+
+  .va-auth-form-title {
+    font-weight: 300;
+  }
+
+  .va-auth-form {
+    text-align: left;
+  }
+
+  .va-auth-submit-container {
+    text-align: right;
+  }
+
+  .va-auth-submit-button {
+    justify-content: flex-end;
+    color: #edfcde
   }
 
   a {
