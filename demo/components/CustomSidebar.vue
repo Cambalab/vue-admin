@@ -20,6 +20,7 @@ import {
 
 const CustomAvatar = {
   name: 'CustomAvatar',
+  // eslint-disable-next-line
   render(h) {
     return (
       <img src="https://randomuser.me/api/portraits/thumb/women/23.jpg" />
