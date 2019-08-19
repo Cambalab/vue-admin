@@ -5,8 +5,11 @@
     </v-navigation-drawer>
 
     <v-app-bar app color="teal" dark>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title :name="UI_NAMES.MAIN_TOOLBAR_TITLE">
+      <v-app-bar-nav-icon
+        :name="names.drawerButton"
+        @click.stop="drawer = !drawer"
+      />
+      <v-toolbar-title :name="names.toolbarTitle">
         {{ title }}
       </v-toolbar-title>
     </v-app-bar>
@@ -22,7 +25,6 @@
 </template>
 
 <script>
-import UI_CONTENT from '../../../constants/ui.content.default'
 import UI_NAMES from '../../../constants/ui.element.names'
 import { DefaultSidebar } from '@components/UiComponents';
 
@@ -37,12 +39,15 @@ export default {
     va: Object
   },
   data() {
+    const names = {
+      drawerButton: UI_NAMES.DRAWER_BUTTON,
+      toolbarTitle: UI_NAMES.MAIN_TOOLBAR_TITLE
+    }
     return {
       selectedLocale: "EN",
       locales: ["EN", "ID"],
       drawer: false,
-      UI_CONTENT,
-      UI_NAMES
+      names
     };
   },
 };

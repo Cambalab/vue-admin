@@ -6,6 +6,7 @@ export default {
    */
   MAIN_TOOLBAR_TITLE: 'main-toolbar-title',
   MAIN_TOOLBAR_USER_AVATAR: 'main-toolbar-user-avatar',
+  DRAWER_BUTTON: 'va-drawer-activator',
   DRAWER_RESOURCE_TILE: {
     with: ({ resourceName }) => `drawer-${resourceName}-tile`
   },
