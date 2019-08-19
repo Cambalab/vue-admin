@@ -1,6 +1,6 @@
 <template>
   <Sidebar>
-    <SidebarHeading href="/" :title="title"/>
+    <SidebarHeading :avatarProps="avatarProps" :title="title"/>
     <SidebarNode title="Entities" icon="keyboard_arrow_up" icon-alt="keyboard_arrow_down">
       <SidebarLink title="Articles" path="/articles" icon="list" />
       <SidebarLink title="Magazines" path="/magazines" icon="list" />
@@ -18,6 +18,15 @@ import {
   SidebarHeading
 } from '@components/UiComponents'
 
+const CustomAvatar = {
+  name: 'CustomAvatar',
+  render(h) {
+    return (
+      <img src="https://randomuser.me/api/portraits/thumb/women/23.jpg" />
+    )
+  }
+}
+
 export default {
   name: 'CustomSidebar',
   components: {
@@ -26,7 +35,9 @@ export default {
   data() {
     return {
       title: this.va.getUser().email,
-      avatarUrl: 'https://randomuser.me/api/portraits/thumb/women/23.jpg'
+      avatarProps: {
+        content: CustomAvatar
+      }
     }
   },
   props: {
