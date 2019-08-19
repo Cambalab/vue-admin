@@ -1,6 +1,10 @@
-# `<Sidebar>` component
+# `Sidebar`
 
-A `<Sidebar>` component that wraps the Sidebar related custom components.
+A `Sidebar` component that wraps the Sidebar related custom components.
+
+<p align="center">
+  <img width="200" src="Sidebar/sidebar.png" alt="Vue Admin Sidebar" />
+</p>
 
 Here you can find an example on how to use this component and the available components that you can provide to it as children:
 

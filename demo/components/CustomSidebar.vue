@@ -1,6 +1,6 @@
 <template>
   <Sidebar>
-    <SidebarHeading :avatar="avatarUrl" heading="Menu" href="/" />
+    <SidebarHeading href="/" :title="title"/>
     <SidebarNode title="Entities" icon="keyboard_arrow_up" icon-alt="keyboard_arrow_down">
       <SidebarLink title="Articles" path="/articles" icon="list" />
       <SidebarLink title="Magazines" path="/magazines" icon="list" />
@@ -25,6 +25,7 @@ export default {
   },
   data() {
     return {
+      title: this.va.getUser().email,
       avatarUrl: 'https://randomuser.me/api/portraits/thumb/women/23.jpg'
     }
   },
