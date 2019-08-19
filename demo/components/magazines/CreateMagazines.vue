@@ -20,7 +20,7 @@
                     label="Name"
                   />
                   <v-text-field
-                    :name="names.elementField('issues')"
+                    :name="names.elementField('issue')"
                     @input="storeValue($event, 'issue')"
                     label="Issue"
                   />
@@ -79,7 +79,7 @@ export default {
       elementField: (field) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
         resourceName,
         view,
-        field: 'name'
+        field
       }),
       submitButton: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
         resourceName,
