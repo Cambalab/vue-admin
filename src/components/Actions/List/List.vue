@@ -71,11 +71,15 @@
             </td>
             <td>
               <EditButton
+                :iconProps="iconProps"
+                :buttonProps="buttonProps"
                 :name="names.editButton(index)"
                 :resourceId="item[resourceIdName]"
                 :resourceName="resourceName"
               />
               <DeleteButton
+                :iconProps="iconProps"
+                :buttonProps="buttonProps"
                 :name="names.deleteButton(index)"
                 :resourceId="item[resourceIdName]"
                 :resourceName="resourceName"
@@ -167,7 +171,13 @@ export default {
         pagination: {
           itemsPerPage: rowsPerPage
         }
-      }
+      },
+      iconProps: {
+        small: true
+      },
+      buttonProps: {
+        small: true
+      },
     }
   },
   computed: {
@@ -179,12 +189,12 @@ export default {
           align: field.alignHeader || 'left',
           sortable: field.sortable || false,
           value: this.label(field),
-          width: field.label === 'id' ? '70px' : ''
+          width: field.width || '',
         })
       })
       newHeaders.push({
         text: "Actions",
-        align: 'center',
+        align: 'left',
         sortable: false,
         value: 'action',
         width: '150px'
