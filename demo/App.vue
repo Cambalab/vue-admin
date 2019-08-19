@@ -44,7 +44,7 @@ import Resource from '@components/Resource'
 import UnauthorizedView from './components/UnauthorizedView'
 import UnauthorizedCustomView from './components/UnauthorizedCustomView'
 
-import CustomSidebar from './components/CustomSidebar.vue'
+import CustomSidebar from './components/CustomSidebar'
 
 import ListArticles from './components/articles/ListArticles'
 import ShowArticles from './components/articles/ShowArticles'

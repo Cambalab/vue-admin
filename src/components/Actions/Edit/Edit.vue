@@ -7,7 +7,7 @@
       </h3>
     </v-card-title>
     <v-form>
-      <v-card-text :name="names.containerFields">
+      <v-card-text md4 :name="names.containerFields">
         <v-layout wrap>
           <v-flex xs8>
             <span v-if="entity">

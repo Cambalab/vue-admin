@@ -1,12 +1,11 @@
 import {
   Create,
-  Delete,
   Edit,
-  EditButton,
   List,
   Show
 } from '@components/Actions'
 import {
+  DeleteButton, EditButton,
   Sidebar, SidebarLink, SidebarNode, SidebarAction, SidebarHeading
 } from '@components/UiComponents'
 import Admin from '@components/Admin'
@@ -17,7 +16,7 @@ import { name, description, version } from '../package.json'
 
 const components = [
   Admin, Resource,
-  Create, Delete, Edit, EditButton, List, Show,
+  Create, DeleteButton, Edit, EditButton, List, Show,
   Sidebar,
   SidebarLink,
   SidebarNode,
@@ -42,7 +41,7 @@ export {
   version,
   // Exports Actions components
   Create,
-  Delete,
+  DeleteButton,
   Edit,
   EditButton,
   List,

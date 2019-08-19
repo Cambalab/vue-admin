@@ -40,7 +40,7 @@
       <template v-slot:body="{ items }">
         <tbody>
           <tr v-for="(item, index) in items"
-            :key="keys.containerFields(item.id)"
+            :key="keys.containerFields(item[resourceIdName])"
             :name="names.containerFields(index)"
           >
             <td class="text-xs-left"
@@ -75,7 +75,7 @@
                 :resourceId="item[resourceIdName]"
                 :resourceName="resourceName"
               />
-              <Delete
+              <DeleteButton
                 :name="names.deleteButton(index)"
                 :resourceId="item[resourceIdName]"
                 :resourceName="resourceName"
@@ -93,8 +93,14 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import UI_ELEMENTS from '@constants/ui.elements.props'
-import { Input, TextField, Spinner, DateInput } from "@components/UiComponents"
-import { EditButton, Delete } from "@components/Actions"
+import {
+  DeleteButton,
+  EditButton,
+  Input,
+  TextField,
+  Spinner,
+  DateInput
+} from "@components/UiComponents"
 
 export default {
   name: "List",
@@ -127,7 +133,7 @@ export default {
   },
   components: {
     DateInput,
-    Delete,
+    DeleteButton,
     EditButton,
     Input,
     TextField,
@@ -172,7 +178,8 @@ export default {
           text: field.headerText || this.label(field),
           align: field.alignHeader || 'left',
           sortable: field.sortable || false,
-          value: this.label(field)
+          value: this.label(field),
+          width: field.label === 'id' ? '70px' : ''
         })
       })
       newHeaders.push({
@@ -214,3 +221,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.v-application p {
+  margin: 8px 0px
+}
+</style>

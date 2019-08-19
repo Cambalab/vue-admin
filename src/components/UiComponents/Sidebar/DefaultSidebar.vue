@@ -28,7 +28,7 @@ import {
   SidebarNode,
   SidebarLink,
   SidebarAction
-} from '@components/UiComponents'
+} from '../Sidebar'
 
 export default {
   name: 'DefaultSidebar',

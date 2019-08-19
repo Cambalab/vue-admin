@@ -37,15 +37,15 @@
 <script>
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
-import { mapState } from "vuex";
-import { Input, TextField, Spinner, DateInput } from "../../UiComponents"
+import { mapState } from "vuex"
+import { Input, TextField, Spinner, DateInput } from "@components/UiComponents"
 
 export default {
   name: "Create",
   components: {
-    Input: Input,
-    TextField: TextField,
-    Spinner: Spinner,
+    Input,
+    TextField,
+    Spinner,
     DateInput
   },
   props: {

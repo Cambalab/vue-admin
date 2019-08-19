@@ -38,6 +38,7 @@
           <v-btn
             :name="names.submitButton"
             color="orange"
+            class="submit-button"
             @click="submit"
           >
             Edit
@@ -114,3 +115,11 @@ export default {
 };
 
 </script>
+
+<style>
+
+.submit-button {
+  color: white !important
+}
+
+</style>

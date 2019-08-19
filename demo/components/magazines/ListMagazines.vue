@@ -4,6 +4,7 @@
     <v-img
       src="banner.png"
       aspect-ratio="4"
+      max-height="300px"
     />
 
     <v-data-table
@@ -33,27 +34,32 @@
 
       <template v-slot:body="{ items }">
         <tbody>
-          <tr v-for="(item, index) in items">
-            <td :name="idRowName(index)">{{ item.id }}</td>
-            <td :name="nameRowName(index)" class="text-xs-left">
+          <tr v-for="(item, index) in items"
+            :key="names.containerFields(item.id)"
+            :name="names.containerFields(index)"
+          >
+            <td :name="names.elementField('id', index)">{{ item.id }}</td>
+            <td :name="names.elementField('name', index)"
+              class="text-xs-left"
+              >
               {{ item.name }}
             </td>
-            <td :name="issueRowName(index)" class="text-xs-center">
+            <td :name="names.elementField('issue', index)" class="text-xs-center">
               {{ item.issue }}
             </td>
-            <td :name="publisherRowName(index)" class="text-xs-right">
+            <td :name="names.elementField('publisher', index)" class="text-xs-right">
               {{ item.publisher }}
             </td>
             <td class="text-xs-center">
               <EditButton
                 :iconProps="iconProps"
-                :name="editButtonName(index)"
+                :name="names.editButtonName(index)"
                 :resourceId="item.id"
                 resourceName="magazines"
               />
-              <Delete
+              <DeleteButton
                 :iconProps="iconProps"
-                :name="deleteButtonName(index)"
+                :name="names.deleteButtonName(index)"
                 :resourceId="item.id"
                 resourceName="magazines"
               />
@@ -69,7 +75,7 @@
 <script>
   import UI_NAMES from '@constants/ui.element.names'
   import { rowsPerPage } from '../../constants'
-  import { EditButton, Delete } from '@components/Actions'
+  import { DeleteButton, EditButton } from '@components/UiComponents'
 
   export default {
     name: 'ListMagazines',
@@ -82,24 +88,25 @@
       }
     },
     components: {
+      DeleteButton,
       EditButton,
-      Delete
     },
     data() {
       // This is only needed for e2e demo tests
       const resourceName = 'magazines'
       const view = 'list'
-      const buildName = (field, index) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-        resourceName,
-        view,
-        field,
-        index
-      })
-      return {
-        idRowName: (index) => buildName('id', index),
-        nameRowName: (index) => buildName('name', index),
-        issueRowName: (index) => buildName('issue', index),
-        publisherRowName: (index) => buildName('publisher', index),
+      const names = {
+        containerFields: (index) => UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
+          resourceName,
+          view,
+          index
+        }),
+        elementField: (field, index) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+          resourceName,
+          view,
+          field,
+          index
+        }),
         editButtonName: (index) => UI_NAMES.RESOURCE_EDIT_BUTTON.with({
           resourceName,
           index
@@ -108,6 +115,9 @@
           resourceName,
           index
         }),
+      }
+      return {
+        names,
         footerProps: {
           itemsPerPageText: 'Magazines per page'
         },

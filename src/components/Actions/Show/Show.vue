@@ -1,43 +1,52 @@
 <template>
-  <v-card :name="names.viewContainer">
-    <Spinner :spin="isLoading"></Spinner>
-    <v-toolbar color="white" :name="names.viewActionsContainer">
-      <v-card-title primary-title :name="names.titleContainer">
-        <h3 class="headline mb-0 text-capitalize">
-          {{content.title}}
-        </h3>
-      </v-card-title>
-      <v-spacer />
-      <EditButton
-        :resourceId="$route.params.id"
-        :resourceName="resourceName"
-      />
-      <Delete
-        :resourceId="$route.params.id"
-        :resourceName="resourceName"
-      />
-    </v-toolbar>
-    <v-card-text :name="names.containerFields"
-      v-if="resourceShow !== undefined"
-    >
-      <component
-        :name="names.containerField(label(field))"
-        v-for="field in fields"
-        :key="names.containerField(label(field))"
-        :is="type(field)"
-        v-bind:value="resourceShow[label(field)]"
-        v-bind="args(field)"
-      />
-    </v-card-text>
-  </v-card>
+  <v-layout>
+    <v-flex lg12 xs12 sm12>
+      <v-card :name="names.viewContainer">
+        <Spinner :spin="isLoading"></Spinner>
+        <v-toolbar color="white" :name="names.viewActionsContainer">
+          <v-card-title primary-title :name="names.titleContainer">
+            <h3 class="headline mb-0 text-capitalize">
+              {{content.title}}
+            </h3>
+          </v-card-title>
+          <v-spacer />
+          <EditButton
+            :resourceId="$route.params.id"
+            :resourceName="resourceName"
+          />
+          <DeleteButton
+            :resourceId="$route.params.id"
+            :resourceName="resourceName"
+          />
+        </v-toolbar>
+        <v-card-text :name="names.containerFields"
+          v-if="resourceShow !== undefined"
+        >
+          <component
+            :name="names.containerField(label(field))"
+            v-for="field in fields"
+            :key="names.containerField(label(field))"
+            :is="type(field)"
+            v-bind:value="resourceShow[label(field)]"
+            v-bind="args(field)"
+          />
+        </v-card-text>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
 import UI_NAMES from '@constants/ui.element.names'
 import UI_CONTENT from '@constants/ui.content.default'
 import { mapState } from "vuex"
-import { Input, TextField, Spinner } from "../../UiComponents"
-import { EditButton, Delete } from "../../Actions"
+import {
+  DeleteButton,
+  EditButton,
+  Input,
+  TextField,
+  Spinner
+} from "@components/UiComponents"
 
 export default {
   name: "Show",
@@ -58,7 +67,7 @@ export default {
   components: {
     Input,
     TextField,
-    Delete,
+    DeleteButton,
     EditButton,
     Spinner
   },
@@ -91,10 +100,7 @@ export default {
         view
       })
     }
-    return {
-      content,
-      names
-    }
+    return { content, names }
   },
   computed: {
     resourceShow: function() {

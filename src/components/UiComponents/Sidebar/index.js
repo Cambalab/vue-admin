@@ -1,13 +1,13 @@
-import Sidebar        from './Sidebar.vue'
-import SidebarLink    from './SidebarLink.vue'
-import SidebarNode    from './SidebarNode.vue'
-import SidebarAction  from './SidebarAction.vue'
-import SidebarHeading from './SidebarHeading.vue'
+import Sidebar        from './Sidebar'
+import SidebarAction  from './SidebarAction'
+import SidebarHeading from './SidebarHeading'
+import SidebarLink    from './SidebarLink'
+import SidebarNode    from './SidebarNode'
 
 export {
   Sidebar,
+  SidebarAction,
+  SidebarHeading,
   SidebarLink,
   SidebarNode,
-  SidebarAction,
-  SidebarHeading
 }

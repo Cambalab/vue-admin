@@ -10,7 +10,13 @@
   </Sidebar>
 </template>
 <script>
-import { Sidebar, SidebarLink, SidebarNode, SidebarAction, SidebarHeading } from '@components/UiComponents'
+import {
+  Sidebar,
+  SidebarLink,
+  SidebarNode,
+  SidebarAction,
+  SidebarHeading
+} from '@components/UiComponents'
 
 export default {
   name: 'CustomSidebar',
