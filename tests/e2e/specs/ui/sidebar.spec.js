@@ -22,7 +22,7 @@ describe('UI Test', () => {
       prop: 'name',
       value: drawerButtonName
     })
-    cy.get(`${drawerButton}`).click()
+    cy.get(drawerButton).click()
   })
 
   it('Drawer should redirect to Articles list view on article tile click', () => {

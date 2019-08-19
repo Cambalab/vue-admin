@@ -35,13 +35,13 @@ describe('UI Test', () => {
   })
 
   it('Toolbar hamburger button should open drawer on click', () => {
-    const mainToolbarTitleName = UI_NAMES.MAIN_TOOLBAR_TITLE
+    const drawerButtonName = UI_NAMES.DRAWER_BUTTON
 
-    const mainToolbarTitleElement = queryElementByProp({
-      type: 'div',
+    const drawerButton = queryElementByProp({
+      type: 'button',
       prop: 'name',
-      value: mainToolbarTitleName
+      value: drawerButtonName
     })
-    cy.get(`${mainToolbarTitleElement} button`).click()
+    cy.get(drawerButton).click()
   })
 })

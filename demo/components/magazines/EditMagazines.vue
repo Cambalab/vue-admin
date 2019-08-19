@@ -2,10 +2,7 @@
   <v-layout>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-img
-          src="banner.png"
-          aspect-ratio="4"
-        />
+        <v-img src="banner.png" aspect-ratio="4" />
         <v-card-title primary-title>
           <h3 class="headline mb-2">Edit Magazine</h3>
         </v-card-title>
@@ -15,35 +12,23 @@
               <v-layout column>
                 <v-flex xs12>
                   <v-text-field
-                    :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-                      resourceName,
-                      view,
-                      field: 'name'
-                    })"
+                    :name="names.containerField('name')"
                     @input="storeValue($event, 'name')"
                     v-model="entity.name"
                     label="Name"
                   />
                   <v-text-field
-                    :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-                      resourceName,
-                      view,
-                      field: 'issue'
-                    })"
+                    :name="names.containerField('issue')"
                     @input="storeValue($event, 'issue')"
                     v-model="entity.issue"
                     label="Issue"
                   />
-                <v-text-field
-                  :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-                    resourceName,
-                    view,
-                    field: 'publisher'
-                  })"
-                  @input="storeValue($event, 'publisher')"
-                  v-model="entity.publisher"
-                  label="Publisher"
-                />
+                  <v-text-field
+                    :name="names.containerField('publisher')"
+                    @input="storeValue($event, 'publisher')"
+                    v-model="entity.publisher"
+                    label="Publisher"
+                  />
                 </v-flex>
               </v-layout>
             </v-container>
@@ -51,11 +36,7 @@
         </div>
         <v-card-actions>
           <v-btn
-            :name="UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
-              resourceName,
-              view
-            })"
-            flat
+            :name="names.submitButton"
             color="orange"
             @click="submit"
           >
@@ -92,11 +73,20 @@ export default {
   },
   data() {
     // This is only needed for e2e demo tests
-    return {
-      resourceName: 'magazines',
-      view: 'edit',
-      UI_NAMES
+    const resourceName = 'magazines'
+    const view = 'edit'
+    const names = {
+      containerField: (field) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+        resourceName,
+        view,
+        field
+      }),
+      submitButton: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
+        resourceName,
+        view
+      })
     }
+    return { names }
   },
   created() {
     // With fetchEntity you can have your 'resourceName' entity initialised.
