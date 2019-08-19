@@ -10,6 +10,7 @@
       <v-text-field
         :label="placeholder"
         :ref="name"
+        :name="name"
         :value="formattedDate"
         clearable
         v-on="on"

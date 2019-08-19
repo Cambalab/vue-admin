@@ -95,10 +95,7 @@ export default {
         view
       })
     }
-    return {
-      content,
-      names
-    }
+    return { content, names }
   },
   computed: {
     ...mapState([
