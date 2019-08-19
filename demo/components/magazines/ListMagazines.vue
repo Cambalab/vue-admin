@@ -16,7 +16,7 @@
     >
 
       <template v-slot:top>
-        <v-toolbar dark flat>
+        <v-toolbar dark>
           <v-toolbar-title>Magazines</v-toolbar-title>
           <v-spacer />
           <router-link :to="{ name: `magazines/create` }" class="no-decoration">

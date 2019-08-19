@@ -1,2 +1,2 @@
 
-export const rowsPerPage = 14
+export const rowsPerPage = 10
