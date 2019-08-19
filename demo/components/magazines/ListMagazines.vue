@@ -53,12 +53,14 @@
             <td class="text-xs-center">
               <EditButton
                 :iconProps="iconProps"
+                :buttonProps="buttonProps"
                 :name="names.editButtonName(index)"
                 :resourceId="item.id"
                 resourceName="magazines"
               />
               <DeleteButton
                 :iconProps="iconProps"
+                :buttonProps="buttonProps"
                 :name="names.deleteButtonName(index)"
                 :resourceId="item.id"
                 resourceName="magazines"
@@ -126,6 +128,9 @@
             itemsPerPage: rowsPerPage
           }
         },
+        buttonProps: {
+          small: true
+        },
         iconProps: {
           small: true
         }
@@ -138,7 +143,7 @@
           { text: 'Name', value: 'name' },
           { text: 'Issue', value: 'issue' },
           { text: 'Publisher', value: 'publisher' },
-          { text: 'Actions', align: 'center', value: 'action', sortable: false, width: '160px' }
+          { text: 'Actions', value: 'action', sortable: false, width: '160px' }
         ]
       },
       magazines: function() {

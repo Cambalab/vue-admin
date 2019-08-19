@@ -16,7 +16,7 @@
             ref="form"
             v-model="valid"
           >
-            <v-flex container sm9 md8 lg8>
+            <v-flex container sm10 md8 lg8>
               <v-text-field
                 color="#009688"
                 :label="UI_CONTENT.CUSTOM_AUTH_LABEL_USERNAME"
