@@ -2,6 +2,7 @@
   <v-tooltip bottom>
     <template v-slot:activator="{ on }">
       <v-btn
+        v-bind="buttonProps"
         :name="name"
         @click="onEdit()"
         icon
@@ -31,6 +32,9 @@ export default {
     },
     resourceName: {
       type: String
+    },
+    buttonProps: {
+      type: Object
     },
     iconProps: {
       type: Object
