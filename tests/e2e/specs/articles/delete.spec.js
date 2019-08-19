@@ -1,5 +1,4 @@
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 
 describe('Articles: Delete Test', () => {
   const resourceName = 'articles'
@@ -38,7 +37,7 @@ describe('Articles: Delete Test', () => {
       elementType: 'button',
       elementProp: 'name',
     })
-    deleteButton.should('contain', UI_CONTENT.RESOURCE_DELETE_BUTTON)
+
     deleteButton.click()
     cy.server({ enable: false })
 

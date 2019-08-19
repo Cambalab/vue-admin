@@ -33,6 +33,8 @@ export default {
 
   CUSTOM_AUTH_ALERT_USERNAME_REQUIRED: 'Username is required',
   CUSTOM_AUTH_ALERT_PASSWORD_REQUIRED: 'Password is required',
+  CUSTOM_AUTH_ALERT_INVALID_EMAIL: 'E-mail is required',
+
   /**
    * Shared content inside List, Show, Create, Edit components
    */
@@ -48,13 +50,13 @@ export default {
     with: ({ resourceName }) => `${resourceName}`
   },
   // Create action button
-  RESOURCE_CREATE_BUTTON: 'add',
+  RESOURCE_CREATE_BUTTON: 'mdi-plus-circle',
 
   // Edit action button
-  RESOURCE_EDIT_BUTTON: 'edit',
+  RESOURCE_EDIT_BUTTON: 'mdi-pencil',
 
   // Delete action button
-  RESOURCE_DELETE_BUTTON: 'delete',
+  RESOURCE_DELETE_BUTTON: 'mdi-delete',
 
   // Create Save button
   CREATE_SUBMIT_BUTTON: 'save',

@@ -68,12 +68,11 @@ describe('Authors: List Test', () => {
     const createButtonElement = cy.getElement({
       constant: UI_NAMES.RESOURCE_CREATE_BUTTON,
       constantParams: { resourceName },
-      elementType: 'a',
+      elementType: 'button',
       elementProp: 'name'
     })
-    const expectedCreateButtonText = UI_CONTENT.RESOURCE_CREATE_BUTTON
 
-    createButtonElement.should('contain',expectedCreateButtonText)
+    createButtonElement.should('exist')
   })
 
   it('The list should contain authors with an {id} attribute', () => {
@@ -101,12 +100,11 @@ describe('Authors: List Test', () => {
     const createButtonElement = cy.getElement({
       constant: UI_NAMES.RESOURCE_CREATE_BUTTON,
       constantParams: { resourceName },
-      elementType: 'a',
+      elementType: 'button',
       elementProp: 'name'
     })
-    const expectedCreateButtonText = UI_CONTENT.RESOURCE_CREATE_BUTTON
 
-    createButtonElement.should('contain', expectedCreateButtonText).click({ force: true })
+    createButtonElement.click()
     cy.url().should('include', `/${resourceName}/create`)
   })
 

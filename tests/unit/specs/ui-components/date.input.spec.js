@@ -4,7 +4,6 @@ import { mount } from '@vue/test-utils'
 import DateInput from '@components/UiComponents/DateInput'
 import ERROR_MESSAGES from '@constants/error.messages'
 import dateInputFixture from '@unit/fixtures/ui-components/date.input.js'
-import { findRef } from '@unit/lib/utils/wrapper'
 
 describe('DateInput.vue', () => {
   const subject = 'DateInput'
@@ -12,6 +11,7 @@ describe('DateInput.vue', () => {
   Vue.use(Vuetify)
   Vue.config.silent = true
 
+  let vuetify
   let subjectWrapper
   let propsData
 
@@ -20,6 +20,7 @@ describe('DateInput.vue', () => {
     propsData = {
       ...dateInputFixture.props
     }
+    vuetify = new Vuetify()
   })
 
   it('should have default props', () => {
@@ -34,24 +35,12 @@ describe('DateInput.vue', () => {
     expect(props.readonly).toBe(true)
     expect(props.vDatePickerProps).toMatchObject(dateInputFixture.props.vDatePickerProps)
     expect(props.vMenuProps).toMatchObject(dateInputFixture.props.vMenuProps)
-    expect(props.valid).toBeDefined()
   })
 
   it('should have non default props', () => {
     mountSubject()
     const props = subjectWrapper.props()
     expect(props.placeholder).toBe(dateInputFixture.props.placeholder)
-  })
-
-  it('should call function on init', async () => {
-    mountSubject()
-    const ref = dateInputFixture.props.name
-    const textField = findRef({ wrapper: subjectWrapper, ref })
-    const aDate = '2019-11-03'
-
-    textField.vm.$emit('input', aDate)
-
-    expect(textField.vm.value).toBe(aDate)
   })
 
   it('throws Error when the {format} property is missing', () => {
@@ -94,7 +83,8 @@ describe('DateInput.vue', () => {
   // Mounts the component
   function mountSubject() {
     subjectWrapper = mount(DateInput, {
-      propsData
+      propsData,
+      vuetify
     })
   }
 })

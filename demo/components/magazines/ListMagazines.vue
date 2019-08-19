@@ -1,80 +1,71 @@
 <template>
-  <v-card>
+  <v-card class="extra-margin">
 
     <v-img
       src="banner.png"
       aspect-ratio="4"
+      max-height="300px"
     />
-
-    <v-card-title primary-title>
-      <div>
-        <h3 class="headline mb-2">This is a Custom List Form</h3>
-        <p>
-          Although we provide default components for List views, Vue Admin
-          ships with a <i>kind of injected</i> set of functions for those
-          components declared in <b>Resource</b> as a view, that can be used
-          for fetching a list of a resource, getting a single element, etc.
-        </p>
-        <p>
-          The Vuex store is the middleware where data is saved until a
-          submit action is triggered. This seems to be the easiest way to
-          save data and call actions from <b>any</b> custom component, such
-          as inputs, textfields, buttons, etc...
-        </p>
-        <p>
-          This is one of the two proposals when we thought about user
-          customization:
-          <ul>
-            <li>
-              letting a user build their own components with any UI
-              frameworkand provide a simple API for updating and storing
-            </li>
-            <li>
-              build our own UI components with a single framework (possibly
-              Vuetify) and expose them to the user in the form of Buttons,
-              Inputs, TextFields, DataTables, ..., as fixed templates.
-            </li>
-          </ul>
-        </p>
-      </div>
-    </v-card-title>
-
-    <v-toolbar flat color="white">
-      <v-toolbar-title>My Magazines List</v-toolbar-title>
-      <v-divider
-        class="mx-2"
-        inset
-        vertical
-      />
-      <v-spacer></v-spacer>
-      <div max-width="500px">
-        <router-link
-          :to="{ name: `magazines/create` }">
-          <v-btn color="primary" dark class="mb-2">New Magazine</v-btn>
-        </router-link>
-      </div>
-    </v-toolbar>
 
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="magazines"
       class="elevation-1"
-      disable-initial-sort
-      :pagination.sync="pagination"
+      :footer-props="footerProps"
+      :options.sync="options"
       :dark="true"
-      rows-per-page-text="Magazines per page"
     >
+
+      <template v-slot:top>
+        <v-toolbar dark>
+          <v-toolbar-title>Magazines</v-toolbar-title>
+          <v-spacer />
+          <router-link :to="{ name: `magazines/create` }" class="no-decoration">
+            <v-btn color="orange" dark class="mb-2">New Magazine</v-btn>
+          </router-link>
+        </v-toolbar>
+      </template>
+
       <template slot="no-data">
         <v-alert :value="true" color="warning" icon="warning">
           Sorry, nothing to display here :(
         </v-alert>
       </template>
 
-      <template slot="items" slot-scope="props">
-        <td :name="idRowName(props.index)">{{ props.item.id }}</td>
-        <td :name="nameRowName(props.index)" class="text-xs-left">{{ props.item.name }}</td>
-        <td :name="issueRowName(props.index)" class="text-xs-center">{{ props.item.issue }}</td>
-        <td :name="publisherRowName(props.index)" class="text-xs-right">{{ props.item.publisher }}</td>
+      <template v-slot:body="{ items }">
+        <tbody>
+          <tr v-for="(item, index) in items"
+            :key="names.containerFields(item.id)"
+            :name="names.containerFields(index)"
+          >
+            <td :name="names.elementField('id', index)">{{ item.id }}</td>
+            <td :name="names.elementField('name', index)"
+              class="text-xs-left"
+              >
+              {{ item.name }}
+            </td>
+            <td :name="names.elementField('issue', index)" class="text-xs-center">
+              {{ item.issue }}
+            </td>
+            <td :name="names.elementField('publisher', index)" class="text-xs-right">
+              {{ item.publisher }}
+            </td>
+            <td class="text-xs-center">
+              <EditButton
+                :iconProps="iconProps"
+                :name="names.editButtonName(index)"
+                :resourceId="item.id"
+                resourceName="magazines"
+              />
+              <DeleteButton
+                :iconProps="iconProps"
+                :name="names.deleteButtonName(index)"
+                :resourceId="item.id"
+                resourceName="magazines"
+              />
+            </td>
+          </tr>
+        </tbody>
       </template>
 
     </v-data-table>
@@ -84,6 +75,7 @@
 <script>
   import UI_NAMES from '@constants/ui.element.names'
   import { rowsPerPage } from '../../constants'
+  import { DeleteButton, EditButton } from '@components/UiComponents'
 
   export default {
     name: 'ListMagazines',
@@ -95,24 +87,47 @@
         required: true
       }
     },
+    components: {
+      DeleteButton,
+      EditButton,
+    },
     data() {
       // This is only needed for e2e demo tests
       const resourceName = 'magazines'
       const view = 'list'
-      const buildName = (field, index) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-        resourceName,
-        view,
-        field,
-        index
-      })
+      const names = {
+        containerFields: (index) => UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
+          resourceName,
+          view,
+          index
+        }),
+        elementField: (field, index) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+          resourceName,
+          view,
+          field,
+          index
+        }),
+        editButtonName: (index) => UI_NAMES.RESOURCE_EDIT_BUTTON.with({
+          resourceName,
+          index
+        }),
+        deleteButtonName: (index) => UI_NAMES.RESOURCE_DELETE_BUTTON.with({
+          resourceName,
+          index
+        }),
+      }
       return {
-        idRowName: (index) => buildName('id', index),
-        nameRowName: (index) => buildName('name', index),
-        issueRowName: (index) => buildName('issue', index),
-        publisherRowName: (index) => buildName('publisher', index),
-        pagination: {
-          page: 1,
-          rowsPerPage
+        names,
+        footerProps: {
+          itemsPerPageText: 'Magazines per page'
+        },
+        options: {
+          pagination: {
+            itemsPerPage: rowsPerPage
+          }
+        },
+        iconProps: {
+          small: true
         }
       }
     },
@@ -122,10 +137,11 @@
           { text: 'ID', align: 'left', sortable: true, value: 'id' },
           { text: 'Name', value: 'name' },
           { text: 'Issue', value: 'issue' },
-          { text: 'Publisher', value: 'publisher' }
+          { text: 'Publisher', value: 'publisher' },
+          { text: 'Actions', align: 'center', value: 'action', sortable: false, width: '160px' }
         ]
       },
-      desserts: function() {
+      magazines: function() {
         return this.va.getList()
       }
     },
@@ -134,3 +150,13 @@
     }
   }
 </script>
+
+<style>
+.no-decoration {
+  text-decoration: none
+}
+
+.extra-margin {
+  margin-bottom: 10px
+}
+</style>

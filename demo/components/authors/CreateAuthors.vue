@@ -2,13 +2,13 @@
   <Create>
     <input source="name" placeHolder="Name" />
     <input source="lastname" placeHolder="Last name" />
-    <input source="birthdate" placeHolder="Birthdate" type="DateInput"
-      :datePickerProps="datePickerProps"
+    <input source="birthdate" placeholder="Birthdate" type="DateInput"
+      :vDatePickerProps="vDatePickerProps"
       :vMenuProps="vMenuProps"
       :parse="parseDate"
       :format="formatDate"
-      :valid="validDate"
-      :readonly="readonly" />
+      :readonly="readonly"
+    />
   </Create>
 </template>
 
@@ -22,9 +22,9 @@ export default {
     Create
   },
   data() {
-    const { parseDate, formatDate, validDate } = dateUtils
+    const { parseDate, formatDate } = dateUtils
     return {
-      datePickerProps: {
+      vDatePickerProps: {
         locale: 'en-us',
         type: 'date',
         noTitle: true
@@ -35,8 +35,7 @@ export default {
       },
       readonly: true,
       parseDate,
-      formatDate,
-      validDate
+      formatDate
     }
   }
 }

@@ -10,11 +10,10 @@ In order to Vue Admin understand what kind of input the View should render, we m
     <input source="birthdate"
       placeHolder="Birthdate"
       type="DateInput"
-      :datePickerProps="datePickerProps"
+      :vDatePickerProps="vDatePickerProps"
       :vMenuProps="vMenuProps"
       :parse="parseDate"
       :format="formatDate"
-      :valid="validDate"
     />
   </Create>
 </template>
@@ -28,7 +27,7 @@ export default {
   },
   data() {
     return {
-      datePickerProps: {
+      vDatePickerProps: {
         locale: 'en-us',
         type: 'date',
         noTitle: true
@@ -40,23 +39,20 @@ export default {
     }
   },
   methods: {
-    parseDate (aDate) {
-      const [year, month, day] = aDate.substr(0, 10).split('-')
-      return { day, month, year }
+    parseDate (date) {
+      // parse your date value to a valid date string (ISOString for example)
+      return new Date(date).toISOString()
     },
-    formatDate ({ day, month, year }) {
+    formatDate (date) {
+      // format your date to a desirable string for the v-text-field to show
       return `${month}/${day}/${year}`
     },
-    validDate (aDate) {
-      const rgx = new RegExp(/\d{4}\/\d{2}\/\d{2}/)
-      return rgx.test(aDate)
-    }
   }  
 }
 </script>
 ```
 
-*It is recommended to implement the parse, format and/or valid functions in a separate module for re-usability*
+*It is recommended to implement the parse and/or format functions in a separate module for re-usability*
 
 ### Supported properties
 The DateInput component supports the following properties:
@@ -65,8 +61,7 @@ The DateInput component supports the following properties:
 *   **name**: The name of the component (as previously);
 *   **readonly**: A Boolean indicating if the date in the input field can be modified manually (readonly = false) or only with the datepicker (readonly = true);
 *   **disabled**: A Boolean indicating if the field is disabled;
-*   **datePickerProps**: An Object with the fields matching the [DatePicker api](https://vuetifyjs.com/en/components/date-pickers#api) and the possible values for them;
+*   **vDatePickerProps**: An Object with the fields matching the [DatePicker api](https://vuetifyjs.com/en/components/date-pickers#api) and the possible values for them;
 *   **vMenuProps**: An Object with the fields matching the [Vuetify menu component api](https://vuetifyjs.com/en/components/menus#api) and the possible values for them;
-*   **format**: A Function that receives an object with the form `{ day, month, year }` and returns a string with the formatted date to show in the input field
-*   **parse**: A Function that receives a Date formatted string and returns an object like the following `{ day, month, year }`.
-*   **valid**: A Function that receives a string as a parameter, which the user can evaluate its validity as a date or not, and returns a Boolean <true = valid | false = invalid>.
+*   **format**: A Function that receives a Date formatted string and returns returns a string value to show in the text-field of the DateInput component.
+*   **parse**: A Function that receives a date value and must return a valid string that represents a date for the v-date-picker component

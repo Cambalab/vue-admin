@@ -1,18 +1,18 @@
 <template>
   <List>
-    <h3 source="id"
+    <p source="id"
       :sortable="true"
       headerText="ID"
       alignHeader="left"
       alignContent="left"
     />
-    <h3 source="name"
+    <p source="name"
       :sortable="true"
       headerText="Name"
       alignHeader="center"
       alignContent="left"
     />
-    <h3 source="lastname"
+    <p source="lastname"
       :sortable="true"
       headerText="Last name"
       alignHeader="center"

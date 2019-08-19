@@ -2,41 +2,9 @@
   <v-layout>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-img
-          src="banner.png"
-          aspect-ratio="4"
-        />
+        <v-img src="banner.png" aspect-ratio="4" />
         <v-card-title primary-title>
-          <div>
-            <h3 class="headline mb-2">This is a Custom Edit Form</h3>
-            <p>
-              Although we provide default components for Edit views, Vue Admin
-              ships with a <i>kind of injected</i> set of functions for those
-              components declared in <b>Resource</b> as a view, that can be used
-              for updating your resource entity and submitting it to your api.
-            </p>
-            <p>
-              The Vuex store is the middleware where data is saved until a
-              submit action is triggered. This seems to be the easiest way to
-              save data and call actions from <b>any</b> custom component, such
-              as inputs, textfields, buttons, etc...
-            </p>
-            <p>
-              This is one of the two proposals when we thought about user
-              customization:
-              <ul>
-                <li>
-                  letting a user build their own components with any UI
-                  frameworkand provide a simple API for updating and storing
-                </li>
-                <li>
-                  build our own UI components with a single framework (possibly
-                  Vuetify) and expose them to the user in the form of Buttons,
-                  Inputs, TextFields, DataTables, ..., as fixed templates.
-                </li>
-              </ul>
-            </p>
-          </div>
+          <h3 class="headline mb-2">Edit Magazine</h3>
         </v-card-title>
         <div>
           <v-form v-if="entity">
@@ -44,35 +12,23 @@
               <v-layout column>
                 <v-flex xs12>
                   <v-text-field
-                    :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-                      resourceName,
-                      view,
-                      field: 'name'
-                    })"
+                    :name="names.containerField('name')"
                     @input="storeValue($event, 'name')"
                     v-model="entity.name"
                     label="Name"
                   />
                   <v-text-field
-                    :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-                      resourceName,
-                      view,
-                      field: 'issue'
-                    })"
+                    :name="names.containerField('issue')"
                     @input="storeValue($event, 'issue')"
                     v-model="entity.issue"
                     label="Issue"
                   />
-                <v-text-field
-                  :name="UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-                    resourceName,
-                    view,
-                    field: 'publisher'
-                  })"
-                  @input="storeValue($event, 'publisher')"
-                  v-model="entity.publisher"
-                  label="Publisher"
-                />
+                  <v-text-field
+                    :name="names.containerField('publisher')"
+                    @input="storeValue($event, 'publisher')"
+                    v-model="entity.publisher"
+                    label="Publisher"
+                  />
                 </v-flex>
               </v-layout>
             </v-container>
@@ -80,12 +36,9 @@
         </div>
         <v-card-actions>
           <v-btn
-            :name="UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
-              resourceName,
-              view
-            })"
-            flat
+            :name="names.submitButton"
             color="orange"
+            class="submit-button"
             @click="submit"
           >
             Edit
@@ -121,11 +74,20 @@ export default {
   },
   data() {
     // This is only needed for e2e demo tests
-    return {
-      resourceName: 'magazines',
-      view: 'edit',
-      UI_NAMES
+    const resourceName = 'magazines'
+    const view = 'edit'
+    const names = {
+      containerField: (field) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+        resourceName,
+        view,
+        field
+      }),
+      submitButton: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
+        resourceName,
+        view
+      })
     }
+    return { names }
   },
   created() {
     // With fetchEntity you can have your 'resourceName' entity initialised.
@@ -153,3 +115,11 @@ export default {
 };
 
 </script>
+
+<style>
+
+.submit-button {
+  color: white !important
+}
+
+</style>

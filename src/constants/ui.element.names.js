@@ -6,6 +6,7 @@ export default {
    */
   MAIN_TOOLBAR_TITLE: 'main-toolbar-title',
   MAIN_TOOLBAR_USER_AVATAR: 'main-toolbar-user-avatar',
+  DRAWER_BUTTON: 'va-drawer-activator',
   DRAWER_RESOURCE_TILE: {
     with: ({ resourceName }) => `drawer-${resourceName}-tile`
   },
@@ -14,6 +15,7 @@ export default {
    * Auth component
    */
 
+   AUTH: 'va-login',
    AUTH_CONTAINER: 'va-login-container',
    AUTH_CONTAINER_TITLE: 'va-login-container-title',
    AUTH_USERNAME_INPUT: 'va-login-username',
@@ -24,7 +26,7 @@ export default {
    * Custom Auth component
    */
 
-  CUSTOM_AUTH: 'va-custon-auth',
+  CUSTOM_AUTH: 'va-custom-auth',
   CUSTOM_AUTH_CONTAINER: 'va-login-container',
   CUSTOM_AUTH_CONTAINER_TITLE: 'va-login-container-title',
   CUSTOM_AUTH_USERNAME_INPUT: 'va-login-username',
@@ -32,14 +34,14 @@ export default {
   CUSTOM_AUTH_SIGN_IN_BUTTON: 'va-login-submit-button',
 
   /**
-   * List
+   * Actions
    */
+
   // The whole container of a Resource List
   RESOURCE_VIEW_CONTAINER: {
     with: ({ resourceName, view }) => `${resourceName}-${view}-container`
   },
 
-  // The whole container of a Resource List
   RESOURCE_VIEW_ACTIONS_CONTAINER: {
     with: ({ resourceName, view }) => `${resourceName}-${view}-actions-container`
   },
@@ -49,7 +51,11 @@ export default {
   },
 
   RESOURCE_VIEW_CONTAINER_FIELDS: {
-    with: ({ resourceName, view }) => `${resourceName}-${view}-container-fields`
+    with: ({ resourceName, view, index }) => {
+      return index !== undefined
+      ? `${resourceName}-${view}-container-fields-${index}`
+      : `${resourceName}-${view}-container-fields`
+    }
   },
 
   RESOURCE_VIEW_CONTAINER_FIELD: {
@@ -64,7 +70,7 @@ export default {
   RESOURCE_EDIT_BUTTON: {
     with: ({ resourceName, index }) => {
       return index !== undefined
-      ? `${resourceName}-${index}-edit-button`
+      ? `${resourceName}-edit-button-${index}`
       : `${resourceName}-edit-button`
     }
   },

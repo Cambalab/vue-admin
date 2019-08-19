@@ -1,26 +1,25 @@
 <template>
   <v-menu
-    lazy
     v-model="menu"
-    transition="scale-transition"
-    offset-y
-    full-width
-    :max-width="dateInputMaxWidth"
-    min-width="290px"
-    :disabled="disabled"
     v-bind="vMenuProps"
+    full-width
+    min-width="290px"
+    :max-width="dateInputMaxWidth"
   >
-    <v-text-field
-      slot="activator"
-      :label="placeHolder"
-      :name="name"
-      :ref="name"
-      :readonly="readonly"
-      :disabled="disabled"
-      v-model="formattedDate"
-    ></v-text-field>
-    <v-date-picker v-model="date" v-bind="vDatePickerProps">
-    </v-date-picker>
+    <template v-slot:activator="{ on }">
+      <v-text-field
+        :label="placeholder"
+        :ref="name"
+        :name="name"
+        :value="formattedDate"
+        clearable
+        v-on="on"
+      />
+    </template>
+    <v-date-picker
+      v-model="date"
+      v-bind="vDatePickerProps"
+    />
   </v-menu>
 </template>
 
@@ -64,57 +63,37 @@ export default {
       type: Object,
       default: defaults().props.vMenuProps
     },
-    valid: {
-      type: Function,
-      default: defaults().props.valid,
-      required: true
-    },
     value: {
       type: [String, Number],
-      default: new Date().toISOString()
+      default: new Date().toISOString(true)
     }
   },
   data() {
-    const formattedDate = this.format(this.parse(this.value))
     return {
-      date: this.constructDate(this.value),
-      formattedDate,
+      date: this.parseDate(this.value),
+      dateInputMaxWidth: this.calculateCorrectDefaultMaxWidth(),
+      formattedDate: this.formatDate(this.value),
       menu: false,
-      dateInputMaxWidth: this.calculateCorrectDefaultMaxWidth()
     }
   },
+
   watch: {
-    date: function(newVal) {
-      if (newVal) {
-        const formattedDate = this.format(this.parse(newVal))
+    date: function(newDate) {
+      if (newDate) {
+        const formattedDate = this.formatDate(newDate)
         this.formattedDate = formattedDate
-        const value = new Date(formattedDate).toISOString()
-        this.$emit('change', value);
+        const value = this.parseDate(newDate)
+        this.$emit('change', value)
       }
     },
-    formattedDate: function(newVal) {
-      if (this.valid && this.valid(newVal)) {
-        this.date = this.constructDate(newVal)
-      } else {
-        this.date = null
-        this.$emit('invalid', newVal)
-      }
-    }
   },
+
   methods: {
-    canParse(aDate) {
-      return this.parse && aDate
+    parseDate(date) {
+      return date ? this.parse(date) : date
     },
-    constructDate(aDate) {
-      if (this.canParse(aDate)) {
-        const { day, year, month } = this.vDateInputParse(aDate)
-        return [year, month, day].join('-')
-      }
-      return this.value
-    },
-    vDateInputParse(aDate) {
-      const [year, month, day] = aDate.substr(0, 10).split('-')
-      return { day, month, year }
+    formatDate(date) {
+      return this.format(date)
     },
     calculateCorrectDefaultMaxWidth() {
       return this.datePickerProps && this.datePickerProps.landscape
@@ -123,4 +102,5 @@ export default {
     }
   }
 }
+
 </script>

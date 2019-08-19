@@ -1,7 +1,6 @@
 <template>
   <Show>
-    <h3 source="id" />
-    <h2 source="title" />
+    <h3 source="title" />
     <p source="content" />
   </Show>
 </template>

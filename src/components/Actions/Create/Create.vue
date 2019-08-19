@@ -1,9 +1,9 @@
 <template>
-  <v-card :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view })}`">
+  <v-card :name="names.viewContainer">
     <Spinner :spin="isLoading"></Spinner>
-    <v-card-title primary-title :name="`${UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view })}`">
+    <v-card-title primary-title :name="names.titleContainer">
       <h3 class="headline mb-0 text-capitalize">
-        {{UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })}}
+        {{content.title}}
       </h3>
     </v-card-title>
     <v-form>
@@ -11,20 +11,21 @@
         <v-layout wrap>
           <v-flex xs8>
             <component
-              :name="`${UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field: label(field) })}`"
+              :name="names.containerField(label(field))"
+              :ref="names.containerField(label(field))"
               v-for="field in fields"
-              :key="key(label(field))"
-              :is="type(field.type)"
+              :key="names.containerField(label(field))"
+              :is="type(field)"
               v-bind="args(field)"
               @change="storeValue($event, label(field))">
             </component>
           </v-flex>
           <v-flex xs12>
             <v-btn
-              :name="`${UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({ resourceName, view })}`"
+              :name="names.submitButton"
               color="success"
               v-on:click="submit">
-              {{UI_CONTENT.CREATE_SUBMIT_BUTTON}}
+              {{content.submitButton}}
             </v-btn>
           </v-flex>
         </v-layout>
@@ -36,15 +37,15 @@
 <script>
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
-import { mapState } from "vuex";
-import { Input, TextField, Spinner, DateInput } from "../../UiComponents"
+import { mapState } from "vuex"
+import { Input, TextField, Spinner, DateInput } from "@components/UiComponents"
 
 export default {
   name: "Create",
   components: {
-    Input: Input,
-    TextField: TextField,
-    Spinner: Spinner,
+    Input,
+    TextField,
+    Spinner,
     DateInput
   },
   props: {
@@ -62,11 +63,32 @@ export default {
     }
   },
   data() {
-    return {
-      view: 'create',
-      UI_CONTENT,
-      UI_NAMES
+    const resourceName = this.resourceName
+    const view = 'create'
+    const content = {
+      submitButton: UI_CONTENT.CREATE_SUBMIT_BUTTON,
+      title: UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })
     }
+    const names = {
+      containerField: (field) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+        resourceName,
+        view,
+        field
+      }),
+      submitButton: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
+        resourceName,
+        view
+      }),
+      titleContainer: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({
+        resourceName,
+        view
+      }),
+      viewContainer: UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
+        resourceName,
+        view
+      })
+    }
+    return { content, names }
   },
 
   computed: {
@@ -91,8 +113,8 @@ export default {
       this.va.submitEntity()
     },
 
-    type(type) {
-      return type || 'Input'
+    type(field) {
+      return field.type || 'Input'
     },
 
     key(label) {

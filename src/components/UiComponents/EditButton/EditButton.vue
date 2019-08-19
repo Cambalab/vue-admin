@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <v-tooltip
-    bottom>
+  <v-tooltip bottom>
+    <template v-slot:activator="{ on }">
       <v-btn
-      :name="`${UI_NAMES.RESOURCE_EDIT_BUTTON.with({ resourceName, index })}`"
-      @click="onEdit()"
-      slot="activator"
-      icon>
-        <i class="v-icon material-icons">
-          {{UI_CONTENT.RESOURCE_EDIT_BUTTON}}
-        </i>
+        :name="name"
+        @click="onEdit()"
+        icon
+        v-on="on"
+      >
+        <v-icon v-bind="iconProps">{{UI_CONTENT.RESOURCE_EDIT_BUTTON}}</v-icon>
       </v-btn>
-      <span>Edit</span>
-    </v-tooltip>
-  </div>
+    </template>
+    Edit
+  </v-tooltip>
 </template>
 
 <script>
@@ -26,7 +24,7 @@ export default {
   props: {
     name: {
       type: String,
-      default: null
+      default: 'va-edit-button'
     },
     resourceId: {
       type: [Number, String]
@@ -34,8 +32,8 @@ export default {
     resourceName: {
       type: String
     },
-    index: {
-      type: Number
+    iconProps: {
+      type: Object
     }
   },
   data() {

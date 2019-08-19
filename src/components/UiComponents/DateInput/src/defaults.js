@@ -26,7 +26,6 @@ export default () => {
   const name             = 'va-date-input'
   const parse            = handleEmptyProp({ prop: 'parse', at: component })
   const readonly         = true
-  const valid            = handleEmptyProp({ prop: 'valid', at: component })
   const vDatePickerProps = _vDatePickerProps
   const vMenuProps       = _vMenuProps
 
@@ -37,7 +36,6 @@ export default () => {
       name,
       parse,
       readonly,
-      valid,
       vDatePickerProps,
       vMenuProps,
     }

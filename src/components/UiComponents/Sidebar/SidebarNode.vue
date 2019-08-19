@@ -6,13 +6,13 @@
     :prepend-icon="model ? icon : iconAlt"
     append-icon=""
     :value="value">
-    <v-list-tile slot="activator">
-      <v-list-tile-content>
-        <v-list-tile-title>
+    <v-list-item slot="activator">
+      <v-list-item-content>
+        <v-list-item-title>
           {{ title }}
-        </v-list-tile-title>
-      </v-list-tile-content>
-    </v-list-tile>
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
     <slot></slot>
   </v-list-group>
 </template>

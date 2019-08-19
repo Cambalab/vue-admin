@@ -1,16 +1,19 @@
 <template>
   <v-app>
-    <v-navigation-drawer app clipped v-model="drawer" fixed>
-      <component :is="sidebar" :va="va">
-      </component>
+    <v-navigation-drawer v-model="drawer" app>
+      <component :is="sidebar" :va="va" />
     </v-navigation-drawer>
-    <v-toolbar class="success" dark app fixed clipped-left dense>
-      <v-toolbar-title :name="UI_NAMES.MAIN_TOOLBAR_TITLE">
-        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        {{title}}
+
+    <v-app-bar app color="teal" dark>
+      <v-app-bar-nav-icon
+        :name="names.drawerButton"
+        @click.stop="drawer = !drawer"
+      />
+      <v-toolbar-title :name="names.toolbarTitle">
+        {{ title }}
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-toolbar>
+    </v-app-bar>
+
     <main>
       <v-content>
         <v-container class="no-padding">
@@ -22,7 +25,6 @@
 </template>
 
 <script>
-import UI_CONTENT from '../../../constants/ui.content.default'
 import UI_NAMES from '../../../constants/ui.element.names'
 import { DefaultSidebar } from '@components/UiComponents';
 
@@ -37,12 +39,15 @@ export default {
     va: Object
   },
   data() {
+    const names = {
+      drawerButton: UI_NAMES.DRAWER_BUTTON,
+      toolbarTitle: UI_NAMES.MAIN_TOOLBAR_TITLE
+    }
     return {
       selectedLocale: "EN",
       locales: ["EN", "ID"],
       drawer: false,
-      UI_CONTENT,
-      UI_NAMES
+      names
     };
   },
 };

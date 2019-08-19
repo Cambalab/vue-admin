@@ -1,18 +1,19 @@
 <template>
-  <div>
-    <v-tooltip bottom>
+  <v-tooltip bottom>
+    <template v-slot:activator="{ on }">
       <v-btn
-        :name="`${UI_NAMES.RESOURCE_DELETE_BUTTON.with({ resourceName: this.resourceName })}`"
+        :name="names.deleteButton"
         @click="onDelete()"
-        slot="activator"
-        icon>
-        <i class="v-icon material-icons">
-          {{UI_CONTENT.RESOURCE_DELETE_BUTTON}}
-        </i>
+        icon
+        v-on="on"
+      >
+        <v-icon v-bind="iconProps">
+          {{content.deleteButton}}
+        </v-icon>
       </v-btn>
-      <span>Delete</span>
-    </v-tooltip>
-  </div>
+    </template>
+    Delete
+  </v-tooltip>
 </template>
 
 <script>
@@ -20,12 +21,11 @@ import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 
 export default {
-  name: "Delete",
-
+  name: "DeleteButton",
   props: {
     name: {
       type: String,
-      default: null
+      default: 'va-delete-button'
     },
     resourceId: {
       type: [Number, String]
@@ -33,14 +33,21 @@ export default {
     resourceName: {
       type: String,
       default: null
+    },
+    iconProps: {
+      type: Object
     }
   },
 
   data() {
-    return {
-      UI_CONTENT,
-      UI_NAMES
+    const resourceName = this.resourceName
+    const names = {
+      deleteButton: UI_NAMES.RESOURCE_DELETE_BUTTON.with({ resourceName })
     }
+    const content = {
+      deleteButton: UI_CONTENT.RESOURCE_DELETE_BUTTON
+    }
+    return { content, names }
   },
 
   methods: {
