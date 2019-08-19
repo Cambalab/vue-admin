@@ -1,9 +1,12 @@
 <template>
   <div fill-height :name="UI_NAMES.AUTH">
     <v-layout>
-      <v-flex xs12 sm8 md4 class="text-xs-center">
+      <v-flex xs6 sm6 md4 lg4>
         <v-card :name="UI_NAMES.AUTH_CONTAINER">
-          <v-card-title :name="UI_NAMES.AUTH_CONTAINER_TITLE">
+          <v-card-title
+            class="va-auth-title-container"
+            :name="UI_NAMES.AUTH_CONTAINER_TITLE"
+          >
             <component
               :is="authFormTitle"
             />
@@ -13,7 +16,7 @@
             ref="form"
             v-model="valid"
           >
-            <v-flex container sm4 md8 lg12 align-md-end>
+            <v-flex container sm10 md8 lg8>
               <v-text-field
                 color="#009688"
                 :label="UI_CONTENT.AUTH_LABEL_USERNAME"
@@ -50,7 +53,7 @@
           </v-form>
         </v-card>
       </v-flex>
-      <v-flex hidden-xs-only sm4 md8 class="va-auth-right-panel">
+      <v-flex hidden-xs-only sm6 md8 lg10 class="va-auth-right-panel">
         <div class="va-auth-main-content-container">
           <component
             :is="authMainContent"
@@ -128,11 +131,14 @@ export default {
     height: 100vh;
     overflow: hidden;
     min-height: 500px;
-    align-content: center;
   }
 
   .v-card {
     height: 100%;
+  }
+
+  .va-auth-title-container {
+    justify-content: center
   }
 
   .va-auth-right-panel {
@@ -142,7 +148,7 @@ export default {
   }
 
   .va-auth-form {
-    width: 50%
+    text-align: left;
   }
 
   .va-auth-submit-container {

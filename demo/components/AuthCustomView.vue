@@ -1,7 +1,7 @@
 <template>
   <div fill-height :name="UI_NAMES.CUSTOM_AUTH">
     <v-layout>
-      <v-flex xs12 sm8 md4>
+      <v-flex xs6 sm6 md4 lg4>
         <v-card :name="UI_NAMES.CUSTOM_AUTH_CONTAINER">
           <v-card-title
             class="va-auth-title-container"
@@ -16,7 +16,7 @@
             ref="form"
             v-model="valid"
           >
-            <v-flex container sm4 md8 lg8>
+            <v-flex container sm10 md8 lg8>
               <v-text-field
                 color="#009688"
                 :label="UI_CONTENT.CUSTOM_AUTH_LABEL_USERNAME"
@@ -34,6 +34,7 @@
                 :rules="passwordRules"
                 type="password"
                 v-model="password"
+                autocomplete
               />
               <v-btn
                 absolute
@@ -50,7 +51,7 @@
           </v-form>
         </v-card>
       </v-flex>
-      <v-flex hidden-xs-only sm4 md8 class="va-img-sector">
+      <v-flex hidden-xs-only sm6 md8 lg10 class="va-img-sector">
         <div class="va-img-container">
           <img class="va-logo" src="../assets/logo.png" />
           <h3 class="headline mt-3">

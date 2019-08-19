@@ -2,6 +2,7 @@
   <v-tooltip bottom>
     <template v-slot:activator="{ on }">
       <v-btn
+        v-bind="buttonProps"
         :name="names.deleteButton"
         @click="onDelete()"
         icon
@@ -33,6 +34,9 @@ export default {
     resourceName: {
       type: String,
       default: null
+    },
+    buttonProps: {
+      type: Object
     },
     iconProps: {
       type: Object
