@@ -1,5 +1,4 @@
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 
 describe('Articles: Delete Test', () => {
   const resourceName = 'articles'

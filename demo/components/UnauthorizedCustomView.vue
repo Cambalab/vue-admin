@@ -21,12 +21,9 @@
 </template>
 <script>
 import UI_NAMES from '@constants/ui.element.names'
-import Unauthorized from '@components/Unauthorized'
+
 export default {
   name: 'UnauthorizedCustomView',
-  components: {
-    Unauthorized
-  },
   data: () => {
     return {
       NAME_BUTTON_GO_BACK: UI_NAMES.BUTTON_GO_BACK,
