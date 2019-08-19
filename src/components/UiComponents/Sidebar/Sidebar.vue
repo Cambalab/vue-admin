@@ -1,9 +1,5 @@
 <template>
-  <v-list
-    dense
-    nav
-    class="py-0"
-  >
+  <v-list dense nav class="py-0">
     <slot></slot>
   </v-list>
 </template>
