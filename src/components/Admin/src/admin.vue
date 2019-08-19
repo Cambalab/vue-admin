@@ -61,7 +61,8 @@ export default {
   data() {
     const va = {
       login: this.login,
-      logout: this.logout
+      logout: this.logout,
+      getUser: this.getUser
     }
     return {
       va
@@ -111,6 +112,9 @@ export default {
     login: function (username, password) {
       const params = { username, password }
       this.$store.dispatch(`auth/${AuthActionTypes.AUTH_LOGIN_REQUEST}`, params)
+    },
+    getUser: function () {
+      return this.$store.getters['auth/getUser']
     }
   },
   computed: {

@@ -3,7 +3,7 @@
  *
  * @param {Object} store          The global Vuex store variable
  *
- * @return {Object} A set of functions to be used in an Edit form.
+ * @return {Object} A set of functions to be used for Authentication
  */
 export default ({
   store
