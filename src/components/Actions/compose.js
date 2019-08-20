@@ -60,12 +60,20 @@ function compose(createElement, context, {
     const fields = children.map(child => {
       const { data: { attrs }, tag } = child
 
-      const childrenProps = Object.keys(childrenAdapter).reduce((props, key) => {
+      const childrenAdapterKeys = Object.keys(childrenAdapter)
+      const childrenProps = childrenAdapterKeys.reduce((props, key) => {
         props[childrenAdapter[key]] = attrs[key]
         return props
       }, {})
 
-      return { ...childrenProps, tag }
+      const customProps = Object.keys(attrs)
+        .filter(key => childrenAdapterKeys.indexOf(key) < 0)
+        .reduce((props, key) => {
+          props[key] = attrs[key]
+          return props
+        }, {})
+
+      return { ...childrenProps, ...customProps, tag }
     })
 
     const props = { ...parentProps, fields }

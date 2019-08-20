@@ -9,7 +9,8 @@ export default () => {
   // Initial vuex crud resources should be added here
   const initialResources = [
     'articles',
-    'magazines'
+    'magazines',
+    'authors'
   ]
   // Vuex initial entities getters should be added here
   const entitiesCrud = {
@@ -25,6 +26,11 @@ export default () => {
     'auth/authStatus': 'idle',
     'auth/getUser': '',
     'auth/isAuthenticated': false
+  }
+
+  // Vuex auth getters
+  const requestGetters = {
+    'requests/isLoading': false
   }
   /**
    * initResourcesCrud - Given a list of resources, creates mocked vuex crud
@@ -49,6 +55,7 @@ export default () => {
     ...authGetters,
     ...initResourcesCrud(initialResources),
     ...entitiesCrud,
-    ...resourcesGetters
+    ...resourcesGetters,
+    ...requestGetters
   }
 }

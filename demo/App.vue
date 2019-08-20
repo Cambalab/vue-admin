@@ -1,16 +1,37 @@
 <template>
-  <Admin :authProvider="authProvider">
-    <Resource name="articles" :resourceIdName="resourceIdName" :userPermissionsField="userPermissionsField" :apiUrl="articlesApiUrl" :redirect="articlesRedirect">
+  <!-- If you want to use your own custom unauthorized page you just have to provide it like:  -->
+  <!-- <Admin :authProvider="authProvider" :unauthorized="UnauthorizedCustomView">             -->
+  <Admin
+    :authLayout="AuthCustomView"
+    :authProvider="authProvider"
+    :sidebar="CustomSidebar"
+    :unauthorized="UnauthorizedCustomView">
+    <!-- Articles Resource -->
+    <Resource
+      name="articles" :resourceIdName="resourceIdName"
+      :userPermissionsField="userPermissionsField" :apiUrl="articlesApiUrl"
+      :redirect="articlesRedirect">
       <View slot="list"   :component="ListArticles" :permissions="['admin']" />
       <View slot="show"   :component="ShowArticles" :permissions="['admin']" />
       <View slot="create" :component="CreateArticles" :permissions="['admin']" />
       <View slot="edit"   :component="EditArticles" :isPublic="true" />
     </Resource>
-    <Resource name="magazines" :resourceIdName="resourceIdName" :apiUrl="magazinesApiUrl" :redirect="magazinesRedirect">
+    <!-- Magazines Resource -->
+    <Resource name="magazines" :resourceIdName="resourceIdName"
+      :apiUrl="magazinesApiUrl" :redirect="magazinesRedirect">
       <View slot="list"   :component="ListMagazines" :isPublic="true" />
       <View slot="show"   :component="ShowMagazines" :isPublic="true" />
       <View slot="create" :component="CreateMagazines" :isPublic="true" />
       <View slot="edit"   :component="EditMagazines" :isPublic="true" />
+    </Resource>
+    <!-- Authors Resource -->
+    <Resource name="authors"
+      :resourceIdName="resourceIdName" :apiUrl="authorsApiUrl"
+      :redirect="authorsRedirect">
+      <View slot="list"   :component="ListAuthors"   :isPublic="true" />
+      <View slot="show"   :component="ShowAuthors"   :isPublic="true" />
+      <View slot="create" :component="CreateAuthors" :isPublic="true" />
+      <View slot="edit"   :component="EditAuthors"   :isPublic="true" />
     </Resource>
   </Admin>
 </template>
@@ -19,6 +40,11 @@
 
 import Admin from '@components/Admin'
 import Resource from '@components/Resource'
+
+import UnauthorizedView from './components/UnauthorizedView'
+import UnauthorizedCustomView from './components/UnauthorizedCustomView'
+
+import CustomSidebar from './components/CustomSidebar'
 
 import ListArticles from './components/articles/ListArticles'
 import ShowArticles from './components/articles/ShowArticles'
@@ -29,6 +55,13 @@ import ListMagazines from './components/magazines/ListMagazines'
 import ShowMagazines from './components/magazines/ShowMagazines'
 import CreateMagazines from './components/magazines/CreateMagazines'
 import EditMagazines from './components/magazines/EditMagazines'
+
+import CreateAuthors from './components/authors/CreateAuthors'
+import EditAuthors from './components/authors/EditAuthors'
+import ListAuthors from './components/authors/ListAuthors'
+import ShowAuthors from './components/authors/ShowAuthors'
+
+import AuthCustomView from './components/AuthCustomView'
 
 import createAxiosAdapter from './va-auth-adapter/axios.adapter'
 import axios from 'axios'
@@ -46,51 +79,17 @@ const authProvider = createAxiosAdapter(client, {
   userField,
 })
 
-// Articles Views as Array
-
-const articlesList = [
-  {
-    'label': 'id',
-    'type': 'TextField',
-    'tag': 'h2'
-  },
-  {
-    'label':'title',
-    'type':'TextField',
-    'tag':'h2'
-  },
-  'content'
-]
-
-const articlesShow = [
-  'id',
-  {
-    'label':'title',
-    'type': 'TextField',
-    'tag': 'h1'
-  },
-  'content'
-]
-
-const fieldsArticleCreate =[
-  {
-    'label':'title',
-    'type':'Input',
-    'placeHolder': 'title'
-  },
-  'content'
-]
-
-const fieldsArticleEdit = fieldsArticleCreate
-
+/**
+ * Redirect objects
+ */
 const articlesRedirect = {
   views: {
     create: 'list',
     edit: 'show'
   }
 }
-
-const magazinesRedirect = articlesRedirect
+const magazinesRedirect = articlesRedirect;
+const authorsRedirect = articlesRedirect;
 
 // The name of the id attribute
 const resourceIdName = 'id'
@@ -116,39 +115,52 @@ const userPermissionsField = 'permissions'
 //   }
 // }
 
-const articlesApiUrl = 'http://localhost:8888/api/'
+const articlesApiUrl  = 'http://localhost:8888/api/'
 const magazinesApiUrl = 'http://localhost:8888/api/'
+const authorsApiUrl   = 'http://localhost:8888/api/'
 
 export default {
   name: 'App',
   components: {
-    Admin: Admin,
-    Resource: Resource
+    Admin,
+    Resource,
   },
   data() {
     return {
+      // Admin props
       authProvider,
+      AuthCustomView,
+      UnauthorizedView,
+      UnauthorizedCustomView,
+      CustomSidebar,
+
+      // Common Resource props
       resourceIdName,
       userPermissionsField,
-      // Articles Views as Array
+
+      // Server Urls
       articlesApiUrl,
       magazinesApiUrl,
-      articlesList,
-      articlesShow,
-      fieldsArticleCreate,
-      fieldsArticleEdit,
-      articlesRedirect,
+      authorsApiUrl,
+
       // Articles Views as Components
       ListArticles,
       ShowArticles,
       CreateArticles,
       EditArticles,
+      articlesRedirect,
       // Magazines Views as Custom Components
       ListMagazines,
       ShowMagazines,
       CreateMagazines,
       EditMagazines,
-      magazinesRedirect
+      magazinesRedirect,
+      // Authors Views as Components
+      ListAuthors,
+      ShowAuthors,
+      CreateAuthors,
+      EditAuthors,
+      authorsRedirect,
 
       // #23 - To use a feathers server just add the parseResponses attribute
       // below, pass ':parseResponses='parseResponses' to Resource in the

@@ -16,7 +16,8 @@ export default () => {
     ],
     childrenAdapter: {
       placeHolder: 'placeHolder',
-      source: 'label'
+      source: 'label',
+      type: 'type'
     }
   }
 

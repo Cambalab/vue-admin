@@ -1,24 +1,54 @@
 # Change Log
 
+## [v0.0.5](https://github.com/Cambalab/vue-admin/tree/v0.0.5) (2019-08-19)
+[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.4...v0.0.5)
+
+**Merged pull requests:**
+
+- 141 demo visual improvements [\#142](https://github.com/Cambalab/vue-admin/pull/142) ([sgobotta](https://github.com/sgobotta))
+- 137 sidebar heading add customisation support [\#139](https://github.com/Cambalab/vue-admin/pull/139) ([sgobotta](https://github.com/sgobotta))
+- 136 update vuetify to version 2 [\#138](https://github.com/Cambalab/vue-admin/pull/138) ([sgobotta](https://github.com/sgobotta))
+- 127 date input component generalisation [\#135](https://github.com/Cambalab/vue-admin/pull/135) ([sgobotta](https://github.com/sgobotta))
+- 133 update cypress to 3.4.0 [\#134](https://github.com/Cambalab/vue-admin/pull/134) ([sgobotta](https://github.com/sgobotta))
+- 130 navigation sidebar customization [\#131](https://github.com/Cambalab/vue-admin/pull/131) ([jejoivanic](https://github.com/jejoivanic))
+- 127 date input component [\#129](https://github.com/Cambalab/vue-admin/pull/129) ([jejoivanic](https://github.com/jejoivanic))
+- Added support for custom Auth component [\#126](https://github.com/Cambalab/vue-admin/pull/126) ([jejoivanic](https://github.com/jejoivanic))
+- \[Create\] Solving submit error on fresh view [\#125](https://github.com/Cambalab/vue-admin/pull/125) ([jejoivanic](https://github.com/jejoivanic))
+- Routes being recreated on hotreload [\#123](https://github.com/Cambalab/vue-admin/pull/123) ([jejoivanic](https://github.com/jejoivanic))
+- 85 update remote fonts [\#122](https://github.com/Cambalab/vue-admin/pull/122) ([jejoivanic](https://github.com/jejoivanic))
+- 5 spinner loader on api calls [\#119](https://github.com/Cambalab/vue-admin/pull/119) ([jejoivanic](https://github.com/jejoivanic))
+- Fixed edit form error which made untouched form's fields not to be st… [\#118](https://github.com/Cambalab/vue-admin/pull/118) ([jejoivanic](https://github.com/jejoivanic))
+- Exposed Unauthorized component in index.js file. [\#117](https://github.com/Cambalab/vue-admin/pull/117) ([jejoivanic](https://github.com/jejoivanic))
+- 90 implement a 404 page for unauthorized routes [\#115](https://github.com/Cambalab/vue-admin/pull/115) ([jejoivanic](https://github.com/jejoivanic))
+- 20 - integrate travis ci dev [\#113](https://github.com/Cambalab/vue-admin/pull/113) ([glmaljkovich](https://github.com/glmaljkovich))
+- 79 improve demo app authors resource [\#111](https://github.com/Cambalab/vue-admin/pull/111) ([jejoivanic](https://github.com/jejoivanic))
+- 0.0.4 [\#109](https://github.com/Cambalab/vue-admin/pull/109) ([sgobotta](https://github.com/sgobotta))
+
+
+**Closed issues:**
+
+- Sidebar Heading: add customisation support [\#137](https://github.com/Cambalab/vue-admin/issues/137)
+- Update Vuetify to version 2.x.x [\#136](https://github.com/Cambalab/vue-admin/issues/136)
+- Update Cypress to 3.4.0 for newer browser versions support [\#133](https://github.com/Cambalab/vue-admin/issues/133)
+- UI Component Customization [\#128](https://github.com/Cambalab/vue-admin/issues/128)
+- As a user I want to use my own Auth component [\#98](https://github.com/Cambalab/vue-admin/issues/98)
+- Implement a 404 page for unauthorized routes [\#90](https://github.com/Cambalab/vue-admin/issues/90)
+- Update remote fonts from index.html [\#85](https://github.com/Cambalab/vue-admin/issues/85)
+- Improve demo App: authors resource [\#79](https://github.com/Cambalab/vue-admin/issues/79)
+- Integrate Travis CI [\#20](https://github.com/Cambalab/vue-admin/issues/20)
+
+**Fixed bugs:**
+
+- Create View: store.state.entities\[formType\] is undefined [\#124](https://github.com/Cambalab/vue-admin/issues/124)
+- store.state.entities\[formType\] is undefined [\#110](https://github.com/Cambalab/vue-admin/issues/110)
+- Routes are being re-created on logout-login/hot-reload [\#97](https://github.com/Cambalab/vue-admin/issues/97)
+
 ## [v0.0.4](https://github.com/Cambalab/vue-admin/tree/v0.0.4) (2019-04-02)
-[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.13...v0.0.4)
+[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.3...v0.0.4)
 
 **Implemented enhancements:**
 
 - Expose Auth action Types in the distributed version [\#107](https://github.com/Cambalab/vue-admin/issues/107)
-
-**Merged pull requests:**
-
-- Updates index.js [\#108](https://github.com/Cambalab/vue-admin/pull/108) ([sgobotta](https://github.com/sgobotta))
-
-## [v0.0.13](https://github.com/Cambalab/vue-admin/tree/v0.0.13) (2019-04-02)
-[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.12...v0.0.13)
-
-## [v0.0.12](https://github.com/Cambalab/vue-admin/tree/v0.0.12) (2019-04-02)
-[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.3...v0.0.12)
-
-**Implemented enhancements:**
-
 - Integrate View's permissions to the route.hooks [\#96](https://github.com/Cambalab/vue-admin/issues/96)
 
 **Fixed bugs:**
@@ -27,6 +57,7 @@
 
 **Merged pull requests:**
 
+- Updates index.js [\#108](https://github.com/Cambalab/vue-admin/pull/108) ([sgobotta](https://github.com/sgobotta))
 - 96 integrate views permissions to the route hooks [\#106](https://github.com/Cambalab/vue-admin/pull/106) ([sgobotta](https://github.com/sgobotta))
 - Test serer: fixes lost users from the whitelist [\#104](https://github.com/Cambalab/vue-admin/pull/104) ([sgobotta](https://github.com/sgobotta))
 - 0.0.3 [\#102](https://github.com/Cambalab/vue-admin/pull/102) ([sgobotta](https://github.com/sgobotta))

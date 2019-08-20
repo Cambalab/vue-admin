@@ -35,30 +35,13 @@ describe('UI Test', () => {
   })
 
   it('Toolbar hamburger button should open drawer on click', () => {
-    const mainToolbarTitleName = UI_NAMES.MAIN_TOOLBAR_TITLE
+    const drawerButtonName = UI_NAMES.DRAWER_BUTTON
 
-    const mainToolbarTitleElement = queryElementByProp({
-      type: 'div',
+    const drawerButton = queryElementByProp({
+      type: 'button',
       prop: 'name',
-      value: mainToolbarTitleName
+      value: drawerButtonName
     })
-    cy.get(`${mainToolbarTitleElement} button`).click()
-  })
-
-  it('Drawer should redirect to Articles list view on article tile click', () => {
-    const routes = [{ name: 'list' }]
-    cy.InitServer({ resourceName: 'articles', routes })
-    const drawerArticlesTileName = UI_NAMES.DRAWER_RESOURCE_TILE.with({
-      resourceName: 'articles'
-    })
-
-    const drawerArticlesTileElement = queryElementByProp({
-      type: 'a',
-      prop: 'name',
-      value: drawerArticlesTileName
-    })
-    cy.get(drawerArticlesTileElement).click()
-
-    cy.url().should('include', '/articles')
+    cy.get(drawerButton).click()
   })
 })

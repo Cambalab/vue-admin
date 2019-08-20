@@ -1,1 +1,5 @@
-export default { rowsPerPage: 14 }
+export default {
+  rowsPerPage: 10,
+  dateInputMaxWidthNoLandscape: "290px",
+  dateInputMaxWidthLandscape:   "580px",
+}

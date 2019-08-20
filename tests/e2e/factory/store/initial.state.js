@@ -9,7 +9,8 @@ export default () => {
   // Initial vuex crud resources should be added here
   const initialResources = [
     'articles',
-    'magazines'
+    'magazines',
+    'authors'
   ]
   // Vuex Crud Initial State for a resource
   const initialResourceState = {
@@ -34,6 +35,11 @@ export default () => {
     isAuthenticated: false,
     status: 'idle',
     user: {}
+  }
+
+  // Vuex Initial State for request
+  const initialRequestState = {
+    isLoading: false
   }
   // Vuex Initial State for entities
   const initialEntitiesState = {}
@@ -62,6 +68,7 @@ export default () => {
     ...initResourcesState(initialResources),
     auth: initialAuthState,
     entities: initialEntitiesState,
-    resources: initialResourcesState
+    resources: initialResourcesState,
+    requests: initialRequestState
   }
 }

@@ -97,6 +97,24 @@ export const updateEntity = ({
 }
 
 /**
+ * initEntity - Calls the store to init the 'resourceName' entity.
+ *
+ * @param {Object} store        The global Vuex store variable
+ * @param {String} resourceName The name of the resource
+ * @param {String} formType     The form type in the entities state (createForm, editForm)
+ */
+
+export const initEntity = ({
+  store,
+  resourceName,
+  formType
+}) => {
+  const moduleName = 'entities/initForm'
+  const entity = resourceName
+  store.commit(moduleName, { formType, entity });
+}
+
+/**
  * submitEntity - Given an object with params, calls the store to dispatch
  * an 'actionType' request
  *
