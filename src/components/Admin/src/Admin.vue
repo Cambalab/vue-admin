@@ -74,11 +74,11 @@ export default {
     this.$store.registerModule('resources', resourceModule)
     this.$store.registerModule('entities', entitiesModule)
     this.$store.registerModule('requests', requestsModule)
-    this.registerUnauthorizedIfAny(this.unauthorized);
+    this.loadUnauthorizedRoute();
     this.registerStoreModule()
   },
   mounted: function() {
-    this.loadAuthRoutes()
+    this.loadAuthRoute()
     this.$store.dispatch(`auth/${AuthActionTypes.AUTH_CHECK_REQUEST}`)
   },
   methods: {
@@ -92,7 +92,7 @@ export default {
         store: this.$store,
       })
     },
-    loadAuthRoutes() {
+    loadAuthRoute() {
       const routes = []
       const route = {
         path: '/login',
@@ -103,11 +103,11 @@ export default {
       routes.push(route)
       this.$router.addRoutes(routes)
     },
-    registerUnauthorizedIfAny(unauthorizedComponent) {
+    loadUnauthorizedRoute() {
       const routeForUnauthorized = {
         path: '/unauthorized',
         name: 'unauthorized',
-        component: unauthorizedComponent
+        component: this.unauthorized
       }
       this.$router.addRoutes([routeForUnauthorized]);
     },
