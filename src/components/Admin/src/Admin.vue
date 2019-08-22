@@ -10,52 +10,54 @@
         :sidebar="sidebar"
         :va="va"
       >
-        <router-view></router-view>
+        <router-view />
       </Core>
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>
 
 <script>
 import Core from "@components/Core";
-import Ui from "@components/Ui";
-import Unauthorized from '@components/Unauthorized'
+
 import resourceModule from "@store/modules/resource";
 import entitiesModule from "@store/modules/entities"
 import requestsModule from "@store/modules/requests"
+
 import createAuthModule from '@va-auth/store'
-import UI_CONTENT from '@constants/ui.content.default'
-import Auth from '@components/Auth'
 import AuthActionTypes from '@va-auth/types'
-import { DefaultSidebar } from '@components/UiComponents';
+
+import defaults from './defaults'
 
 export default {
   name: "Admin",
   props: {
     appLayout: {
-      default: () => Ui
+      type: Object,
+      default: () => defaults().props.appLayout
     },
     authLayout: {
-      default: () => Auth
+      type: Object,
+      default: () => defaults().props.authLayout
     },
     authProvider: {
       type: Function,
-      required: true
+      default: defaults().props.authProvider
     },
     title: {
       type: String,
-      default: UI_CONTENT.MAIN_TOOLBAR_TITLE
+      default: defaults().props.title
     },
     sidebar: {
-      default: () => DefaultSidebar
+      type: Object,
+      default: () => defaults().props.sidebar
     },
     unauthorized: {
-      type: Object
+      type: Object,
+      default: () => defaults().props.unauthorized
     }
   },
   components: {
-    Auth,
     Core
   },
   data() {
@@ -105,7 +107,7 @@ export default {
       const routeForUnauthorized = {
         path: '/unauthorized',
         name: 'unauthorized',
-        component: unauthorizedComponent || Unauthorized
+        component: unauthorizedComponent
       }
       this.$router.addRoutes([routeForUnauthorized]);
     },

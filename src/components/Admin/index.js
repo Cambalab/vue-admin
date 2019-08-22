@@ -1,4 +1,4 @@
-import Admin from './src/admin';
+import Admin from './src/Admin';
 
 Admin.install = function(Vue) {
   Vue.component(Admin.name, Admin);
