@@ -34,7 +34,7 @@ export default {
     title: String,
     sidebar: {
       type: Object,
-      default: () => DefaultSidebar
+      required: true
     },
     va: Object
   },
