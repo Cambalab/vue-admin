@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div v-if="!isAuthenticated">
-      <component :is="authLayout" :va="va"/>
-    </div>
+    <Unauthenticated
+      v-if="!isAuthenticated"
+      :layout="authLayout"
+      :login="login"
+    />
     <div v-else>
       <Core
         v-bind:appLayout="appLayout"
@@ -18,9 +20,10 @@
 </template>
 
 <script>
-import Core from "@components/Core";
+import Core from "@components/Core"
+import Unauthenticated from './Unauthenticated'
 
-import resourceModule from "@store/modules/resource";
+import resourceModule from "@store/modules/resource"
 import entitiesModule from "@store/modules/entities"
 import requestsModule from "@store/modules/requests"
 
@@ -58,7 +61,8 @@ export default {
     }
   },
   components: {
-    Core
+    Core,
+    Unauthenticated
   },
   data() {
     const va = {
@@ -70,15 +74,17 @@ export default {
       va
     }
   },
-  created() {
+  beforeCreate() {
     this.$store.registerModule('resources', resourceModule)
     this.$store.registerModule('entities', entitiesModule)
     this.$store.registerModule('requests', requestsModule)
+  },
+  created() {
+    this.loadAuthRoute()
     this.loadUnauthorizedRoute();
     this.registerStoreModule()
   },
   mounted: function() {
-    this.loadAuthRoute()
     this.$store.dispatch(`auth/${AuthActionTypes.AUTH_CHECK_REQUEST}`)
   },
   methods: {
