@@ -20,21 +20,21 @@ export default {
       type: Object,
       default: () => defaults().props.authLayout
     },
-    title: {
-      type: String,
-      default: defaults().props.title
-    },
+    options: {
+      type: Object,
+    }
     sidebar: {
       type: Object,
       default: () => defaults().props.sidebar
+    },
+    title: {
+      type: String,
+      default: defaults().props.title
     },
     unauthorized: {
       type: Object,
       default: () => defaults().props.unauthorized
     },
-    options: {
-      type: Object,
-    }
   },
   components: {
     Authenticated,
