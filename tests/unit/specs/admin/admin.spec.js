@@ -3,6 +3,7 @@ import VueRouter from "vue-router"
 import Vuex from 'vuex'
 
 import Admin from '@components/Admin/src/Admin'
+import AuthActionTypes from '@va-auth/types'
 import createAuthModule from '@va-auth/store'
 import entitiesModule from '@store/modules/entities'
 import requestsModule from '@store/modules/requests'
@@ -56,7 +57,8 @@ describe('Admin.vue', () => {
       options
     }
     storeSpy = {
-      registerModule: jest.spyOn(mocks.$store, 'registerModule')
+      registerModule: jest.spyOn(mocks.$store, 'registerModule'),
+      dispatch: jest.spyOn(mocks.$store, 'dispatch')
     }
     stubs = ['router-view']
   })
@@ -90,10 +92,18 @@ describe('Admin.vue', () => {
     expect(storeSpy.registerModule).toHaveBeenNthCalledWith(2, 'requests', requestsModule)
   })
 
-  it('[Auth Module] should call registerModule on initialisation', () => {
+  it('[Auth Module] - should call registerModule on initialisation', () => {
     const { authModule } = options
     mountSubject()
 
     expect(storeSpy.registerModule).toHaveBeenNthCalledWith(3, 'auth', authModule)
+  })
+
+  it('[Auth Check Request] - should call dispach', () => {
+    mountSubject()
+    const { namespace, AUTH_CHECK_REQUEST } = AuthActionTypes
+
+    expect(storeSpy.dispatch).toHaveBeenCalledTimes(1)
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(`${namespace}/${AUTH_CHECK_REQUEST}`)
   })
 })

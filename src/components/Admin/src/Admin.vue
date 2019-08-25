@@ -22,7 +22,7 @@ export default {
     },
     options: {
       type: Object,
-    }
+    },
     sidebar: {
       type: Object,
       default: () => defaults().props.sidebar

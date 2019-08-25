@@ -23,7 +23,8 @@ export default {
     },
     login: function (username, password) {
       const params = { username, password }
-      this.$store.dispatch(`auth/${AuthActionTypes.AUTH_LOGIN_REQUEST}`, params)
+      const { namespace, AUTH_LOGIN_REQUEST } = AuthActionTypes
+      this.$store.dispatch(`${namespace}/${AUTH_LOGIN_REQUEST}`, params)
     }
   },
   render: function (createElement) {
