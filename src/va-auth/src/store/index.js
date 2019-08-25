@@ -14,12 +14,10 @@ import Types from '../types'
  */
 export default ({
   client,
-  moduleName,
-  store,
 }) => {
   const types = Types
 
-  const module = {
+  return {
     namespaced: true,
 
     state: createState(),
@@ -35,5 +33,4 @@ export default ({
 
     getters: createGetters(),
   }
-  store.registerModule(moduleName, module)
 }
