@@ -27,12 +27,12 @@ export default {
     this.$store.registerModule('resources', resourceModule)
   },
   created() {
-    const unauthorizedRoute = {
+    const unauthorizedRoutes = [{
       path: '/unauthorized',
       name: 'unauthorized',
       component: this.unauthorized
-    }
-    this.$router.addRoutes([unauthorizedRoute])
+    }]
+    this.$router.addRoutes(unauthorizedRoutes)
   },
   methods: {
     logout: function () {
