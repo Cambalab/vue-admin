@@ -44,7 +44,7 @@ export default {
       return this.$store.getters[`${namespace}/getUser`]
     }
   },
-  render: function (createElement, context) {
+  render: function (createElement) {
     const props = {
       layout: this.layout,
       title: this.title,

@@ -26,7 +26,6 @@
 
 <script>
 import UI_NAMES from '../../../constants/ui.element.names'
-import { DefaultSidebar } from '@components/UiComponents';
 
 export default {
   name: "Ui",
