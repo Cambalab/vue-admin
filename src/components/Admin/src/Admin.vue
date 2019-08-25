@@ -1,31 +1,9 @@
-<template>
-  <div>
-    <Unauthenticated
-      v-if="!isAuthenticated"
-      :layout="authLayout"
-      :login="login"
-    />
-    <div v-else>
-      <Core
-        v-bind:appLayout="appLayout"
-        :title="title"
-        :sidebar="sidebar"
-        :va="va"
-      >
-        <router-view />
-      </Core>
-      <slot />
-    </div>
-  </div>
-</template>
-
 <script>
-import Core from "@components/Core"
 import Unauthenticated from './Unauthenticated'
+import Authenticated from './Authenticated'
 
-import resourceModule from "@store/modules/resource"
-import entitiesModule from "@store/modules/entities"
-import requestsModule from "@store/modules/requests"
+import entitiesModule from '@store/modules/entities'
+import requestsModule from '@store/modules/requests'
 
 import createAuthModule from '@va-auth/store'
 import AuthActionTypes from '@va-auth/types'
@@ -33,7 +11,7 @@ import AuthActionTypes from '@va-auth/types'
 import defaults from './defaults'
 
 export default {
-  name: "Admin",
+  name: 'Admin',
   props: {
     appLayout: {
       type: Object,
@@ -61,81 +39,53 @@ export default {
     }
   },
   components: {
-    Core,
+    Authenticated,
     Unauthenticated
   },
-  data() {
-    const va = {
-      login: this.login,
-      logout: this.logout,
-      getUser: this.getUser
-    }
-    return {
-      va
-    }
-  },
   beforeCreate() {
-    this.$store.registerModule('resources', resourceModule)
     this.$store.registerModule('entities', entitiesModule)
     this.$store.registerModule('requests', requestsModule)
   },
   created() {
-    this.loadAuthRoute()
-    this.loadUnauthorizedRoute();
-    this.registerStoreModule()
+    this.registerStoreModule({
+      client: this.authProvider,
+      moduleName: 'auth',
+      store: this.$store
+    })
   },
   mounted: function() {
-    this.$store.dispatch(`auth/${AuthActionTypes.AUTH_CHECK_REQUEST}`)
+    const { namespace, AUTH_CHECK_REQUEST } = AuthActionTypes
+    this.$store.dispatch(`${namespace}/${AUTH_CHECK_REQUEST}`)
   },
   methods: {
-    logout() {
-      this.$store.dispatch(`auth/${AuthActionTypes.AUTH_LOGOUT_REQUEST}`)
+    registerStoreModule(args) {
+      createAuthModule(args)
     },
-    registerStoreModule() {
-      createAuthModule({
-        client: this.authProvider,
-        moduleName: 'auth',
-        store: this.$store,
-      })
-    },
-    loadAuthRoute() {
-      const routes = []
-      const route = {
-        path: '/login',
-        name: 'login',
-        component: this.authLayout,
-        props: {}
-      }
-      routes.push(route)
-      this.$router.addRoutes(routes)
-    },
-    loadUnauthorizedRoute() {
-      const routeForUnauthorized = {
-        path: '/unauthorized',
-        name: 'unauthorized',
-        component: this.unauthorized
-      }
-      this.$router.addRoutes([routeForUnauthorized]);
-    },
-    login: function (username, password) {
-      const params = { username, password }
-      this.$store.dispatch(`auth/${AuthActionTypes.AUTH_LOGIN_REQUEST}`, params)
-    },
-    getUser: function () {
-      return this.$store.getters['auth/getUser']
+    loadRoute(args) {
+      this.$router.addRoutes([args])
     }
   },
   computed: {
     isAuthenticated() {
-      return this.$store.getters[`auth/isAuthenticated`]
+      const { namespace } = AuthActionTypes
+      return this.$store.getters[`${namespace}/isAuthenticated`]
     }
   },
-  render() {
-    return null
+  render(createElement) {
+    return this.isAuthenticated
+    ? createElement(Authenticated, {
+      props: {
+        layout: this.appLayout,
+        title: this.title,
+        sidebar: this.sidebar,
+        unauthorized: this.unauthorized,
+      }
+    }, this.$slots.default)
+    : createElement(Unauthenticated, {
+      props: {
+        layout: this.authLayout
+      }
+    })
   }
-};
+}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-</style>
