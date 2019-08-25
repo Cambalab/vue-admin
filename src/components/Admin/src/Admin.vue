@@ -1,12 +1,9 @@
 <script>
-import Unauthenticated from './Unauthenticated'
-import Authenticated from './Authenticated'
-
+import AuthActionTypes from '@va-auth/types'
 import entitiesModule from '@store/modules/entities'
 import requestsModule from '@store/modules/requests'
-
-import AuthActionTypes from '@va-auth/types'
-
+import Unauthenticated from './Unauthenticated'
+import Authenticated from './Authenticated'
 import defaults from './defaults'
 
 export default {
@@ -51,11 +48,6 @@ export default {
   mounted: function() {
     const { namespace, AUTH_CHECK_REQUEST } = AuthActionTypes
     this.$store.dispatch(`${namespace}/${AUTH_CHECK_REQUEST}`)
-  },
-  methods: {
-    loadRoute(args) {
-      this.$router.addRoutes([args])
-    }
   },
   computed: {
     isAuthenticated() {
