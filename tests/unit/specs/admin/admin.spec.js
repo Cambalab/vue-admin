@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import VueRouter from "vue-router"
 import Vuex from 'vuex'
-import { shallowMount } from '@vue/test-utils'
-import ERROR_MESSAGES from '@constants/error.messages'
+
 import Admin from '@components/Admin/src/Admin'
-// import { findButtonByName, findRef, nextTick } from '@unit/lib/utils/wrapper'
+import createAuthModule from '@va-auth/store'
+import entitiesModule from '@store/modules/entities'
+import requestsModule from '@store/modules/requests'
+import { shallowMount } from '@vue/test-utils'
+
 import Factory from '../../factory'
 import adminFixture from '../../fixtures/admin'
 
@@ -16,13 +19,20 @@ describe('Admin.vue', () => {
   Vue.use(VueRouter)
   Vue.use(Vuex)
 
+  // subject
+  let subjectWrapper
+  // mocks
   let mockedRouter
   let mockedStore
   let mocks
-  let propsData
-  let routerSpy
+  // spies
+  let storeSpy
+  // stubs
   let stubs
-  let subjectWrapper
+  // props
+  let propsData
+  let authProvider
+  let options
 
   function mountSubject() {
     subjectWrapper = shallowMount(Admin, {
@@ -37,8 +47,16 @@ describe('Admin.vue', () => {
     mockedStore = new Vuex.Store({})
     mockedRouter['app'] = {}
     mocks = { $store: mockedStore }
+    authProvider = Factory.createAuthProvider()
+    options = {
+      authModule: createAuthModule({ client: authProvider })
+    }
     propsData = {
-      authProvider: Factory.createAuthProvider()
+      authProvider,
+      options
+    }
+    storeSpy = {
+      registerModule: jest.spyOn(mocks.$store, 'registerModule')
     }
     stubs = ['router-view']
   })
@@ -60,25 +78,22 @@ describe('Admin.vue', () => {
     expect(props.unauthorized).toMatchObject(adminFixture.props.unauthorized)
   })
 
-  it('should throw an error when the {authProvider} property is missing', () => {
-    const prop = 'authProvider'
-    shouldThrowOnMissingProp({ prop, subject })
+  it('[Entities Module] should call registerModule on initialisation', () => {
+    mountSubject()
+
+    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(1, 'entities', entitiesModule)
   })
 
-  /**
-   * Helper functions
-   */
+  it('[Entities Module] should call registerModule on initialisation', () => {
+    mountSubject()
 
-    function shouldThrowOnMissingProp({ prop, subject }) {
-      // Setup: deletes the list prop before mounting
-      delete propsData[prop]
-      const { UNDEFINED_PROPERTY } = ERROR_MESSAGES
-      const at = subject
-      const message = UNDEFINED_PROPERTY.with({ prop, at })
-      // Exercise: mounts the subject instance
-      expect(mountSubject).toThrow(message)
-      // Cannot hide second error throw.
-      // In fact, why is it throwing errors twice?
-      // Is Admin endering twice?- @sgobotta
-    }
+    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(2, 'requests', requestsModule)
+  })
+
+  it('[Auth Module] should call registerModule on initialisation', () => {
+    const { authModule } = options
+    mountSubject()
+
+    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(3, 'auth', authModule)
+  })
 })
