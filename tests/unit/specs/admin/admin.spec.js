@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from "vue-router"
 import Vuex from 'vuex'
-
 import Admin from '@components/Admin/src/Admin'
 import Authenticated from '@components/Admin/src/Authenticated'
 import Unauthenticated from '@components/Admin/src/Unauthenticated'
@@ -19,7 +18,6 @@ describe('Admin.vue', () => {
   const subject = 'Admin'
 
   Vue.config.silent = true
-
   Vue.use(VueRouter)
   Vue.use(Vuex)
 
@@ -40,7 +38,10 @@ describe('Admin.vue', () => {
 
   function mountSubject() {
     subjectWrapper = shallowMount(Admin, {
-      mocks, propsData, router: mockedRouter, stubs,
+      mocks,
+      propsData,
+      router: mockedRouter,
+      stubs,
       sync: true
     })
   }
@@ -83,26 +84,26 @@ describe('Admin.vue', () => {
     expect(props.unauthorized).toMatchObject(adminFixture.props.unauthorized)
   })
 
-  it('[Entities Module] should call registerModule on beforeCreate', () => {
+  it('[Entities Module] - store should call registerModule on beforeCreate', () => {
     mountSubject()
 
     expect(storeSpy.registerModule).toHaveBeenNthCalledWith(1, 'entities', entitiesModule)
   })
 
-  it('[Entities Module] should call registerModule on beforeCreate', () => {
+  it('[Entities Module] - store should call registerModule on beforeCreate', () => {
     mountSubject()
 
     expect(storeSpy.registerModule).toHaveBeenNthCalledWith(2, 'requests', requestsModule)
   })
 
-  it('[Auth Module] - should call registerModule on created', () => {
+  it('[Auth Module] - store should call registerModule on created', () => {
     const { authModule } = options
     mountSubject()
 
     expect(storeSpy.registerModule).toHaveBeenNthCalledWith(3, 'auth', authModule)
   })
 
-  it('[Auth Check Request] - should call dispach on mounted', () => {
+  it('[Auth Check Request] - store should call dispach on mounted', () => {
     const { namespace, AUTH_CHECK_REQUEST } = AuthActionTypes
     mountSubject()
 
@@ -110,7 +111,7 @@ describe('Admin.vue', () => {
     expect(storeSpy.dispatch).toHaveBeenCalledWith(`${namespace}/${AUTH_CHECK_REQUEST}`)
   })
 
-  it('[Unauthenticated] view is rendered when isAuthenticated returns false', () => {
+  it('[Unauthenticated] - component is rendered when isAuthenticated returns false', () => {
     const { namespace } = AuthActionTypes
     const getter = `${namespace}/isAuthenticated`
 
@@ -123,8 +124,9 @@ describe('Admin.vue', () => {
     expect(unauthenticatedLayout.exists()).toBe(true)
   })
 
-  it('[Authenticated] view is rendered when isAuthenticated returns true', async () => {
+  it('[Authenticated] - component is rendered when isAuthenticated returns true', async () => {
     const { namespace, AUTH_LOGIN_SUCCESS } = AuthActionTypes
+    const getter = `${namespace}/isAuthenticated`
 
     mountSubject()
 
@@ -133,7 +135,7 @@ describe('Admin.vue', () => {
     await nextTick(subjectWrapper)
 
     const authenticatedLayout = subjectWrapper.find(Authenticated)
-    const isAuthenticated = subjectWrapper.vm.$store.getters[`${namespace}/isAuthenticated`]
+    const isAuthenticated = subjectWrapper.vm.$store.getters[getter]
 
     expect(isAuthenticated).toBe(true)
     expect(authenticatedLayout.exists()).toBe(true)
