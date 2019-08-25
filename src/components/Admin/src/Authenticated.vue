@@ -1,7 +1,7 @@
 <script>
 import AuthActionTypes from '@va-auth/types'
 import Core from '@components/Core'
-import resourceModule from '@store/modules/resource'
+import { authenticatedDefaults } from './defaults'
 
 export default {
   name: 'Authenticated',
@@ -24,14 +24,11 @@ export default {
     }
   },
   beforeCreate() {
+    const { args: { resourceModule } } = authenticatedDefaults
     this.$store.registerModule('resources', resourceModule)
   },
   created() {
-    const unauthorizedRoutes = [{
-      path: '/unauthorized',
-      name: 'unauthorized',
-      component: this.unauthorized
-    }]
+    const { args: { unauthorizedRoutes } } = authenticatedDefaults
     this.$router.addRoutes(unauthorizedRoutes)
   },
   methods: {

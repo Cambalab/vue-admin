@@ -1,8 +1,10 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import AuthLayout from '@components/Auth'
-import AppLayout from "@components/Ui";
+import AppLayout from "@components/Ui"
+import Core from '@components/Core'
 import Unauthorized from '@components/Unauthorized'
-import { DefaultSidebar } from '@components/UiComponents';
+import { DefaultSidebar } from '@components/UiComponents'
+import resourceModule from '@store/modules/resource'
 
 /**
  * Defaults - Default attributes for the Admin component
@@ -25,5 +27,24 @@ export default () => {
       title,
       unauthorized
     }
+  }
+}
+
+/**
+ * Defaults - Default attributes for the Authenticated component
+ *
+ * @return {Object} An object containing default attributes
+ */
+
+const unauthorizedRoutes = [{
+  path: '/unauthorized',
+  name: 'unauthorized',
+  component: Unauthorized
+}]
+
+export const authenticatedDefaults = {
+  args: {
+    resourceModule,
+    unauthorizedRoutes
   }
 }
