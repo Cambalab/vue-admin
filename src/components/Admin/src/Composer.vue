@@ -5,12 +5,28 @@ import createAuthModule from '@va-auth/store'
 
 export default {
   functional: true,
+  props: {
+    authProvider: {
+      type: Function
+    },
+    options: {
+      type: Object
+    }
+  },
   render(createElement, context) {
-    const { props: { authProvider, options: _options = {} } } = context
+    // One of authProvider or an authModule are strictly required
+    const {
+      props: {
+        authProvider = () => {},
+        options: _options = {}
+      }
+    } = context
+
     const options = Object.assign({}, {
       authModule: createAuthModule({ client: authProvider })
     }, _options)
     const props = Object.assign({}, context.props, { options })
+
     return createElement(Admin, { props }, context.slots().default)
   }
 }
