@@ -1,5 +1,6 @@
 <script>
 import AuthActionTypes from '@va-auth/types'
+import { unauthenticatedDefaults } from './defaults'
 
 export default {
   name: 'Unauthenticated',
@@ -10,17 +11,11 @@ export default {
     }
   },
   created() {
-    this.loadRoute({
-      path: '/login',
-      name: 'login',
-      component: this.authLayout,
-      props: {}
-    })
+    const { args: { createUnauthenticatedRoutes } } = unauthenticatedDefaults
+    const unauthenticatedRoutes = createUnauthenticatedRoutes(this.layout)
+    this.$router.addRoutes(unauthenticatedRoutes)
   },
   methods: {
-    loadRoute(args) {
-      this.$router.addRoutes([args])
-    },
     login: function (username, password) {
       const params = { username, password }
       const { namespace, AUTH_LOGIN_REQUEST } = AuthActionTypes

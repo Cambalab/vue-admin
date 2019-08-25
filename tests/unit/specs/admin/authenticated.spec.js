@@ -85,7 +85,7 @@ describe('Authenticated.vue', () => {
     expect(routerSpy.addRoutes).toHaveBeenCalledWith(unauthorizedRoutes)
   })
 
-  it('[Core] - component is rendered when isAuthenticated returns true', async () => {
+  it('[Core] - component is rendered', async () => {
     mountSubject()
 
     const coreComponent = subjectWrapper.find(authenticatedFixture.args.Core)

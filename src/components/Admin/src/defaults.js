@@ -47,3 +47,22 @@ export const authenticatedDefaults = {
     unauthorizedRoutes
   }
 }
+
+/**
+ * Defaults - Default attributes for the Unauthenticated component
+ *
+ * @return {Object} An object containing default attributes
+ */
+
+const createUnauthenticatedRoutes = (authLayout) => [{
+  path: '/login',
+  name: 'login',
+  component: authLayout || AuthLayout,
+  props: {}
+}]
+
+export const unauthenticatedDefaults = {
+  args: {
+    createUnauthenticatedRoutes
+  }
+}

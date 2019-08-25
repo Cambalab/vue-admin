@@ -1,8 +1,10 @@
 import AppLayout from '@components/Ui'
+import AuthLayout from '@components/Auth'
 import Core from '@components/Core'
 import Unauthorized from '@components/Unauthorized'
 import defaults, {
-  authenticatedDefaults
+  authenticatedDefaults,
+  unauthenticatedDefaults
 } from '@components/Admin/src/defaults'
 import { DefaultSidebar } from '@components/UiComponents';
 
@@ -22,5 +24,14 @@ export const Authenticated = {
   args: {
     Core,
     ...authenticatedDefaults.args
+  }
+}
+
+export const Unauthenticated = {
+  props: {
+    layout: AuthLayout
+  },
+  args: {
+    ...unauthenticatedDefaults.args
   }
 }
