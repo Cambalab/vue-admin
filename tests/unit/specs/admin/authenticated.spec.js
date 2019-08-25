@@ -5,7 +5,7 @@ import Authenticated from '@components/Admin/src/Authenticated'
 import { shallowMount } from '@vue/test-utils'
 import { Authenticated as authenticatedFixture } from '../../fixtures/admin'
 
-describe('Admin.vue', () => {
+describe('Authenticated.vue', () => {
   const subject = 'Authenticated'
 
   Vue.config.silent = true
