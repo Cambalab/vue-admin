@@ -28,8 +28,11 @@
 +   **Type:** `Object`
 
 +   **Details:** It's just an object that contains user related functions tha are exposed to layouts:
-    +   `login`: a function used to call the `authModule`
-    > The `Authenticated` component defines the va object. `authModule` is a `@va-auth/store` module assigned in `Admin`.
+    +   `logout`: a function that implements the `auth/AUTH_LOGOUT_REQUEST` interface to call the `authModule`.
+    +   `getUser`: a function that implements the `auth/AUTH_GET_USER` interface to call the `authModule`
+    
+    > Interfaces implementation can be found in `@va-auth/types`, while the `authModule` is a `@va-auth/store` module, and it's assigned by the `Admin` component.
 
-+   **Default:** An object with the login and getUser function that, in turn, use the `@va-auth/types`: `AUTH_LOGOUT_REQUEST`, `GET_USER_REQUEST`
-> The va object is assigned by the `Authenticated` component.
++   **Default:** An object with the logout and getUser function that, in turn, use the `@va-auth/types`: `AUTH_LOGOUT_REQUEST`, `GET_USER_REQUEST`
+> The va object is designed in the `Authenticated` component.
+> The `Authenticated` component defines the va object. 
