@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import UI_NAMES from '../../../constants/ui.element.names'
+import UI_NAMES from '@constants/ui.element.names'
 
 export default {
-  name: "Ui",
+  name: "AppLayout",
   props: {
     title: String,
     sidebar: {
@@ -47,9 +47,9 @@ export default {
       locales: ["EN", "ID"],
       drawer: false,
       names
-    };
+    }
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

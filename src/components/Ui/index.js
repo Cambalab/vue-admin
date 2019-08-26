@@ -1,7 +1,7 @@
-import Ui from './src/ui';
+import AppLayout from './src/AppLayout';
 
-Ui.install = function(Vue) {
-  Vue.component(Ui.name, Ui);
+AppLayout.install = function(Vue) {
+  Vue.component(AppLayout.name, AppLayout);
 };
 
-export default Ui;
+export default AppLayout;
