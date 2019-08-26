@@ -1,6 +1,6 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import AuthLayout from '@components/Auth'
-import AppLayout from "@components/Ui"
+import AppLayout from "@components/AppLayout"
 import Unauthorized from '@components/Unauthorized'
 import { DefaultSidebar } from '@components/UiComponents'
 import resourceModule from '@store/modules/resource'
