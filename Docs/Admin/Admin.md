@@ -1,7 +1,8 @@
 # `Admin`
 
-`Admin` is one of the core components. This component receives many of the properties provided by a user and dispatches them to the correspondent sub-components that will render them. Some of those properties are not required. When those properties are not provided, the `Admin` component will use a set of default ones.
-It's main responsibility is to create an authentication route and store modules, decide whether a user is authenticated or not and finally render the proper component given an authentication scenario.
+`Admin` is one of the core components, receives many of the properties provided by a user and sends them to the correspondent sub-components. Some of those properties are not required. When those properties are not provided, the `Admin` component will use a set of default ones.  
+It's main responsibility is to create an authentication route and store modules, decide whether a user is authenticated or not and finally render the proper component, given an authentication scenario.
+Communication to the store match the structure provided in the `authModule` (e.g.: `@va-auth/store`) and `@va-auth/types`.
 
 ## props
 
@@ -15,7 +16,7 @@ It's main responsibility is to create an authentication route and store modules,
 
 +   **Type:** `Object (optional)`
 
-+   **Details:** A component that is used by the router whenever the store `isAuthenticated` getter returns `false`. When using your own authLayout, a va `Object` will be provided with a `login` function that receives two arguments: `{String} username`, `{String} password` and updates the store `isAuthenticated` state.
++   **Details:** A component that is used by the router whenever the store `isAuthenticated` getter returns `false`. When using your own authLayout, a va `Object` will be provided with a `login` function that receives two arguments: `{String} username`, `{String} password` and updates the stores state.
 
 +   **Default:** `AuthLayout`
 
@@ -23,9 +24,11 @@ It's main responsibility is to create an authentication route and store modules,
 
 +   **Type:** `Object`
 
-+   **Details:** Allows users to provide their own store modules. Instead of providing an authProvider, an authModule can be passed to the instance. However, the module must contain the authProvider internally, it will be used as the authentication client.  
++   **Details:** Allows users to provide their own store modules. Instead of providing an authProvider, an authModule can be passed to the instance.
 You can use the following options:  
     +   `authModule`: a vuex store object.
+
+>   An `authModule` must be created with authProvider internally, it is internally used as the authentication client. The `@va-auth/store` module contains a valid implementation.
 
 +   **Example:**
 
