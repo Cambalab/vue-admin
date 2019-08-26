@@ -30,11 +30,11 @@ import UI_NAMES from '@constants/ui.element.names'
 export default {
   name: "AppLayout",
   props: {
-    title: String,
     sidebar: {
       type: Object,
       required: true
     },
+    title: String,
     va: Object
   },
   data() {

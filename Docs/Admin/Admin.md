@@ -7,9 +7,9 @@ It's main responsibility is to create an authentication route and store modules,
 
 ### authProvider
 
-+   **Type:** `Object`
++   **Type:** `Function`
 
-+   **Details:** A function used to call different mutations in an authorization module. It is in fact the an adapter for a client (eg: axios) you'd like to use to perform requests to a server.
++   **Details:** A function used to call different mutations in an authorization module. It is in fact the an adapter for a client (e.g.: axios) you'd like to use to perform requests to a server.
 
 ### authLayout
 
@@ -17,13 +17,15 @@ It's main responsibility is to create an authentication route and store modules,
 
 +   **Details:** A component that is used by the router whenever the store `isAuthenticated` getter returns `false`. When using your own authLayout, a va `Object` will be provided with a `login` function that receives two arguments: `{String} username`, `{String} password` and updates the store `isAuthenticated` state.
 
++   **Default:** `AuthLayout`
+
 ### options
 
 +   **Type:** `Object`
 
 +   **Details:** Allows users to provide their own store modules. Instead of providing an authProvider, an authModule can be passed to the instance. However, the module must contain the authProvider internally, it will be used as the authentication client.  
 You can use the following options:  
-    +   `authModule`: a vuex store `Object` with properties: `namespaced: true`, state, actions, mutations and getters. ***Current constraints***: Getters should an object with attributes: `{String} authStatus`, `{Boolean} isAuthenticated`, `{Object} user`. State should be an object with attributes: `{String} error`, `{Boolean} isAuthenticated`, `{String} status`, `{Object} user`.
+    +   `authModule`: a vuex store object.
 
 +   **Example:**
 
@@ -56,7 +58,9 @@ const adminOptions = {
 
 +   **Type:** `Object (optional)`
 
-+   **Details:** A component that is used by the `appLayout` component (currently not customizable) to provide links to available resources. If you want to use your own sidebar, you might want to take a look at the [**Sidebar docs**](../Ui-Components/Sidebar.md).
++   **Details:** A sidebar component that used by the `appLayout` prop. If you want to use your own sidebar, you might want to take a look at the [**Sidebar docs**](../Ui-Components/Sidebar.md).
+
++   **Default:** `DefaultSidebar`
 
 ### title
 
@@ -64,8 +68,22 @@ const adminOptions = {
 
 +   **Details:** a string used by the `appLayout` as the toolbar title
 
++   **Default:** `Vue Admin`
+
 ### unauthorized
 
 +   **Type:** `Object (optional)`
 
 +   **Details:** A component that is used by the router whenever a user is not authorized to visit certain views.
+
++   **Default:** `Unauthorized`
+
+## internal props
+
+### appLayout
+
++   **Type:** `Object (default)`
+
++   **Details:** when a user is authenticated, `appLayout` is passed as prop to the `Authenticated` component.  
+
++   **Source:** `AppLayout`
