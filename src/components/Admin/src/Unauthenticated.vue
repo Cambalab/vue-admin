@@ -10,11 +10,6 @@ export default {
       required: true
     }
   },
-  created() {
-    const { args: { createUnauthenticatedRoutes } } = unauthenticatedDefaults
-    const unauthenticatedRoutes = createUnauthenticatedRoutes(this.layout)
-    this.$router.addRoutes(unauthenticatedRoutes)
-  },
   methods: {
     login: function (username, password) {
       const params = { username, password }

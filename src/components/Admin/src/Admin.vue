@@ -43,7 +43,16 @@ export default {
   },
   created() {
     const { authModule } = this.options
+    const {
+      args: {
+        createUnauthenticatedRoutes,
+        unauthorizedRoutes
+      }
+    } = defaults()
+    const unauthenticatedRoutes = createUnauthenticatedRoutes(this.authLayout)
+
     this.$store.registerModule('auth', authModule)
+    this.$router.addRoutes([...unauthenticatedRoutes, ...unauthorizedRoutes])
   },
   mounted: function() {
     const { namespace, AUTH_CHECK_REQUEST } = AuthActionTypes

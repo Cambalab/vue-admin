@@ -27,10 +27,6 @@ export default {
     const { args: { resourceModule } } = authenticatedDefaults
     this.$store.registerModule('resources', resourceModule)
   },
-  created() {
-    const { args: { unauthorizedRoutes } } = authenticatedDefaults
-    this.$router.addRoutes(unauthorizedRoutes)
-  },
   methods: {
     logout: function () {
       const { namespace, AUTH_LOGOUT_REQUEST } = AuthActionTypes

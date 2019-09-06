@@ -18,6 +18,19 @@ export default () => {
   const title = UI_CONTENT.MAIN_TOOLBAR_TITLE
   const unauthorized = Unauthorized
 
+  const createUnauthenticatedRoutes = (authLayout) => [{
+    path: '/login',
+    name: 'login',
+    component: authLayout || AuthLayout,
+    props: {}
+  }]
+
+  const unauthorizedRoutes = [{
+    path: '/unauthorized',
+    name: 'unauthorized',
+    component: Unauthorized
+  }]
+
   return {
     props: {
       appLayout,
@@ -25,6 +38,10 @@ export default () => {
       sidebar,
       title,
       unauthorized
+    },
+    args: {
+      createUnauthenticatedRoutes,
+      unauthorizedRoutes
     }
   }
 }
@@ -35,16 +52,9 @@ export default () => {
  * @return {Object} An object containing default attributes
  */
 
-const unauthorizedRoutes = [{
-  path: '/unauthorized',
-  name: 'unauthorized',
-  component: Unauthorized
-}]
-
 export const authenticatedDefaults = {
   args: {
-    resourceModule,
-    unauthorizedRoutes
+    resourceModule
   }
 }
 
@@ -54,15 +64,9 @@ export const authenticatedDefaults = {
  * @return {Object} An object containing default attributes
  */
 
-const createUnauthenticatedRoutes = (authLayout) => [{
-  path: '/login',
-  name: 'login',
-  component: authLayout || AuthLayout,
-  props: {}
-}]
 
 export const unauthenticatedDefaults = {
   args: {
-    createUnauthenticatedRoutes
+
   }
 }

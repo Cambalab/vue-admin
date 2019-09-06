@@ -9,6 +9,9 @@ export default {
     authProvider: {
       type: Function
     },
+    sidebar: {
+      type: Object
+    },
     options: {
       type: Object
     }
@@ -18,6 +21,7 @@ export default {
     const {
       props: {
         authProvider = () => {},
+        sidebar,
         options: _options = {}
       }
     } = context
@@ -25,7 +29,7 @@ export default {
     const options = Object.assign({}, {
       authModule: createAuthModule({ client: authProvider })
     }, _options)
-    const props = Object.assign({}, context.props, { options })
+    const props = Object.assign({}, context.props, { sidebar, options })
 
     return createElement(Admin, { props }, context.slots().default)
   }
