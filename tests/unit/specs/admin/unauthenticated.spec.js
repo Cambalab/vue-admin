@@ -17,8 +17,6 @@ describe('Unauthenticated.vue', () => {
   let mockedRouter
   let mockedStore
   let mocks
-  // spies
-  let routerSpy
   // props
   let propsData
 
@@ -39,9 +37,6 @@ describe('Unauthenticated.vue', () => {
     propsData = {
       layout: unauthenticatedFixture.props.layout,
     }
-    routerSpy = {
-      addRoutes: jest.spyOn(mocks.$router, 'addRoutes')
-    }
   })
 
   afterEach(() => {
@@ -55,18 +50,6 @@ describe('Unauthenticated.vue', () => {
 
     expect(subjectWrapper.name()).toMatch(subject)
     expect(props.layout).toMatchObject(unauthenticatedFixture.props.layout)
-  })
-
-  it('[Auth View] - router should call addRoutes on created', () => {
-    mountSubject()
-
-    const {
-      args: { createUnauthenticatedRoutes },
-      props: { layout }
-    } = unauthenticatedFixture
-    const unauthenticatedRoutes = createUnauthenticatedRoutes(layout)
-    expect(routerSpy.addRoutes).toHaveBeenCalledTimes(1)
-    expect(routerSpy.addRoutes).toHaveBeenCalledWith(unauthenticatedRoutes)
   })
 
   it('[Auth] - component is rendered when isAuthenticated returns true', async () => {

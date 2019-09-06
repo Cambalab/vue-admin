@@ -18,7 +18,6 @@ describe('Admin.vue', () => {
   const subject = 'Admin'
 
   Vue.config.silent = true
-  Vue.use(VueRouter)
   Vue.use(Vuex)
 
   // subject
@@ -28,6 +27,7 @@ describe('Admin.vue', () => {
   let mockedStore
   let mocks
   // spies
+  let routerSpy
   let storeSpy
   // stubs
   let stubs
@@ -51,7 +51,7 @@ describe('Admin.vue', () => {
     mockedRouter = new VueRouter(routes)
     mockedStore = new Vuex.Store({})
     mockedRouter['app'] = {}
-    mocks = { $store: mockedStore }
+    mocks = { $store: mockedStore, $router: mockedRouter }
     authProvider = Factory.createAuthProvider()
     options = {
       authModule: createAuthModule({ client: authProvider })
@@ -59,6 +59,9 @@ describe('Admin.vue', () => {
     propsData = {
       authProvider,
       options
+    }
+    routerSpy = {
+      addRoutes: jest.spyOn(mocks.$router, 'addRoutes')
     }
     storeSpy = {
       registerModule: jest.spyOn(mocks.$store, 'registerModule'),
@@ -94,6 +97,23 @@ describe('Admin.vue', () => {
     mountSubject()
 
     expect(storeSpy.registerModule).toHaveBeenNthCalledWith(2, 'requests', requestsModule)
+  })
+
+  it('[Auth/Unauthorized View] - router should call addRoutes on created', () => {
+    mountSubject()
+
+    const {
+      props: { authLayout },
+      args: {
+        createUnauthenticatedRoutes,
+        unauthorizedRoutes
+      }
+    } = adminFixture
+    const unauthenticatedRoutes = createUnauthenticatedRoutes(authLayout)
+    const args = [...unauthenticatedRoutes, ...unauthorizedRoutes]
+
+    expect(routerSpy.addRoutes).toHaveBeenCalledTimes(1)
+    expect(routerSpy.addRoutes).toHaveBeenCalledWith(args)
   })
 
   it('[Auth Module] - store should call registerModule on created', () => {

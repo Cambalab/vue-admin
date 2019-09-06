@@ -18,7 +18,6 @@ describe('Authenticated.vue', () => {
   let mockedStore
   let mocks
   // spies
-  let routerSpy
   let storeSpy
   // props
   let propsData
@@ -47,9 +46,6 @@ describe('Authenticated.vue', () => {
       registerModule: jest.spyOn(mocks.$store, 'registerModule'),
       dispatch: jest.spyOn(mocks.$store, 'dispatch')
     }
-    routerSpy = {
-      addRoutes: jest.spyOn(mocks.$router, 'addRoutes')
-    }
   })
 
   afterEach(() => {
@@ -74,15 +70,6 @@ describe('Authenticated.vue', () => {
 
     expect(storeSpy.registerModule).toHaveBeenCalledTimes(1)
     expect(storeSpy.registerModule).toHaveBeenCalledWith('resources', resourceModule)
-  })
-
-  it('[Unauthorized View] - router should call addRoutes on created', () => {
-    mountSubject()
-
-    const { args: { unauthorizedRoutes } } = authenticatedFixture
-
-    expect(routerSpy.addRoutes).toHaveBeenCalledTimes(1)
-    expect(routerSpy.addRoutes).toHaveBeenCalledWith(unauthorizedRoutes)
   })
 
   it('[Core] - component is rendered', async () => {

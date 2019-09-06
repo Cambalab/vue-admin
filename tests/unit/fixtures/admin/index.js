@@ -11,6 +11,9 @@ import { DefaultSidebar } from '@components/UiComponents';
 export default {
   props: {
     ...defaults().props
+  },
+  args: {
+    ...defaults().args
   }
 }
 
