@@ -121,14 +121,20 @@ describe('Admin.vue', () => {
     mountSubject()
 
     const {
-      props: { authLayout },
+      props: { authLayout, homeLayout },
       args: {
         createUnauthenticatedRoutes,
+        createSiteRoutes,
         unauthorizedRoutes
       }
     } = adminFixture
     const unauthenticatedRoutes = createUnauthenticatedRoutes(authLayout)
-    const args = [...unauthenticatedRoutes, ...unauthorizedRoutes]
+    const siteRoutes = createSiteRoutes({ homeLayout })
+    const args = [
+      ...siteRoutes,
+      ...unauthenticatedRoutes,
+      ...unauthorizedRoutes
+    ]
 
     expect(routerSpy.addRoutes).toHaveBeenCalledTimes(1)
     expect(routerSpy.addRoutes).toHaveBeenCalledWith(args)

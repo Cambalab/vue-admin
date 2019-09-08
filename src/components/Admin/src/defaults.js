@@ -37,6 +37,13 @@ export default () => {
     component: UnauthorizedLayout
   }]
 
+  const createSiteRoutes = ({ homeLayout }) => [{
+    path: '/',
+    name: 'home',
+    component: homeLayout || HomeLayout,
+    props: {}
+  }]
+
   return {
     props: {
       appLayout,
@@ -47,6 +54,7 @@ export default () => {
       unauthorized
     },
     args: {
+      createSiteRoutes,
       createUnauthenticatedRoutes,
       entitiesModule,
       requestsModule,
