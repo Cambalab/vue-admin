@@ -64,14 +64,6 @@ describe('Authenticated.vue', () => {
     expect(props.unauthorized).toMatchObject(authenticatedFixture.props.unauthorized)
   })
 
-  it('[Resource Module] - store should call registerModule on beforeCreate', () => {
-    mountSubject()
-    const { args: { resourceModule } } = authenticatedFixture
-
-    expect(storeSpy.registerModule).toHaveBeenCalledTimes(1)
-    expect(storeSpy.registerModule).toHaveBeenCalledWith('resources', resourceModule)
-  })
-
   it('[Core] - component is rendered', async () => {
     mountSubject()
 

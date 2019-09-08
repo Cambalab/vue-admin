@@ -23,10 +23,6 @@ export default {
       required: true
     }
   },
-  beforeCreate() {
-    const { args: { resourceModule } } = authenticatedDefaults
-    this.$store.registerModule('resources', resourceModule)
-  },
   methods: {
     logout: function () {
       const { namespace, AUTH_LOGOUT_REQUEST } = AuthActionTypes

@@ -1,36 +1,45 @@
 <script>
 import AuthActionTypes from '@va-auth/types'
-import entitiesModule from '@store/modules/entities'
-import requestsModule from '@store/modules/requests'
 import Unauthenticated from './Unauthenticated'
 import Authenticated from './Authenticated'
 import defaults from './defaults'
+
+const {
+  props,
+  args: {
+    createUnauthenticatedRoutes,
+    entitiesModule,
+    requestsModule,
+    resourceModule,
+    unauthorizedRoutes
+  }
+} = defaults()
 
 export default {
   name: 'Admin',
   props: {
     appLayout: {
       type: Object,
-      default: () => defaults().props.appLayout
+      default: () => props.appLayout
     },
     authLayout: {
       type: Object,
-      default: () => defaults().props.authLayout
+      default: () => props.authLayout
     },
     options: {
       type: Object,
     },
     sidebar: {
       type: Object,
-      default: () => defaults().props.sidebar
+      default: () => props.sidebar
     },
     title: {
       type: String,
-      default: defaults().props.title
+      default: props.title
     },
     unauthorized: {
       type: Object,
-      default: () => defaults().props.unauthorized
+      default: () => props.unauthorized
     },
   },
   components: {
@@ -40,15 +49,10 @@ export default {
   beforeCreate() {
     this.$store.registerModule('entities', entitiesModule)
     this.$store.registerModule('requests', requestsModule)
+    this.$store.registerModule('resources', resourceModule)
   },
   created() {
     const { authModule } = this.options
-    const {
-      args: {
-        createUnauthenticatedRoutes,
-        unauthorizedRoutes
-      }
-    } = defaults()
     const unauthenticatedRoutes = createUnauthenticatedRoutes(this.authLayout)
 
     this.$store.registerModule('auth', authModule)

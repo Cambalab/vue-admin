@@ -3,6 +3,8 @@ import AuthLayout from '@components/Auth'
 import AppLayout from "@components/Layouts"
 import Unauthorized from '@components/Unauthorized'
 import { DefaultSidebar } from '@components/UiComponents'
+import entitiesModule from '@store/modules/entities'
+import requestsModule from '@store/modules/requests'
 import resourceModule from '@store/modules/resource'
 
 /**
@@ -41,6 +43,9 @@ export default () => {
     },
     args: {
       createUnauthenticatedRoutes,
+      entitiesModule,
+      requestsModule,
+      resourceModule,
       unauthorizedRoutes
     }
   }
@@ -54,7 +59,7 @@ export default () => {
 
 export const authenticatedDefaults = {
   args: {
-    resourceModule
+
   }
 }
 

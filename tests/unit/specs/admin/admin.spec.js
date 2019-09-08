@@ -6,8 +6,6 @@ import Authenticated from '@components/Admin/src/Authenticated'
 import Unauthenticated from '@components/Admin/src/Unauthenticated'
 import AuthActionTypes from '@va-auth/types'
 import createAuthModule from '@va-auth/store'
-import entitiesModule from '@store/modules/entities'
-import requestsModule from '@store/modules/requests'
 import { shallowMount } from '@vue/test-utils'
 import { nextTick } from '@unit/lib/utils/wrapper'
 
@@ -90,13 +88,32 @@ describe('Admin.vue', () => {
   it('[Entities Module] - store should call registerModule on beforeCreate', () => {
     mountSubject()
 
+    const { args: { entitiesModule } } = adminFixture
+
     expect(storeSpy.registerModule).toHaveBeenNthCalledWith(1, 'entities', entitiesModule)
   })
 
-  it('[Entities Module] - store should call registerModule on beforeCreate', () => {
+  it('[Requests Module] - store should call registerModule on beforeCreate', () => {
     mountSubject()
 
+    const { args: { requestsModule } } = adminFixture
+
     expect(storeSpy.registerModule).toHaveBeenNthCalledWith(2, 'requests', requestsModule)
+  })
+
+  it('[Resource Module] - store should call registerModule on beforeCreate', () => {
+    mountSubject()
+
+    const { args: { resourceModule } } = adminFixture
+
+    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(3, 'resources', resourceModule)
+  })
+
+  it('[Auth Module] - store should call registerModule on created', () => {
+    const { authModule } = options
+    mountSubject()
+
+    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(4, 'auth', authModule)
   })
 
   it('[Auth/Unauthorized View] - router should call addRoutes on created', () => {
@@ -114,13 +131,6 @@ describe('Admin.vue', () => {
 
     expect(routerSpy.addRoutes).toHaveBeenCalledTimes(1)
     expect(routerSpy.addRoutes).toHaveBeenCalledWith(args)
-  })
-
-  it('[Auth Module] - store should call registerModule on created', () => {
-    const { authModule } = options
-    mountSubject()
-
-    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(3, 'auth', authModule)
   })
 
   it('[Auth Check Request] - store should call dispach on mounted', () => {
