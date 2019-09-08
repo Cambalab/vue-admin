@@ -26,6 +26,10 @@ export default {
       type: Object,
       default: () => props.authLayout
     },
+    homeLayout: {
+      type: Object,
+      default: () => props.homeLayout
+    },
     options: {
       type: Object,
     },

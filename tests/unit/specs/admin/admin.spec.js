@@ -80,6 +80,7 @@ describe('Admin.vue', () => {
     expect(subjectWrapper.name()).toMatch(subject)
     expect(props.appLayout).toMatchObject(adminFixture.props.appLayout)
     expect(props.authLayout).toMatchObject(adminFixture.props.authLayout)
+    expect(props.homeLayout).toMatchObject(adminFixture.props.homeLayout)
     expect(props.sidebar).toMatchObject(adminFixture.props.sidebar)
     expect(props.title).toMatch(adminFixture.props.title)
     expect(props.unauthorized).toMatchObject(adminFixture.props.unauthorized)

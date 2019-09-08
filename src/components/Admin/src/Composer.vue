@@ -12,6 +12,9 @@ export default {
     authProvider: {
       type: Function
     },
+    homeLayout: {
+      type: Object
+    },
     sidebar: {
       type: Object
     },

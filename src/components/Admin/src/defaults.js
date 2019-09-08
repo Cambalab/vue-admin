@@ -1,5 +1,10 @@
 import UI_CONTENT from '@constants/ui.content.default'
-import { AppLayout, AuthLayout, UnauthorizedLayout } from '@components/Layouts'
+import {
+  AppLayout,
+  AuthLayout,
+  HomeLayout,
+  UnauthorizedLayout
+} from '@components/Layouts'
 import { DefaultSidebar } from '@components/UiComponents'
 import entitiesModule from '@store/modules/entities'
 import requestsModule from '@store/modules/requests'
@@ -14,6 +19,7 @@ export default () => {
 
   const appLayout = AppLayout
   const authLayout = AuthLayout
+  const homeLayout = HomeLayout
   const sidebar = DefaultSidebar
   const title = UI_CONTENT.MAIN_TOOLBAR_TITLE
   const unauthorized = UnauthorizedLayout
@@ -35,6 +41,7 @@ export default () => {
     props: {
       appLayout,
       authLayout,
+      homeLayout,
       sidebar,
       title,
       unauthorized
