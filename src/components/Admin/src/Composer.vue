@@ -23,9 +23,7 @@ export default {
     // One of authProvider or an authModule are strictly required
     const {
       props: {
-        authLayout,
         authProvider = () => {},
-        sidebar,
         options: _options = {}
       }
     } = context
@@ -33,7 +31,7 @@ export default {
     const options = Object.assign({}, {
       authModule: createAuthModule({ client: authProvider })
     }, _options)
-    const props = Object.assign({}, context.props, { sidebar, options })
+    const props = Object.assign({}, context.props, { options })
 
     return createElement(Admin, { props }, context.slots().default)
   }
