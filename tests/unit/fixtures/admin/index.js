@@ -1,7 +1,5 @@
-import AppLayout from '@components/Layouts'
-import AuthLayout from '@components/Auth'
+import { AppLayout, AuthLayout, UnauthorizedLayout } from '@components/Layouts'
 import Core from '@components/Core'
-import Unauthorized from '@components/Unauthorized'
 import defaults, {
   authenticatedDefaults,
   unauthenticatedDefaults
@@ -22,7 +20,7 @@ export const Authenticated = {
     layout: AppLayout,
     sidebar: DefaultSidebar,
     title: 'A toolbar text',
-    unauthorized: Unauthorized
+    unauthorized: UnauthorizedLayout
   },
   args: {
     Core,

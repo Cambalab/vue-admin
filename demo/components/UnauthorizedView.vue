@@ -1,5 +1,5 @@
 <template>
-  <Unauthorized>
+  <UnauthorizedLayout>
     <h2 slot="title">You do not have permissions for accessing this view</h2>
     <div slot="text">
       <p>If you think you should be allowed to see this view, please contact the page administrator.</p>
@@ -7,14 +7,14 @@
           BACK
       </v-btn>
     </div>
-  </Unauthorized>
+  </UnauthorizedLayout>
 </template>
 <script>
-import Unauthorized from '@components/Unauthorized'
+import { UnauthorizedLayout } from '@components/Layouts'
 export default {
   name: 'UnauthorizedView',
   components: {
-    Unauthorized
+    UnauthorizedLayout
   },
   methods: {
     goBack () {

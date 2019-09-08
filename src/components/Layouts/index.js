@@ -1,7 +1,9 @@
-import AppLayout from './src/AppLayout';
+import AppLayout from './src/AppLayout'
+import AuthLayout from './src/AuthLayout'
+import UnauthorizedLayout from './src/UnauthorizedLayout'
 
-AppLayout.install = function(Vue) {
-  Vue.component(AppLayout.name, AppLayout);
-};
-
-export default AppLayout;
+export {
+  AppLayout,
+  AuthLayout,
+  UnauthorizedLayout
+}

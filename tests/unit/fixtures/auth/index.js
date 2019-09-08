@@ -1,4 +1,4 @@
-import defaults from '@components/Auth/src/defaults'
+import defaults from '@components/Layouts/src/AuthLayout/defaults'
 
 export default {
   props: {
