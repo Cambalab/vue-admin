@@ -17,8 +17,6 @@ describe('Authenticated.vue', () => {
   let mockedRouter
   let mockedStore
   let mocks
-  // spies
-  let storeSpy
   // props
   let propsData
 
@@ -41,10 +39,6 @@ describe('Authenticated.vue', () => {
       sidebar: authenticatedFixture.props.sidebar,
       title: authenticatedFixture.props.title,
       unauthorized: authenticatedFixture.props.unauthorized,
-    }
-    storeSpy = {
-      registerModule: jest.spyOn(mocks.$store, 'registerModule'),
-      dispatch: jest.spyOn(mocks.$store, 'dispatch')
     }
   })
 

@@ -1,6 +1,5 @@
 <script>
 import AuthActionTypes from '@va-auth/types'
-import { unauthenticatedDefaults } from './defaults'
 
 export default {
   name: 'Unauthenticated',

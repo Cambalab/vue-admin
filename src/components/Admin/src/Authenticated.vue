@@ -1,7 +1,6 @@
 <script>
 import AuthActionTypes from '@va-auth/types'
 import Core from '@components/Core'
-import { authenticatedDefaults } from './defaults'
 
 export default {
   name: 'Authenticated',
