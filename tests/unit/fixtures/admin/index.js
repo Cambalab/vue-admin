@@ -1,4 +1,4 @@
-import AppLayout from '@components/Layouts'
+import { AppLayout } from '@components/Layouts'
 import AuthLayout from '@components/Auth'
 import Core from '@components/Core'
 import Unauthorized from '@components/Unauthorized'
