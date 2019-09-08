@@ -75,7 +75,7 @@ import UI_NAMES from '@constants/ui.element.names'
 import defaults from './defaults'
 
 export default {
-  name: 'Auth',
+  name: 'AuthLayout',
   props: {
     authFormTitle: {
       type: Object,
