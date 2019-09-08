@@ -4,6 +4,12 @@ The `Composer` wrapper for the `Admin` is nothing more than a functional compone
 
 ## props
 
+### authLayout
+
++   **Type:** `Object (optional)`
+
++   **Details:** A component to log in that is passed as prop to `Admin`
+
 ### authProvider
 
 +   **Type:** `Function`
