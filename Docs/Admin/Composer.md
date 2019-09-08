@@ -19,3 +19,9 @@ The `Composer` wrapper for the `Admin` is nothing more than a functional compone
 +   **Details:** An object with options that are passed as props to `Admin`:
     +   `authModule`: a vuex store `Object` with properties: `namespaced: true`, state, actions, mutations and getters.  
         > Getters should be an object with attributes: `{String} authStatus`, `{Boolean} isAuthenticated`, `{Object} user`. State should be an object with attributes: `{String} error`, `{Boolean} isAuthenticated`, `{String} status`, `{Object} user`.
+
+### sidebar
+
++   **Type:** `Object (optional)`
+
++   **Details:** A sidebar component that is passed as prop to `Admin`
