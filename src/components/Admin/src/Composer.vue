@@ -6,6 +6,9 @@ import createAuthModule from '@va-auth/store'
 export default {
   functional: true,
   props: {
+    authLayout: {
+      type: Object,
+    },
     authProvider: {
       type: Function
     },
@@ -20,6 +23,7 @@ export default {
     // One of authProvider or an authModule are strictly required
     const {
       props: {
+        authLayout,
         authProvider = () => {},
         sidebar,
         options: _options = {}
