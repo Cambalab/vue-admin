@@ -79,7 +79,7 @@ const adminOptions = {
 
 +   **Details:** A component that is used by the router whenever a user is not authorized to visit certain views.
 
-+   **Default:** `Unauthorized`
++   **Default:** `UnauthorizedLayout`
 
 ## internal props
 

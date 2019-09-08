@@ -23,7 +23,7 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 export default {
-  name: "Unauthorized",
+  name: 'UnauthorizedLayout',
   data: () => {
     return {
       NAME_UNAUTHORIZED_HEADER_CONTAINER: UI_NAMES.UNAUTHORIZED_HEADER_CONTAINER,
