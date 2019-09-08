@@ -1,6 +1,5 @@
 import UI_CONTENT from '@constants/ui.content.default'
-import AuthLayout from '@components/Auth'
-import { AppLayout } from "@components/Layouts"
+import { AppLayout, AuthLayout } from "@components/Layouts"
 import Unauthorized from '@components/Unauthorized'
 import { DefaultSidebar } from '@components/UiComponents'
 import entitiesModule from '@store/modules/entities'

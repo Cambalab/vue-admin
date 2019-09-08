@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import Auth from '@components/Auth/src/Auth'
+import { AuthLayout } from '@components/Layouts'
 import Factory from '@unit/factory'
 import { mount } from '@vue/test-utils'
 import UI_NAMES from '@constants/ui.element.names'
@@ -9,8 +9,8 @@ import UNIT_CONSTANTS from '@unit/lib/constants'
 import authFixture from '@unit/fixtures/auth'
 import { findButtonByName, findRef, nextTick } from '@unit/lib/utils/wrapper'
 
-describe('Auth.vue', () => {
-  const subject = 'Auth'
+describe('AuthLayout.vue', () => {
+  const subject = 'AuthLayout'
   Vue.use(Vuetify)
   // Silences warnings from vuetify prop mutations
   Vue.config.silent = true
@@ -27,7 +27,7 @@ describe('Auth.vue', () => {
   } = UNIT_CONSTANTS
 
   const _mount = ({ propsData }) => {
-    wrapper = mount(Auth, {
+    wrapper = mount(AuthLayout, {
       propsData,
       sync: false
     })
