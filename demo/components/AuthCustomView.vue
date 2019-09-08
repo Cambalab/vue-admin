@@ -87,8 +87,8 @@ export default {
       CUSTOM_AUTH_ALERT_INVALID_EMAIL
     } = UI_CONTENT
     return {
-      username: 'dev@camba.coop',
-      password: '123456',
+      username: '',
+      password: '',
       valid: false,
       usernameRules: [
         v => !!v || CUSTOM_AUTH_ALERT_USERNAME_REQUIRED,
