@@ -7,6 +7,7 @@ import defaults from './defaults'
 const {
   props,
   args: {
+    createSiteRoutes,
     createUnauthenticatedRoutes,
     entitiesModule,
     requestsModule,
@@ -25,6 +26,10 @@ export default {
     authLayout: {
       type: Object,
       default: () => props.authLayout
+    },
+    homeLayout: {
+      type: Object,
+      default: () => props.homeLayout
     },
     options: {
       type: Object,
@@ -54,9 +59,14 @@ export default {
   created() {
     const { authModule } = this.options
     const unauthenticatedRoutes = createUnauthenticatedRoutes(this.authLayout)
+    const siteRoutes = createSiteRoutes({ homeLayout: this.homeLayout })
 
     this.$store.registerModule('auth', authModule)
-    this.$router.addRoutes([...unauthenticatedRoutes, ...unauthorizedRoutes])
+    this.$router.addRoutes([
+      ...siteRoutes,
+      ...unauthenticatedRoutes,
+      ...unauthorizedRoutes
+    ])
   },
   mounted: function() {
     const { namespace, AUTH_CHECK_REQUEST } = AuthActionTypes
