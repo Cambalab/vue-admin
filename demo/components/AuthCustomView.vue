@@ -12,13 +12,13 @@
             </p>
           </v-card-title>
           <v-form
-          class="va-auth-form input-padding"
+            class="va-auth-form input-padding"
             ref="form"
             v-model="valid"
           >
             <v-flex container sm10 md8 lg8>
               <v-text-field
-                color="#009688"
+                color="teal"
                 :label="UI_CONTENT.CUSTOM_AUTH_LABEL_USERNAME"
                 :name="UI_NAMES.CUSTOM_AUTH_USERNAME_INPUT"
                 required
@@ -27,7 +27,7 @@
               />
 
               <v-text-field
-                color="#009688"
+                color="teal"
                 :label="UI_CONTENT.CUSTOM_AUTH_LABEL_PASSWORD"
                 :name="UI_NAMES.CUSTOM_AUTH_PASSWORD_INPUT"
                 required
@@ -40,7 +40,7 @@
                 absolute
                 class="va-auth-submit-button"
                 @click="validate"
-                color="#009688"
+                color="teal"
                 :disabled="!valid"
                 :name="UI_NAMES.CUSTOM_AUTH_SIGN_IN_BUTTON"
               >
@@ -178,7 +178,7 @@ export default {
   }
 
   .va-auth-submit-button {
-    justify-content: flex-end;
+    justify-content: flex-start;
     color: #edfcde
   }
 
