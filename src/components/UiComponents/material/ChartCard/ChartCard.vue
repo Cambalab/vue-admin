@@ -12,7 +12,6 @@
         :ratio="ratio"
         :responsive-options="responsiveOptions"
         :type="type"
-        style="max-height: 150px;"
       />
     </template>
 
