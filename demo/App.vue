@@ -4,6 +4,7 @@
   <Admin
     :authLayout="AuthCustomView"
     :authProvider="authProvider"
+    :homeLayout="HomeLayout"
     :sidebar="CustomSidebar"
     :unauthorized="UnauthorizedCustomView">
     <!-- Articles Resource -->
@@ -43,8 +44,8 @@ import Resource from '@components/Resource'
 
 import UnauthorizedView from './components/UnauthorizedView'
 import UnauthorizedCustomView from './components/UnauthorizedCustomView'
-
 import CustomSidebar from './components/CustomSidebar'
+import HomeLayout from './components/HomeLayout'
 
 import ListArticles from './components/articles/ListArticles'
 import ShowArticles from './components/articles/ShowArticles'
@@ -133,6 +134,7 @@ export default {
       UnauthorizedView,
       UnauthorizedCustomView,
       CustomSidebar,
+      HomeLayout,
 
       // Common Resource props
       resourceIdName,
