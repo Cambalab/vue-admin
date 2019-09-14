@@ -1,6 +1,6 @@
 <script>
+import { VApp } from 'vuetify/lib'
 import Admin from './Admin'
-
 import createAuthModule from '@va-auth/store'
 
 export default {
@@ -36,7 +36,9 @@ export default {
     }, _options)
     const props = Object.assign({}, context.props, { options })
 
-    return createElement(Admin, { props }, context.slots().default)
+    const admin = createElement(Admin, { props }, context.slots().default)
+
+    return createElement(VApp, {}, [admin])
   }
 }
 </script>
