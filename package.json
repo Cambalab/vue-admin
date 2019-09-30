@@ -6,7 +6,8 @@
   "scripts": {
     "build": "vue-cli-service build --target lib ./src/index.js",
     "changelog": "github_changelog_generator && git add CHANGELOG.md && git commit -am \"Updates changelog\"",
-    "lint": "vue-cli-service lint",
+    "lint": "vue-cli-service lint --no-fix",
+    "lint:autofix": "vue-cli-service lint",
     "prepublish": "npm run build",
     "publish": "git push origin --tags && npm run changelog && git push origin",
     "release:major": "npm version major && npm publish",
@@ -36,6 +37,7 @@
     "cypress-dark": "^1.7.13",
     "deepmerge": "^4.0.0",
     "eslint": "^5.16.0",
+    "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",
     "fibers": "^4.0.1",
