@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueRouter from "vue-router"
+import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import Authenticated from '@components/Admin/src/Authenticated'
 import { shallowMount } from '@vue/test-utils'
@@ -25,7 +25,7 @@ describe('Authenticated.vue', () => {
       mocks,
       propsData,
       router: mockedRouter,
-      sync: true
+      sync: true,
     })
   }
 
@@ -55,7 +55,9 @@ describe('Authenticated.vue', () => {
     expect(props.layout).toMatchObject(authenticatedFixture.props.layout)
     expect(props.sidebar).toMatchObject(authenticatedFixture.props.sidebar)
     expect(props.title).toMatch(authenticatedFixture.props.title)
-    expect(props.unauthorized).toMatchObject(authenticatedFixture.props.unauthorized)
+    expect(props.unauthorized).toMatchObject(
+      authenticatedFixture.props.unauthorized
+    )
   })
 
   it('[Core] - component is rendered', async () => {

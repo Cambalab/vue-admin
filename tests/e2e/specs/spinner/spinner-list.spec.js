@@ -21,7 +21,7 @@ describe('Spinner on a List View Test', () => {
     const spinnerContainer = cy.getElement({
       constant: UI_NAMES.SPINNER_CONTAINER,
       elementType: 'div',
-      elementProp: 'id'
+      elementProp: 'id',
     })
 
     spinnerContainer.should('not.be.visible')
@@ -34,10 +34,9 @@ describe('Spinner on a List View Test', () => {
     const spinnerContainer = cy.getElement({
       constant: UI_NAMES.SPINNER_CONTAINER,
       elementType: 'div',
-      elementProp: 'id'
+      elementProp: 'id',
     })
 
     spinnerContainer.should('be.visible')
   })
-
 })

@@ -23,13 +23,13 @@ describe('AuthLayout.vue', () => {
   const { username, password } = Factory.createCredentials()
 
   const {
-    VUETIFY_TEXT_FIELD_LABEL_DETAILS_CLASS: TEXT_FIELD_LABEL
+    VUETIFY_TEXT_FIELD_LABEL_DETAILS_CLASS: TEXT_FIELD_LABEL,
   } = UNIT_CONSTANTS
 
   const _mount = ({ propsData }) => {
     wrapper = mount(AuthLayout, {
       propsData,
-      sync: false
+      sync: false,
     })
   }
 
@@ -37,7 +37,7 @@ describe('AuthLayout.vue', () => {
     propsData = authFixture.props
     vuetify = new Vuetify()
     vaPropSpy = {
-      login: jest.spyOn(propsData.va, 'login')
+      login: jest.spyOn(propsData.va, 'login'),
     }
 
     _mount({ propsData, vuetify })
@@ -113,7 +113,7 @@ describe('AuthLayout.vue', () => {
     const textFieldName = UI_NAMES.AUTH_USERNAME_INPUT
     const buttonName = UI_NAMES.AUTH_SIGN_IN_BUTTON
     const errorMessage = UI_CONTENT.AUTH_ALERT_EMAIL_REQUIRED
-    const button = findButtonByName({ wrapper, name: buttonName})
+    const button = findButtonByName({ wrapper, name: buttonName })
     const textField = findRef({ wrapper, ref: textFieldName })
 
     await textField.vm.focus()

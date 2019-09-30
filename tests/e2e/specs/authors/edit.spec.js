@@ -6,7 +6,6 @@ import UI_CONTENT from '../../../../src/constants/ui.content.default'
 import UI_NAMES from '../../../../src/constants/ui.element.names'
 
 describe('Authors: Edit Test', () => {
-
   const resourceName = 'authors'
   const view = 'edit'
   const author = {}
@@ -26,10 +25,7 @@ describe('Authors: Edit Test', () => {
 
   before('Initialises the mocked serve and visits the edit url', () => {
     const response = author
-    const routes = [
-      { name: 'edit', response },
-      { name: 'show', response }
-    ]
+    const routes = [{ name: 'edit', response }, { name: 'show', response }]
 
     cy.InitServer({ resourceName, routes })
     cy.visit(`/#/${resourceName}/edit/${author.id}`)
@@ -37,12 +33,15 @@ describe('Authors: Edit Test', () => {
   })
 
   it('Authors Edit should render title: Authors', () => {
-    const editViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })
+    const editViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
+      resourceName,
+      view,
+    })
     const editViewTitleContainer = cy.getElement({
       constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE,
       constantParams: { resourceName, view },
       elementType: 'div',
-      elementProp: 'name'
+      elementProp: 'name',
     })
 
     editViewTitleContainer.should('contain', editViewTitleText)
@@ -80,7 +79,7 @@ describe('Authors: Edit Test', () => {
   it('An author is updated when the user submits the form', () => {
     const routes = [
       { name: view, response: newAuthor },
-      { name: 'show', response: newAuthor }
+      { name: 'show', response: newAuthor },
     ]
     cy.InitServer({ resourceName, routes })
 
@@ -96,8 +95,8 @@ describe('Authors: Edit Test', () => {
   })
 
   /**
-  * Helper functions
-  **/
+   * Helper functions
+   **/
 
   function editField(field, content) {
     queryToField(field)
@@ -111,7 +110,7 @@ describe('Authors: Edit Test', () => {
       constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD,
       constantParams: { resourceName, view, field },
       elementType: 'input',
-      elementProp: 'name'
+      elementProp: 'name',
     })
   }
 

@@ -1,6 +1,5 @@
-
 export const createAuthProvider = () => {
-  return (type) => {
+  return type => {
     switch (type) {
       default:
         return Promise.resolve()

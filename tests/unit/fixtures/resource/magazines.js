@@ -15,16 +15,16 @@ export default {
     list: ListMagazines,
     show: ShowMagazines,
     redirect: defaults().props.redirect(),
-    parseResponses: defaults().props.parseResponses()
+    parseResponses: defaults().props.parseResponses(),
   },
   methods: {
     storeMethods: {
       'resources/addRoute': {
         params: {
           path: '/magazines',
-          name: 'magazines'
-        }
-      }
-    }
-  }
+          name: 'magazines',
+        },
+      },
+    },
+  },
 }

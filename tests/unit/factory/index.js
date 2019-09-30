@@ -5,5 +5,5 @@ import { createAuthProvider } from './admin'
 export default {
   createAuthProvider,
   createCredentials,
-  createStoreWith
+  createStoreWith,
 }
