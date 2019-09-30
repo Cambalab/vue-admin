@@ -1,7 +1,7 @@
-import AppLayout from './AppLayout';
+import AppLayout from './AppLayout'
 
 AppLayout.install = function(Vue) {
-  Vue.component(AppLayout.name, AppLayout);
-};
+  Vue.component(AppLayout.name, AppLayout)
+}
 
-export default AppLayout;
+export default AppLayout

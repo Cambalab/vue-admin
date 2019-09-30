@@ -1,7 +1,7 @@
-import Edit from "./Composer";
+import Edit from './Composer'
 
 Edit.install = function(Vue) {
-  Vue.component(Edit.name, Edit);
-};
+  Vue.component(Edit.name, Edit)
+}
 
-export default Edit;
+export default Edit

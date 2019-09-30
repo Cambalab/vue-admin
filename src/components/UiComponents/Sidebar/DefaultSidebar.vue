@@ -1,34 +1,43 @@
 <template>
   <Sidebar>
     <template v-for="(item, index) in menuItems">
-      <SidebarNode v-if="item.children" :key="index"
+      <SidebarNode
+        v-if="item.children"
+        :key="index"
         :title="item.title"
         icon="keyboard_arrow_up"
         icon-alt="keyboard_arrow_down"
       >
-        <SidebarLink v-for="(child, i) in item.children" :key="i"
-          :title="child.title" :path="child.link" :icon="child.icon"
+        <SidebarLink
+          v-for="(child, i) in item.children"
+          :key="i"
+          :title="child.title"
+          :path="child.link"
+          :icon="child.icon"
         />
       </SidebarNode>
 
-      <SidebarLink v-else-if="item.link" :key="item.title"
-        :title="item.title" :path="item.link" :icon="item.icon"
+      <SidebarLink
+        v-else-if="item.link"
+        :key="item.title"
+        :title="item.title"
+        :path="item.link"
+        :icon="item.icon"
       />
 
-      <SidebarAction v-else-if="item.click" :key="item.title"
-        :title="item.title" :action="item.click" :icon="item.icon"
+      <SidebarAction
+        v-else-if="item.click"
+        :key="item.title"
+        :title="item.title"
+        :action="item.click"
+        :icon="item.icon"
       />
     </template>
   </Sidebar>
 </template>
 
 <script>
-import {
-  Sidebar,
-  SidebarNode,
-  SidebarLink,
-  SidebarAction
-} from '../Sidebar'
+import { Sidebar, SidebarNode, SidebarLink, SidebarAction } from '../Sidebar'
 
 export default {
   name: 'DefaultSidebar',
@@ -36,10 +45,10 @@ export default {
     Sidebar,
     SidebarNode,
     SidebarLink,
-    SidebarAction
+    SidebarAction,
   },
   props: {
-    va: Object
+    va: Object,
   },
   data() {
     return {
@@ -57,7 +66,7 @@ export default {
           click: () => this.va.logout(),
           icon: 'power_settings_new',
           title: 'Sign Out',
-        }
+        },
       ],
     }
   },
@@ -67,7 +76,7 @@ export default {
   methods: {
     // Listen to addRoutes mutations
     mapCurrentRegisteredRoutes() {
-      let whitelist = ['resources/addRoute'];
+      let whitelist = ['resources/addRoute']
       this.$store.subscribe((mutation, state) => {
         if (whitelist.includes(mutation.type)) {
           const currentRoutes = state.resources.routes.map(route => {
@@ -76,7 +85,7 @@ export default {
           this.menuItems[0].children = currentRoutes
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>

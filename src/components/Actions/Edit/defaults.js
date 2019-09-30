@@ -1,4 +1,3 @@
-
 /**
  * Defaults - Default attributes for the Edit view
  *
@@ -8,19 +7,16 @@ export default () => {
   /**
    * Edit View default composer options
    */
-   const composer = {
-     parentPropKeys: [
-       'resourceName',
-       'va'
-     ],
-     childrenAdapter: {
-       placeHolder: 'placeHolder',
-       source: 'label',
-       type: 'type'
-     }
-   }
+  const composer = {
+    parentPropKeys: ['resourceName', 'va'],
+    childrenAdapter: {
+      placeHolder: 'placeHolder',
+      source: 'label',
+      type: 'type',
+    },
+  }
 
   return {
-    composer
+    composer,
   }
 }

@@ -10,37 +10,36 @@
       </v-list-item-subtitle>
     </v-list-item-content>
   </v-list-item>
-
 </template>
 <script>
 import defaults from './defaults'
 
 export default {
-  name: "SidebarHeading",
+  name: 'SidebarHeading',
   props: {
     avatar: {
       type: Object,
-      default: () => defaults().props.avatar
+      default: () => defaults().props.avatar,
     },
     avatarProps: {
       type: Object,
-      default: () => defaults().props.avatarProps
+      default: () => defaults().props.avatarProps,
     },
     title: {
       type: String,
-      default: 'Menu'
+      default: 'Menu',
     },
     subTitle: {
       type: String,
-      default: defaults().props.subTitle
-    }
-  }
+      default: defaults().props.subTitle,
+    },
+  },
 }
 </script>
 
 <style>
 .va-heading-title {
-  font-weight: bold !important
+  font-weight: bold !important;
 }
 
 .va-heading-subtitle {

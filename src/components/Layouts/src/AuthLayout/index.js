@@ -1,7 +1,7 @@
-import AuthLayout from './AuthLayout';
+import AuthLayout from './AuthLayout'
 
 AuthLayout.install = function(Vue) {
-  Vue.component(AuthLayout.name, AuthLayout);
-};
+  Vue.component(AuthLayout.name, AuthLayout)
+}
 
-export default AuthLayout;
+export default AuthLayout

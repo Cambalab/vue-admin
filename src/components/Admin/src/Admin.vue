@@ -12,8 +12,8 @@ const {
     entitiesModule,
     requestsModule,
     resourceModule,
-    unauthorizedRoutes
-  }
+    unauthorizedRoutes,
+  },
 } = defaults()
 
 export default {
@@ -21,35 +21,35 @@ export default {
   props: {
     appLayout: {
       type: Object,
-      default: () => props.appLayout
+      default: () => props.appLayout,
     },
     authLayout: {
       type: Object,
-      default: () => props.authLayout
+      default: () => props.authLayout,
     },
     homeLayout: {
       type: Object,
-      default: () => props.homeLayout
+      default: () => props.homeLayout,
     },
     options: {
       type: Object,
     },
     sidebar: {
       type: Object,
-      default: () => props.sidebar
+      default: () => props.sidebar,
     },
     title: {
       type: String,
-      default: props.title
+      default: props.title,
     },
     unauthorized: {
       type: Object,
-      default: () => props.unauthorized
+      default: () => props.unauthorized,
     },
   },
   components: {
     Authenticated,
-    Unauthenticated
+    Unauthenticated,
   },
   beforeCreate() {
     this.$store.registerModule('entities', entitiesModule)
@@ -65,7 +65,7 @@ export default {
     this.$router.addRoutes([
       ...siteRoutes,
       ...unauthenticatedRoutes,
-      ...unauthorizedRoutes
+      ...unauthorizedRoutes,
     ])
   },
   mounted: function() {
@@ -76,23 +76,27 @@ export default {
     isAuthenticated() {
       const { namespace } = AuthActionTypes
       return this.$store.getters[`${namespace}/isAuthenticated`]
-    }
+    },
   },
   render(createElement) {
     return this.isAuthenticated
-    ? createElement(Authenticated, {
-      props: {
-        layout: this.appLayout,
-        title: this.title,
-        sidebar: this.sidebar,
-        unauthorized: this.unauthorized,
-      }
-    }, this.$slots.default)
-    : createElement(Unauthenticated, {
-      props: {
-        layout: this.authLayout
-      }
-    })
-  }
+      ? createElement(
+          Authenticated,
+          {
+            props: {
+              layout: this.appLayout,
+              title: this.title,
+              sidebar: this.sidebar,
+              unauthorized: this.unauthorized,
+            },
+          },
+          this.$slots.default
+        )
+      : createElement(Unauthenticated, {
+          props: {
+            layout: this.authLayout,
+          },
+        })
+  },
 }
 </script>

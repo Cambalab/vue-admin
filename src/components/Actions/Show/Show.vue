@@ -6,7 +6,7 @@
         <v-toolbar color="white" :name="names.viewActionsContainer">
           <v-card-title primary-title :name="names.titleContainer">
             <h3 class="headline mb-0 text-capitalize">
-              {{content.title}}
+              {{ content.title }}
             </h3>
           </v-card-title>
           <v-spacer />
@@ -19,7 +19,8 @@
             :resourceName="resourceName"
           />
         </v-toolbar>
-        <v-card-text :name="names.containerFields"
+        <v-card-text
+          :name="names.containerFields"
           v-if="resourceShow !== undefined"
         >
           <component
@@ -39,66 +40,67 @@
 <script>
 import UI_NAMES from '@constants/ui.element.names'
 import UI_CONTENT from '@constants/ui.content.default'
-import { mapState } from "vuex"
+import { mapState } from 'vuex'
 import {
   DeleteButton,
   EditButton,
   Input,
   TextField,
-  Spinner
-} from "@components/UiComponents"
+  Spinner,
+} from '@components/UiComponents'
 
 export default {
-  name: "Show",
+  name: 'Show',
   props: {
     resourceName: {
       type: String,
-      required: true
+      required: true,
     },
     fields: {
       type: Array,
-      required: true
+      required: true,
     },
     va: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     Input,
     TextField,
     DeleteButton,
     EditButton,
-    Spinner
+    Spinner,
   },
   data() {
     const resourceName = this.resourceName
     const view = 'show'
     const content = {
-      title: UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })
+      title: UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view }),
     }
     const names = {
-      containerField: (field) => UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({
-        resourceName,
-        view,
-        field
-      }),
+      containerField: field =>
+        UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({
+          resourceName,
+          view,
+          field,
+        }),
       containerFields: UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
         resourceName,
-        view
+        view,
       }),
       titleContainer: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({
         resourceName,
-        view
+        view,
       }),
       viewActionsContainer: UI_NAMES.RESOURCE_VIEW_ACTIONS_CONTAINER.with({
         resourceName,
-        view
+        view,
       }),
       viewContainer: UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
         resourceName,
-        view
-      })
+        view,
+      }),
     }
     return { content, names }
   },
@@ -107,11 +109,11 @@ export default {
       return this.va.getEntity()
     },
     ...mapState([
-      "route" // vuex-router-sync
+      'route', // vuex-router-sync
     ]),
     isLoading() {
       return this.$store.getters['requests/isLoading']
-    }
+    },
   },
   methods: {
     fetchData() {
@@ -124,15 +126,15 @@ export default {
       return field.label || field
     },
     args(field) {
-      const args = typeof(field) === 'string' ? { 'label': field } : field
+      const args = typeof field === 'string' ? { label: field } : field
       return args
-    }
+    },
   },
   watch: {
-    $route: "fetchData"
+    $route: 'fetchData',
   },
   created() {
     this.fetchData()
-  }
+  },
 }
 </script>

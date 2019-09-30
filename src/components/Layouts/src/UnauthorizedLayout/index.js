@@ -1,4 +1,3 @@
-
 import UnauthorizedLayout from './UnauthorizedLayout'
 
 UnauthorizedLayout.install = function(Vue) {

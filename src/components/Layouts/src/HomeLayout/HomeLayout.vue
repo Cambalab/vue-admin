@@ -17,12 +17,10 @@ export default {
   name: 'HomeLayout',
   data() {
     return {
-      logo
+      logo,
     }
   },
-  props: {
-
-  }
+  props: {},
 }
 </script>
 

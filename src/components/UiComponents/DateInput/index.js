@@ -1,7 +1,7 @@
-import DateInput from './src/DateInput.vue';
+import DateInput from './src/DateInput.vue'
 
 DateInput.install = function(Vue) {
-  Vue.component(DateInput.name, DateInput);
-};
+  Vue.component(DateInput.name, DateInput)
+}
 
-export default DateInput;
+export default DateInput

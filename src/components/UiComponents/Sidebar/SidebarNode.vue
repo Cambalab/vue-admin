@@ -5,7 +5,8 @@
     no-action
     :prepend-icon="model ? icon : iconAlt"
     append-icon=""
-    :value="value">
+    :value="value"
+  >
     <v-list-item slot="activator">
       <v-list-item-content>
         <v-list-item-title>
@@ -18,17 +19,17 @@
 </template>
 <script>
 export default {
-  name: "SidebarNode",
+  name: 'SidebarNode',
   props: {
     title: String,
     icon: String,
-    iconAlt: String
+    iconAlt: String,
   },
   data() {
     return {
       value: true,
-      model: {}
+      model: {},
     }
-  }
+  },
 }
 </script>

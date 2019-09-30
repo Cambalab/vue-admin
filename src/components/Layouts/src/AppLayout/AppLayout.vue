@@ -28,25 +28,25 @@
 import UI_NAMES from '@constants/ui.element.names'
 
 export default {
-  name: "AppLayout",
+  name: 'AppLayout',
   props: {
     sidebar: {
       type: Object,
-      required: true
+      required: true,
     },
     title: String,
-    va: Object
+    va: Object,
   },
   data() {
     const names = {
       drawerButton: UI_NAMES.DRAWER_BUTTON,
-      toolbarTitle: UI_NAMES.MAIN_TOOLBAR_TITLE
+      toolbarTitle: UI_NAMES.MAIN_TOOLBAR_TITLE,
     }
     return {
-      selectedLocale: "EN",
-      locales: ["EN", "ID"],
+      selectedLocale: 'EN',
+      locales: ['EN', 'ID'],
       drawer: false,
-      names
+      names,
     }
   },
 }

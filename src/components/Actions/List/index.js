@@ -1,7 +1,7 @@
-import List from "./Composer";
+import List from './Composer'
 
 List.install = function(Vue) {
-  Vue.component(List.name, List);
-};
+  Vue.component(List.name, List)
+}
 
-export default List;
+export default List

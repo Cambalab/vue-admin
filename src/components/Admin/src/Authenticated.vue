@@ -7,32 +7,32 @@ export default {
   props: {
     layout: {
       type: Object,
-      required: true
+      required: true,
     },
     title: {
       type: String,
-      required: true
+      required: true,
     },
     sidebar: {
       type: Object,
-      required: true
+      required: true,
     },
     unauthorized: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
-    logout: function () {
+    logout: function() {
       const { namespace, AUTH_LOGOUT_REQUEST } = AuthActionTypes
       this.$store.dispatch(`${namespace}/${AUTH_LOGOUT_REQUEST}`)
     },
-    getUser: function () {
+    getUser: function() {
       const { namespace } = AuthActionTypes
       return this.$store.getters[`${namespace}/getUser`]
-    }
+    },
   },
-  render: function (createElement) {
+  render: function(createElement) {
     const props = {
       layout: this.layout,
       title: this.title,
@@ -40,12 +40,11 @@ export default {
       unauthorized: this.unauthorized,
       va: {
         getUser: this.getUser,
-        logout: this.logout
-      }
+        logout: this.logout,
+      },
     }
 
     return createElement(Core, { props }, this.$slots.default)
-  }
+  },
 }
-
 </script>
