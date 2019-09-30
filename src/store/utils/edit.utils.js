@@ -3,7 +3,7 @@ import {
   getEntity,
   getEntityForm,
   submitEntity,
-  updateEntity
+  updateEntity,
 } from './common.utils'
 
 /**
@@ -25,7 +25,7 @@ export default ({
   resourceName,
   store,
   router,
-  parseResponses
+  parseResponses,
 }) => {
   return {
     /**
@@ -71,7 +71,7 @@ export default ({
         value,
         store,
         resourceName,
-        formType
+        formType,
       })
     },
 
@@ -92,8 +92,8 @@ export default ({
         router,
         redirectView,
         resourceIdName,
-        parseResponses
+        parseResponses,
       })
-    }
+    },
   }
 }

@@ -8,10 +8,7 @@ import { fetchList, getList } from './common.utils'
  *
  * @return {Object} A set of functions to be used in an Edit form.
  */
-export default ({
-  resourceName,
-  store
-}) => {
+export default ({ resourceName, store }) => {
   return {
     /**
      * fetchList - Fetchs a set of 'resourceName' using the Vuex Crud getters
@@ -29,6 +26,6 @@ export default ({
      */
     getList() {
       return getList({ resourceName, store })
-    }
+    },
   }
 }

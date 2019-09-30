@@ -10,12 +10,12 @@ export default {
   UNDEFINED_PROPERTY: {
     with: ({ prop, at }) => {
       return buildMessage('UNDEFINED_PROPERTY', { prop, at })
-    }
+    },
   },
   INVALID_SCHEMA: {
     with: ({ prop, at, details }) => {
       const _details = parseErrorDetails(details)
       return buildMessage('INVALID_SCHEMA', { prop, at, details: _details })
-    }
-  }
+    },
+  },
 }
