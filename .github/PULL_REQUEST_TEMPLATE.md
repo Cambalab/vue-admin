@@ -30,12 +30,14 @@ Closes #(issue)
 
 ## How Has This Been Tested?
 
-**Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce. Please also list any relevant details for your test configuration**
+**Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce the cases. Please also list any relevant details for your test configuration**
 
-<!-- Edit below -->
+<!-- Delete if no tests were ran -->
 
 -   [ ] Test A
 -   [ ] Test B
+
+<!-- Provide instructions below -->
 
 **Instructions:**
 
