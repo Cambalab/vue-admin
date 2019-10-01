@@ -37,6 +37,14 @@ Closes #(issue)
 -   [ ] Test A
 -   [ ] Test B
 
+**Instructions:**
+
+**1.** First instruction  
+**2.** Second instruction  
+**3.** Third instruction  
+
+**Expected result:** a result description
+
 ## Checklist:
 
 > The following options in **bold** are required for a PR approval. Please check the boxes only if necessary, it help us minimizing the reviewing process.
