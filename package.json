@@ -6,7 +6,7 @@
   "scripts": {
     "build": "vue-cli-service build --target lib ./src/index.js",
     "changelog": "github_changelog_generator && git add CHANGELOG.md && git commit -am \"Updates changelog\"",
-    "lint": "vue-cli-service lint --no-fix",
+    "lint": "vue-cli-service lint --no-fix --max-warnings 0",
     "lint:autofix": "vue-cli-service lint",
     "prepublish": "npm run build",
     "publish": "git push origin --tags && npm run changelog && git push origin",
