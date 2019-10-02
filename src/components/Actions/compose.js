@@ -12,11 +12,12 @@
  */
 export default (createElement, context, { component }) => {
   const { composer } = require(`./${component.name}/defaults.js`).default()
-  const { parentPropKeys, childrenAdapter } = composer
+  const { parentPropKeys, componentPropKeys, childrenAdapter } = composer
 
   return compose(createElement, context, {
     component,
     parentPropKeys,
+    componentPropKeys,
     childrenAdapter
   })
 }
@@ -36,6 +37,7 @@ export default (createElement, context, { component }) => {
 function compose(createElement, context, {
   component,
   parentPropKeys,
+  componentPropKeys,
   childrenAdapter
 }) {
   // TODO: this should be the right place to handle View component misusing.
@@ -48,10 +50,19 @@ function compose(createElement, context, {
   if (context.children) {
     // Gets the context children and the parent component associated by Resource
     // during the binding.
-    const { children, parent: { $attrs } } = context
-    // Extracts the props that should be passed to the View
+    const {
+      children,
+      parent: { $attrs: parentAttrs },
+      data: { attrs: componentAttrs = {} },
+    } = context
+    // Extracts the parent props that should be passed to the View
     const parentProps = parentPropKeys.reduce((props, key) => {
-      props[key] = $attrs[key]
+      if (parentAttrs[key]) props[key] = parentAttrs[key]
+      return props
+    }, {})
+    // Extracts the component props that should be passed to itself
+    const componentProps = componentPropKeys.reduce((props, key) => {
+      props[key] = componentAttrs[key]
       return props
     }, {})
     // Composes the View children into an array of elements
@@ -75,8 +86,7 @@ function compose(createElement, context, {
 
       return { ...childrenProps, ...customProps, tag }
     })
-
-    const props = { ...parentProps, fields }
+    const props = { ...parentProps, ...componentProps, fields }
     return createElement(component, { props })
   }
   // The View is already being instanced by Resource as an Array

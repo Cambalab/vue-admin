@@ -1,7 +1,6 @@
 import { InitEntityUtils } from '../../lib/commands'
 import { rowsPerPage } from '../../../../src/constants/ui.elements.props'
 
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 
@@ -59,7 +58,7 @@ describe('Articles: List Test', () => {
       elementType: '',
       elementProp: 'name'
     })
-    const expectedTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName })
+    const expectedTitleText = 'Articles'
 
     titleContainer.should('contain', expectedTitleText)
   })

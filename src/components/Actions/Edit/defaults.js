@@ -9,10 +9,8 @@ export default () => {
    * Edit View default composer options
    */
    const composer = {
-     parentPropKeys: [
-       'resourceName',
-       'va'
-     ],
+     parentPropKeys: ['resourceName', 'va'],
+     componentPropKeys: [],
      childrenAdapter: {
        placeHolder: 'placeHolder',
        source: 'label',
