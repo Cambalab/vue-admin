@@ -1,7 +1,6 @@
 import { InitEntityUtils } from '../../lib/commands'
 import { rowsPerPage } from '../../../../src/constants/ui.elements.props'
 
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 
