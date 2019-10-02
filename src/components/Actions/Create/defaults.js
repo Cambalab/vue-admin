@@ -9,11 +9,8 @@ export default () => {
    * Create View default validations
    */
   const composer = {
-    parentPropKeys: [
-      'resourceName',
-      'redirect',
-      'va'
-    ],
+    parentPropKeys: ['resourceName', 'redirect', 'va'],
+    componentPropKeys: [],
     childrenAdapter: {
       placeHolder: 'placeHolder',
       source: 'label',
