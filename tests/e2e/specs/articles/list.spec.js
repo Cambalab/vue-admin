@@ -59,7 +59,7 @@ describe('Articles: List Test', () => {
       elementType: '',
       elementProp: 'name'
     })
-    const expectedTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName })
+    const expectedTitleText = 'Articles'
 
     titleContainer.should('contain', expectedTitleText)
   })
