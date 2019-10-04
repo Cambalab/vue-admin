@@ -1,4 +1,3 @@
-
 /**
  * Defaults - Default attributes for the Create view
  *
@@ -14,11 +13,11 @@ export default () => {
     childrenAdapter: {
       placeHolder: 'placeHolder',
       source: 'label',
-      type: 'type'
-    }
+      type: 'type',
+    },
   }
 
   return {
-    composer
+    composer,
   }
 }

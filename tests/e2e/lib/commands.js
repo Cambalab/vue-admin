@@ -16,12 +16,8 @@ const storePath = 'app.$store'
  * @return {Object} An object with common functions to search for elements in
  * the DOM
  */
-export const InitEntityUtils = ({
-  resourceName,
-  view
-}) => {
+export const InitEntityUtils = ({ resourceName, view }) => {
   return {
-
     /**
      * getUrlByResource - Given an object with parameters, returns the url
      * for a given resource
@@ -49,10 +45,10 @@ export const InitEntityUtils = ({
         constantParams: {
           resourceName,
           view,
-          field: args.field
+          field: args.field,
         },
         elementProp: 'name',
-        elementType: 'input'
+        elementType: 'input',
       }
       return cy.getElement(Object.assign({}, _args, args))
     },
@@ -71,10 +67,10 @@ export const InitEntityUtils = ({
         constant: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON,
         constantParams: {
           resourceName,
-          view
+          view,
         },
         elementProp: 'name',
-        elementType: 'button'
+        elementType: 'button',
       }
       return cy.getElement(Object.assign({}, _args, args))
     },
@@ -95,13 +91,13 @@ export const InitEntityUtils = ({
           resourceName,
           view,
           field: args.field,
-          index: args.index
+          index: args.index,
         },
         elementProp: 'name',
-        elementType: 'td'
+        elementType: 'td',
       }
       return cy.getElement(Object.assign({}, _args, args))
-    }
+    },
   }
 }
 
@@ -126,14 +122,15 @@ export const getElement = ({
   elementProp,
 }) => {
   // Builds the name of the element using predefined constants
-  const elementFieldName = (constant instanceof Object) || constantParams
-    ? constant.with(constantParams)
-    : constant
+  const elementFieldName =
+    constant instanceof Object || constantParams
+      ? constant.with(constantParams)
+      : constant
   // Creates the Cypress query
   const element = createElementQueryWith({
     type: elementType,
     prop: elementProp,
-    value: elementFieldName
+    value: elementFieldName,
   })
   // Gets the 'elementType' element
   return cy.get(element)
@@ -141,18 +138,21 @@ export const getElement = ({
 
 export const getStore = () => cy.window().its(storePath)
 
-export const authenticate = (args) => {
+export const authenticate = args => {
   getStore().then(store => {
     store.dispatch(`auth/${AUTH_LOGIN_REQUEST}`, args)
   })
 }
 
-export const InitAuthenticatedUser = ({ credentials = {}, authResponse = {} } = {}) => {
+export const InitAuthenticatedUser = ({
+  credentials = {},
+  authResponse = {},
+} = {}) => {
   const _credentials = Factory.createCredentials()
   const authParams = Object.assign({}, _credentials, credentials)
   const _response = Factory.createAuthResponse()
   const response = Object.assign({}, _response, authResponse)
-  
+
   cy.visit('/#/login')
   cy.server()
   cy.route({
@@ -161,8 +161,10 @@ export const InitAuthenticatedUser = ({ credentials = {}, authResponse = {} } = 
     response,
   }).as('auth')
 
-  cy.authenticate(authParams).wait('@auth').then(xmlHttpRequest => {
-    const { status } = xmlHttpRequest
-    expect(status).to.equal(200)
-  })
+  cy.authenticate(authParams)
+    .wait('@auth')
+    .then(xmlHttpRequest => {
+      const { status } = xmlHttpRequest
+      expect(status).to.equal(200)
+    })
 }

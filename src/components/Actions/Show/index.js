@@ -1,7 +1,7 @@
-import Show from "./Composer";
+import Show from './Composer'
 
 Show.install = function(Vue) {
-  Vue.component(Show.name, Show);
-};
+  Vue.component(Show.name, Show)
+}
 
-export default Show;
+export default Show

@@ -6,7 +6,7 @@ describe('Magazines: Show Action Test', () => {
   const magazine = {}
   const utils = InitEntityUtils({
     resourceName,
-    view
+    view,
   })
 
   before('Initialises authenticated with a default user', () => {
@@ -22,7 +22,7 @@ describe('Magazines: Show Action Test', () => {
 
   before('Initialises the server', () => {
     // Inits the server with a stubbed get endpoint
-    const routes = [ { name: view, response: magazine } ]
+    const routes = [{ name: view, response: magazine }]
     cy.InitServer({ resourceName, routes })
   })
 

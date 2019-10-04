@@ -3,7 +3,7 @@ import {
   AppLayout,
   AuthLayout,
   HomeLayout,
-  UnauthorizedLayout
+  UnauthorizedLayout,
 } from '@components/Layouts'
 import { DefaultSidebar } from '@components/UiComponents'
 import entitiesModule from '@store/modules/entities'
@@ -16,7 +16,6 @@ import resourceModule from '@store/modules/resource'
  * @return {Object} An object containing default attributes
  */
 export default () => {
-
   const appLayout = AppLayout
   const authLayout = AuthLayout
   const homeLayout = HomeLayout
@@ -24,25 +23,31 @@ export default () => {
   const title = UI_CONTENT.MAIN_TOOLBAR_TITLE
   const unauthorized = UnauthorizedLayout
 
-  const createUnauthenticatedRoutes = (authLayout) => [{
-    path: '/login',
-    name: 'login',
-    component: authLayout || AuthLayout,
-    props: {}
-  }]
+  const createUnauthenticatedRoutes = authLayout => [
+    {
+      path: '/login',
+      name: 'login',
+      component: authLayout || AuthLayout,
+      props: {},
+    },
+  ]
 
-  const unauthorizedRoutes = [{
-    path: '/unauthorized',
-    name: 'unauthorized',
-    component: UnauthorizedLayout
-  }]
+  const unauthorizedRoutes = [
+    {
+      path: '/unauthorized',
+      name: 'unauthorized',
+      component: UnauthorizedLayout,
+    },
+  ]
 
-  const createSiteRoutes = ({ homeLayout }) => [{
-    path: '/',
-    name: 'home',
-    component: homeLayout || HomeLayout,
-    props: {}
-  }]
+  const createSiteRoutes = ({ homeLayout }) => [
+    {
+      path: '/',
+      name: 'home',
+      component: homeLayout || HomeLayout,
+      props: {},
+    },
+  ]
 
   return {
     props: {
@@ -51,7 +56,7 @@ export default () => {
       homeLayout,
       sidebar,
       title,
-      unauthorized
+      unauthorized,
     },
     args: {
       createSiteRoutes,
@@ -59,8 +64,8 @@ export default () => {
       entitiesModule,
       requestsModule,
       resourceModule,
-      unauthorizedRoutes
-    }
+      unauthorizedRoutes,
+    },
   }
 }
 
@@ -71,9 +76,7 @@ export default () => {
  */
 
 export const authenticatedDefaults = {
-  args: {
-
-  }
+  args: {},
 }
 
 /**
@@ -82,9 +85,6 @@ export const authenticatedDefaults = {
  * @return {Object} An object containing default attributes
  */
 
-
 export const unauthenticatedDefaults = {
-  args: {
-
-  }
+  args: {},
 }

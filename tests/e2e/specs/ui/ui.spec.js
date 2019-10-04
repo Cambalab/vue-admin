@@ -5,7 +5,6 @@ const { queryElementByProp } = require('../../helpers')
 const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
-
 describe('UI Test', () => {
   before('Initialises authenticated with a default user', () => {
     cy.InitAuthenticatedUser()
@@ -24,12 +23,12 @@ describe('UI Test', () => {
     const mainToolbarTitleElement = queryElementByProp({
       type: 'div',
       prop: 'name',
-      value: mainToolbarTitleName
+      value: mainToolbarTitleName,
     })
 
     const expectedMainToolbarTitleText = UI_CONTENT.MAIN_TOOLBAR_TITLE
 
-    cy.get(mainToolbarTitleElement).should((mainToolbarTitle) => {
+    cy.get(mainToolbarTitleElement).should(mainToolbarTitle => {
       expect(mainToolbarTitle).to.contain(expectedMainToolbarTitleText)
     })
   })
@@ -40,7 +39,7 @@ describe('UI Test', () => {
     const drawerButton = queryElementByProp({
       type: 'button',
       prop: 'name',
-      value: drawerButtonName
+      value: drawerButtonName,
     })
     cy.get(drawerButton).click()
   })

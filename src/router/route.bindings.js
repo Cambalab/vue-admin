@@ -31,7 +31,7 @@ export default ({
   userPermissionsField,
   redirection,
   router,
-  parseResponses
+  parseResponses,
 }) => {
   const store = router.app.$store
   const hasShow = !!show
@@ -40,12 +40,11 @@ export default ({
   const resourcePath = `/${resourceName}`
   const authUtils = createAuthUtils({ store })
   return {
-
     list: ({ wrapper }) => {
       const name = `${resourceName}/list`
       const utils = listUtils({
         resourceName,
-        store
+        store,
       })
       if (list instanceof Array) {
         // list should be an array based component
@@ -62,9 +61,9 @@ export default ({
             resourceIdName,
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             va: {
-              ...utils
-            }
-          }
+              ...utils,
+            },
+          },
         }
       } else {
         // list is an Object
@@ -73,7 +72,7 @@ export default ({
           isPublic,
           permissions,
           store: authUtils,
-          userPermissionsField
+          userPermissionsField,
         })
         return {
           path: resourcePath,
@@ -87,12 +86,12 @@ export default ({
             resourceIdName,
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             va: {
-              ...utils
-            }
+              ...utils,
+            },
           },
           meta: {
             isPublic,
-            permissions
+            permissions,
           },
           ...routeHooks,
         }
@@ -104,7 +103,7 @@ export default ({
       const utils = showUtils({
         resourceName,
         router,
-        store
+        store,
       })
       if (show instanceof Array) {
         // show should be a VA default component
@@ -117,9 +116,9 @@ export default ({
             fields: show,
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             va: {
-              ...utils
-            }
-          }
+              ...utils,
+            },
+          },
         }
       } else {
         // show is an Object
@@ -128,7 +127,7 @@ export default ({
           isPublic,
           permissions,
           store: authUtils,
-          userPermissionsField
+          userPermissionsField,
         })
         return {
           path: `${resourcePath}/show/:id`,
@@ -138,12 +137,12 @@ export default ({
             resourceName,
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             va: {
-              ...utils
-            }
+              ...utils,
+            },
           },
           meta: {
             isPublic,
-            permissions
+            permissions,
           },
           ...routeHooks,
         }
@@ -159,7 +158,7 @@ export default ({
         resourceName,
         router,
         store,
-        parseResponses
+        parseResponses,
       })
       if (create instanceof Array) {
         // create should be a VA default component
@@ -171,9 +170,9 @@ export default ({
             resourceName,
             fields: create,
             va: {
-              ...utils
-            }
-          }
+              ...utils,
+            },
+          },
         }
       } else {
         // create is an Object
@@ -182,7 +181,7 @@ export default ({
           isPublic,
           permissions,
           store: authUtils,
-          userPermissionsField
+          userPermissionsField,
         })
         return {
           path: `${resourcePath}/create`,
@@ -192,14 +191,14 @@ export default ({
             // This could be refactored into a vue mixin, check #52 - @sgobotta
             resourceName,
             va: {
-              ...utils
-            }
+              ...utils,
+            },
           },
           meta: {
             isPublic,
-            permissions
+            permissions,
           },
-          ...routeHooks
+          ...routeHooks,
         }
       }
     },
@@ -213,7 +212,7 @@ export default ({
         resourceName,
         router,
         store,
-        parseResponses
+        parseResponses,
       })
       if (edit instanceof Array) {
         // edit should be a VA default component
@@ -225,9 +224,9 @@ export default ({
             resourceName,
             fields: edit,
             va: {
-              ...utils
-            }
-          }
+              ...utils,
+            },
+          },
         }
       } else {
         // edit is an Object
@@ -236,7 +235,7 @@ export default ({
           isPublic,
           permissions,
           store: authUtils,
-          userPermissionsField
+          userPermissionsField,
         })
         return {
           path: `${resourcePath}/edit/:id`,
@@ -246,16 +245,16 @@ export default ({
           props: {
             resourceName,
             va: {
-              ...utils
-            }
+              ...utils,
+            },
           },
           meta: {
             isPublic,
-            permissions
+            permissions,
           },
-          ...routeHooks
+          ...routeHooks,
         }
       }
-    }
+    },
   }
 }

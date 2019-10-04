@@ -1,7 +1,7 @@
 import Factory from '../factory'
 import resourceFixture from '../fixtures/resource/magazines'
 import Resource from '@components/Resource/src/Resource'
-import VueRouter from "vue-router"
+import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import ERROR_MESSAGES from '@constants/error.messages'
@@ -17,7 +17,7 @@ describe('Resource.vue', () => {
   // Initialises a vuex store
   const dummyStore = Factory.createStoreWith({
     snapshot: subject,
-    initialResources
+    initialResources,
   })
 
   let mockedStore
@@ -47,14 +47,14 @@ describe('Resource.vue', () => {
       create: resourceFixture.props.create,
       edit: resourceFixture.props.edit,
       list: resourceFixture.props.list,
-      show: resourceFixture.props.show
+      show: resourceFixture.props.show,
     }
     // Configures subject spy methods
     routerSpy = {
-      addRoutes: jest.spyOn(mocks.$router, 'addRoutes')
+      addRoutes: jest.spyOn(mocks.$router, 'addRoutes'),
     }
     storeSpy = {
-      addRoute: jest.spyOn(mocks.$store, 'commit')
+      addRoute: jest.spyOn(mocks.$store, 'commit'),
     }
   })
 
@@ -64,9 +64,13 @@ describe('Resource.vue', () => {
     const props = subjectWrapper.props()
     expect(subjectWrapper.name()).toMatch(subject)
     expect(props.resourceIdName).toMatch(resourceFixture.props.resourceIdName)
-    expect(props.userPermissionsField).toMatch(resourceFixture.props.userPermissionsField)
+    expect(props.userPermissionsField).toMatch(
+      resourceFixture.props.userPermissionsField
+    )
     expect(props.redirect).toMatchObject(resourceFixture.props.redirect)
-    expect(props.parseResponses).toMatchObject(resourceFixture.props.parseResponses)
+    expect(props.parseResponses).toMatchObject(
+      resourceFixture.props.parseResponses
+    )
   })
 
   it('should have non default props', () => {
@@ -94,8 +98,13 @@ describe('Resource.vue', () => {
     const { storeMethods } = resourceFixture.methods
     const { params } = storeMethods[methodName]
     expect(storeSpy.addRoute).toHaveBeenCalledTimes(1)
-    const addedRouteCallbackExpectation = { addedRouteCallback: expect.any(Function) }
-    expect(storeSpy.addRoute).toHaveBeenCalledWith(methodName, { ...params, ...addedRouteCallbackExpectation })
+    const addedRouteCallbackExpectation = {
+      addedRouteCallback: expect.any(Function),
+    }
+    expect(storeSpy.addRoute).toHaveBeenCalledWith(methodName, {
+      ...params,
+      ...addedRouteCallbackExpectation,
+    })
   })
 
   it('should have the store initialised with {initialResources} getters', () => {
@@ -131,9 +140,9 @@ describe('Resource.vue', () => {
     shouldThrowOnInvalidProp({ prop, subject, invalidProp, validate })
   })
 
-/**
- * Helper functions
- */
+  /**
+   * Helper functions
+   */
 
   function shouldThrowOnMissingProp({ prop, subject }) {
     // Setup: deletes the list prop before mounting
@@ -161,7 +170,7 @@ describe('Resource.vue', () => {
   function mountSubject() {
     subjectWrapper = shallowMount(Resource, {
       mocks,
-      propsData
+      propsData,
     })
   }
 })

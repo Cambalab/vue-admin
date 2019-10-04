@@ -1,7 +1,5 @@
 import ERROR_MESSAGES from '@constants/error.messages'
-import {
-  validateSchema
-} from '@validators'
+import { validateSchema } from '@validators'
 
 /**
  * handleEmptyProp - Given a prop, throws an error with the proper user
@@ -12,10 +10,7 @@ import {
  *                      useful add references to specific documentation on error
  *                      messages.
  */
-export const handleEmptyProp = ({
-  prop,
-  at
-}) => () => {
+export const handleEmptyProp = ({ prop, at }) => () => {
   const { UNDEFINED_PROPERTY } = ERROR_MESSAGES
   throw new Error(UNDEFINED_PROPERTY.with({ prop, at }))
 }
@@ -30,11 +25,7 @@ export const handleEmptyProp = ({
  *
  * @return {Object} The given property
  */
-export const handleSchemaValidation = ({
-  schema,
-  prop,
-  at
-}) => {
+export const handleSchemaValidation = ({ schema, prop, at }) => {
   const validation = validateSchema(prop, schema)
   if (validation.error) {
     const { INVALID_SCHEMA } = ERROR_MESSAGES

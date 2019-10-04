@@ -1,7 +1,7 @@
-import HomeLayout from './HomeLayout';
+import HomeLayout from './HomeLayout'
 
 HomeLayout.install = function(Vue) {
-  Vue.component(HomeLayout.name, HomeLayout);
-};
+  Vue.component(HomeLayout.name, HomeLayout)
+}
 
-export default HomeLayout;
+export default HomeLayout

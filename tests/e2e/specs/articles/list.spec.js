@@ -3,13 +3,12 @@ import { rowsPerPage } from '../../../../src/constants/ui.elements.props'
 
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
-
 describe('Articles: List Test', () => {
   const resourceName = 'articles'
   const view = 'list'
   const utils = InitEntityUtils({
     resourceName,
-    view
+    view,
   })
 
   let articles
@@ -43,20 +42,20 @@ describe('Articles: List Test', () => {
       expect(articles.length).to.equal(responseData.length)
       expect(articles).to.deep.equal(responseData)
     })
-   cy.server({ enable: false })
+    cy.server({ enable: false })
   })
 
-   it('Visits the List View', () => {
-     const url = utils.getUrlByResource({ resourceName })
-     cy.url().should('eq', url)
-   })
+  it('Visits the List View', () => {
+    const url = utils.getUrlByResource({ resourceName })
+    cy.url().should('eq', url)
+  })
 
   it('Articles List View should render title', () => {
     const titleContainer = cy.getElement({
       constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE,
       constantParams: { resourceName, view },
       elementType: '',
-      elementProp: 'name'
+      elementProp: 'name',
     })
     const expectedTitleText = 'Articles'
 
@@ -68,7 +67,7 @@ describe('Articles: List Test', () => {
       constant: UI_NAMES.RESOURCE_CREATE_BUTTON,
       constantParams: { resourceName },
       elementType: 'button',
-      elementProp: 'name'
+      elementProp: 'name',
     })
 
     createButtonElement.should('exist')
@@ -94,7 +93,7 @@ describe('Articles: List Test', () => {
       constant: UI_NAMES.RESOURCE_CREATE_BUTTON,
       constantParams: { resourceName },
       elementType: 'button',
-      elementProp: 'name'
+      elementProp: 'name',
     })
 
     createButtonElement.click()
@@ -102,8 +101,8 @@ describe('Articles: List Test', () => {
   })
 
   /*
-  * Helper functions
-  */
+   * Helper functions
+   */
 
   /**
    * assertListElementsByField - Given an list of elements, a 'field' and a
@@ -122,19 +121,19 @@ describe('Articles: List Test', () => {
       // Setup: Gets the 'index' publisher row
       const row = utils.getTableRowBy({
         field,
-        index: index % rowsPerPage
+        index: index % rowsPerPage,
       })
       // Assertion: the input contains the article issue content
       row.should('contain', element[field])
     })
   }
 
-  const navigateToNextPage = (index) => {
-    if (index && (index % rowsPerPage === 0)) {
+  const navigateToNextPage = index => {
+    if (index && index % rowsPerPage === 0) {
       const nextPageButton = cy.getElement({
         constant: '"Next page"',
         elementType: 'button',
-        elementProp: 'aria-label'
+        elementProp: 'aria-label',
       })
       nextPageButton.click()
       timesNavigatedToNextPage = timesNavigatedToNextPage + 1
@@ -146,7 +145,7 @@ describe('Articles: List Test', () => {
       const previousPageButton = cy.getElement({
         constant: '"Previous page"',
         elementType: 'button',
-        elementProp: 'aria-label'
+        elementProp: 'aria-label',
       })
       while (timesNavigatedToNextPage > 0) {
         previousPageButton.click({ multiple: true })

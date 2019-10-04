@@ -2,17 +2,17 @@ import { AppLayout, AuthLayout, UnauthorizedLayout } from '@components/Layouts'
 import Core from '@components/Core'
 import defaults, {
   authenticatedDefaults,
-  unauthenticatedDefaults
+  unauthenticatedDefaults,
 } from '@components/Admin/src/defaults'
-import { DefaultSidebar } from '@components/UiComponents';
+import { DefaultSidebar } from '@components/UiComponents'
 
 export default {
   props: {
-    ...defaults().props
+    ...defaults().props,
   },
   args: {
-    ...defaults().args
-  }
+    ...defaults().args,
+  },
 }
 
 export const Authenticated = {
@@ -20,19 +20,19 @@ export const Authenticated = {
     layout: AppLayout,
     sidebar: DefaultSidebar,
     title: 'A toolbar text',
-    unauthorized: UnauthorizedLayout
+    unauthorized: UnauthorizedLayout,
   },
   args: {
     Core,
-    ...authenticatedDefaults.args
-  }
+    ...authenticatedDefaults.args,
+  },
 }
 
 export const Unauthenticated = {
   props: {
-    layout: AuthLayout
+    layout: AuthLayout,
   },
   args: {
-    ...unauthenticatedDefaults.args
-  }
+    ...unauthenticatedDefaults.args,
+  },
 }

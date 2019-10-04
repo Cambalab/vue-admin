@@ -11,23 +11,34 @@ describe('Vuex Store Getters', () => {
   })
 
   before('Initialises authenticated with a default user', () => {
-    cy.InitAuthenticatedUser().then(authResponse => {
-      const { response: { body: { user } }, status } = authResponse
-      if (status === 200) {
-        isUserAuthenticated = true
-        Object.assign(initialGetters, { 'auth/getUser': user })
-      }
-    }).visit('/#/')
+    cy.InitAuthenticatedUser()
+      .then(authResponse => {
+        const {
+          response: {
+            body: { user },
+          },
+          status,
+        } = authResponse
+        if (status === 200) {
+          isUserAuthenticated = true
+          Object.assign(initialGetters, { 'auth/getUser': user })
+        }
+      })
+      .visit('/#/')
   })
 
   it('Should have attributes on initialisation', () => {
-    getStore().its('getters').should('have.keys', Object.keys(initialGetters))
+    getStore()
+      .its('getters')
+      .should('have.keys', Object.keys(initialGetters))
   })
 
   it('Attribute {resources/all} should have been initialised', () => {
     const attribute = 'resources/all'
     const getters = `getters.${attribute}`
-    getStore().its(getters).should('deep.equal', initialGetters[attribute])
+    getStore()
+      .its(getters)
+      .should('deep.equal', initialGetters[attribute])
   })
 
   it('{Auth} getters should have been initialised', () => {
@@ -46,9 +57,11 @@ describe('Vuex Store Getters', () => {
   })
 
   it('{Entities} getters should have been initialised', () => {
-    getStore().its('getters').should((getters) => {
-      expect(getters['entities/getEntity']).to.be.empty
-    })
+    getStore()
+      .its('getters')
+      .should(getters => {
+        expect(getters['entities/getEntity']).to.be.empty
+      })
   })
 
   /**
@@ -61,11 +74,13 @@ describe('Vuex Store Getters', () => {
     const authStatus = `${resource}/authStatus`
     const getUser = `${resource}/getUser`
     const isAuthenticated = `${resource}/isAuthenticated`
-    getStore().its('getters').should(getters => {
-      expect(getters[authStatus]).to.equal(initialGetters[authStatus])
-      expect(getters[getUser]).to.deep.equal(initialGetters[getUser])
-      expect(getters[isAuthenticated]).to.equal(isUserAuthenticated)
-    })
+    getStore()
+      .its('getters')
+      .should(getters => {
+        expect(getters[authStatus]).to.equal(initialGetters[authStatus])
+        expect(getters[getUser]).to.deep.equal(initialGetters[getUser])
+        expect(getters[isAuthenticated]).to.equal(isUserAuthenticated)
+      })
   }
 
   /**
@@ -79,11 +94,13 @@ describe('Vuex Store Getters', () => {
     const isError = `${resource}/isError`
     const isLoading = `${resource}/isLoading`
     const list = `${resource}/list`
-    getStore().its('getters').should(getters => {
-      assert.isFunction(getters[byId])
-      expect(getters[isError]).to.equal(initialGetters[isError])
-      expect(getters[isLoading]).to.equal(initialGetters[isLoading])
-      expect(getters[list]).to.be.empty
-    })
+    getStore()
+      .its('getters')
+      .should(getters => {
+        assert.isFunction(getters[byId])
+        expect(getters[isError]).to.equal(initialGetters[isError])
+        expect(getters[isLoading]).to.equal(initialGetters[isLoading])
+        expect(getters[list]).to.be.empty
+      })
   }
 })

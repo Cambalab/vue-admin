@@ -7,7 +7,7 @@ export const createMagazine = (args = {}) => {
   const _args = {
     name,
     issue,
-    publisher
+    publisher,
   }
   return Object.assign({}, _args, args)
 }

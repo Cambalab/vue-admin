@@ -5,16 +5,14 @@ describe('Auth Test', () => {
   const view = 'login'
   const user = {
     username: 'dev@camba.coop',
-    password: '123456'
+    password: '123456',
   }
 
-  const findInput = ({ constant }) => (
+  const findInput = ({ constant }) =>
     cy.getElement({ constant, elementType: 'input', elementProp: 'name' })
-  )
 
-  const findButton = ({ constant }) => (
+  const findButton = ({ constant }) =>
     cy.getElement({ constant, elementType: 'button', elementProp: 'name' })
-  )
 
   const findTypeAndAssert = ({ element, value, condition }) => {
     const input = findInput({ constant: element })
@@ -35,7 +33,7 @@ describe('Auth Test', () => {
     const createViewTitleContainer = cy.getElement({
       constant: UI_NAMES.AUTH_CONTAINER_TITLE,
       elementType: 'div',
-      elementProp: 'name'
+      elementProp: 'name',
     })
 
     createViewTitleContainer.should('contain', createViewTitleText)
@@ -45,7 +43,7 @@ describe('Auth Test', () => {
     findTypeAndAssert({
       element: UI_NAMES.AUTH_USERNAME_INPUT,
       value: user.username,
-      condition: 'have.value'
+      condition: 'have.value',
     })
   })
 
@@ -53,7 +51,7 @@ describe('Auth Test', () => {
     findTypeAndAssert({
       element: UI_NAMES.AUTH_PASSWORD_INPUT,
       value: user.password,
-      condition: 'have.value'
+      condition: 'have.value',
     })
   })
 
@@ -66,12 +64,12 @@ describe('Auth Test', () => {
     findTypeAndAssert({
       element: UI_NAMES.AUTH_USERNAME_INPUT,
       value: user.username,
-      condition: 'have.value'
+      condition: 'have.value',
     })
     findTypeAndAssert({
       element: UI_NAMES.AUTH_PASSWORD_INPUT,
       value: user.password,
-      condition: 'have.value'
+      condition: 'have.value',
     })
     const button = findButton({ constant: UI_NAMES.AUTH_SIGN_IN_BUTTON })
     button.should('be.enabled')

@@ -1,4 +1,3 @@
-
 /**
  * Compose - Given a function that creates VNodes and a context, composes the
  * View using it's default values
@@ -14,12 +13,16 @@ export default (createElement, context, { component }) => {
   const { composer } = require(`./${component.name}/defaults.js`).default()
   const { parentPropKeys, componentPropKeys, childrenAdapter } = composer
 
-  return compose(createElement, context, {
-    component,
-    parentPropKeys,
-    componentPropKeys,
-    childrenAdapter
-  })
+  return compose(
+    createElement,
+    context,
+    {
+      component,
+      parentPropKeys,
+      componentPropKeys,
+      childrenAdapter,
+    }
+  )
 }
 
 /**
@@ -34,12 +37,11 @@ export default (createElement, context, { component }) => {
  *
  * @return {VNode} A Vue component
  */
-function compose(createElement, context, {
-  component,
-  parentPropKeys,
-  componentPropKeys,
-  childrenAdapter
-}) {
+function compose(
+  createElement,
+  context,
+  { component, parentPropKeys, componentPropKeys, childrenAdapter }
+) {
   // TODO: this should be the right place to handle View component misusing.
   // Use case: a user instance it as a component in a template without passing
   // any children with a source property - @sgobotta
@@ -69,7 +71,10 @@ function compose(createElement, context, {
     // TODO: this could probably be done in the future by passing components
     // instead of building an array for Show
     const fields = children.map(child => {
-      const { data: { attrs }, tag } = child
+      const {
+        data: { attrs },
+        tag,
+      } = child
 
       const childrenAdapterKeys = Object.keys(childrenAdapter)
       const childrenProps = childrenAdapterKeys.reduce((props, key) => {
@@ -91,5 +96,4 @@ function compose(createElement, context, {
   }
   // The View is already being instanced by Resource as an Array
   return createElement(component, context)
-
 }

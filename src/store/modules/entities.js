@@ -11,9 +11,9 @@ export default {
       initForm(state, { formType, entity })
       state[formType][entity][resourceKey] = value
     },
-    initForm
+    initForm,
   },
   getters: {
-    getEntity: state => state
-  }
+    getEntity: state => state,
+  },
 }

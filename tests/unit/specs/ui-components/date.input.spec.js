@@ -18,7 +18,7 @@ describe('DateInput.vue', () => {
   beforeEach(() => {
     // Configures the subject props
     propsData = {
-      ...dateInputFixture.props
+      ...dateInputFixture.props,
     }
     vuetify = new Vuetify()
   })
@@ -33,7 +33,9 @@ describe('DateInput.vue', () => {
     expect(props.name).toMatch(dateInputFixture.props.name)
     expect(props.parse).toBeDefined()
     expect(props.readonly).toBe(true)
-    expect(props.vDatePickerProps).toMatchObject(dateInputFixture.props.vDatePickerProps)
+    expect(props.vDatePickerProps).toMatchObject(
+      dateInputFixture.props.vDatePickerProps
+    )
     expect(props.vMenuProps).toMatchObject(dateInputFixture.props.vMenuProps)
   })
 
@@ -68,15 +70,15 @@ describe('DateInput.vue', () => {
     const { UNDEFINED_PROPERTY } = ERROR_MESSAGES
     const at = subject
     const message = UNDEFINED_PROPERTY.with({ prop, at })
-    const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+    const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {})
 
     try {
       // Exercise: mounts the subject instance
       mountSubject()
     } catch (error) {
-      expect(error.message).toBe(message);
+      expect(error.message).toBe(message)
     } finally {
-      spy.mockRestore();
+      spy.mockRestore()
     }
   }
 
@@ -84,7 +86,7 @@ describe('DateInput.vue', () => {
   function mountSubject() {
     subjectWrapper = mount(DateInput, {
       propsData,
-      vuetify
+      vuetify,
     })
   }
 })
