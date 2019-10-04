@@ -15,7 +15,7 @@
             :name="names.viewContainerTitle"
             class="headline mb-0 text-capitalize"
           >
-            {{ resourceName }}
+            {{ toolbarTitle }}
           </v-toolbar-title>
           <v-divider class="mx-4" inset vertical />
           <v-spacer />
@@ -130,6 +130,9 @@ export default {
       type: String,
       required: true,
     },
+    title: {
+      type: [String, Object],
+    },
     va: {
       type: Object,
       required: true,
@@ -208,6 +211,7 @@ export default {
       buttonProps: {
         small: true,
       },
+      toolbarTitle: this.title || this.resourceName,
     }
   },
   computed: {

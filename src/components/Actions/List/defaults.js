@@ -14,8 +14,10 @@ export default () => {
       'hasCreate',
       'hasShow',
       'hasEdit',
+      'title',
       'va',
     ],
+    componentPropKeys: ['title'],
     childrenAdapter: {
       alignContent: 'align',
       alignHeader: 'alignHeader',
