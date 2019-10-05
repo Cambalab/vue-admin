@@ -18,9 +18,15 @@
 
 ## About the library
 
-Vue admin is a frontend application that provides **create**, **read**, **update** and **delete** views.  
-Given a simple configuration to Vue-Admin components, this library connects your backend and interprets your services as frontend resources from which the views are automatically created and associated with a route.  
-Vue-Admin also lets you create custom views to provide other kind of information to the site (measures, landings, etc.)
+Given a simple configuration to Vue-Admin components, this library connects your backend and interprets your services as frontend resources from which **crud** views are automatically created and associated with a route.  
+Vue-Admin also lets you create custom views to provide other kind of information to the site (measures, landings, etc).
+
+**Vue admin provides:**
++   **create**, **read**, **update** and **delete** views for each declared resource.
++   customizable **homepage**.
++   **navigation** between views.
++   an **authentication** view
++   [**vuetify2**](https://github.com/vuetifyjs/vuetify) support
 
 ## Dependencies and third party libraries
 
