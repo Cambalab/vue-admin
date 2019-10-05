@@ -14,17 +14,23 @@
 
 ## Introduction
 
-*We've been working a lot with other libraries that generate administration dashboards, routes, resources in other javascript frameworks, but did not find any Vue library capable of performing this kind of solution, except of many really impressive Vue libraries that provide UI components for admin dashboards. We are pretty convinced Vue's learning curve is gentle, so we thought we could try and build our own tool to help building administration applications.*
+*We've been working a lot with other libraries that generate administration dashboards, routes, resources in other javascript frameworks, but did not find any Vue library capable of performing this kind of solution, except of many really impressive Vue libraries that provide UI components for admin dashboards. We are pretty convinced Vue's learning curve is gentle, so we thought we could try and build our own tool.*
+
+## About the library
+
+Vue admin is a frontend application that provides **create**, **read**, **update** and **delete** views.  
+Given a simple configuration to Vue-Admin components, this library connects your backend and interprets your services as frontend resources from which the views are automatically created and associated with a route.  
+Vue-Admin also lets you create custom views to provide other kind of information to the site (measures, landings, etc.)
 
 ## Dependencies and third party libraries
 
-*We assume your project is currently shipped with the following dependencies:*
+**We assume your project ships the following dependencies:**
 
 +   [**vue-router:**](https://github.com/vuejs/vue-router) used to dynamically create routes and bind components to them. We also take advantage of some of the route hooks.
 +   [**vuex:**](https://github.com/vuejs/vuex) lets us globally share information between the core application and component customizations of a library user.
 +   [**vuetify:**](https://github.com/vuetifyjs/vuetify) we basically don't want to implement UI components from scratch, plus their widgets are awesome. The drawer, buttons, cards and CRUD views are implemented with Vuetify, but you could use any other UI framework if you want to build your own CRUD views. Take the [magazines](/demo/components/magazines) view as example.
 
-*Core Libaries vue-admin-js depends on*
+**Core Libaries vue-admin-js depends on:**
 
 +   [**vuex-crud:**](https://github.com/JiriChara/vuex-crud) this lightweight tool creates the resources crud store state, mutations and getters for us.
 
@@ -42,7 +48,7 @@ You will have to configure an adapter to communicate with your REST api.
 
 We currently provide a simple example using an axios client in the demo app. Though we intend to keep developing other kind of adapters for different node backend frameworks, they will live in separate packages.
 
-Anyways, we hope the axios example encourages you to write your own adapter until we release the adapters guide. The @va-auth module uses the vuex store and expects a user to make use of the action types it provides.
+Anyways, we hope the axios example encourages you to write your own adapter until we release the adapters guide. The `@va-auth` module uses the vuex store and expects a user to make use of the action types it provides.
 
 ## Usage
 
@@ -56,8 +62,8 @@ Anyways, we hope the axios example encourages you to write your own adapter unti
       userPermissionsField="permissions"
       apiUrl="http://localhost:8888/api/"
     >
-      <View slot="list"   :component="ListArticles" :permissions="['admin']" />
-      <View slot="show"   :component="ShowArticles" :permissions="['admin']" />
+      <View slot="list"   :component="ListArticles"   :permissions="['admin']" />
+      <View slot="show"   :component="ShowArticles"   :permissions="['admin']" />
       <View slot="create" :component="CreateArticles" :permissions="['admin']" />
       <View slot="edit"   :component="EditArticles" :isPublic="true" />
     </Resource>
@@ -123,7 +129,7 @@ export default {
 
 ## Using your own custom authentication component
 
-By default Vue-Admin provides you with a default authentication view, but you may desire to use your own custom view to authenticate. In that case, you just need to pass it as a property in the *Admin* component like the following.
+By default Vue-Admin provides a default authentication view, but you may desire to use your own custom view to authenticate. In that case, you just need to pass it as a property in the *Admin* component like the following.
 
 *Example of custom authentication component usage*
 ```vue
@@ -154,13 +160,15 @@ In order to use the available authentication mechanism you have to declare a *pr
 
 ### Examples
 
-For a complete example take a look at the [demo files](/demo)
+For a complete example take a look at the [**demo files**](/demo)
 
-Some of the custom components examples can be found in the [magazines views](/demo/components/magazines)
+Some of the custom components examples can be found in the [**magazines views**](/demo/components/magazines)
 
 ## Contributing and Future features
 
-*Nothing could make us happier than the community involvement into this framework, so if you feel like contributing or just sharing an idea for us to improve the library, please do not hesitate to [fork vue-admin-js](https://github.com/Cambalab/vue-admin) from our repository, comment or open an issue with the available labels.*
+Nothing could make us happier than the community involvement into this framework, so if you feel like contributing or just sharing an idea for us to improve the library, please do not hesitate to [**fork vue-admin-js**](https://github.com/Cambalab/vue-admin) from our repository, comment or open an issue with the available labels.
+
+> *If you're going to submit a pull request to vue-admin make sure it targets the `develop` branch and uses our Pull Request template.*
 
 ## Starting a new project
 
@@ -181,22 +189,34 @@ npm run dev
 
 ## Getting it running
 
+To get vue-admin-js up and running we'll need two terminals: one for the frontend and another one simulating a backend.
+
+Clone a `vue-admin-js` repository and open two terminals in the repository root.
 ```bash
-# clone the repository
 git clone https://github.com/Cambalab/vue-admin.git
-# navigate to the repository and install npm dependencies
-cd vue-admin && npm install
+cd vue-admin
+```
+
+In the first terminal get the node development server running
+```bash
 # install the test server dependencies
-cd ../utils/server-test && npm install
+cd utils/server-test && npm install
 # run the server (we prefer to use the same port as Cypress server)
 PORT=8888 node server
-# in another terminal go to the repository directory and run the Vue application
+```
+
+In the second terminal get the frontend application running
+```bash
+# make sure you're in the root of the project
+npm install
 npm run serve
 ```
 
-## Running the tests
+## Running the tests and other scripts
 
-**We use the vue-cli-service to run the tests**
+**We use the `vue-cli-service` to run tests, lint and build**
+
+> All of the above are used by the travis continuous integration
 
 ***end to end tests***
 ```bash
@@ -209,6 +229,18 @@ npm run test:e2e
 ```bash
 # in the root of the project run the unit tests script
 npm run test:unit
+```
+
+***lint service***
+```bash
+# zero tolerance for errors and warnings
+npm run lint
+```
+
+***build service***
+```bash
+# the build is targeted as a library
+npm run build
 ```
 
 ---
