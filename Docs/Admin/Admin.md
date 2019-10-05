@@ -20,6 +20,14 @@ Communication to the store match the structure provided in the `authModule` (e.g
 
 +   **Default:** `AuthLayout`
 
+### homeLayout
+
++   **Type:** `Object (optional)`
+
++   **Details:** A component that is used by the router whenever `/` is visited.
+
++   **Default:** `HomeLayout`
+
 ### options
 
 +   **Type:** `Object`
