@@ -1,5 +1,4 @@
 <script>
-import { List, Show, Create, Edit } from '@components/Actions'
 import { createCrudModule } from '@store/modules'
 import createRouteBindings from '@router/route.bindings'
 import defaults from './defaults'
@@ -13,13 +12,13 @@ export default {
       default: defaults().props.name,
     },
     list: {
-      type: [Array, Object],
+      type: Object,
       required: true,
       default: defaults().props.list,
     },
-    show: [Array, Object],
-    create: [Array, Object],
-    edit: [Array, Object],
+    show: Object,
+    create: Object,
+    edit: Object,
     resourceIdName: {
       type: String,
       default: defaults().props.resourceIdName,
@@ -79,10 +78,10 @@ export default {
         parseResponses: this.parseResponses,
       })
       // Adds binded components to routes
-      routes.push(bind.list({ wrapper: List }))
-      routes.push(bind.show({ wrapper: Show }))
-      routes.push(bind.create({ wrapper: Create }))
-      routes.push(bind.edit({ wrapper: Edit }))
+      routes.push(bind.list())
+      routes.push(bind.show())
+      routes.push(bind.create())
+      routes.push(bind.edit())
       // Adds the routes to the global router
       this.$router.addRoutes(routes)
     },
