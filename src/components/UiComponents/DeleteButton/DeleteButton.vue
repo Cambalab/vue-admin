@@ -4,7 +4,7 @@
       <v-btn
         v-bind="buttonProps"
         :name="names.deleteButton"
-        @click="onDelete()"
+        @click.stop="onDelete()"
         icon
         v-on="on"
       >
