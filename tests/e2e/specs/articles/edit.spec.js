@@ -1,7 +1,6 @@
 const Factory = require('../../factory')
 const { InitEntityUtils } = require('../../lib/commands')
 
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 describe('Articles: Edit Test', () => {
@@ -31,11 +30,8 @@ describe('Articles: Edit Test', () => {
     cy.server({ enable: false })
   })
 
-  it('Articles Edit should render title: Articles', () => {
-    const editViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
-      resourceName,
-      view,
-    })
+  it('Articles Edit should render title: Edit Article', () => {
+    const editViewTitleText = 'Edit Article'
     const editViewTitleContainer = cy.getElement({
       constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE,
       constantParams: { resourceName, view },
