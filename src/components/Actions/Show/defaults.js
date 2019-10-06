@@ -9,7 +9,7 @@ export default () => {
    */
   const composer = {
     parentPropKeys: ['resourceName', 'redirect', 'va'],
-    componentPropKeys: [],
+    componentPropKeys: ['title'],
     childrenAdapter: { placeHolder: 'placeHolder', source: 'label' },
   }
 

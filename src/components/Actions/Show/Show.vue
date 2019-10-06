@@ -60,6 +60,9 @@ export default {
       type: Array,
       required: true,
     },
+    title: {
+      type: [String, Object],
+    },
     va: {
       type: Object,
       required: true,
@@ -76,7 +79,9 @@ export default {
     const resourceName = this.resourceName
     const view = 'show'
     const content = {
-      title: UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view }),
+      title:
+        this.title ||
+        UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view }),
     }
     const names = {
       containerField: field =>
