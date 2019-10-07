@@ -1,5 +1,4 @@
 const { queryElementByProp } = require('../../helpers')
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 describe('Articles: Show Test', () => {
@@ -33,9 +32,7 @@ describe('Articles: Show Test', () => {
   })
 
   it('Articles Show View should render title: Articles', () => {
-    const showViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
-      resourceName,
-    })
+    const showViewTitleText = 'Article'
 
     cy.getElement({
       constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE,
