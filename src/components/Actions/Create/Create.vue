@@ -59,6 +59,9 @@ export default {
       type: Array,
       required: true,
     },
+    title: {
+      type: [String, Object],
+    },
     va: {
       type: Object,
       required: true,
@@ -69,7 +72,9 @@ export default {
     const view = 'create'
     const content = {
       submitButton: UI_CONTENT.CREATE_SUBMIT_BUTTON,
-      title: UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view }),
+      title:
+        this.title ||
+        UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view }),
     }
     const names = {
       containerField: field =>

@@ -24,10 +24,7 @@ describe('Articles: Create Test', () => {
   })
 
   it('Articles Create View should render title: Articles', () => {
-    const createViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
-      resourceName,
-      view,
-    })
+    const createViewTitleText = 'Create Article'
     const createViewTitleContainer = cy.getElement({
       constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE,
       constantParams: { resourceName, view },
