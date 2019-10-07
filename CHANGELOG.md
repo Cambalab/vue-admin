@@ -1,7 +1,76 @@
 # Change Log
 
+## [v0.0.6](https://github.com/Cambalab/vue-admin/tree/v0.0.6) (2019-10-07)
+[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.5...v0.0.6)
+
+**Implemented enhancements:**
+
+- As a Show Action, a custom title can be provided [\#172](https://github.com/Cambalab/vue-admin/issues/172)
+- Move layouts to a single layouts module for structure simplification [\#151](https://github.com/Cambalab/vue-admin/issues/151)
+- Provide a default Homepage for the UI component [\#144](https://github.com/Cambalab/vue-admin/issues/144)
+
+**Fixed bugs:**
+
+- An AuthLayout component is not being passed to Admin [\#149](https://github.com/Cambalab/vue-admin/issues/149)
+- Visual styles not being applied in the Login page [\#95](https://github.com/Cambalab/vue-admin/issues/95)
+
+**Closed issues:**
+
+- README update: contributions section and more [\#166](https://github.com/Cambalab/vue-admin/issues/166)
+- Create a Pull Request template [\#159](https://github.com/Cambalab/vue-admin/issues/159)
+- Refactor the Admin component authentication logic to specific components [\#146](https://github.com/Cambalab/vue-admin/issues/146)
+- Demo visual improvements [\#141](https://github.com/Cambalab/vue-admin/issues/141)
+- As a User i want to import an Unauthorized component from npm dependency [\#116](https://github.com/Cambalab/vue-admin/issues/116)
+- Deprecate views components as Arrays [\#94](https://github.com/Cambalab/vue-admin/issues/94)
+- Implement a unit test for the Resource component [\#64](https://github.com/Cambalab/vue-admin/issues/64)
+- Refactor articles tests to use mocked API routes [\#63](https://github.com/Cambalab/vue-admin/issues/63)
+- Configure Unit Tests for Vue components [\#62](https://github.com/Cambalab/vue-admin/issues/62)
+- Configure ESLint to enforce coding style consistency [\#7](https://github.com/Cambalab/vue-admin/issues/7)
+- Implement spinner/loaders on api calls for user feedback [\#5](https://github.com/Cambalab/vue-admin/issues/5)
+- As a List Action, a default title should be used if none was provided [\#4](https://github.com/Cambalab/vue-admin/issues/4)
+- As a Create Action, a default title should be used if none was provided [\#3](https://github.com/Cambalab/vue-admin/issues/3)
+- As an Edit Action, a default title should be used if none was provided [\#2](https://github.com/Cambalab/vue-admin/issues/2)
+
+**Merged pull requests:**
+
+- 172 as a show action a custom title can be provided [\#173](https://github.com/Cambalab/vue-admin/pull/173) ([sgobotta](https://github.com/sgobotta))
+- 3 as a create action a default title should be used [\#171](https://github.com/Cambalab/vue-admin/pull/171) ([sgobotta](https://github.com/sgobotta))
+- 2 as an edit actions a default title should be used [\#169](https://github.com/Cambalab/vue-admin/pull/169) ([sgobotta](https://github.com/sgobotta))
+- Deprecate crud components as arrays [\#168](https://github.com/Cambalab/vue-admin/pull/168) ([SevenIndirecto](https://github.com/SevenIndirecto))
+- 166 readme update contributions sections and more [\#167](https://github.com/Cambalab/vue-admin/pull/167) ([sgobotta](https://github.com/sgobotta))
+- 4 as a list action a default title should be used if none was provided [\#165](https://github.com/Cambalab/vue-admin/pull/165) ([sgobotta](https://github.com/sgobotta))
+- Adds a PULL REQUEST template [\#163](https://github.com/Cambalab/vue-admin/pull/163) ([sgobotta](https://github.com/sgobotta))
+- 7 - configures ESLint to enforce coding style consistency [\#162](https://github.com/Cambalab/vue-admin/pull/162) ([agustinariq](https://github.com/agustinariq))
+- Bump mixin-deep from 1.3.1 to 1.3.2 [\#156](https://github.com/Cambalab/vue-admin/pull/156) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Composer: adds VApp as parent of Admin for Vuetify styles propagation [\#155](https://github.com/Cambalab/vue-admin/pull/155) ([sgobotta](https://github.com/sgobotta))
+- 144 provide a default homepage [\#153](https://github.com/Cambalab/vue-admin/pull/153) ([sgobotta](https://github.com/sgobotta))
+- 151 move layouts to its own module [\#152](https://github.com/Cambalab/vue-admin/pull/152) ([sgobotta](https://github.com/sgobotta))
+- 149 an authlayout component is not being passed to admin [\#150](https://github.com/Cambalab/vue-admin/pull/150) ([sgobotta](https://github.com/sgobotta))
+- 146 refactor admin component to avoid unnecessary modules and routes creation [\#148](https://github.com/Cambalab/vue-admin/pull/148) ([sgobotta](https://github.com/sgobotta))
+- 0.0.5 [\#143](https://github.com/Cambalab/vue-admin/pull/143) ([sgobotta](https://github.com/sgobotta))
+
 ## [v0.0.5](https://github.com/Cambalab/vue-admin/tree/v0.0.5) (2019-08-19)
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.4...v0.0.5)
+
+**Fixed bugs:**
+
+- Create View: store.state.entities\[formType\] is undefined [\#124](https://github.com/Cambalab/vue-admin/issues/124)
+- store.state.entities\[formType\] is undefined [\#110](https://github.com/Cambalab/vue-admin/issues/110)
+- Routes are being re-created on logout-login/hot-reload [\#97](https://github.com/Cambalab/vue-admin/issues/97)
+
+**Closed issues:**
+
+- Sidebar Heading: add customisation support [\#137](https://github.com/Cambalab/vue-admin/issues/137)
+- Update Vuetify to version 2.x.x [\#136](https://github.com/Cambalab/vue-admin/issues/136)
+- Update Cypress to 3.4.0 for newer browser versions support [\#133](https://github.com/Cambalab/vue-admin/issues/133)
+- Navigation Sidebar Customization [\#130](https://github.com/Cambalab/vue-admin/issues/130)
+- UI Component Customization [\#128](https://github.com/Cambalab/vue-admin/issues/128)
+- Date Input Component Implementation [\#127](https://github.com/Cambalab/vue-admin/issues/127)
+- As a user I want to use my own Auth component [\#98](https://github.com/Cambalab/vue-admin/issues/98)
+- Implement a 404 page for unauthorized routes [\#90](https://github.com/Cambalab/vue-admin/issues/90)
+- Update remote fonts from index.html [\#85](https://github.com/Cambalab/vue-admin/issues/85)
+- Improve demo App: authors resource [\#79](https://github.com/Cambalab/vue-admin/issues/79)
+- Integrate Travis CI [\#20](https://github.com/Cambalab/vue-admin/issues/20)
 
 **Merged pull requests:**
 
@@ -23,25 +92,6 @@
 - 20 - integrate travis ci dev [\#113](https://github.com/Cambalab/vue-admin/pull/113) ([glmaljkovich](https://github.com/glmaljkovich))
 - 79 improve demo app authors resource [\#111](https://github.com/Cambalab/vue-admin/pull/111) ([jejoivanic](https://github.com/jejoivanic))
 - 0.0.4 [\#109](https://github.com/Cambalab/vue-admin/pull/109) ([sgobotta](https://github.com/sgobotta))
-
-
-**Closed issues:**
-
-- Sidebar Heading: add customisation support [\#137](https://github.com/Cambalab/vue-admin/issues/137)
-- Update Vuetify to version 2.x.x [\#136](https://github.com/Cambalab/vue-admin/issues/136)
-- Update Cypress to 3.4.0 for newer browser versions support [\#133](https://github.com/Cambalab/vue-admin/issues/133)
-- UI Component Customization [\#128](https://github.com/Cambalab/vue-admin/issues/128)
-- As a user I want to use my own Auth component [\#98](https://github.com/Cambalab/vue-admin/issues/98)
-- Implement a 404 page for unauthorized routes [\#90](https://github.com/Cambalab/vue-admin/issues/90)
-- Update remote fonts from index.html [\#85](https://github.com/Cambalab/vue-admin/issues/85)
-- Improve demo App: authors resource [\#79](https://github.com/Cambalab/vue-admin/issues/79)
-- Integrate Travis CI [\#20](https://github.com/Cambalab/vue-admin/issues/20)
-
-**Fixed bugs:**
-
-- Create View: store.state.entities\[formType\] is undefined [\#124](https://github.com/Cambalab/vue-admin/issues/124)
-- store.state.entities\[formType\] is undefined [\#110](https://github.com/Cambalab/vue-admin/issues/110)
-- Routes are being re-created on logout-login/hot-reload [\#97](https://github.com/Cambalab/vue-admin/issues/97)
 
 ## [v0.0.4](https://github.com/Cambalab/vue-admin/tree/v0.0.4) (2019-04-02)
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.3...v0.0.4)
