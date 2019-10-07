@@ -7,11 +7,7 @@
  *
  * @return {Object} The actions for the auth store
  */
-export default ({
-  client,
-  types,
-}) => {
-
+export default ({ client, types }) => {
   return {
     [types.AUTH_LOGIN_REQUEST]: ({ commit }, user) => {
       commit(types.AUTH_LOGIN_REQUEST)
@@ -38,12 +34,12 @@ export default ({
     [types.AUTH_CHECK_REQUEST]: ({ commit }) => {
       commit(types.AUTH_CHECK_REQUEST)
       client(types.AUTH_CHECK_REQUEST)
-        .then((response) => {
+        .then(response => {
           commit(types.AUTH_CHECK_SUCCESS, response)
         })
-        .catch((error) => {
+        .catch(error => {
           commit(types.AUTH_CHECK_FAILURE, error)
         })
-    }
+    },
   }
 }

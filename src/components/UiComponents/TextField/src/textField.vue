@@ -1,7 +1,6 @@
 <template>
   <div>
-    <component
-      :is="tag">
+    <component :is="tag">
       {{ parsedContent }}
     </component>
   </div>
@@ -9,25 +8,25 @@
 
 <script>
 export default {
-  name: "TextField",
-  props:{
+  name: 'TextField',
+  props: {
     value: {
       type: [String, Number],
-      default: 'Empty content'
+      default: 'Empty content',
     },
     tag: {
       type: String,
-      default: 'p'
+      default: 'p',
     },
     parse: {
       type: Function,
-      default: (value) => value
-    }
+      default: value => value,
+    },
   },
   data() {
     return {
-      parsedContent: this.parse(this.value)
+      parsedContent: this.parse(this.value),
     }
-  }
-};
+  },
+}
 </script>

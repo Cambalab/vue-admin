@@ -1,37 +1,32 @@
 <template>
-  <v-text-field
-    :name="name"
-    v-model="inputValue"
-    :label="placeHolder"
-    required>
+  <v-text-field :name="name" v-model="inputValue" :label="placeHolder" required>
   </v-text-field>
 </template>
 
 <script>
 export default {
-  name: "Input",
+  name: 'Input',
   props: {
     placeHolder: {
       type: String,
-      default: "Input"
+      default: 'Input',
     },
     value: [String, Number],
     name: {
       type: String,
-      default: 'va-input'
-    }
+      default: 'va-input',
+    },
   },
   data() {
     return {
-      inputValue: this.value
+      inputValue: this.value,
     }
   },
   watch: {
     inputValue: function(newVal) {
-      this.$emit('change', newVal);
-    }
+      this.$emit('change', newVal)
+    },
   },
-  computed:{
-  }
-};
+  computed: {},
+}
 </script>

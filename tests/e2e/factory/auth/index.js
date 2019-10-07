@@ -5,7 +5,7 @@ export const createAuthResponse = (args = {}) => {
   const user = createUser()
   const _args = {
     status,
-    user
+    user,
   }
   return Object.assign({}, _args, args)
 }
@@ -15,7 +15,7 @@ export const createCredentials = (args = {}) => {
   const password = '123456'
   const _args = {
     username,
-    password
+    password,
   }
   return Object.assign({}, _args, args)
 }

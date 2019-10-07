@@ -1,4 +1,4 @@
-import createCrudModule, { client } from "vuex-crud";
+import createCrudModule, { client } from 'vuex-crud'
 
 /**
  * Crud Module - Given a set of data, creates a vuex crud module and calls
@@ -16,32 +16,36 @@ export default ({
   resourceName,
   resourceIdName,
   parseResponses,
-  store
+  store,
 }) => {
-  const customUrlFn = (id) => {
-    const rootUrl =`${apiUrl}${resourceName}/`
+  const customUrlFn = id => {
+    const rootUrl = `${apiUrl}${resourceName}/`
     return id ? `${rootUrl}${id}` : rootUrl
   }
-  const setLoading = isLoading => () => store.commit('requests/setLoading', { isLoading })
+  const setLoading = isLoading => () =>
+    store.commit('requests/setLoading', { isLoading })
 
   // Requests Interceptors
-  const successCall = (injectedLogic) => (requestOrResponse) => {
+  const successCall = injectedLogic => requestOrResponse => {
     injectedLogic()
     return requestOrResponse
   }
-  const errorCall = (injectedLogic) => (error) => {
+  const errorCall = injectedLogic => error => {
     injectedLogic()
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
 
-  client.interceptors.request.use(successCall(setLoading(true)));
-  client.interceptors.response.use(successCall(setLoading(false)), errorCall(setLoading(false)));
+  client.interceptors.request.use(successCall(setLoading(true)))
+  client.interceptors.response.use(
+    successCall(setLoading(false)),
+    errorCall(setLoading(false))
+  )
 
   const module = createCrudModule({
     resource: resourceName,
     customUrlFn,
     idAttribute: resourceIdName,
-    ...parseResponses
-  });
-  store.registerModule(resourceName, module);
+    ...parseResponses,
+  })
+  store.registerModule(resourceName, module)
 }

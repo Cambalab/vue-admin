@@ -15,9 +15,7 @@ describe('Articles: Delete Test', () => {
   })
 
   before('Initialises the server', () => {
-    const routes = [
-      { name: 'show', response: article },
-    ]
+    const routes = [{ name: 'show', response: article }]
     cy.InitServer({ resourceName, routes })
   })
 

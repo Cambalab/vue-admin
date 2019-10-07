@@ -1,7 +1,7 @@
-import Spinner from './Spinner';
+import Spinner from './Spinner'
 
 Spinner.install = function(Vue) {
-  Vue.component(Spinner.name, Spinner);
-};
+  Vue.component(Spinner.name, Spinner)
+}
 
-export default Spinner;
+export default Spinner

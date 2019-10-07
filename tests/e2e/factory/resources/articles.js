@@ -6,7 +6,7 @@ export const createArticle = (args = {}) => {
   const content = ipsum.generateParagraph({ useStartingSentence: true })
   const _args = {
     title,
-    content
+    content,
   }
   return Object.assign({}, _args, args)
 }

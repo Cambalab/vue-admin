@@ -9,11 +9,7 @@ import { fetchEntity, getEntity } from './common.utils'
  *
  * @return {Object} A set of functions to be used in a Show form.
  */
-export default ({
-  resourceName,
-  store,
-  router
-}) => {
+export default ({ resourceName, store, router }) => {
   return {
     /**
      * getEntity - Gets a 'resourceName' entity from the store.
@@ -31,6 +27,6 @@ export default ({
      */
     fetchEntity() {
       return fetchEntity({ resourceName, router, store })
-    }
+    },
   }
 }

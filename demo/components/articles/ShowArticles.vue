@@ -1,5 +1,5 @@
 <template>
-  <Show>
+  <Show title="Article">
     <h3 source="title" />
     <p source="content" />
   </Show>
@@ -11,7 +11,7 @@ import Show from '@components/Actions/Show'
 export default {
   name: 'ShowArticles',
   components: {
-    Show
-  }
+    Show,
+  },
 }
 </script>

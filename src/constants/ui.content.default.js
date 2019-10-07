@@ -1,6 +1,4 @@
-
 export default {
-
   MAIN_TITLE: 'vue-admin',
 
   /**
@@ -43,11 +41,12 @@ export default {
    * Unauthorized component
    */
   UNAUTHORIZED_HEADER: 'You do not have permission to access this page.',
-  UNAUTHORIZED_MESSAGE: 'If you think you should be allowed to see this page, please contact the administrator.',
+  UNAUTHORIZED_MESSAGE:
+    'If you think you should be allowed to see this page, please contact the administrator.',
 
   // Any View Title (List, Show, Create, Edit)
   RESOURCE_VIEW_TITLE: {
-    with: ({ resourceName }) => `${resourceName}`
+    with: ({ resourceName }) => `${resourceName}`,
   },
   // Create action button
   RESOURCE_CREATE_BUTTON: 'mdi-plus-circle',
@@ -65,7 +64,7 @@ export default {
   EDIT_SUBMIT_BUTTON: 'save',
 
   /**
-  * Other buttons
-  */
+   * Other buttons
+   */
   BUTTON_GO_BACK: 'back',
 }

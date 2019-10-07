@@ -3,7 +3,7 @@
     <Spinner :spin="isLoading"></Spinner>
     <v-card-title primary-title :name="names.titleContainer">
       <h3 class="headline mb-0 text-capitalize">
-        {{content.title}}
+        {{ content.title }}
       </h3>
     </v-card-title>
     <v-form>
@@ -18,7 +18,8 @@
                 :is="type(field)"
                 v-bind="args(field)"
                 :value="entity[label(field)]"
-                @change="storeValue($event, label(field))">
+                @change="storeValue($event, label(field))"
+              >
               </component>
             </span>
           </v-flex>
@@ -28,7 +29,7 @@
               color="success"
               v-on:click="submit"
             >
-              {{content.submitButton}}
+              {{ content.submitButton }}
             </v-btn>
           </v-flex>
         </v-layout>
@@ -40,73 +41,79 @@
 <script>
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
-import { mapState } from "vuex";
-import { Input, TextField, Spinner, DateInput } from "../../UiComponents"
+import { mapState } from 'vuex'
+import { Input, TextField, Spinner, DateInput } from '../../UiComponents'
 
 export default {
-  name: "Edit",
+  name: 'Edit',
   props: {
     resourceName: {
       type: String,
-      default: null
+      default: null,
     },
     fields: {
       type: Array,
-      required: true
+      required: true,
+    },
+    title: {
+      type: [String, Object],
     },
     va: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     Input,
     TextField,
     Spinner,
-    DateInput
+    DateInput,
   },
   data() {
     const resourceName = this.resourceName
     const view = 'edit'
     const content = {
       submitButton: UI_CONTENT.EDIT_SUBMIT_BUTTON,
-      title: UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })
+      title:
+        this.title ||
+        UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view }),
     }
     const names = {
-      containerField: (field) => UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({
-        resourceName,
-        view,
-        field
-      }),
+      containerField: field =>
+        UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD.with({
+          resourceName,
+          view,
+          field,
+        }),
       containerFields: UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
         resourceName,
-        view
+        view,
       }),
       submitButton: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
         resourceName,
-        view
+        view,
       }),
       titleContainer: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({
         resourceName,
-        view
+        view,
       }),
       viewContainer: UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
         resourceName,
-        view
-      })
+        view,
+      }),
     }
     return { content, names }
   },
   computed: {
     ...mapState([
-      "route" // vuex-router-sync
+      'route', // vuex-router-sync
     ]),
     entity() {
       return this.va.getEntity()
     },
     isLoading() {
-      return this.$store.getters['requests/isLoading'];
-    }
+      return this.$store.getters['requests/isLoading']
+    },
   },
   methods: {
     storeValue(value, resourceKey) {
@@ -131,12 +138,13 @@ export default {
       return field.label || field
     },
     args(field) {
-      const args = typeof(field) === 'string' ? { 'label': field, 'placeHolder': field } : field
+      const args =
+        typeof field === 'string' ? { label: field, placeHolder: field } : field
       return args
-    }
+    },
   },
   created() {
     this.va.fetchEntity().then(this.storeValues)
-  }
-};
+  },
+}
 </script>

@@ -8,10 +8,7 @@ import { numbers } from '../factory/utils'
  * @param {Array}  routes       An array of routes with name and an optional
  *                              response to initialise stubbed endpoints
  */
-export default ({
-  resourceName,
-  routes
-}) => {
+export default ({ resourceName, routes }) => {
   // Initialises the Cypress server
   cy.server()
   // Gets the {resourceName} fixture
@@ -34,7 +31,7 @@ export default ({
       cy.route({
         method: 'GET',
         url: `api/${resourceName}/`,
-        response: response || data
+        response: response || data,
       }).as(`${resourceName}/list`)
     }
 
@@ -51,7 +48,7 @@ export default ({
         onRequest: () => {
           data.push(entity)
         },
-        response: entity
+        response: entity,
       }).as(`${resourceName}/create`)
     }
 
@@ -59,28 +56,21 @@ export default ({
      * editRequest - A stub for PATCH requests
      */
     function editRequest({ response }) {
-      cy.route(
-        'PATCH',
-        `**/api/${resourceName}/*`,
-        response,
-        {
-          onRequest: () => {
-            data = data.filter(element => response.id !== element.id)
-            data.push(response)
-          }
-        }
-      ).as(`${resourceName}/update`)
+      cy.route('PATCH', `**/api/${resourceName}/*`, response, {
+        onRequest: () => {
+          data = data.filter(element => response.id !== element.id)
+          data.push(response)
+        },
+      }).as(`${resourceName}/update`)
     }
 
     /**
      * showRequest - A stub for GET Many requests
      */
     function showRequest({ response }) {
-      cy.route(
-        'GET',
-        `api/${resourceName}/${response.id}`,
-        response
-      ).as(`${resourceName}/show/${response.id}`)
+      cy.route('GET', `api/${resourceName}/${response.id}`, response).as(
+        `${resourceName}/show/${response.id}`
+      )
     }
 
     /**
@@ -89,12 +79,12 @@ export default ({
     function deleteRequest({ response }) {
       const resource = data.find(a => a.id === response.id)
       const index = data.indexOf(resource)
-      data.splice(index,1)
+      data.splice(index, 1)
       cy.route({
         method: 'DELETE',
         url: `api/${resourceName}/${response.id}`,
         response: {},
-        status: 202
+        status: 202,
       }).as(`${resourceName}/delete/${response.id}`)
     }
 

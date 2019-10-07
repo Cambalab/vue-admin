@@ -1,6 +1,4 @@
-import {
-  handleEmptyProp
-} from '@handlers/error/src'
+import { handleEmptyProp } from '@handlers/error/src'
 
 /**
  * Defaults - Default attributes for the DateInput component
@@ -21,13 +19,13 @@ export default () => {
   /**
    * DateInput default props
    */
-  const disabled         = false
-  const format           = handleEmptyProp({ prop: 'format', at: component })
-  const name             = 'va-date-input'
-  const parse            = handleEmptyProp({ prop: 'parse', at: component })
-  const readonly         = true
+  const disabled = false
+  const format = handleEmptyProp({ prop: 'format', at: component })
+  const name = 'va-date-input'
+  const parse = handleEmptyProp({ prop: 'parse', at: component })
+  const readonly = true
   const vDatePickerProps = _vDatePickerProps
-  const vMenuProps       = _vMenuProps
+  const vMenuProps = _vMenuProps
 
   return {
     props: {
@@ -38,6 +36,6 @@ export default () => {
       readonly,
       vDatePickerProps,
       vMenuProps,
-    }
+    },
   }
 }

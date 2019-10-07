@@ -1,47 +1,46 @@
 <script>
-import { List, Show, Create, Edit } from '@components/Actions'
 import { createCrudModule } from '@store/modules'
 import createRouteBindings from '@router/route.bindings'
 import defaults from './defaults'
 
 export default {
-  name: "Resource",
+  name: 'Resource',
   props: {
     name: {
       type: String,
       required: true,
-      default: defaults().props.name
+      default: defaults().props.name,
     },
     list: {
-      type: [Array, Object],
+      type: Object,
       required: true,
-      default: defaults().props.list
+      default: defaults().props.list,
     },
-    show: [Array, Object],
-    create: [Array, Object],
-    edit: [Array, Object],
+    show: Object,
+    create: Object,
+    edit: Object,
     resourceIdName: {
       type: String,
-      default: defaults().props.resourceIdName
+      default: defaults().props.resourceIdName,
     },
     userPermissionsField: {
       type: String,
-      default: defaults().props.userPermissionsField
+      default: defaults().props.userPermissionsField,
     },
     apiUrl: {
       type: String,
       required: true,
-      default: defaults().props.apiUrl
+      default: defaults().props.apiUrl,
     },
     redirect: {
       type: Object,
       default: defaults().props.redirect,
-      validator: defaults().validate.redirect
+      validator: defaults().validate.redirect,
     },
     parseResponses: {
       type: Object,
-      default: defaults().props.parseResponses
-    }
+      default: defaults().props.parseResponses,
+    },
   },
   created: function() {
     if (!this.storeHasModule(this.name)) {
@@ -50,14 +49,18 @@ export default {
         resourceName: this.name,
         resourceIdName: this.resourceIdName,
         parseResponses: this.parseResponses,
-        store: this.$store
+        store: this.$store,
       })
     }
   },
   methods: {
     addRoute: function(path, name, addedRouteCallback) {
-      const resourceName = "resources/addRoute"
-      return this.$store.commit(resourceName, { path, name, addedRouteCallback })
+      const resourceName = 'resources/addRoute'
+      return this.$store.commit(resourceName, {
+        path,
+        name,
+        addedRouteCallback,
+      })
     },
     bindComponentsOnRoutes: function() {
       const routes = []
@@ -72,13 +75,13 @@ export default {
         userPermissionsField: this.userPermissionsField,
         redirection: this.redirect,
         router: this.$router,
-        parseResponses: this.parseResponses
+        parseResponses: this.parseResponses,
       })
       // Adds binded components to routes
-      routes.push(bind.list({ wrapper: List }))
-      routes.push(bind.show({ wrapper: Show }))
-      routes.push(bind.create({ wrapper: Create }))
-      routes.push(bind.edit({ wrapper: Edit }))
+      routes.push(bind.list())
+      routes.push(bind.show())
+      routes.push(bind.create())
+      routes.push(bind.edit())
       // Adds the routes to the global router
       this.$router.addRoutes(routes)
     },
@@ -90,13 +93,13 @@ export default {
     },
     storeHasModule(moduleName) {
       return !!this.$store.state[moduleName]
-    }
+    },
   },
   mounted: function() {
     this.loadRoutes()
   },
   render() {
     return null
-  }
+  },
 }
 </script>

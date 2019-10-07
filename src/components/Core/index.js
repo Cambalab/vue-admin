@@ -1,7 +1,7 @@
-import Core from './src/core';
+import Core from './src/Core'
 
 Core.install = function(Vue) {
-  Vue.component(Core.name, Core);
-};
+  Vue.component(Core.name, Core)
+}
 
-export default Core;
+export default Core

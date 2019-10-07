@@ -25,32 +25,31 @@
 </template>
 
 <script>
-import UI_NAMES from '../../../constants/ui.element.names'
-import { DefaultSidebar } from '@components/UiComponents';
+import UI_NAMES from '@constants/ui.element.names'
 
 export default {
-  name: "Ui",
+  name: 'AppLayout',
   props: {
-    title: String,
     sidebar: {
       type: Object,
-      default: () => DefaultSidebar
+      required: true,
     },
-    va: Object
+    title: String,
+    va: Object,
   },
   data() {
     const names = {
       drawerButton: UI_NAMES.DRAWER_BUTTON,
-      toolbarTitle: UI_NAMES.MAIN_TOOLBAR_TITLE
+      toolbarTitle: UI_NAMES.MAIN_TOOLBAR_TITLE,
     }
     return {
-      selectedLocale: "EN",
-      locales: ["EN", "ID"],
+      selectedLocale: 'EN',
+      locales: ['EN', 'ID'],
       drawer: false,
-      names
-    };
+      names,
+    }
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

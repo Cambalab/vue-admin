@@ -1,5 +1,5 @@
 <template>
-  <Edit>
+  <Edit title="Edit Article">
     <input source="id" placeHolder="Id" />
     <input source="title" placeHolder="Title" />
     <input source="content" placeHolder="Content" />
@@ -12,7 +12,7 @@ import Edit from '@components/Actions/Edit'
 export default {
   name: 'EditArticles',
   components: {
-    Edit
-  }
+    Edit,
+  },
 }
 </script>

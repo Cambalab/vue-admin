@@ -26,12 +26,15 @@ describe('Authors: Create Test', () => {
   })
 
   it('Authors Create View should render title: Authors', () => {
-    const createViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })
+    const createViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({
+      resourceName,
+      view,
+    })
     const createViewTitleContainer = cy.getElement({
       constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE,
       constantParams: { resourceName, view },
       elementType: 'div',
-      elementProp: 'name'
+      elementProp: 'name',
     })
 
     createViewTitleContainer.should('contain', createViewTitleText)
@@ -51,7 +54,7 @@ describe('Authors: Create Test', () => {
   })
 
   it('Authors Create View should redirect to the List View on a create submit', () => {
-    const routes = [ { name: view, response: author }, { name: 'list' } ]
+    const routes = [{ name: view, response: author }, { name: 'list' }]
     cy.InitServer({ resourceName, routes, response: author })
 
     const submitButtonText = UI_CONTENT.CREATE_SUBMIT_BUTTON
@@ -59,7 +62,7 @@ describe('Authors: Create Test', () => {
       constant: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON,
       constantParams: { resourceName, view },
       elementType: 'button',
-      elementProp: 'name'
+      elementProp: 'name',
     })
 
     submitButton.should('contain', submitButtonText).click()
@@ -74,7 +77,7 @@ describe('Authors: Create Test', () => {
       constant: UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD,
       constantParams: { resourceName, view, field },
       elementType: 'input',
-      elementProp: 'name'
+      elementProp: 'name',
     })
 
     input.clear().type(value)

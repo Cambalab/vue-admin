@@ -6,14 +6,14 @@
 
 <script>
 export default {
-  name: "ButtonWrapper",
-  props:{
+  name: 'ButtonWrapper',
+  props: {
     source: {
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {}
-  }
-};
+  },
+}
 </script>

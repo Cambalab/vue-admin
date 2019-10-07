@@ -1,11 +1,9 @@
 const Factory = require('../../factory')
 const { InitEntityUtils } = require('../../lib/commands')
 
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 describe('Articles: Edit Test', () => {
-
   const resourceName = 'articles'
   const view = 'edit'
   const article = {}
@@ -25,23 +23,20 @@ describe('Articles: Edit Test', () => {
 
   before('Initialises the mocked serve and visits the edit url', () => {
     const response = article
-    const routes = [
-      { name: 'edit', response },
-      { name: 'show', response }
-    ]
+    const routes = [{ name: 'edit', response }, { name: 'show', response }]
 
     cy.InitServer({ resourceName, routes })
     cy.visit(`/#/${resourceName}/edit/${article.id}`)
     cy.server({ enable: false })
   })
 
-  it('Articles Edit should render title: Articles', () => {
-    const editViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName, view })
+  it('Articles Edit should render title: Edit Article', () => {
+    const editViewTitleText = 'Edit Article'
     const editViewTitleContainer = cy.getElement({
       constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE,
       constantParams: { resourceName, view },
       elementType: 'div',
-      elementProp: 'name'
+      elementProp: 'name',
     })
 
     editViewTitleContainer.should('contain', editViewTitleText)
@@ -68,7 +63,7 @@ describe('Articles: Edit Test', () => {
   it('An article is updated when the user submits the form', () => {
     const routes = [
       { name: view, response: newArticle },
-      { name: 'show', response: newArticle }
+      { name: 'show', response: newArticle },
     ]
     cy.InitServer({ resourceName, routes })
 
@@ -84,8 +79,8 @@ describe('Articles: Edit Test', () => {
   })
 
   /**
-  * Helper functions
-  **/
+   * Helper functions
+   **/
 
   function editField(field, content) {
     queryToField(field)
@@ -99,7 +94,7 @@ describe('Articles: Edit Test', () => {
       constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELD,
       constantParams: { resourceName, view, field },
       elementType: 'input',
-      elementProp: 'name'
+      elementProp: 'name',
     })
   }
 

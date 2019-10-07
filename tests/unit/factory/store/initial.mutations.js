@@ -1,4 +1,3 @@
-
 /**
  * Annonymous Function - Creates a simualtion of initial vuex crud mutations
  *
@@ -11,24 +10,24 @@ export default ({ snapshot = 'default' }) => {
   // New custom mutations configurations should be added here
   const snapshots = {
     default: initDefaultMutations,
-    Resource: initMutationsForResource
+    Resource: initMutationsForResource,
   }
   const resourcesMutations = {
     'resources/addRoute': (state, args) => {
       args.addedRouteCallback && args.addedRouteCallback()
-    }
+    },
   }
 
   // Initialises default mutations
   function initDefaultMutations() {
     return {
-      ...resourcesMutations
+      ...resourcesMutations,
     }
   }
   // Initialises mutations for a Resource component
   function initMutationsForResource() {
     return {
-      ...resourcesMutations
+      ...resourcesMutations,
     }
   }
 

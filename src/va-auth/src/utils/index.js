@@ -5,11 +5,8 @@
  *
  * @return {Object} A set of functions to be used for Authentication
  */
-export default ({
-  store
-}) => {
+export default ({ store }) => {
   return {
-
     /**
      * checkAuthentication - Indicates whether the user is authenticated or not.
      *

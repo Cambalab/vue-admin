@@ -1,4 +1,4 @@
-import defaults from '@components/Auth/src/defaults'
+import defaults from '@components/Layouts/src/AuthLayout/defaults'
 
 export default {
   props: {
@@ -8,7 +8,7 @@ export default {
     usernameRules: defaults().props.usernameRules,
     passwordRules: defaults().props.passwordRules,
     va: {
-      login: () => {}
-    }
-  }
+      login: () => {},
+    },
+  },
 }

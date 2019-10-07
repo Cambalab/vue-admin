@@ -16,10 +16,7 @@
         v-on="on"
       />
     </template>
-    <v-date-picker
-      v-model="date"
-      v-bind="vDatePickerProps"
-    />
+    <v-date-picker v-model="date" v-bind="vDatePickerProps" />
   </v-menu>
 </template>
 
@@ -28,45 +25,45 @@ import defaults from './defaults'
 import ELEMENTS_PROPS from '@constants/ui.elements.props'
 
 export default {
-  name: "DateInput",
+  name: 'DateInput',
   props: {
     disabled: {
       type: Boolean,
-      default: defaults().props.disabled
+      default: defaults().props.disabled,
     },
     format: {
       type: Function,
       default: defaults().props.format,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      default: defaults().props.name
+      default: defaults().props.name,
     },
     placeholder: {
-      type: String
+      type: String,
     },
     readonly: {
       type: Boolean,
-      default: defaults().props.readonly
+      default: defaults().props.readonly,
     },
     parse: {
       type: Function,
       default: defaults().props.parse,
-      required: true
+      required: true,
     },
     vDatePickerProps: {
       type: Object,
-      default: defaults().props.vDatePickerProps
+      default: defaults().props.vDatePickerProps,
     },
     vMenuProps: {
       type: Object,
-      default: defaults().props.vMenuProps
+      default: defaults().props.vMenuProps,
     },
     value: {
       type: [String, Number],
-      default: new Date().toISOString(true)
-    }
+      default: new Date().toISOString(true),
+    },
   },
   data() {
     return {
@@ -99,8 +96,7 @@ export default {
       return this.datePickerProps && this.datePickerProps.landscape
         ? ELEMENTS_PROPS.dateInputMaxWidthLandscape
         : ELEMENTS_PROPS.dateInputMaxWidthNoLandscape
-    }
-  }
+    },
+  },
 }
-
 </script>

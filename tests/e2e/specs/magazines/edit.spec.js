@@ -9,7 +9,7 @@ describe('Magazines: Edit Action Test', () => {
   const newMagazine = Factory.createMagazine()
   const utils = InitEntityUtils({
     resourceName,
-    view
+    view,
   })
 
   before('Initialises authenticated with a default user', () => {
@@ -89,7 +89,7 @@ describe('Magazines: Edit Action Test', () => {
   it('A magazine is updated when the user submits the form', () => {
     const routes = [
       { name: view, response: newMagazine },
-      { name: 'show', response: newMagazine }
+      { name: 'show', response: newMagazine },
     ]
     cy.InitServer({ resourceName, routes })
     // Setup: Gets the submit button element

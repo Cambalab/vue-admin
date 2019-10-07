@@ -9,14 +9,11 @@ import { initialResourcesRoutes } from './common.utils'
  *
  * @return {Object} The expected Vuex Crud mocked state
  */
-export default ({
-  snapshot = 'default',
-  initialResources
-}) => {
+export default ({ snapshot = 'default', initialResources }) => {
   // New custom mutations configurations should be added here
   const snapshots = {
     default: initDefaultState,
-    Resource: initStateForResource
+    Resource: initStateForResource,
   }
   // Vuex Crud Initial State for a resource
   const initialResourceState = {
@@ -33,13 +30,13 @@ export default ({
     isUpdating: false,
     list: [],
     replaceError: null,
-    updateError: null
+    updateError: null,
   }
   // Vuex Initial State for entities
   const initialEntitiesState = {}
   // Vuex Initial State for resource routes
   const initialResourcesState = {
-    routes: initialResourcesRoutes(initialResources)
+    routes: initialResourcesRoutes(initialResources),
   }
 
   /**
@@ -62,7 +59,7 @@ export default ({
     return {
       ...initResourcesState(initialResources),
       entities: initialEntitiesState,
-      resources: initialResourcesState
+      resources: initialResourcesState,
     }
   }
   // Initialises state for a Resource component

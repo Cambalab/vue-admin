@@ -1,6 +1,6 @@
 import createActions from './modules/actions'
 import createGetters from './modules/getters'
-import createMutations  from './modules/mutations'
+import createMutations from './modules/mutations'
 import createState from './modules/state'
 import Types from '../types'
 
@@ -12,14 +12,10 @@ import Types from '../types'
  * @param {String}    moduleName        The name of the auth module
  * @param {Object}    store             The global Vuex store variable
  */
-export default ({
-  client,
-  moduleName,
-  store,
-}) => {
+export default ({ client }) => {
   const types = Types
 
-  const module = {
+  return {
     namespaced: true,
 
     state: createState(),
@@ -30,10 +26,9 @@ export default ({
     }),
 
     mutations: createMutations({
-      types
+      types,
     }),
 
     getters: createGetters(),
   }
-  store.registerModule(moduleName, module)
 }

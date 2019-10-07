@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import Auth from '@components/Auth/src/Auth'
+import { AuthLayout } from '@components/Layouts'
 import Factory from '@unit/factory'
 import { mount } from '@vue/test-utils'
 import UI_NAMES from '@constants/ui.element.names'
@@ -9,8 +9,8 @@ import UNIT_CONSTANTS from '@unit/lib/constants'
 import authFixture from '@unit/fixtures/auth'
 import { findButtonByName, findRef, nextTick } from '@unit/lib/utils/wrapper'
 
-describe('Auth.vue', () => {
-  const subject = 'Auth'
+describe('AuthLayout.vue', () => {
+  const subject = 'AuthLayout'
   Vue.use(Vuetify)
   // Silences warnings from vuetify prop mutations
   Vue.config.silent = true
@@ -23,13 +23,13 @@ describe('Auth.vue', () => {
   const { username, password } = Factory.createCredentials()
 
   const {
-    VUETIFY_TEXT_FIELD_LABEL_DETAILS_CLASS: TEXT_FIELD_LABEL
+    VUETIFY_TEXT_FIELD_LABEL_DETAILS_CLASS: TEXT_FIELD_LABEL,
   } = UNIT_CONSTANTS
 
   const _mount = ({ propsData }) => {
-    wrapper = mount(Auth, {
+    wrapper = mount(AuthLayout, {
       propsData,
-      sync: false
+      sync: false,
     })
   }
 
@@ -37,7 +37,7 @@ describe('Auth.vue', () => {
     propsData = authFixture.props
     vuetify = new Vuetify()
     vaPropSpy = {
-      login: jest.spyOn(propsData.va, 'login')
+      login: jest.spyOn(propsData.va, 'login'),
     }
 
     _mount({ propsData, vuetify })
@@ -113,7 +113,7 @@ describe('Auth.vue', () => {
     const textFieldName = UI_NAMES.AUTH_USERNAME_INPUT
     const buttonName = UI_NAMES.AUTH_SIGN_IN_BUTTON
     const errorMessage = UI_CONTENT.AUTH_ALERT_EMAIL_REQUIRED
-    const button = findButtonByName({ wrapper, name: buttonName})
+    const button = findButtonByName({ wrapper, name: buttonName })
     const textField = findRef({ wrapper, ref: textFieldName })
 
     await textField.vm.focus()

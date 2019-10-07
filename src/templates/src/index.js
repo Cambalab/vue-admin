@@ -1,12 +1,14 @@
 const docsUrl = require('@/../package.json').directories.doc
 
-const errorTitle  = '\n\nVueAdmin/{at}:\n\n'
-const errorFooter = '{errorMessage}\tTake a look at our documentation at {url}\n'
+const errorTitle = '\n\nVueAdmin/{at}:\n\n'
+const errorFooter =
+  '{errorMessage}\tTake a look at our documentation at {url}\n'
 
 // Component doc paths should be added here
 const componentsDocs = {
+  Admin: '{docsUrl}/Admin/Admin.md#props',
   Resource: '{docsUrl}/Resource.md#resource-props',
-  DateInput: '{docsUrl}/Ui-Components/DateInput.md'
+  DateInput: '{docsUrl}/Ui-Components/DateInput.md',
 }
 
 /**
@@ -41,7 +43,7 @@ function buildMessage(message, args) {
  *
  * @return {Function} A builder function of messageType
  */
-export default (template) => {
+export default template => {
   const params = template.split('.')
   const language = params[0]
   const messageType = params[1]
@@ -57,18 +59,18 @@ export default (template) => {
    * @return {String} An error message built with messageParams
    */
   function buildErrorMessage(constant, messageParams) {
-    const { at }        = messageParams
-    const componentDoc  = componentsDocs[at]
-    const prefix        = buildMessage(errorTitle, { at })
-    const url           = buildMessage(componentDoc, { docsUrl })
+    const { at } = messageParams
+    const componentDoc = componentsDocs[at]
+    const prefix = buildMessage(errorTitle, { at })
+    const url = buildMessage(componentDoc, { docsUrl })
     Object.assign(messageParams, { prefix })
-    const errorMessage  = buildMessage(messages[constant], messageParams)
+    const errorMessage = buildMessage(messages[constant], messageParams)
 
     return buildMessage(errorFooter, { errorMessage, url })
   }
 
   const messageTypes = {
-    error: buildErrorMessage
+    error: buildErrorMessage,
     // newMessages: buildNewMessage
   }
 
