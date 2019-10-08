@@ -51,10 +51,14 @@
               :name="names.elementField(label(field), index)"
             >
               <component
-                  :name="label(field) === resourceIdName ? names.elementField(label(field)) : names.elementField(label(field), index)"
-                  :is="type(field)"
-                  v-bind:value="item[label(field)]"
-                  v-bind="args(field)"
+                :name="
+                  label(field) === resourceIdName
+                    ? names.elementField(label(field))
+                    : names.elementField(label(field), index)
+                "
+                :is="type(field)"
+                v-bind:value="item[label(field)]"
+                v-bind="args(field)"
               />
             </td>
             <td>
