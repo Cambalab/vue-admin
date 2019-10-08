@@ -42,6 +42,7 @@
             v-for="(item, index) in items"
             :key="keys.containerFields(item[resourceIdName])"
             :name="names.containerFields(index)"
+            @click="onRowClicked(item[resourceIdName])"
           >
             <td
               class="text-xs-left"
@@ -49,26 +50,16 @@
               :key="keys.elementField(label(field), index)"
               :name="names.elementField(label(field), index)"
             >
-              <a
-                :name="names.elementField(resourceIdName, index)"
-                v-if="label(field) === resourceIdName && hasShow"
-                @click="onIdClick(item[resourceIdName])"
-              >
-                <component
-                  :name="names.elementField(label(field))"
-                  :is="type(field)"
-                  v-bind:value="item[label(field)]"
-                  v-bind="args(field)"
-                />
-              </a>
-              <span v-else>
-                <component
-                  :name="names.elementField(label(field), index)"
-                  :is="type(field)"
-                  v-bind:value="item[label(field)]"
-                  v-bind="args(field)"
-                />
-              </span>
+              <component
+                :name="
+                  label(field) === resourceIdName
+                    ? names.elementField(label(field))
+                    : names.elementField(label(field), index)
+                "
+                :is="type(field)"
+                v-bind:value="item[label(field)]"
+                v-bind="args(field)"
+              />
             </td>
             <td>
               <EditButton
@@ -256,8 +247,10 @@ export default {
     onCreateClick() {
       this.$router.push({ name: `${this.resourceName}/create` })
     },
-    onIdClick(id) {
-      this.$router.push({ name: `${this.resourceName}/show`, params: { id } })
+    onRowClicked(id) {
+      if (this.hasShow) {
+        this.$router.push({ name: `${this.resourceName}/show`, params: { id } })
+      }
     },
   },
   created() {
