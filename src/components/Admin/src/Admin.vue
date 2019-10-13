@@ -57,6 +57,7 @@ export default {
     this.$store.registerModule('resources', resourceModule)
   },
   created() {
+    const { namespace } = AuthActionTypes
     const { authModule } = this.options
     const unauthenticatedRoutes = createUnauthenticatedRoutes(this.authLayout)
     const siteRoutes = createSiteRoutes({ homeLayout: this.homeLayout })
@@ -74,8 +75,8 @@ export default {
   },
   computed: {
     isAuthenticated() {
-      const { namespace } = AuthActionTypes
-      return this.$store.getters[`${namespace}/isAuthenticated`]
+      const { namespace, AUTH_IS_AUTHENTICATED } = AuthActionTypes
+      return this.$store.getters[`${namespace}/${AUTH_IS_AUTHENTICATED}`]
     },
   },
   render(createElement) {

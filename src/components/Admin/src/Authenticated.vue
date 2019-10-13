@@ -28,8 +28,8 @@ export default {
       this.$store.dispatch(`${namespace}/${AUTH_LOGOUT_REQUEST}`)
     },
     getUser: function() {
-      const { namespace } = AuthActionTypes
-      return this.$store.getters[`${namespace}/getUser`]
+      const { namespace, AUTH_GET_USER } = AuthActionTypes
+      return this.$store.getters[`${namespace}/${AUTH_GET_USER}`]
     },
   },
   render: function(createElement) {

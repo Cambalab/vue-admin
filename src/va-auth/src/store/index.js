@@ -14,21 +14,11 @@ import Types from '../types'
  */
 export default ({ client }) => {
   const types = Types
-
   return {
     namespaced: true,
-
     state: createState(),
-
-    actions: createActions({
-      client,
-      types,
-    }),
-
-    mutations: createMutations({
-      types,
-    }),
-
-    getters: createGetters(),
+    actions: createActions({ client, types }),
+    mutations: createMutations({ types }),
+    getters: createGetters({ types }),
   }
 }
