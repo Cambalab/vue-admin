@@ -1,4 +1,5 @@
 import Factory from '../../factory'
+import AuthTypes from '../../../../src/va-auth/src/types'
 
 describe('Vuex Store Getters', () => {
   const getStore = () => cy.getStore()
@@ -20,8 +21,11 @@ describe('Vuex Store Getters', () => {
           status,
         } = authResponse
         if (status === 200) {
+          const { namespace, AUTH_GET_USER } = AuthTypes
           isUserAuthenticated = true
-          Object.assign(initialGetters, { 'auth/getUser': user })
+          Object.assign(initialGetters, {
+            [`${namespace}/${AUTH_GET_USER}`]: user,
+          })
         }
       })
       .visit('/#/')
@@ -42,8 +46,7 @@ describe('Vuex Store Getters', () => {
   })
 
   it('{Auth} getters should have been initialised', () => {
-    const resource = 'auth'
-    authGettersShouldHaveBeenInitialised(resource)
+    authGettersShouldHaveBeenInitialised()
   })
 
   it('{Articles} vuex crud getters should have been initialised', () => {
@@ -70,10 +73,16 @@ describe('Vuex Store Getters', () => {
    *
    * @param {String} resource The name of a resource
    */
-  function authGettersShouldHaveBeenInitialised(resource) {
-    const authStatus = `${resource}/authStatus`
-    const getUser = `${resource}/getUser`
-    const isAuthenticated = `${resource}/isAuthenticated`
+  function authGettersShouldHaveBeenInitialised() {
+    const {
+      namespace,
+      AUTH_GET_STATUS,
+      AUTH_GET_USER,
+      AUTH_IS_AUTHENTICATED,
+    } = AuthTypes
+    const authStatus = `${namespace}/${AUTH_GET_STATUS}`
+    const getUser = `${namespace}/${AUTH_GET_USER}`
+    const isAuthenticated = `${namespace}/${AUTH_IS_AUTHENTICATED}`
     getStore()
       .its('getters')
       .should(getters => {

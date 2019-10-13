@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import Admin from '@components/Admin/src/Admin'
 import Authenticated from '@components/Admin/src/Authenticated'
 import Unauthenticated from '@components/Admin/src/Unauthenticated'
-import AuthActionTypes from '@va-auth/types'
+import AuthTypes from '@va-auth/types'
 import createAuthModule from '@va-auth/store'
 import { shallowMount } from '@vue/test-utils'
 import { nextTick } from '@unit/lib/utils/wrapper'
@@ -163,7 +163,7 @@ describe('Admin.vue', () => {
   })
 
   it('[Auth Check Request] - store should call dispach on mounted', () => {
-    const { namespace, AUTH_CHECK_REQUEST } = AuthActionTypes
+    const { namespace, AUTH_CHECK_REQUEST } = AuthTypes
     mountSubject()
 
     expect(storeSpy.dispatch).toHaveBeenCalledTimes(1)
@@ -172,9 +172,9 @@ describe('Admin.vue', () => {
     )
   })
 
-  it('[Unauthenticated] - component is rendered when isAuthenticated returns false', () => {
-    const { namespace } = AuthActionTypes
-    const getter = `${namespace}/isAuthenticated`
+  it('[Unauthenticated] - component is rendered when [AUTH_IS_AUTHENTICATED] returns false', () => {
+    const { namespace, AUTH_IS_AUTHENTICATED } = AuthTypes
+    const getter = `${namespace}/${AUTH_IS_AUTHENTICATED}`
 
     mountSubject()
 
@@ -185,9 +185,9 @@ describe('Admin.vue', () => {
     expect(unauthenticatedLayout.exists()).toBe(true)
   })
 
-  it('[Authenticated] - component is rendered when isAuthenticated returns true', async () => {
-    const { namespace, AUTH_LOGIN_SUCCESS } = AuthActionTypes
-    const getter = `${namespace}/isAuthenticated`
+  it('[Authenticated] - component is rendered when [AUTH_IS_AUTHENTICATED] returns true', async () => {
+    const { namespace, AUTH_LOGIN_SUCCESS, AUTH_IS_AUTHENTICATED } = AuthTypes
+    const getter = `${namespace}/${AUTH_IS_AUTHENTICATED}`
 
     mountSubject()
 

@@ -3,10 +3,10 @@
  *
  * @return {Object} The getters for the auth store
  */
-export default () => {
+export default ({ types }) => {
   return {
-    authStatus: state => state.status,
-    isAuthenticated: state => state.isAuthenticated,
-    getUser: state => state.user,
+    [types.AUTH_GET_STATUS]: state => state.status,
+    [types.AUTH_IS_AUTHENTICATED]: state => state.isAuthenticated,
+    [types.AUTH_GET_USER]: state => state.user,
   }
 }

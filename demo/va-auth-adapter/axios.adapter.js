@@ -1,4 +1,4 @@
-import AuthActionTypes from '@va-auth/types'
+import AuthTypes from '@va-auth/types'
 
 export default (client, options = {}) => {
   return (type, params) => {
@@ -6,7 +6,7 @@ export default (client, options = {}) => {
       AUTH_LOGIN_REQUEST,
       AUTH_LOGOUT_REQUEST,
       AUTH_CHECK_REQUEST,
-    } = AuthActionTypes
+    } = AuthTypes
 
     const { authFields, authUrl, storageKey, userField } = Object.assign(
       {

@@ -2,7 +2,8 @@ import listUtils from '@store/utils/list.utils'
 import showUtils from '@store/utils/show.utils'
 import createUtils from '@store/utils/create.utils'
 import editUtils from '@store/utils/edit.utils'
-import createAuthUtils from '@va-auth/utils'
+import createAuthUtils from './auth.utils'
+import AuthTypes from '@va-auth/types'
 import createRouteHooks from './route.hooks'
 
 /**
@@ -38,7 +39,7 @@ export default ({
   const hasCreate = !!create
   const hasEdit = !!edit
   const resourcePath = `/${resourceName}`
-  const authUtils = createAuthUtils({ store })
+  const authUtils = createAuthUtils({ store, types: AuthTypes })
   return {
     list: () => {
       const name = `${resourceName}/list`

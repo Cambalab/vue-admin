@@ -1,4 +1,5 @@
 import { initialResourcesRoutes } from './common.utils'
+import AuthTypes from '../../../../src/va-auth/src/types'
 
 /**
  * Anonymous Function - Creates a simualtion of initial vuex crud getters
@@ -18,13 +19,19 @@ export default () => {
   }
 
   // Vuex auth getters
+  const {
+    namespace,
+    AUTH_GET_STATUS,
+    AUTH_GET_USER,
+    AUTH_IS_AUTHENTICATED,
+  } = AuthTypes
   const authGetters = {
-    'auth/authStatus': 'idle',
-    'auth/getUser': '',
-    'auth/isAuthenticated': false,
+    [`${namespace}/${AUTH_GET_STATUS}`]: 'idle',
+    [`${namespace}/${AUTH_GET_USER}`]: '',
+    [`${namespace}/${AUTH_IS_AUTHENTICATED}`]: false,
   }
 
-  // Vuex auth getters
+  // Vuex ui getters
   const requestGetters = {
     'requests/isLoading': false,
   }
