@@ -33,6 +33,6 @@
     
     > Interfaces implementation can be found in `@va-auth/types`, while the `authModule` is a `@va-auth/store` module, and it's assigned by the `Admin` component.
 
-+   **Default:** An object with the logout and getUser function that, in turn, use the `@va-auth/types`: `AUTH_LOGOUT_REQUEST`, `GET_USER_REQUEST`
++   **Default:** An object with the logout and getUser function that, in turn, use the `@va-auth/types`: `AUTH_LOGOUT_REQUEST`, `AUTH_GET_USER`
 > The va object is designed in the `Authenticated` component.
 > The `Authenticated` component defines the va object. 

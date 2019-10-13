@@ -22,4 +22,4 @@ It's responsible of creating the unauthorized routes and rendering a Core compon
 
 ### getUser
 
-+   **Details:** implements the `auth/GET_USER_REQUEST` interface from `@va-auth/types`
++   **Details:** implements the `auth/AUTH_GET_USER` interface from `@va-auth/types`
