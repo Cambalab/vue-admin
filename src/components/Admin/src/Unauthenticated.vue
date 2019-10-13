@@ -1,5 +1,5 @@
 <script>
-import AuthActionTypes from '@va-auth/types'
+import AuthTypes from '@va-auth/types'
 
 export default {
   name: 'Unauthenticated',
@@ -12,7 +12,7 @@ export default {
   methods: {
     login: function(username, password) {
       const params = { username, password }
-      const { namespace, AUTH_LOGIN_REQUEST } = AuthActionTypes
+      const { namespace, AUTH_LOGIN_REQUEST } = AuthTypes
       this.$store.dispatch(`${namespace}/${AUTH_LOGIN_REQUEST}`, params)
     },
   },

@@ -1,5 +1,5 @@
 <script>
-import AuthActionTypes from '@va-auth/types'
+import AuthTypes from '@va-auth/types'
 import Unauthenticated from './Unauthenticated'
 import Authenticated from './Authenticated'
 import defaults from './defaults'
@@ -57,12 +57,12 @@ export default {
     this.$store.registerModule('resources', resourceModule)
   },
   created() {
-    const { namespace } = AuthActionTypes
+    const { namespace } = AuthTypes
     const { authModule } = this.options
     const unauthenticatedRoutes = createUnauthenticatedRoutes(this.authLayout)
     const siteRoutes = createSiteRoutes({ homeLayout: this.homeLayout })
 
-    this.$store.registerModule('auth', authModule)
+    this.$store.registerModule(namespace, authModule)
     this.$router.addRoutes([
       ...siteRoutes,
       ...unauthenticatedRoutes,
@@ -70,12 +70,12 @@ export default {
     ])
   },
   mounted: function() {
-    const { namespace, AUTH_CHECK_REQUEST } = AuthActionTypes
+    const { namespace, AUTH_CHECK_REQUEST } = AuthTypes
     this.$store.dispatch(`${namespace}/${AUTH_CHECK_REQUEST}`)
   },
   computed: {
     isAuthenticated() {
-      const { namespace, AUTH_IS_AUTHENTICATED } = AuthActionTypes
+      const { namespace, AUTH_IS_AUTHENTICATED } = AuthTypes
       return this.$store.getters[`${namespace}/${AUTH_IS_AUTHENTICATED}`]
     },
   },
