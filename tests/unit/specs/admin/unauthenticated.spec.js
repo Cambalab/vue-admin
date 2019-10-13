@@ -52,7 +52,7 @@ describe('Unauthenticated.vue', () => {
     expect(props.layout).toMatchObject(unauthenticatedFixture.props.layout)
   })
 
-  it('[Auth] - component is rendered when isAuthenticated returns true', async () => {
+  it('[Auth] - component is rendered', async () => {
     mountSubject()
 
     const {
