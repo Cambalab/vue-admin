@@ -59,6 +59,14 @@
     "vuex": "^3.0.1",
     "vuex-crud": "^0.3.2"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": ["npm run lint:autofix", "git add"]
+  },
   "directories": {
     "doc": "https://github.com/Cambalab/vue-admin/blob/develop/Docs"
   },
