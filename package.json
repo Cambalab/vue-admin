@@ -39,7 +39,7 @@
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-vue": "^5.0.0",
+    "eslint-plugin-vue": "^5.2.3",
     "fibers": "^4.0.1",
     "husky": "^3.0.9",
     "joi": "^14.3.1",
@@ -65,7 +65,10 @@
     }
   },
   "lint-staged": {
-    "*.js": ["npm run lint:autofix", "git add"]
+    "src/**/*.{js,json,vue}": [
+      "npm run lint:autofix",
+      "git add"
+    ]
   },
   "directories": {
     "doc": "https://github.com/Cambalab/vue-admin/blob/develop/Docs"
