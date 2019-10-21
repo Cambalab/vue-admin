@@ -17,6 +17,9 @@
     "eslint:recommended",
     "plugin:prettier/recommended"
   ],
+  "plugins": [
+    "json"
+  ],
   "parserOptions": {
     "parser": "babel-eslint"
   },
