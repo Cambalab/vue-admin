@@ -17,7 +17,7 @@
 *We've been working a lot with other libraries that generate administration dashboards, routes, resources in other javascript frameworks, but did not find any Vue library capable of performing this kind of solution, except of many really impressive Vue libraries that provide UI components for admin dashboards. We are pretty convinced Vue's learning curve is gentle, so we thought we could try and build our own tool.*
 
 <p align="center">
-![demo of the app running](public/demo.gif)
+<img src="public/demo.gif" alt="demo of the app running" />
 </p>
 ## About the library
 
