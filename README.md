@@ -19,6 +19,7 @@
 <p align="center">
 <img src="public/demo.gif" alt="demo of the app running" />
 </p>
+
 ## About the library
 
 Given a simple configuration to Vue-Admin components, this library connects your backend and interprets your services as frontend resources from which **crud** views are automatically created and associated with a route.  
