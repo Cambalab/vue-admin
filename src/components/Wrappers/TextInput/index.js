@@ -1,7 +1,7 @@
-import TextInputWrapper from './TextInputWrapper';
+import TextInputWrapper from './TextInputWrapper'
 
 TextInputWrapper.install = function(Vue) {
-  Vue.component(TextInputWrapper.name, TextInputWrapper);
-};
+  Vue.component(TextInputWrapper.name, TextInputWrapper)
+}
 
-export default TextInputWrapper;
+export default TextInputWrapper

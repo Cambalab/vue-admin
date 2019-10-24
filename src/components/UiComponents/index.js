@@ -1,16 +1,16 @@
-import DateInput from './DateInput';
+import DateInput from './DateInput'
 import DefaultSidebar from './Sidebar/DefaultSidebar'
-import DeleteButton from './DeleteButton';
-import EditButton from './EditButton';
-import Input from './Input';
-import TextField from './TextField';
-import Spinner from './Spinner';
+import DeleteButton from './DeleteButton'
+import EditButton from './EditButton'
+import Input from './Input'
+import TextField from './TextField'
+import Spinner from './Spinner'
 import {
   Sidebar,
   SidebarLink,
   SidebarNode,
   SidebarAction,
-  SidebarHeading
+  SidebarHeading,
 } from './Sidebar'
 
 export {
@@ -21,5 +21,9 @@ export {
   Input,
   TextField,
   Spinner,
-  Sidebar, SidebarLink, SidebarNode, SidebarAction, SidebarHeading,
+  Sidebar,
+  SidebarLink,
+  SidebarNode,
+  SidebarAction,
+  SidebarHeading,
 }

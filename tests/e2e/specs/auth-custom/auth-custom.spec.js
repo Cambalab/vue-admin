@@ -5,16 +5,14 @@ describe('Custom Auth Test', () => {
   const view = 'login'
   const user = {
     username: 'dev@camba.coop',
-    password: '123456'
+    password: '123456',
   }
 
-  const findInput = ({ constant }) => (
+  const findInput = ({ constant }) =>
     cy.getElement({ constant, elementType: 'input', elementProp: 'name' })
-  )
 
-  const findButton = ({ constant }) => (
+  const findButton = ({ constant }) =>
     cy.getElement({ constant, elementType: 'button', elementProp: 'name' })
-  )
 
   const findTypeAndAssert = ({ element, value, condition }) => {
     const input = findInput({ constant: element })
@@ -28,7 +26,7 @@ describe('Custom Auth Test', () => {
    */
   let hasCustomAuth = true
 
-  function skipIfCustomAuth (testAction) {
+  function skipIfCustomAuth(testAction) {
     if (hasCustomAuth) {
       testAction()
     }
@@ -39,9 +37,7 @@ describe('Custom Auth Test', () => {
   })
 
   it('The url path should be /login', () => {
-    skipIfCustomAuth(() =>
-      cy.url().should('include', `/${view}`)
-    )
+    skipIfCustomAuth(() => cy.url().should('include', `/${view}`))
   })
 
   it('Login View should render a title: Sign In', () => {
@@ -50,7 +46,7 @@ describe('Custom Auth Test', () => {
       const createViewTitleContainer = cy.getElement({
         constant: UI_NAMES.CUSTOM_AUTH_CONTAINER_TITLE,
         elementType: 'div',
-        elementProp: 'name'
+        elementProp: 'name',
       })
 
       createViewTitleContainer.should('contain', createViewTitleText)
@@ -62,7 +58,7 @@ describe('Custom Auth Test', () => {
       findTypeAndAssert({
         element: UI_NAMES.CUSTOM_AUTH_USERNAME_INPUT,
         value: user.username,
-        condition: 'have.value'
+        condition: 'have.value',
       })
     })
   })
@@ -72,14 +68,16 @@ describe('Custom Auth Test', () => {
       findTypeAndAssert({
         element: UI_NAMES.CUSTOM_AUTH_PASSWORD_INPUT,
         value: user.username,
-        condition: 'have.value'
+        condition: 'have.value',
       })
     })
   })
 
   it('The Sign In button is disabled when no username and password were given', () => {
     skipIfCustomAuth(() => {
-      const button = findButton({ constant: UI_NAMES.CUSTOM_AUTH_SIGN_IN_BUTTON })
+      const button = findButton({
+        constant: UI_NAMES.CUSTOM_AUTH_SIGN_IN_BUTTON,
+      })
       button.should('be.disabled')
     })
   })
@@ -88,12 +86,12 @@ describe('Custom Auth Test', () => {
     findTypeAndAssert({
       element: UI_NAMES.CUSTOM_AUTH_USERNAME_INPUT,
       value: user.username,
-      condition: 'have.value'
+      condition: 'have.value',
     })
     findTypeAndAssert({
       element: UI_NAMES.CUSTOM_AUTH_PASSWORD_INPUT,
       value: user.password,
-      condition: 'have.value'
+      condition: 'have.value',
     })
     const button = findButton({ constant: UI_NAMES.CUSTOM_AUTH_SIGN_IN_BUTTON })
     button.should('be.enabled')

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueRouter from "vue-router"
+import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import Unauthenticated from '@components/Admin/src/Unauthenticated'
 import { shallowMount } from '@vue/test-utils'
@@ -25,7 +25,7 @@ describe('Unauthenticated.vue', () => {
       mocks,
       propsData,
       router: mockedRouter,
-      sync: true
+      sync: true,
     })
   }
 
@@ -52,10 +52,12 @@ describe('Unauthenticated.vue', () => {
     expect(props.layout).toMatchObject(unauthenticatedFixture.props.layout)
   })
 
-  it('[Auth] - component is rendered when isAuthenticated returns true', async () => {
+  it('[Auth] - component is rendered', async () => {
     mountSubject()
 
-    const { props: { layout } } = unauthenticatedFixture
+    const {
+      props: { layout },
+    } = unauthenticatedFixture
     const authComponent = subjectWrapper.find(layout)
 
     expect(authComponent.exists()).toBe(true)

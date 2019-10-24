@@ -7,11 +7,7 @@ import { initialResourcesRoutes } from './common.utils'
  */
 export default () => {
   // Initial vuex crud resources should be added here
-  const initialResources = [
-    'articles',
-    'magazines',
-    'authors'
-  ]
+  const initialResources = ['articles', 'magazines', 'authors']
   // Vuex Crud Initial State for a resource
   const initialResourceState = {
     createError: null,
@@ -27,25 +23,25 @@ export default () => {
     isUpdating: false,
     list: [],
     replaceError: null,
-    updateError: null
+    updateError: null,
   }
   // Vuex Initial State for auth
   const initialAuthState = {
     error: '',
     isAuthenticated: false,
     status: 'idle',
-    user: {}
+    user: {},
   }
 
   // Vuex Initial State for request
   const initialRequestState = {
-    isLoading: false
+    isLoading: false,
   }
   // Vuex Initial State for entities
   const initialEntitiesState = {}
   // Vuex Initial State for resource routes
   const initialResourcesState = {
-    routes: initialResourcesRoutes(initialResources)
+    routes: initialResourcesRoutes(initialResources),
   }
 
   /**
@@ -69,6 +65,6 @@ export default () => {
     auth: initialAuthState,
     entities: initialEntitiesState,
     resources: initialResourcesState,
-    requests: initialRequestState
+    requests: initialRequestState,
   }
 }

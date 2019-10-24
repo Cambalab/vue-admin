@@ -4,12 +4,12 @@
       <v-btn
         v-bind="buttonProps"
         :name="names.deleteButton"
-        @click="onDelete()"
+        @click.stop="onDelete()"
         icon
         v-on="on"
       >
         <v-icon v-bind="iconProps">
-          {{content.deleteButton}}
+          {{ content.deleteButton }}
         </v-icon>
       </v-btn>
     </template>
@@ -22,44 +22,44 @@ import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 
 export default {
-  name: "DeleteButton",
+  name: 'DeleteButton',
   props: {
     name: {
       type: String,
-      default: 'va-delete-button'
+      default: 'va-delete-button',
     },
     resourceId: {
-      type: [Number, String]
+      type: [Number, String],
     },
     resourceName: {
       type: String,
-      default: null
+      default: null,
     },
     buttonProps: {
-      type: Object
+      type: Object,
     },
     iconProps: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   data() {
     const resourceName = this.resourceName
     const names = {
-      deleteButton: UI_NAMES.RESOURCE_DELETE_BUTTON.with({ resourceName })
+      deleteButton: UI_NAMES.RESOURCE_DELETE_BUTTON.with({ resourceName }),
     }
     const content = {
-      deleteButton: UI_CONTENT.RESOURCE_DELETE_BUTTON
+      deleteButton: UI_CONTENT.RESOURCE_DELETE_BUTTON,
     }
     return { content, names }
   },
 
   methods: {
     onDelete() {
-      const resourceName = this.resourceName + "/destroy";
-      this.$store.dispatch(resourceName, { id: this.resourceId });
-      return this.$router.push({ path: `/${this.resourceName}`});
-    }
+      const resourceName = this.resourceName + '/destroy'
+      this.$store.dispatch(resourceName, { id: this.resourceId })
+      return this.$router.push({ path: `/${this.resourceName}` })
+    },
   },
-};
+}
 </script>

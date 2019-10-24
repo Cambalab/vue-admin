@@ -2,10 +2,7 @@
   <v-layout>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-img
-          src="banner.png"
-          aspect-ratio="4"
-        />
+        <v-img src="banner.png" aspect-ratio="4" />
         <v-card-title primary-title>
           <h3 class="headline mb-2">New Magazine</h3>
         </v-card-title>

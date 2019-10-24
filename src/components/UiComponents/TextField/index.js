@@ -1,7 +1,7 @@
-import TextField from './src/textField';
+import TextField from './src/textField'
 
 TextField.install = function(Vue) {
-  Vue.component(TextField.name, TextField);
-};
+  Vue.component(TextField.name, TextField)
+}
 
-export default TextField;
+export default TextField

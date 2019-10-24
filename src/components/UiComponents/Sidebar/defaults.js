@@ -6,11 +6,10 @@ import { VListItemAvatar, VAvatar, VIcon } from 'vuetify/lib'
  * @return {Object} An object containing props and methods
  */
 export default () => {
-
   const avatar = Avatar
   const avatarProps = {
     color: 'teal',
-    content: AccountIcon
+    content: AccountIcon,
   }
   const title = 'Menu'
   const subTitle = ''
@@ -20,8 +19,8 @@ export default () => {
       avatar,
       avatarProps,
       title,
-      subTitle
-    }
+      subTitle,
+    },
   }
 }
 
@@ -29,10 +28,8 @@ const AccountIcon = {
   name: 'AccountIcon',
   // eslint-disable-next-line
   render: function(h) {
-    return (
-      <VIcon dark>account_circle</VIcon>
-    )
-  }
+    return <VIcon dark>account_circle</VIcon>
+  },
 }
 
 const Avatar = {
@@ -43,10 +40,8 @@ const Avatar = {
     const { props } = context
     return (
       <VListItemAvatar>
-        <VAvatar color={props.color}>
-          {h(props.content)}
-        </VAvatar>
+        <VAvatar color={props.color}>{h(props.content)}</VAvatar>
       </VListItemAvatar>
     )
-  }
+  },
 }

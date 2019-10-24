@@ -1,5 +1,5 @@
 export default {
   rowsPerPage: 10,
-  dateInputMaxWidthNoLandscape: "290px",
-  dateInputMaxWidthLandscape:   "580px",
+  dateInputMaxWidthNoLandscape: '290px',
+  dateInputMaxWidthLandscape: '580px',
 }

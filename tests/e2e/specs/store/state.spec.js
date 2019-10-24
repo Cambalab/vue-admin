@@ -9,55 +9,76 @@ describe('Vuex Store State', () => {
     Object.assign(initialState, _initialState)
   })
   before('Initialises authenticated with a default user', () => {
-    cy.InitAuthenticatedUser().then(authResponse => {
-      const { response: { body: { user } }, status } = authResponse
-      if (status === 200) {
-        Object.assign(initialState.auth, { isAuthenticated: true, user })
-      }
-    }).visit('/#/')
+    cy.InitAuthenticatedUser()
+      .then(authResponse => {
+        const {
+          response: {
+            body: { user },
+          },
+          status,
+        } = authResponse
+        if (status === 200) {
+          Object.assign(initialState.auth, { isAuthenticated: true, user })
+        }
+      })
+      .visit('/#/')
   })
 
   it('Should have attributes on initialisation', () => {
     const state = 'state'
-    getStore().its(state).should('have.keys', Object.keys(initialState))
+    getStore()
+      .its(state)
+      .should('have.keys', Object.keys(initialState))
   })
 
   it('Attribute {auth} should have an intitial configuration', () => {
     const attribute = 'auth'
     const state = `state.${attribute}`
-    getStore().its(state).should('deep.equal', initialState[attribute])
+    getStore()
+      .its(state)
+      .should('deep.equal', initialState[attribute])
   })
 
   it('Attribute {articles} should have the vuex crud intitial configuration', () => {
     const attribute = 'articles'
     const state = `state.${attribute}`
-    getStore().its(state).should('deep.equal', initialState[attribute])
+    getStore()
+      .its(state)
+      .should('deep.equal', initialState[attribute])
   })
 
   it('Attribute {magazines} should have the vuex crud initial configuration', () => {
     const attribute = 'magazines'
     const state = `state.${attribute}`
-    getStore().its(state).should('deep.equal', initialState[attribute])
+    getStore()
+      .its(state)
+      .should('deep.equal', initialState[attribute])
   })
 
   it('Attribute {entities} should be empty', () => {
     const attribute = 'entities'
     const state = `state.${attribute}`
-    getStore().its(state).should('eql', initialState[attribute])
-    getStore().its(state).should('be.empty')
+    getStore()
+      .its(state)
+      .should('eql', initialState[attribute])
+    getStore()
+      .its(state)
+      .should('be.empty')
   })
 
   it('Attribute {resources} should have attributes initialised', () => {
     const attribute = 'resources'
     const state = `state.${attribute}`
-    getStore().its(state).should('have.keys', [
-      'routes'
-    ])
+    getStore()
+      .its(state)
+      .should('have.keys', ['routes'])
   })
 
   it('Attribute {resources} should have routes initialised', () => {
     const attribute = 'resources'
     const state = `state.${attribute}`
-    getStore().its(state).should('deep.equal', initialState[attribute])
+    getStore()
+      .its(state)
+      .should('deep.equal', initialState[attribute])
   })
 })

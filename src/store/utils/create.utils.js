@@ -1,4 +1,9 @@
-import { submitEntity, initEntity, updateEntity, getEntityForm } from './common.utils'
+import {
+  submitEntity,
+  initEntity,
+  updateEntity,
+  getEntityForm,
+} from './common.utils'
 
 /**
  * Create View Utils - A function used to create utilities
@@ -19,7 +24,7 @@ export default ({
   resourceName,
   store,
   router,
-  parseResponses
+  parseResponses,
 }) => {
   return {
     /**
@@ -47,7 +52,7 @@ export default ({
         value,
         store,
         resourceName,
-        formType
+        formType,
       })
     },
 
@@ -59,7 +64,7 @@ export default ({
       initEntity({
         store,
         resourceName,
-        formType
+        formType,
       })
     },
 
@@ -70,7 +75,7 @@ export default ({
      */
     submitEntity() {
       const actionType = 'create'
-      const actionTypeParams = { data : this.getEntityForm() }
+      const actionTypeParams = { data: this.getEntityForm() }
       submitEntity({
         resourceName,
         actionType,
@@ -79,8 +84,8 @@ export default ({
         router,
         redirectView,
         resourceIdName,
-        parseResponses
+        parseResponses,
       })
-    }
+    },
   }
 }

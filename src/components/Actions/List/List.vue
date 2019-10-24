@@ -9,17 +9,16 @@
       :options.sync="options"
       dense
     >
-
       <template v-slot:top>
         <v-toolbar flat color="white">
           <v-toolbar-title
             :name="names.viewContainerTitle"
             class="headline mb-0 text-capitalize"
           >
-            {{resourceName}}
+            {{ toolbarTitle }}
           </v-toolbar-title>
           <v-divider class="mx-4" inset vertical />
-          <v-spacer/>
+          <v-spacer />
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn
@@ -29,7 +28,7 @@
                 @click="onCreateClick()"
                 icon
               >
-                <v-icon color="teal">{{content.createButton}}</v-icon>
+                <v-icon color="teal">{{ content.createButton }}</v-icon>
               </v-btn>
             </template>
             <span>Create</span>
@@ -39,35 +38,28 @@
 
       <template v-slot:body="{ items }">
         <tbody>
-          <tr v-for="(item, index) in items"
+          <tr
+            v-for="(item, index) in items"
             :key="keys.containerFields(item[resourceIdName])"
             :name="names.containerFields(index)"
+            @click="onRowClicked(item[resourceIdName])"
           >
-            <td class="text-xs-left"
+            <td
+              class="text-xs-left"
               v-for="field in fields"
               :key="keys.elementField(label(field), index)"
               :name="names.elementField(label(field), index)"
             >
-                <a
-                  :name="names.elementField(resourceIdName, index)"
-                  v-if="label(field) === resourceIdName && hasShow"
-                  @click="onIdClick(item[resourceIdName])"
-                >
-                  <component
-                    :name="names.elementField(label(field))"
-                    :is="type(field)"
-                    v-bind:value="item[label(field)]"
-                    v-bind="args(field)"
-                  />
-                </a>
-              <span v-else>
-                <component
-                  :name="names.elementField(label(field), index)"
-                  :is="type(field)"
-                  v-bind:value="item[label(field)]"
-                  v-bind="args(field)"
-                />
-              </span>
+              <component
+                :name="
+                  label(field) === resourceIdName
+                    ? names.elementField(label(field))
+                    : names.elementField(label(field), index)
+                "
+                :is="type(field)"
+                v-bind:value="item[label(field)]"
+                v-bind="args(field)"
+              />
             </td>
             <td>
               <EditButton
@@ -88,7 +80,6 @@
           </tr>
         </tbody>
       </template>
-
     </v-data-table>
   </v-card>
 </template>
@@ -103,37 +94,40 @@ import {
   Input,
   TextField,
   Spinner,
-  DateInput
-} from "@components/UiComponents"
+  DateInput,
+} from '@components/UiComponents'
 
 export default {
-  name: "List",
+  name: 'List',
   props: {
     resourceName: {
       type: String,
       required: true,
     },
     hasShow: {
-      type: Boolean
+      type: Boolean,
     },
     hasCreate: {
-      type: Boolean
+      type: Boolean,
     },
     hasEdit: {
-      type: Boolean
+      type: Boolean,
     },
     fields: {
       type: Array,
-      required: true
+      required: true,
     },
     resourceIdName: {
       type: String,
-      required: true
+      required: true,
+    },
+    title: {
+      type: [String, Object],
     },
     va: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     DateInput,
@@ -141,27 +135,57 @@ export default {
     EditButton,
     Input,
     TextField,
-    Spinner
+    Spinner,
   },
   data() {
     const { rowsPerPage } = UI_ELEMENTS
     const resourceName = this.resourceName
     const view = 'list'
     const content = {
-      createButton: UI_CONTENT.RESOURCE_CREATE_BUTTON
+      createButton: UI_CONTENT.RESOURCE_CREATE_BUTTON,
     }
     const keys = {
-      containerFields: (index) => UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({ resourceName, view, index }),
-      elementField: (field, index) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field, index })
+      containerFields: index =>
+        UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
+          resourceName,
+          view,
+          index,
+        }),
+      elementField: (field, index) =>
+        UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+          resourceName,
+          view,
+          field,
+          index,
+        }),
     }
     const names = {
-      containerFields: (index) => UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({ resourceName, view, index }),
+      containerFields: index =>
+        UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
+          resourceName,
+          view,
+          index,
+        }),
       createButton: UI_NAMES.RESOURCE_CREATE_BUTTON.with({ resourceName }),
-      deleteButton: (index) => UI_NAMES.RESOURCE_DELETE_BUTTON.with({ resourceName, index }),
-      editButton: (index) => UI_NAMES.RESOURCE_EDIT_BUTTON.with({ resourceName, index }),
-      elementField: (field, index) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({ resourceName, view, field, index }),
-      viewContainer: UI_NAMES.RESOURCE_VIEW_CONTAINER.with({ resourceName, view }),
-      viewContainerTitle: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({ resourceName, view }),
+      deleteButton: index =>
+        UI_NAMES.RESOURCE_DELETE_BUTTON.with({ resourceName, index }),
+      editButton: index =>
+        UI_NAMES.RESOURCE_EDIT_BUTTON.with({ resourceName, index }),
+      elementField: (field, index) =>
+        UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+          resourceName,
+          view,
+          field,
+          index,
+        }),
+      viewContainer: UI_NAMES.RESOURCE_VIEW_CONTAINER.with({
+        resourceName,
+        view,
+      }),
+      viewContainerTitle: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE.with({
+        resourceName,
+        view,
+      }),
     }
     return {
       content,
@@ -169,21 +193,22 @@ export default {
       names,
       options: {
         pagination: {
-          itemsPerPage: rowsPerPage
-        }
+          itemsPerPage: rowsPerPage,
+        },
       },
       iconProps: {
-        small: true
+        small: true,
       },
       buttonProps: {
-        small: true
+        small: true,
       },
+      toolbarTitle: this.title || this.resourceName,
     }
   },
   computed: {
-    headers: function () {
+    headers: function() {
       const newHeaders = []
-      this.fields.forEach((field) => {
+      this.fields.forEach(field => {
         newHeaders.push({
           text: field.headerText || this.label(field),
           align: field.alignHeader || 'left',
@@ -193,11 +218,11 @@ export default {
         })
       })
       newHeaders.push({
-        text: "Actions",
+        text: 'Actions',
         align: 'left',
         sortable: false,
         value: 'action',
-        width: '150px'
+        width: '150px',
       })
       return newHeaders
     },
@@ -206,7 +231,7 @@ export default {
     },
     isLoading() {
       return this.$store.getters['requests/isLoading']
-    }
+    },
   },
   methods: {
     type(field) {
@@ -216,24 +241,26 @@ export default {
       return field.label || field
     },
     args(field) {
-      const args = typeof(field) === 'string' ? { 'label': field } : field
+      const args = typeof field === 'string' ? { label: field } : field
       return args
     },
     onCreateClick() {
       this.$router.push({ name: `${this.resourceName}/create` })
     },
-    onIdClick(id) {
-      this.$router.push({ name: `${this.resourceName}/show`, params: { id } })
-    }
+    onRowClicked(id) {
+      if (this.hasShow) {
+        this.$router.push({ name: `${this.resourceName}/show`, params: { id } })
+      }
+    },
   },
   created() {
     this.va.fetchList()
-  }
+  },
 }
 </script>
 
 <style>
 .v-application p {
-  margin: 8px 0px
+  margin: 8px 0px;
 }
 </style>

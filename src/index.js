@@ -1,12 +1,12 @@
+import { Create, Edit, List, Show } from '@components/Actions'
 import {
-  Create,
-  Edit,
-  List,
-  Show
-} from '@components/Actions'
-import {
-  DeleteButton, EditButton,
-  Sidebar, SidebarLink, SidebarNode, SidebarAction, SidebarHeading
+  DeleteButton,
+  EditButton,
+  Sidebar,
+  SidebarLink,
+  SidebarNode,
+  SidebarAction,
+  SidebarHeading,
 } from '@components/UiComponents'
 import Admin from '@components/Admin'
 import AuthTypes from '@va-auth/types'
@@ -15,13 +15,19 @@ import { UnauthorizedLayout } from '@components/Layouts'
 import { name, description, version } from '../package.json'
 
 const components = [
-  Admin, Resource,
-  Create, DeleteButton, Edit, EditButton, List, Show,
+  Admin,
+  Resource,
+  Create,
+  DeleteButton,
+  Edit,
+  EditButton,
+  List,
+  Show,
   Sidebar,
   SidebarLink,
   SidebarNode,
   SidebarAction,
-  SidebarHeading
+  SidebarHeading,
 ]
 
 const install = function(Vue) {

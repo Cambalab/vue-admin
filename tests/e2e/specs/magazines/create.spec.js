@@ -8,7 +8,7 @@ describe('Magazines: Create Action Test', () => {
   const magazine = Factory.createMagazine()
   const utils = InitEntityUtils({
     resourceName,
-    view
+    view,
   })
 
   before('Initialises authenticated with a default user', () => {
@@ -56,10 +56,7 @@ describe('Magazines: Create Action Test', () => {
 
   it('A magazine is created when the user submits the form', () => {
     // Setup: Initialises the server before the create request request
-    const routes = [
-      { name: 'create', response: magazine },
-      { name: 'list' }
-    ]
+    const routes = [{ name: 'create', response: magazine }, { name: 'list' }]
     cy.InitServer({ resourceName, routes, response: magazine })
     // Setup: Gets the submit button element
     const button = utils.getSubmitButton({ submitType: 'create' })
@@ -72,7 +69,7 @@ describe('Magazines: Create Action Test', () => {
       expect(newMagazine).to.deep.equal(magazine)
     })
     // Assertion: The magazine exists in the list
-    cy.wait(`@${resourceName}/list`).then((xmlHttpRequest) => {
+    cy.wait(`@${resourceName}/list`).then(xmlHttpRequest => {
       const newMagazine = xmlHttpRequest.response.body.find(_magazine => {
         return _magazine.id === magazine.id
       })

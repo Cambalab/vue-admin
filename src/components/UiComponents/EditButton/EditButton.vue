@@ -4,11 +4,13 @@
       <v-btn
         v-bind="buttonProps"
         :name="name"
-        @click="onEdit()"
+        @click.stop="onEdit()"
         icon
         v-on="on"
       >
-        <v-icon v-bind="iconProps">{{UI_CONTENT.RESOURCE_EDIT_BUTTON}}</v-icon>
+        <v-icon v-bind="iconProps">{{
+          UI_CONTENT.RESOURCE_EDIT_BUTTON
+        }}</v-icon>
       </v-btn>
     </template>
     Edit
@@ -20,36 +22,39 @@ import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 
 export default {
-  name: "EditButton",
+  name: 'EditButton',
 
   props: {
     name: {
       type: String,
-      default: 'va-edit-button'
+      default: 'va-edit-button',
     },
     resourceId: {
-      type: [Number, String]
+      type: [Number, String],
     },
     resourceName: {
-      type: String
+      type: String,
     },
     buttonProps: {
-      type: Object
+      type: Object,
     },
     iconProps: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   data() {
     return {
       UI_CONTENT,
-      UI_NAMES
+      UI_NAMES,
     }
   },
   methods: {
     onEdit() {
-      this.$router.push({ name: `${this.resourceName}/edit`, params: { id: this.resourceId } });
-    }
+      this.$router.push({
+        name: `${this.resourceName}/edit`,
+        params: { id: this.resourceId },
+      })
+    },
   },
-};
+}
 </script>

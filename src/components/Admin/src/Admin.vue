@@ -1,5 +1,5 @@
 <script>
-import AuthActionTypes from '@va-auth/types'
+import AuthTypes from '@va-auth/types'
 import Unauthenticated from './Unauthenticated'
 import Authenticated from './Authenticated'
 import defaults from './defaults'
@@ -12,8 +12,8 @@ const {
     entitiesModule,
     requestsModule,
     resourceModule,
-    unauthorizedRoutes
-  }
+    unauthorizedRoutes,
+  },
 } = defaults()
 
 export default {
@@ -21,35 +21,35 @@ export default {
   props: {
     appLayout: {
       type: Object,
-      default: () => props.appLayout
+      default: () => props.appLayout,
     },
     authLayout: {
       type: Object,
-      default: () => props.authLayout
+      default: () => props.authLayout,
     },
     homeLayout: {
       type: Object,
-      default: () => props.homeLayout
+      default: () => props.homeLayout,
     },
     options: {
       type: Object,
     },
     sidebar: {
       type: Object,
-      default: () => props.sidebar
+      default: () => props.sidebar,
     },
     title: {
       type: String,
-      default: props.title
+      default: props.title,
     },
     unauthorized: {
       type: Object,
-      default: () => props.unauthorized
+      default: () => props.unauthorized,
     },
   },
   components: {
     Authenticated,
-    Unauthenticated
+    Unauthenticated,
   },
   beforeCreate() {
     this.$store.registerModule('entities', entitiesModule)
@@ -57,42 +57,47 @@ export default {
     this.$store.registerModule('resources', resourceModule)
   },
   created() {
+    const { namespace } = AuthTypes
     const { authModule } = this.options
     const unauthenticatedRoutes = createUnauthenticatedRoutes(this.authLayout)
     const siteRoutes = createSiteRoutes({ homeLayout: this.homeLayout })
 
-    this.$store.registerModule('auth', authModule)
+    this.$store.registerModule(namespace, authModule)
     this.$router.addRoutes([
       ...siteRoutes,
       ...unauthenticatedRoutes,
-      ...unauthorizedRoutes
+      ...unauthorizedRoutes,
     ])
   },
   mounted: function() {
-    const { namespace, AUTH_CHECK_REQUEST } = AuthActionTypes
+    const { namespace, AUTH_CHECK_REQUEST } = AuthTypes
     this.$store.dispatch(`${namespace}/${AUTH_CHECK_REQUEST}`)
   },
   computed: {
     isAuthenticated() {
-      const { namespace } = AuthActionTypes
-      return this.$store.getters[`${namespace}/isAuthenticated`]
-    }
+      const { namespace, AUTH_IS_AUTHENTICATED } = AuthTypes
+      return this.$store.getters[`${namespace}/${AUTH_IS_AUTHENTICATED}`]
+    },
   },
   render(createElement) {
     return this.isAuthenticated
-    ? createElement(Authenticated, {
-      props: {
-        layout: this.appLayout,
-        title: this.title,
-        sidebar: this.sidebar,
-        unauthorized: this.unauthorized,
-      }
-    }, this.$slots.default)
-    : createElement(Unauthenticated, {
-      props: {
-        layout: this.authLayout
-      }
-    })
-  }
+      ? createElement(
+          Authenticated,
+          {
+            props: {
+              layout: this.appLayout,
+              title: this.title,
+              sidebar: this.sidebar,
+              unauthorized: this.unauthorized,
+            },
+          },
+          this.$slots.default
+        )
+      : createElement(Unauthenticated, {
+          props: {
+            layout: this.authLayout,
+          },
+        })
+  },
 }
 </script>

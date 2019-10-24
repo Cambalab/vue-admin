@@ -1,7 +1,7 @@
-import DeleteButton from "./DeleteButton";
+import DeleteButton from './DeleteButton'
 
 DeleteButton.install = function(Vue) {
-  Vue.component(DeleteButton.name, DeleteButton);
-};
+  Vue.component(DeleteButton.name, DeleteButton)
+}
 
-export default DeleteButton;
+export default DeleteButton

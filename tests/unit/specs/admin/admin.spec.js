@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import VueRouter from "vue-router"
+import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import Admin from '@components/Admin/src/Admin'
 import Authenticated from '@components/Admin/src/Authenticated'
 import Unauthenticated from '@components/Admin/src/Unauthenticated'
-import AuthActionTypes from '@va-auth/types'
+import AuthTypes from '@va-auth/types'
 import createAuthModule from '@va-auth/store'
 import { shallowMount } from '@vue/test-utils'
 import { nextTick } from '@unit/lib/utils/wrapper'
@@ -40,7 +40,7 @@ describe('Admin.vue', () => {
       propsData,
       router: mockedRouter,
       stubs,
-      sync: true
+      sync: true,
     })
   }
 
@@ -52,18 +52,18 @@ describe('Admin.vue', () => {
     mocks = { $store: mockedStore, $router: mockedRouter }
     authProvider = Factory.createAuthProvider()
     options = {
-      authModule: createAuthModule({ client: authProvider })
+      authModule: createAuthModule({ client: authProvider }),
     }
     propsData = {
       authProvider,
-      options
+      options,
     }
     routerSpy = {
-      addRoutes: jest.spyOn(mocks.$router, 'addRoutes')
+      addRoutes: jest.spyOn(mocks.$router, 'addRoutes'),
     }
     storeSpy = {
       registerModule: jest.spyOn(mocks.$store, 'registerModule'),
-      dispatch: jest.spyOn(mocks.$store, 'dispatch')
+      dispatch: jest.spyOn(mocks.$store, 'dispatch'),
     }
     stubs = ['router-view']
   })
@@ -89,32 +89,54 @@ describe('Admin.vue', () => {
   it('[Entities Module] - store should call registerModule on beforeCreate', () => {
     mountSubject()
 
-    const { args: { entitiesModule } } = adminFixture
+    const {
+      args: { entitiesModule },
+    } = adminFixture
 
-    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(1, 'entities', entitiesModule)
+    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(
+      1,
+      'entities',
+      entitiesModule
+    )
   })
 
   it('[Requests Module] - store should call registerModule on beforeCreate', () => {
     mountSubject()
 
-    const { args: { requestsModule } } = adminFixture
+    const {
+      args: { requestsModule },
+    } = adminFixture
 
-    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(2, 'requests', requestsModule)
+    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(
+      2,
+      'requests',
+      requestsModule
+    )
   })
 
   it('[Resource Module] - store should call registerModule on beforeCreate', () => {
     mountSubject()
 
-    const { args: { resourceModule } } = adminFixture
+    const {
+      args: { resourceModule },
+    } = adminFixture
 
-    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(3, 'resources', resourceModule)
+    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(
+      3,
+      'resources',
+      resourceModule
+    )
   })
 
   it('[Auth Module] - store should call registerModule on created', () => {
     const { authModule } = options
     mountSubject()
 
-    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(4, 'auth', authModule)
+    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(
+      4,
+      'auth',
+      authModule
+    )
   })
 
   it('[Auth/Unauthorized View] - router should call addRoutes on created', () => {
@@ -125,15 +147,15 @@ describe('Admin.vue', () => {
       args: {
         createUnauthenticatedRoutes,
         createSiteRoutes,
-        unauthorizedRoutes
-      }
+        unauthorizedRoutes,
+      },
     } = adminFixture
     const unauthenticatedRoutes = createUnauthenticatedRoutes(authLayout)
     const siteRoutes = createSiteRoutes({ homeLayout })
     const args = [
       ...siteRoutes,
       ...unauthenticatedRoutes,
-      ...unauthorizedRoutes
+      ...unauthorizedRoutes,
     ]
 
     expect(routerSpy.addRoutes).toHaveBeenCalledTimes(1)
@@ -141,16 +163,18 @@ describe('Admin.vue', () => {
   })
 
   it('[Auth Check Request] - store should call dispach on mounted', () => {
-    const { namespace, AUTH_CHECK_REQUEST } = AuthActionTypes
+    const { namespace, AUTH_CHECK_REQUEST } = AuthTypes
     mountSubject()
 
     expect(storeSpy.dispatch).toHaveBeenCalledTimes(1)
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(`${namespace}/${AUTH_CHECK_REQUEST}`)
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(
+      `${namespace}/${AUTH_CHECK_REQUEST}`
+    )
   })
 
-  it('[Unauthenticated] - component is rendered when isAuthenticated returns false', () => {
-    const { namespace } = AuthActionTypes
-    const getter = `${namespace}/isAuthenticated`
+  it('[Unauthenticated] - component is rendered when [AUTH_IS_AUTHENTICATED] returns false', () => {
+    const { namespace, AUTH_IS_AUTHENTICATED } = AuthTypes
+    const getter = `${namespace}/${AUTH_IS_AUTHENTICATED}`
 
     mountSubject()
 
@@ -161,9 +185,9 @@ describe('Admin.vue', () => {
     expect(unauthenticatedLayout.exists()).toBe(true)
   })
 
-  it('[Authenticated] - component is rendered when isAuthenticated returns true', async () => {
-    const { namespace, AUTH_LOGIN_SUCCESS } = AuthActionTypes
-    const getter = `${namespace}/isAuthenticated`
+  it('[Authenticated] - component is rendered when [AUTH_IS_AUTHENTICATED] returns true', async () => {
+    const { namespace, AUTH_LOGIN_SUCCESS, AUTH_IS_AUTHENTICATED } = AuthTypes
+    const getter = `${namespace}/${AUTH_IS_AUTHENTICATED}`
 
     mountSubject()
 

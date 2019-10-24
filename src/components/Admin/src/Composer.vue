@@ -10,35 +10,36 @@ export default {
       type: Object,
     },
     authProvider: {
-      type: Function
+      type: Function,
     },
     homeLayout: {
-      type: Object
+      type: Object,
     },
     sidebar: {
-      type: Object
+      type: Object,
     },
     options: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   render(createElement, context) {
     // One of authProvider or an authModule are strictly required
     const {
-      props: {
-        authProvider = () => {},
-        options: _options = {}
-      }
+      props: { authProvider = () => {}, options: _options = {} },
     } = context
 
-    const options = Object.assign({}, {
-      authModule: createAuthModule({ client: authProvider })
-    }, _options)
+    const options = Object.assign(
+      {},
+      {
+        authModule: createAuthModule({ client: authProvider }),
+      },
+      _options
+    )
     const props = Object.assign({}, context.props, { options })
 
     const admin = createElement(Admin, { props }, context.slots().default)
 
     return createElement(VApp, {}, [admin])
-  }
+  },
 }
 </script>

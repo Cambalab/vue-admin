@@ -1,4 +1,4 @@
-import AuthActionTypes from '@va-auth/types'
+import AuthTypes from '@va-auth/types'
 
 export default (client, options = {}) => {
   return (type, params) => {
@@ -6,18 +6,16 @@ export default (client, options = {}) => {
       AUTH_LOGIN_REQUEST,
       AUTH_LOGOUT_REQUEST,
       AUTH_CHECK_REQUEST,
-    } = AuthActionTypes
+    } = AuthTypes
 
-    const {
-      authFields,
-      authUrl,
-      storageKey,
-      userField,
-    } = Object.assign({
-      authFields: { username: 'username', password: 'password' },
-      storageKey: 'token',
-      userField: 'user',
-    }, options);
+    const { authFields, authUrl, storageKey, userField } = Object.assign(
+      {
+        authFields: { username: 'username', password: 'password' },
+        storageKey: 'token',
+        userField: 'user',
+      },
+      options
+    )
 
     switch (type) {
       case AUTH_LOGIN_REQUEST:
@@ -25,7 +23,7 @@ export default (client, options = {}) => {
           const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
             [authFields.username]: params.username,
-            [authFields.password]: params.password
+            [authFields.password]: params.password,
           }
           const method = 'post'
           const url = authUrl
@@ -53,31 +51,30 @@ export default (client, options = {}) => {
         })
 
       case AUTH_CHECK_REQUEST:
-      return new Promise((resolve, reject) => {
-        const token = localStorage.getItem(storageKey)
-        if (token) {
-          const url = authUrl
-          const headers = {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            token,
+        return new Promise((resolve, reject) => {
+          const token = localStorage.getItem(storageKey)
+          if (token) {
+            const url = authUrl
+            const headers = {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              token,
+            }
+            const method = 'get'
+            client({ url, headers, method })
+              .then(response => {
+                const { data } = response
+                const { [userField]: user } = data
+                resolve(user)
+              })
+              .catch(error => {
+                reject(error)
+              })
+          } else {
+            reject('Authentication failed.')
           }
-          const method = 'get'
-          client({ url, headers, method })
-            .then(response => {
-              const { data } = response
-              const { [userField]: user } = data
-              resolve(user)
-            })
-            .catch(error => {
-              reject(error)
-            })
-        } else {
-          reject('Authentication failed.')
-        }
-      })
-
+        })
       default:
-        return Promise.reject(`Unsupported @va-auth action type: ${type}`);
+        return Promise.reject(`Unsupported @va-auth action type: ${type}`)
     }
   }
 }

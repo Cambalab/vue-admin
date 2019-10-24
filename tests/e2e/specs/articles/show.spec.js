@@ -1,5 +1,4 @@
 const { queryElementByProp } = require('../../helpers')
-const UI_CONTENT = require('../../../../src/constants/ui.content.default')
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
 describe('Articles: Show Test', () => {
@@ -33,13 +32,13 @@ describe('Articles: Show Test', () => {
   })
 
   it('Articles Show View should render title: Articles', () => {
-    const showViewTitleText = UI_CONTENT.RESOURCE_VIEW_TITLE.with({ resourceName })
+    const showViewTitleText = 'Article'
 
     cy.getElement({
       constant: UI_NAMES.RESOURCE_VIEW_CONTAINER_TITLE,
       constantParams: { resourceName, view },
       elementType: 'div',
-      elementProp: 'name'
+      elementProp: 'name',
     }).should('contain', showViewTitleText)
   })
 
@@ -52,14 +51,14 @@ describe('Articles: Show Test', () => {
   })
 
   /**
-  * Helper functions
-  **/
-  function queryToElementWith(containerType, containerParams){
+   * Helper functions
+   **/
+  function queryToElementWith(containerType, containerParams) {
     const containerName = UI_NAMES[containerType].with(containerParams)
     return queryElementByProp({
       type: 'div',
       prop: 'name',
-      value: containerName
+      value: containerName,
     })
   }
 
@@ -68,15 +67,19 @@ describe('Articles: Show Test', () => {
   }
 
   function articlesShowViewShouldContainTheField(field) {
-    cy.get(queryToElement('RESOURCE_VIEW_CONTAINER_FIELDS'))
-      .should((fieldsContainerRes) => {
-        const fieldContainerElement = queryToElementWith('RESOURCE_VIEW_CONTAINER_FIELD', {
-          resourceName,
-          view,
-          field
-        })
+    cy.get(queryToElement('RESOURCE_VIEW_CONTAINER_FIELDS')).should(
+      fieldsContainerRes => {
+        const fieldContainerElement = queryToElementWith(
+          'RESOURCE_VIEW_CONTAINER_FIELD',
+          {
+            resourceName,
+            view,
+            field,
+          }
+        )
         const fieldContainer = fieldsContainerRes.find(fieldContainerElement)
         expect(fieldContainer).to.contain(article[field])
-      })
+      }
+    )
   }
 })

@@ -1,5 +1,5 @@
 <script>
-import AuthActionTypes from '@va-auth/types'
+import AuthTypes from '@va-auth/types'
 import Core from '@components/Core'
 
 export default {
@@ -7,32 +7,32 @@ export default {
   props: {
     layout: {
       type: Object,
-      required: true
+      required: true,
     },
     title: {
       type: String,
-      required: true
+      required: true,
     },
     sidebar: {
       type: Object,
-      required: true
+      required: true,
     },
     unauthorized: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
-    logout: function () {
-      const { namespace, AUTH_LOGOUT_REQUEST } = AuthActionTypes
+    logout: function() {
+      const { namespace, AUTH_LOGOUT_REQUEST } = AuthTypes
       this.$store.dispatch(`${namespace}/${AUTH_LOGOUT_REQUEST}`)
     },
-    getUser: function () {
-      const { namespace } = AuthActionTypes
-      return this.$store.getters[`${namespace}/getUser`]
-    }
+    getUser: function() {
+      const { namespace, AUTH_GET_USER } = AuthTypes
+      return this.$store.getters[`${namespace}/${AUTH_GET_USER}`]
+    },
   },
-  render: function (createElement) {
+  render: function(createElement) {
     const props = {
       layout: this.layout,
       title: this.title,
@@ -40,12 +40,11 @@ export default {
       unauthorized: this.unauthorized,
       va: {
         getUser: this.getUser,
-        logout: this.logout
-      }
+        logout: this.logout,
+      },
     }
 
     return createElement(Core, { props }, this.$slots.default)
-  }
+  },
 }
-
 </script>

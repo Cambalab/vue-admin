@@ -4,7 +4,6 @@ const { queryElementByProp } = require('../../helpers')
 
 const UI_NAMES = require('../../../../src/constants/ui.element.names')
 
-
 describe('UI Test', () => {
   before('Initialises authenticated with a default user', () => {
     cy.InitAuthenticatedUser()
@@ -20,7 +19,7 @@ describe('UI Test', () => {
     const drawerButton = queryElementByProp({
       type: 'button',
       prop: 'name',
-      value: drawerButtonName
+      value: drawerButtonName,
     })
     cy.get(drawerButton).click()
   })
@@ -29,13 +28,13 @@ describe('UI Test', () => {
     const routes = [{ name: 'list' }]
     cy.InitServer({ resourceName: 'articles', routes })
     const drawerArticlesTileName = UI_NAMES.DRAWER_RESOURCE_TILE.with({
-      resourceName: 'articles'
+      resourceName: 'articles',
     })
 
     const drawerArticlesTileElement = queryElementByProp({
       type: 'a',
       prop: 'name',
-      value: drawerArticlesTileName
+      value: drawerArticlesTileName,
     })
     cy.get(drawerArticlesTileElement).click()
 
@@ -46,13 +45,13 @@ describe('UI Test', () => {
     const routes = [{ name: 'list' }]
     cy.InitServer({ resourceName: 'magazines', routes })
     const drawerMagazinesTileName = UI_NAMES.DRAWER_RESOURCE_TILE.with({
-      resourceName: 'magazines'
+      resourceName: 'magazines',
     })
 
     const drawerMagazinesTileElement = queryElementByProp({
       type: 'a',
       prop: 'name',
-      value: drawerMagazinesTileName
+      value: drawerMagazinesTileName,
     })
     cy.get(drawerMagazinesTileElement).click()
 
@@ -63,13 +62,13 @@ describe('UI Test', () => {
     const routes = [{ name: 'list' }]
     cy.InitServer({ resourceName: 'authors', routes })
     const drawerAuthorsTileName = UI_NAMES.DRAWER_RESOURCE_TILE.with({
-      resourceName: 'authors'
+      resourceName: 'authors',
     })
 
     const drawerAuthorsTileElement = queryElementByProp({
       type: 'a',
       prop: 'name',
-      value: drawerAuthorsTileName
+      value: drawerAuthorsTileName,
     })
     cy.get(drawerAuthorsTileElement).click()
 
@@ -80,13 +79,13 @@ describe('UI Test', () => {
     const routes = [{ name: 'list' }]
     cy.InitServer({ resourceName: 'authors', routes })
     const drawerAuthorsTileName = UI_NAMES.DRAWER_RESOURCE_TILE.with({
-      resourceName: 'authors'
+      resourceName: 'authors',
     })
 
     const drawerAuthorsTileElement = queryElementByProp({
       type: 'a',
       prop: 'name',
-      value: drawerAuthorsTileName
+      value: drawerAuthorsTileName,
     })
     cy.get(drawerAuthorsTileElement).click()
 

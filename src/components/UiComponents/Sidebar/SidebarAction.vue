@@ -12,11 +12,11 @@
 </template>
 <script>
 export default {
-  name: "SidebarAction",
+  name: 'SidebarAction',
   props: {
     title: String,
     action: Function,
-    icon: String
-  }
+    icon: String,
+  },
 }
 </script>

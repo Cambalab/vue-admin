@@ -1,22 +1,11 @@
-import {
-  createArticle,
-  createMagazine,
-  createAuthor,
-} from './resources'
-import {
-  createAuthResponse,
-  createCredentials
-} from './auth'
-import {
-  createUser,
-} from './users'
+import { createArticle, createMagazine, createAuthor } from './resources'
+import { createAuthResponse, createCredentials } from './auth'
+import { createUser } from './users'
 import {
   createInitialVuexStoreGetters,
   createInitialVuexStoreState,
 } from './store'
-import {
-  createApiUrl,
-} from './env'
+import { createApiUrl } from './env'
 
 export default {
   // Auth builders

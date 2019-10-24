@@ -9,23 +9,20 @@ import { initialResourcesRoutes } from './common.utils'
  *
  * @return {Object} The expected Vuex Crud mocked getters
  */
-export default ({
-  snapshot = 'default',
-  initialResources
-}) => {
+export default ({ snapshot = 'default', initialResources }) => {
   // New custom getters configurations should be added here
   const snapshots = {
     default: initDefaultGetters,
-    Resource: initGettersForResource
+    Resource: initGettersForResource,
   }
 
   // Vuex initial entities getters should be added here
   const entitiesCrud = {
-    'entities/getEntity': () => {}
+    'entities/getEntity': () => {},
   }
   // Vuex initial resources getters should be added here
   const resourcesGetters = {
-    'resources/all': () => initialResourcesRoutes(initialResources)
+    'resources/all': () => initialResourcesRoutes(initialResources),
   }
 
   /**
@@ -39,10 +36,10 @@ export default ({
   function initResourcesGetters(resources) {
     const crud = {}
     resources.forEach(resource => {
-      crud[`${resource}/byId`] = (id) => id,
-      crud[`${resource}/isError`] = () => false,
-      crud[`${resource}/isLoading`] = () => false,
-      crud[`${resource}/list`] = () => []
+      ;(crud[`${resource}/byId`] = id => id),
+        (crud[`${resource}/isError`] = () => false),
+        (crud[`${resource}/isLoading`] = () => false),
+        (crud[`${resource}/list`] = () => [])
     })
     return crud
   }
@@ -51,13 +48,13 @@ export default ({
     return {
       ...initResourcesGetters(initialResources),
       ...entitiesCrud,
-      ...resourcesGetters
+      ...resourcesGetters,
     }
   }
   // Initialises getters for a Resource component
   function initGettersForResource() {
     return {
-      ...initResourcesGetters(initialResources)
+      ...initResourcesGetters(initialResources),
     }
   }
 

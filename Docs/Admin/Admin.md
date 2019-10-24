@@ -16,9 +16,17 @@ Communication to the store match the structure provided in the `authModule` (e.g
 
 +   **Type:** `Object (optional)`
 
-+   **Details:** A component that is used by the router whenever the store `isAuthenticated` getter returns `false`. When using your own authLayout, a va `Object` will be provided with a `login` function that receives two arguments: `{String} username`, `{String} password` and updates the stores state.
++   **Details:** A component that is used by the router whenever the store `AUTH_IS_AUTHENTICATED` getter returns `false`. When using your own authLayout, a va `Object` will be provided with a `login` function that receives two arguments: `{String} username`, `{String} password` and updates the stores state.
 
 +   **Default:** `AuthLayout`
+
+### homeLayout
+
++   **Type:** `Object (optional)`
+
++   **Details:** A component that is used by the router whenever `/` is visited.
+
++   **Default:** `HomeLayout`
 
 ### options
 
@@ -33,6 +41,7 @@ You can use the following options:
 +   **Example:**
 
 ```js
+import AuthTypes from 'vue-admin-js'
 const adminOptions = {
   authModule: {
     namespaced: true,
@@ -40,9 +49,9 @@ const adminOptions = {
       ...
     },
     getters: {
-      authStatus: state => state.status,
-      isAuthenticated: state.isAuthenticated,
-      getUser: state.user
+      [AuthTypes.AUTH_GET_STATUS]: state => state.status,
+      [AuthTypes.AUTH_IS_AUTHENTICATED]: state.isAuthenticated,
+      [AuthTypes.AUTH_GET_USER]: state.user
     }
     mutations: {
       ...

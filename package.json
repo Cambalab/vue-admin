@@ -1,12 +1,13 @@
 {
   "name": "vue-admin-js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "An open source frontend Framework for building admin applications running in the browser, using ES6, Vue.js and Vuetify.js",
   "author": "Camba <info@camba.coop>",
   "scripts": {
     "build": "vue-cli-service build --target lib ./src/index.js",
     "changelog": "github_changelog_generator && git add CHANGELOG.md && git commit -am \"Updates changelog\"",
-    "lint": "vue-cli-service lint",
+    "lint": "vue-cli-service lint --no-fix --max-warnings 0",
+    "lint:autofix": "vue-cli-service lint",
     "prepublish": "npm run build",
     "publish": "git push origin --tags && npm run changelog && git push origin",
     "release:major": "npm version major && npm publish",
@@ -36,12 +37,17 @@
     "cypress-dark": "^1.7.13",
     "deepmerge": "^4.0.0",
     "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-vue": "^5.2.3",
     "fibers": "^4.0.1",
+    "husky": "^3.0.9",
     "joi": "^14.3.1",
+    "lint-staged": "^9.4.2",
     "material-design-icons-iconfont": "^5.0.1",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
+    "prettier": "1.18.2",
     "sass": "^1.17.4",
     "sass-loader": "^7.1.0",
     "vue": "^2.6.10",
@@ -54,22 +60,19 @@
     "vuex": "^3.0.1",
     "vuex-crud": "^0.3.2"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,json,vue}": [
+      "npm run lint:autofix",
+      "git add"
+    ]
+  },
   "directories": {
     "doc": "https://github.com/Cambalab/vue-admin/blob/develop/Docs"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
   },
   "postcss": {
     "plugins": {

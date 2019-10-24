@@ -3,10 +3,7 @@ import createInitialGettersWith from './initial.getters'
 import createInitialMutationsWith from './initial.mutations'
 
 // Initial vuex crud resources should be added here
-const _initialResources = [
-  'articles',
-  'magazines'
-]
+const _initialResources = ['articles', 'magazines']
 
 /**
  * Annonymous Function - Creates a simualtion of initial vuex crud store
@@ -19,11 +16,11 @@ const _initialResources = [
  */
 export default ({
   snapshot = 'default',
-  initialResources = _initialResources
+  initialResources = _initialResources,
 }) => {
   return {
     state: createInitialStateWith({ snapshot, initialResources }),
     getters: createInitialGettersWith({ snapshot, initialResources }),
-    mutations: createInitialMutationsWith({ snapshot })
+    mutations: createInitialMutationsWith({ snapshot }),
   }
 }

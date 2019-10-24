@@ -1,7 +1,5 @@
 <template>
-  <v-list-item :to="path"
-    :name="names.resourceTitle"
-  >
+  <v-list-item :to="path" :name="names.resourceTitle">
     <v-list-item-action>
       <v-icon>{{ icon }}</v-icon>
     </v-list-item-action>
@@ -16,20 +14,20 @@
 import UI_NAMES from '@constants/ui.element.names'
 
 export default {
-  name: "SidebarLink",
+  name: 'SidebarLink',
   props: {
     title: String,
     path: String,
-    icon: String
+    icon: String,
   },
   data() {
     const { DRAWER_RESOURCE_TILE } = UI_NAMES
     const names = {
       resourceTitle: DRAWER_RESOURCE_TILE.with({
-        resourceName: this.title.toLowerCase()
-      })
+        resourceName: this.title.toLowerCase(),
+      }),
     }
     return { names }
-  }
+  },
 }
 </script>

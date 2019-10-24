@@ -26,7 +26,7 @@ export const getEntityForm = ({ resourceName, formType, store }) => {
  */
 export const getEntity = ({ resourceName, store, router }) => {
   const { id } = router.history.current.params
-  const moduleName = `${resourceName}/byId`;
+  const moduleName = `${resourceName}/byId`
   return store.getters[moduleName](id)
 }
 
@@ -42,8 +42,8 @@ export const getEntity = ({ resourceName, store, router }) => {
  */
 export const fetchEntity = ({ resourceName, store, router }) => {
   const { id } = router.history.current.params
-  const moduleName = `${resourceName}/fetchSingle`;
-  return store.dispatch(moduleName, { id });
+  const moduleName = `${resourceName}/fetchSingle`
+  return store.dispatch(moduleName, { id })
 }
 
 /**
@@ -55,7 +55,7 @@ export const fetchEntity = ({ resourceName, store, router }) => {
  * @return {Array} A 'resourceName' list from the Vuex Crud store
  */
 export const fetchList = ({ resourceName, store }) => {
-  const moduleName = `${resourceName}/fetchList`;
+  const moduleName = `${resourceName}/fetchList`
   return store.dispatch(moduleName)
 }
 
@@ -89,11 +89,11 @@ export const updateEntity = ({
   value,
   store,
   resourceName,
-  formType
+  formType,
 }) => {
   const moduleName = 'entities/updateForm'
   const entity = resourceName
-  store.commit(moduleName, { formType, value, resourceKey, entity });
+  store.commit(moduleName, { formType, value, resourceKey, entity })
 }
 
 /**
@@ -104,14 +104,10 @@ export const updateEntity = ({
  * @param {String} formType     The form type in the entities state (createForm, editForm)
  */
 
-export const initEntity = ({
-  store,
-  resourceName,
-  formType
-}) => {
+export const initEntity = ({ store, resourceName, formType }) => {
   const moduleName = 'entities/initForm'
   const entity = resourceName
-  store.commit(moduleName, { formType, entity });
+  store.commit(moduleName, { formType, entity })
 }
 
 /**
@@ -138,28 +134,29 @@ export const submitEntity = ({
   router,
   redirectView,
   resourceIdName,
-  parseResponses
+  parseResponses,
 }) => {
   const moduleName = `${resourceName}/${actionType}`
-  return store.dispatch(moduleName, actionTypeParams)
-  .then(res => {
-    const { status } = res
-    // NOTE - Maybe in the future we want to delete the remaining data in
-    // the store if the creation went Ok, though it could be useful to
-    // keep it if we want to implement an Undo feature - @sgobotta
-    if (redirectView && [200, 201].indexOf(status) !== -1) {
-      const parsedResponse = parseResponses.parseSingle
-        ? parseResponses.parseSingle(res)
-        : res
-      const id = parsedResponse.data[resourceIdName]
-      const resource = resourceName
-      const view = redirectView
-      Router.redirect({ router, resource, view, id })
-    }
-    return res
-  })
-  .catch(err => {
-    // eslint-disable-next-line no-console
-    console.error(err)
-  })
+  return store
+    .dispatch(moduleName, actionTypeParams)
+    .then(res => {
+      const { status } = res
+      // NOTE - Maybe in the future we want to delete the remaining data in
+      // the store if the creation went Ok, though it could be useful to
+      // keep it if we want to implement an Undo feature - @sgobotta
+      if (redirectView && [200, 201].indexOf(status) !== -1) {
+        const parsedResponse = parseResponses.parseSingle
+          ? parseResponses.parseSingle(res)
+          : res
+        const id = parsedResponse.data[resourceIdName]
+        const resource = resourceName
+        const view = redirectView
+        Router.redirect({ router, resource, view, id })
+      }
+      return res
+    })
+    .catch(err => {
+      // eslint-disable-next-line no-console
+      console.error(err)
+    })
 }

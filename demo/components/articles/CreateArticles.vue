@@ -1,5 +1,5 @@
 <template>
-  <Create>
+  <Create title="Create Article">
     <input source="title" placeHolder="Title" />
     <input source="content" placeHolder="Content" />
   </Create>
@@ -11,7 +11,7 @@ import Create from '@components/Actions/Create'
 export default {
   name: 'CreateArticles',
   components: {
-    Create
-  }
+    Create,
+  },
 }
 </script>

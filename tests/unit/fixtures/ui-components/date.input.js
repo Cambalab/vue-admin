@@ -10,5 +10,5 @@ export default {
     readonly: defaults().props.readonly,
     vDatePickerProps: defaults().props.vDatePickerProps(),
     vMenuProps: defaults().props.vMenuProps(),
-  }
+  },
 }

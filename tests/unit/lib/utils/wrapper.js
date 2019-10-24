@@ -1,6 +1,5 @@
-
-const nextTick = (wrapper) => {
-  return new Promise(resolve => wrapper.vm.$nextTick(resolve));
+const nextTick = wrapper => {
+  return new Promise(resolve => wrapper.vm.$nextTick(resolve))
 }
 
 const findButtonByName = ({ wrapper, name }) => {
@@ -9,8 +8,4 @@ const findButtonByName = ({ wrapper, name }) => {
 
 const findRef = ({ wrapper, ref }) => wrapper.find({ ref })
 
-export {
-  findButtonByName,
-  findRef,
-  nextTick
-}
+export { findButtonByName, findRef, nextTick }

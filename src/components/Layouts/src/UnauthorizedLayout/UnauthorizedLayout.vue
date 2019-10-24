@@ -13,7 +13,12 @@
           {{ UNAUTHORIZED_MESSAGE_CONTENT }}
         </p>
       </slot>
-      <v-btn :name="NAME_BUTTON_GO_BACK" class="m-0" color="success" v-on:click="goBack">
+      <v-btn
+        :name="NAME_BUTTON_GO_BACK"
+        class="m-0"
+        color="success"
+        v-on:click="goBack"
+      >
         {{ BUTTON_GO_BACK_CONTENT }}
       </v-btn>
     </v-card-text>
@@ -26,8 +31,10 @@ export default {
   name: 'UnauthorizedLayout',
   data: () => {
     return {
-      NAME_UNAUTHORIZED_HEADER_CONTAINER: UI_NAMES.UNAUTHORIZED_HEADER_CONTAINER,
-      NAME_UNAUTHORIZED_MESSAGE_CONTAINER: UI_NAMES.UNAUTHORIZED_MESSAGE_CONTAINER,
+      NAME_UNAUTHORIZED_HEADER_CONTAINER:
+        UI_NAMES.UNAUTHORIZED_HEADER_CONTAINER,
+      NAME_UNAUTHORIZED_MESSAGE_CONTAINER:
+        UI_NAMES.UNAUTHORIZED_MESSAGE_CONTAINER,
       NAME_BUTTON_GO_BACK: UI_NAMES.BUTTON_GO_BACK,
 
       UNAUTHORIZED_HEADER_CONTENT: UI_CONTENT.UNAUTHORIZED_HEADER,
@@ -36,11 +43,9 @@ export default {
     }
   },
   methods: {
-    goBack () {
-      window.history.length > 1
-        ? this.$router.go(-1)
-        : this.$router.push('/')
-    }
-  }
+    goBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+    },
+  },
 }
 </script>

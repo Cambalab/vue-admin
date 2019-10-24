@@ -1,6 +1,9 @@
-
 export default {
   namespace: 'auth',
+
+  /**
+   * Actions and Mutations
+   */
 
   AUTH_LOGIN_REQUEST: 'AUTH_LOGIN_REQUEST',
   AUTH_LOGIN_SUCCESS: 'AUTH_LOGIN_SUCCESS',
@@ -13,4 +16,12 @@ export default {
   AUTH_CHECK_REQUEST: 'AUTH_CHECK_REQUEST',
   AUTH_CHECK_SUCCESS: 'AUTH_CHECK_SUCCESS',
   AUTH_CHECK_FAILURE: 'AUTH_CHECK_FAILURE',
+
+  /**
+   * Getters
+   */
+
+  AUTH_GET_USER: 'AUTH_GET_USER',
+  AUTH_GET_STATUS: 'AUTH_GET_STATUS',
+  AUTH_IS_AUTHENTICATED: 'AUTH_IS_AUTHENTICATED',
 }

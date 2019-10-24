@@ -6,7 +6,7 @@ describe('Magazines: List Action Test', () => {
   const view = 'list'
   const utils = InitEntityUtils({
     resourceName,
-    view
+    view,
   })
 
   let magazines
@@ -89,12 +89,12 @@ describe('Magazines: List Action Test', () => {
     })
   }
 
-  const navigateToNextPage = (index) => {
-    if (index && (index % rowsPerPage === 0)) {
+  const navigateToNextPage = index => {
+    if (index && index % rowsPerPage === 0) {
       const nextPageButton = cy.getElement({
         constant: '"Next page"',
         elementType: 'button',
-        elementProp: 'aria-label'
+        elementProp: 'aria-label',
       })
       nextPageButton.click()
       timesNavigatedToNextPage = timesNavigatedToNextPage + 1
@@ -106,7 +106,7 @@ describe('Magazines: List Action Test', () => {
       const previousPageButton = cy.getElement({
         constant: '"Previous page"',
         elementType: 'button',
-        elementProp: 'aria-label'
+        elementProp: 'aria-label',
       })
       while (timesNavigatedToNextPage > 0) {
         previousPageButton.click({ multiple: true })
