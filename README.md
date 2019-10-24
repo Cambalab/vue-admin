@@ -218,6 +218,17 @@ npm install
 npm run serve
 ```
 
+### Demo app credentials
+
+User with **admin** permissions
+> **username:** dev@camba.coop  
+> **password:** 123456
+
+User with **guest** permissions
+
+> **username:** user@camba.coop  
+> **password:** 123456
+
 ## Running the tests and other scripts
 
 **We use the `vue-cli-service` to run tests, lint and build**
