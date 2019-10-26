@@ -11,6 +11,7 @@ module.exports = {
     '@assets(.*)$': '<rootDir>/src/assets/$1',
     '@components(.*)$': '<rootDir>/src/components/$1',
     '@constants(.*)$': '<rootDir>/src/constants/$1',
+    '@demo(.*)$': '<rootDir>/demo/$1',
     '@handlers(.*)$': '<rootDir>/src/handlers/$1',
     '@router(.*)$': '<rootDir>/src/router/$1',
     '@store(.*)$': '<rootDir>/src/store/$1',
