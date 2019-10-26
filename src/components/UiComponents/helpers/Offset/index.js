@@ -1,7 +1,7 @@
-import Offset from "./Offset";
+import Offset from './Offset'
 
 Offset.install = function(Vue) {
-  Vue.component(Offset.name, Offset);
-};
+  Vue.component(Offset.name, Offset)
+}
 
-export default Offset;
+export default Offset
