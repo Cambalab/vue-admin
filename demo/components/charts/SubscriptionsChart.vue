@@ -34,20 +34,7 @@ export default {
       subscriptions: [],
       articlesSubscriptionsChart: {
         data: {
-          labels: [
-            'Ja',
-            'Fe',
-            'Ma',
-            'Ap',
-            'Mai',
-            'Ju',
-            'Jul',
-            'Au',
-            'Se',
-            'Oc',
-            'No',
-            'De',
-          ],
+          labels: [],
           series: [],
         },
         options: {
@@ -83,9 +70,6 @@ export default {
     this.getSubscriptions()
   },
   methods: {
-    complete(index) {
-      this.list[index] = !this.list[index]
-    },
     getSubscriptions() {
       axios
         .get('http://localhost:8888/api/subscriptions', {
