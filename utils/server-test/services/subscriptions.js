@@ -3,61 +3,73 @@ module.exports = function(app) {
     {
       id: 1,
       month: 'January',
+      shortMonth: 'Ja',
       subscriptions: 913,
     },
     {
       id: 2,
       month: 'February',
+      shortMonth: 'Fe',
       subscriptions: 1020,
     },
     {
       id: 3,
       month: 'March',
+      shortMonth: 'Ma',
       subscriptions: 980,
     },
     {
       id: 3,
       month: 'April',
+      shortMonth: 'Ap',
       subscriptions: 853,
     },
     {
       id: 3,
       month: 'May',
+      shortMonth: 'Ma',
       subscriptions: 795,
     },
     {
       id: 3,
       month: 'June',
+      shortMonth: 'Ju',
       subscriptions: 750,
     },
     {
       id: 3,
       month: 'July',
+      shortMonth: 'Ju',
       subscriptions: 613,
     },
     {
       id: 3,
       month: 'August',
+      shortMonth: 'Au',
       subscriptions: 740,
     },
     {
       id: 3,
       month: 'September',
+      shortMonth: 'Se',
       subscriptions: 780,
     },
     {
       id: 3,
       month: 'October',
+      shortMonth: 'Oc',
       subscriptions: 890,
     },
     {
       id: 3,
       month: 'November',
+      shortMonth: 'No',
       subscriptions: 420,
     },
     {
       id: 3,
       month: 'December',
+      shortMonth: 'De',
       subscriptions: 627,
     },
   ]
