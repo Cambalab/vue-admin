@@ -1,41 +1,45 @@
 <template>
-  <Edit>
-    <input source="id" placeHolder="Id" />
+  <Create>
     <input source="name" placeHolder="Name" />
     <input source="lastname" placeHolder="Last name" />
-    <input source="birthdate" placeholder="Birthdate" type="DateInput"
+    <input
+      source="birthdate"
+      placeholder="Birthdate"
+      type="DateInput"
       :vDatePickerProps="vDatePickerProps"
       :vMenuProps="vMenuProps"
       :parse="parseDate"
       :format="formatDate"
+      :readonly="readonly"
     />
-  </Edit>
+  </Create>
 </template>
 
 <script>
-import Edit from '@components/Actions/Edit'
+import Create from '@components/Actions/Create'
 import dateUtils from '@demo/utils/dates'
 
 export default {
-  name: 'EditAuthors',
+  name: 'CreateAuthors',
   components: {
-    Edit
+    Create,
   },
   data() {
     const { parseDate, formatDate } = dateUtils
     return {
       vDatePickerProps: {
-        locale: 'en',
+        locale: 'en-us',
         type: 'date',
-        noTitle: true
+        noTitle: true,
       },
       vMenuProps: {
         nudgeRight: 0,
-        closeOnContentClick: true
+        closeOnContentClick: true,
       },
+      readonly: true,
       parseDate,
-      formatDate
+      formatDate,
     }
-  }
+  },
 }
 </script>

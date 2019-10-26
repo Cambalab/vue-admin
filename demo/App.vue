@@ -6,39 +6,53 @@
     :authProvider="authProvider"
     :homeLayout="HomeLayout"
     :sidebar="CustomSidebar"
-    :unauthorized="UnauthorizedCustomView">
+    :unauthorized="UnauthorizedCustomView"
+  >
     <!-- Articles Resource -->
     <Resource
-      name="articles" :resourceIdName="resourceIdName"
-      :userPermissionsField="userPermissionsField" :apiUrl="articlesApiUrl"
-      :redirect="articlesRedirect">
-      <View slot="list"   :component="ListArticles" :permissions="['admin']" />
-      <View slot="show"   :component="ShowArticles" :permissions="['admin']" />
-      <View slot="create" :component="CreateArticles" :permissions="['admin']" />
-      <View slot="edit"   :component="EditArticles" :isPublic="true" />
+      name="articles"
+      :resourceIdName="resourceIdName"
+      :userPermissionsField="userPermissionsField"
+      :apiUrl="articlesApiUrl"
+      :redirect="articlesRedirect"
+    >
+      <View slot="list" :component="ListArticles" :permissions="['admin']" />
+      <View slot="show" :component="ShowArticles" :permissions="['admin']" />
+      <View
+        slot="create"
+        :component="CreateArticles"
+        :permissions="['admin']"
+      />
+      <View slot="edit" :component="EditArticles" :isPublic="true" />
     </Resource>
     <!-- Magazines Resource -->
-    <Resource name="magazines" :resourceIdName="resourceIdName"
-      :apiUrl="magazinesApiUrl" :redirect="magazinesRedirect">
-      <View slot="list"   :component="ListMagazines" :isPublic="true" />
-      <View slot="show"   :component="ShowMagazines" :isPublic="true" />
+    <Resource
+      name="magazines"
+      :resourceIdName="resourceIdName"
+      :apiUrl="magazinesApiUrl"
+      :redirect="magazinesRedirect"
+    >
+      <View slot="list" :component="ListMagazines" :isPublic="true" />
+      <View slot="show" :component="ShowMagazines" :isPublic="true" />
       <View slot="create" :component="CreateMagazines" :isPublic="true" />
-      <View slot="edit"   :component="EditMagazines" :isPublic="true" />
+      <View slot="edit" :component="EditMagazines" :isPublic="true" />
     </Resource>
     <!-- Authors Resource -->
-    <Resource name="authors"
-      :resourceIdName="resourceIdName" :apiUrl="authorsApiUrl"
-      :redirect="authorsRedirect">
-      <View slot="list"   :component="ListAuthors"   :isPublic="true" />
-      <View slot="show"   :component="ShowAuthors"   :isPublic="true" />
+    <Resource
+      name="authors"
+      :resourceIdName="resourceIdName"
+      :apiUrl="authorsApiUrl"
+      :redirect="authorsRedirect"
+    >
+      <View slot="list" :component="ListAuthors" :isPublic="true" />
+      <View slot="show" :component="ShowAuthors" :isPublic="true" />
       <View slot="create" :component="CreateAuthors" :isPublic="true" />
-      <View slot="edit"   :component="EditAuthors"   :isPublic="true" />
+      <View slot="edit" :component="EditAuthors" :isPublic="true" />
     </Resource>
   </Admin>
 </template>
 
 <script>
-
 import Admin from '@components/Admin'
 import Resource from '@components/Resource'
 
@@ -47,20 +61,20 @@ import UnauthorizedCustomView from './components/UnauthorizedCustomView'
 import CustomSidebar from './components/CustomSidebar'
 import HomeLayout from './components/HomeLayout'
 
-import ListArticles from './components/articles/ListArticles'
-import ShowArticles from './components/articles/ShowArticles'
-import CreateArticles from './components/articles/CreateArticles'
-import EditArticles from './components/articles/EditArticles'
+import ListArticles from './components/crud/articles/ListArticles'
+import ShowArticles from './components/crud/articles/ShowArticles'
+import CreateArticles from './components/crud/articles/CreateArticles'
+import EditArticles from './components/crud/articles/EditArticles'
 
-import ListMagazines from './components/magazines/ListMagazines'
-import ShowMagazines from './components/magazines/ShowMagazines'
-import CreateMagazines from './components/magazines/CreateMagazines'
-import EditMagazines from './components/magazines/EditMagazines'
+import ListMagazines from './components/crud/magazines/ListMagazines'
+import ShowMagazines from './components/crud/magazines/ShowMagazines'
+import CreateMagazines from './components/crud/magazines/CreateMagazines'
+import EditMagazines from './components/crud/magazines/EditMagazines'
 
-import CreateAuthors from './components/authors/CreateAuthors'
-import EditAuthors from './components/authors/EditAuthors'
-import ListAuthors from './components/authors/ListAuthors'
-import ShowAuthors from './components/authors/ShowAuthors'
+import CreateAuthors from './components/crud/authors/CreateAuthors'
+import EditAuthors from './components/crud/authors/EditAuthors'
+import ListAuthors from './components/crud/authors/ListAuthors'
+import ShowAuthors from './components/crud/authors/ShowAuthors'
 
 import AuthCustomView from './components/AuthCustomView'
 
@@ -86,11 +100,11 @@ const authProvider = createAxiosAdapter(client, {
 const articlesRedirect = {
   views: {
     create: 'list',
-    edit: 'show'
-  }
+    edit: 'show',
+  },
 }
-const magazinesRedirect = articlesRedirect;
-const authorsRedirect = articlesRedirect;
+const magazinesRedirect = articlesRedirect
+const authorsRedirect = articlesRedirect
 
 // The name of the id attribute
 const resourceIdName = 'id'
@@ -116,9 +130,9 @@ const userPermissionsField = 'permissions'
 //   }
 // }
 
-const articlesApiUrl  = 'http://localhost:8888/api/'
+const articlesApiUrl = 'http://localhost:8888/api/'
 const magazinesApiUrl = 'http://localhost:8888/api/'
-const authorsApiUrl   = 'http://localhost:8888/api/'
+const authorsApiUrl = 'http://localhost:8888/api/'
 
 export default {
   name: 'App',
@@ -169,6 +183,6 @@ export default {
       // template and update the resourceIdName to '_id'. - sgobotta
       // parseResponses: parseFeathersResponses
     }
-  }
+  },
 }
 </script>
