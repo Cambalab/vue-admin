@@ -17,21 +17,27 @@
       <v-icon class="mr-2" small>
         mdi-clock-outline
       </v-icon>
-      <span class="caption grey--text font-weight-light"
-        >updated 10 minutes ago</span
-      >
+      <span class="caption grey--text font-weight-light">
+        updated {{ updatedAt }}
+      </span>
     </template>
   </material-chart-card>
 </template>
 
 <script>
 import axios from 'axios'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+
+TimeAgo.addLocale(en)
+const timeAgo = new TimeAgo('en-US')
 
 export default {
   name: 'SubscriptionsChart',
   data() {
     return {
       subscriptions: [],
+      updatedAt: '',
       articlesSubscriptionsChart: {
         data: {
           labels: [],
@@ -39,7 +45,7 @@ export default {
         },
         options: {
           axisX: {
-            showGrid: false,
+            showGrid: true,
           },
           low: 0,
           high: 1500,
@@ -80,15 +86,20 @@ export default {
           },
         })
         .then(res => {
+          // eslint-disable-next-line
           console.log(res)
-          const { data } = res
-          this.articlesSubscriptionsChart.data.labels = data.map(
+          const {
+            data: { updatedAt, subscriptions },
+          } = res
+          this.articlesSubscriptionsChart.data.labels = subscriptions.map(
             s => s.shortMonth
           )
           this.articlesSubscriptionsChart.data.series.push(
-            data.map(s => s.subscriptions)
+            subscriptions.map(s => s.subscriptions)
           )
+          this.updatedAt = timeAgo.format(new Date(updatedAt))
         })
+        // eslint-disable-next-line
         .catch(err => console.log(err))
     },
   },
