@@ -8,7 +8,11 @@ export default {
     usernameRules: defaults().props.usernameRules,
     passwordRules: defaults().props.passwordRules,
     va: {
-      login: () => {},
+      login: () => {
+        return {
+          then: () => {},
+        }
+      },
     },
   },
 }

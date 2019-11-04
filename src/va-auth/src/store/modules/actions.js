@@ -11,7 +11,7 @@ export default ({ client, types }) => {
   return {
     [types.AUTH_LOGIN_REQUEST]: ({ commit }, user) => {
       commit(types.AUTH_LOGIN_REQUEST)
-      client(types.AUTH_LOGIN_REQUEST, { ...user })
+      return client(types.AUTH_LOGIN_REQUEST, { ...user })
         .then(response => {
           commit(types.AUTH_LOGIN_SUCCESS, response)
         })
