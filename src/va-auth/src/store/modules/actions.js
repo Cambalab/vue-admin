@@ -22,7 +22,7 @@ export default ({ client, types }) => {
 
     [types.AUTH_LOGOUT_REQUEST]: ({ commit }) => {
       commit(types.AUTH_LOGOUT_REQUEST)
-      client(types.AUTH_LOGOUT_REQUEST)
+      return client(types.AUTH_LOGOUT_REQUEST)
         .then(() => {
           commit(types.AUTH_LOGOUT_SUCCESS)
         })

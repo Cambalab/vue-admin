@@ -25,7 +25,9 @@ export default {
   methods: {
     logout: function() {
       const { namespace, AUTH_LOGOUT_REQUEST } = AuthTypes
-      this.$store.dispatch(`${namespace}/${AUTH_LOGOUT_REQUEST}`)
+      this.$store
+        .dispatch(`${namespace}/${AUTH_LOGOUT_REQUEST}`)
+        .then(() => this.$router.push('/'))
     },
     getUser: function() {
       const { namespace, AUTH_GET_USER } = AuthTypes
