@@ -32,7 +32,7 @@ export default () => {
     [`${namespace}/${AUTH_IS_AUTHENTICATED}`]: false,
     [`${namespace}/${AUTH_GET_ERROR}`]: {
       response: {
-        status: '401',
+        status: 401,
         message: 'Invalid user or password',
       },
     },
