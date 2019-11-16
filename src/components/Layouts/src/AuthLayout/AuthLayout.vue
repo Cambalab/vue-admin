@@ -58,6 +58,7 @@
       <v-snackbar
         :name="UI_NAMES.AUTH_SNACKBAR"
         v-model="snackbar"
+        :timeout="10000"
         color="error"
       >
         {{ snackbarText }}
