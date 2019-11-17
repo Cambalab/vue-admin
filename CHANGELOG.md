@@ -1,5 +1,29 @@
 # Change Log
 
+## [v0.0.7](https://github.com/Cambalab/vue-admin/tree/v0.0.7) (2019-11-17)
+[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.6...v0.0.7)
+
+**Implemented enhancements:**
+
+- As a user I want to be notified when authentication fails [\#180](https://github.com/Cambalab/vue-admin/issues/180)
+- As a user I want to use auth types to access the auth store module [\#178](https://github.com/Cambalab/vue-admin/issues/178)
+- Unable to login and 404 on the demo api [\#176](https://github.com/Cambalab/vue-admin/issues/176)
+- Replace server author services specific data generators with fake-data-generator [\#161](https://github.com/Cambalab/vue-admin/issues/161)
+- Add a pre-commit hook to avoid eslint errors/warnings [\#158](https://github.com/Cambalab/vue-admin/issues/158)
+
+**Closed issues:**
+
+- As a User I want to click on a List element to navigate to a Show view [\#121](https://github.com/Cambalab/vue-admin/issues/121)
+
+**Merged pull requests:**
+
+- 161 replace server author services specific data generators with fake data generator [\#189](https://github.com/Cambalab/vue-admin/pull/189) ([sgobotta](https://github.com/sgobotta))
+- Feedback on failing authentication [\#188](https://github.com/Cambalab/vue-admin/pull/188) ([jejoivanic](https://github.com/jejoivanic))
+- Add demo gif [\#186](https://github.com/Cambalab/vue-admin/pull/186) ([glmaljkovich](https://github.com/glmaljkovich))
+- 178 as a user i want to use auth types to access the auth store module [\#182](https://github.com/Cambalab/vue-admin/pull/182) ([sgobotta](https://github.com/sgobotta))
+- 0.0.6 [\#174](https://github.com/Cambalab/vue-admin/pull/174) ([sgobotta](https://github.com/sgobotta))
+- List Component: Adds the ability to navigate on row click [\#170](https://github.com/Cambalab/vue-admin/pull/170) ([DanielOrmeno](https://github.com/DanielOrmeno))
+
 ## [v0.0.6](https://github.com/Cambalab/vue-admin/tree/v0.0.6) (2019-10-07)
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.5...v0.0.6)
 
@@ -33,6 +57,8 @@
 
 **Merged pull requests:**
 
+- Chore/add linting to pre commit hook [\#183](https://github.com/Cambalab/vue-admin/pull/183) ([C3-TKO](https://github.com/C3-TKO))
+- README.md: adds credentials information for the demo app [\#177](https://github.com/Cambalab/vue-admin/pull/177) ([sgobotta](https://github.com/sgobotta))
 - 172 as a show action a custom title can be provided [\#173](https://github.com/Cambalab/vue-admin/pull/173) ([sgobotta](https://github.com/sgobotta))
 - 3 as a create action a default title should be used [\#171](https://github.com/Cambalab/vue-admin/pull/171) ([sgobotta](https://github.com/sgobotta))
 - 2 as an edit actions a default title should be used [\#169](https://github.com/Cambalab/vue-admin/pull/169) ([sgobotta](https://github.com/sgobotta))
