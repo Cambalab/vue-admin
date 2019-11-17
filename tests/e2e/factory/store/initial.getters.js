@@ -24,11 +24,18 @@ export default () => {
     AUTH_GET_STATUS,
     AUTH_GET_USER,
     AUTH_IS_AUTHENTICATED,
+    AUTH_GET_ERROR,
   } = AuthTypes
   const authGetters = {
     [`${namespace}/${AUTH_GET_STATUS}`]: 'idle',
     [`${namespace}/${AUTH_GET_USER}`]: '',
     [`${namespace}/${AUTH_IS_AUTHENTICATED}`]: false,
+    [`${namespace}/${AUTH_GET_ERROR}`]: {
+      response: {
+        status: 401,
+        message: 'Invalid user or password',
+      },
+    },
   }
 
   // Vuex ui getters

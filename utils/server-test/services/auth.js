@@ -24,9 +24,11 @@ module.exports = function(app) {
 
   app.post('/api/auth', (req, res) => {
     const user = whitelist.find(user => user.email === req.headers.username);
-    if (!user) return res.status(404).send('No user found.');
+    if (!user)
+      return res.status(401).send('Invalid user or password');
     const isPasswordValid = bcrypt.compareSync(req.headers.password, user.password);
-    if (!isPasswordValid) return res.status(401).send({ auth: false, token: null });
+    if (!isPasswordValid)
+      return res.status(401).send('Invalid user or password');
     const token = jwt.sign({ id: user.id }, secret, { expiresIn: 3600 });
     // Saves the token in the whitelist user array
     whitelist = whitelist.map(_user => {

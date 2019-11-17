@@ -8,5 +8,6 @@ export default ({ types }) => {
     [types.AUTH_GET_STATUS]: state => state.status,
     [types.AUTH_IS_AUTHENTICATED]: state => state.isAuthenticated,
     [types.AUTH_GET_USER]: state => state.user,
+    [types.AUTH_GET_ERROR]: state => state.error,
   }
 }
