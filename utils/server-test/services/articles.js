@@ -1,92 +1,91 @@
-const Ipsum = require("bavaria-ipsum");
+const Ipsum = require('bavaria-ipsum')
 
-module.exports = function (app) {
-
-  const ipsum = new Ipsum();
+module.exports = function(app) {
+  const ipsum = new Ipsum()
 
   const articles = [
     {
       id: 1,
       title: ipsum.generateSentence(),
-      content: ipsum.generateParagraph()
+      content: ipsum.generateParagraph(),
     },
     {
       id: 2,
       title: ipsum.generateSentence(),
-      content: ipsum.generateParagraph()
+      content: ipsum.generateParagraph(),
     },
     {
       id: 3,
       title: ipsum.generateSentence(),
-      content: ipsum.generateParagraph()
-    }
-  ];
+      content: ipsum.generateParagraph(),
+    },
+  ]
 
-  app.get("/api/articles", (req, res) => {
-    res.json(articles);
-  });
+  app.get('/api/articles', (req, res) => {
+    res.json(articles)
+  })
 
-  app.get("/api/articles/:id", (req, res) => {
-    const article = articles.find(a => a.id.toString() === req.params.id);
-    const index = articles.indexOf(article);
+  app.get('/api/articles/:id', (req, res) => {
+    const article = articles.find(a => a.id.toString() === req.params.id)
+    const index = articles.indexOf(article)
 
-    res.json(articles[index]);
-  });
+    res.json(articles[index])
+  })
 
-  app.patch("/api/articles/:id", (req, res) => {
-    const { body } = req;
-    const article = articles.find(a => a.id.toString() === req.params.id);
-    const index = articles.indexOf(article);
-
-    if (index >= 0) {
-      article.title = body.title;
-      article.content = body.content;
-      articles[index] = article;
-    }
-
-    res.json(article);
-  });
-
-  app.put("/api/articles/:id", (req, res) => {
-    const { body } = req;
-    const article = articles.find(a => a.id.toString() === req.params.id);
-    const index = articles.indexOf(article);
+  app.patch('/api/articles/:id', (req, res) => {
+    const { body } = req
+    const article = articles.find(a => a.id.toString() === req.params.id)
+    const index = articles.indexOf(article)
 
     if (index >= 0) {
-      article.title = body.title;
-      article.content = body.content;
-      articles[index] = article;
+      article.title = body.title
+      article.content = body.content
+      articles[index] = article
     }
 
-    res.json(article);
-  });
+    res.json(article)
+  })
 
-  app.delete("/api/articles/:id", (req, res) => {
-    const article = articles.find(a => a.id.toString() === req.params.id);
-    const index = articles.indexOf(article);
+  app.put('/api/articles/:id', (req, res) => {
+    const { body } = req
+    const article = articles.find(a => a.id.toString() === req.params.id)
+    const index = articles.indexOf(article)
 
-    if (index >= 0) articles.splice(index, 1);
+    if (index >= 0) {
+      article.title = body.title
+      article.content = body.content
+      articles[index] = article
+    }
 
-    res.status(202).send();
-  });
+    res.json(article)
+  })
 
-  app.post("/api/articles", (req, res) => {
+  app.delete('/api/articles/:id', (req, res) => {
+    const article = articles.find(a => a.id.toString() === req.params.id)
+    const index = articles.indexOf(article)
+
+    if (index >= 0) articles.splice(index, 1)
+
+    res.status(202).send()
+  })
+
+  app.post('/api/articles', (req, res) => {
     let id
     if (!articles.length) {
       id = 0
     } else {
-      id = articles[articles.length - 1].id + 1;
+      id = articles[articles.length - 1].id + 1
     }
-    const { body } = req;
+    const { body } = req
 
     const article = {
       id,
       title: body.title,
-      content: body.content
-    };
+      content: body.content,
+    }
 
-    articles.push(article);
+    articles.push(article)
 
-    res.status(201).send(article);
-  });
+    res.status(201).send(article)
+  })
 }

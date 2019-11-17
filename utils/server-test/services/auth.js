@@ -1,10 +1,9 @@
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
 
 const secret = 'mySecret'
 
 module.exports = function(app) {
-
   let whitelist = [
     {
       id: 123456,
@@ -19,17 +18,19 @@ module.exports = function(app) {
       password: '$2b$08$ZRrJWppetUmKe5Zlc1Mtj.w51ZTmmx2M4YKUdS4QOBHXq2gzF/zyS', // bcrypt.hashSync('123456')
       permissions: ['admin'],
       token: '',
-    }
+    },
   ]
 
   app.post('/api/auth', (req, res) => {
-    const user = whitelist.find(user => user.email === req.headers.username);
-    if (!user)
-      return res.status(401).send('Invalid user or password');
-    const isPasswordValid = bcrypt.compareSync(req.headers.password, user.password);
+    const user = whitelist.find(user => user.email === req.headers.username)
+    if (!user) return res.status(401).send('Invalid user or password')
+    const isPasswordValid = bcrypt.compareSync(
+      req.headers.password,
+      user.password
+    )
     if (!isPasswordValid)
-      return res.status(401).send('Invalid user or password');
-    const token = jwt.sign({ id: user.id }, secret, { expiresIn: 3600 });
+      return res.status(401).send('Invalid user or password')
+    const token = jwt.sign({ id: user.id }, secret, { expiresIn: 3600 })
     // Saves the token in the whitelist user array
     whitelist = whitelist.map(_user => {
       if (_user.id === user.id) {
