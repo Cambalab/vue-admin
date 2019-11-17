@@ -16,6 +16,10 @@
 
 *We've been working a lot with other libraries that generate administration dashboards, routes, resources in other javascript frameworks, but did not find any Vue library capable of performing this kind of solution, except of many really impressive Vue libraries that provide UI components for admin dashboards. We are pretty convinced Vue's learning curve is gentle, so we thought we could try and build our own tool.*
 
+<p align="center">
+<img src="public/demo.gif" alt="demo of the app running" />
+</p>
+
 ## About the library
 
 Given a simple configuration to Vue-Admin components, this library connects your backend and interprets your services as frontend resources from which **crud** views are automatically created and associated with a route.  
@@ -217,6 +221,17 @@ In the second terminal get the frontend application running
 npm install
 npm run serve
 ```
+
+### Demo app credentials
+
+User with **admin** permissions
+> **username:** dev@camba.coop  
+> **password:** 123456
+
+User with **guest** permissions
+
+> **username:** user@camba.coop  
+> **password:** 123456
 
 ## Running the tests and other scripts
 

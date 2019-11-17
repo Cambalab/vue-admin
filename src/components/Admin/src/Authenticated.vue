@@ -1,5 +1,5 @@
 <script>
-import AuthActionTypes from '@va-auth/types'
+import AuthTypes from '@va-auth/types'
 import Core from '@components/Core'
 
 export default {
@@ -24,12 +24,12 @@ export default {
   },
   methods: {
     logout: function() {
-      const { namespace, AUTH_LOGOUT_REQUEST } = AuthActionTypes
+      const { namespace, AUTH_LOGOUT_REQUEST } = AuthTypes
       this.$store.dispatch(`${namespace}/${AUTH_LOGOUT_REQUEST}`)
     },
     getUser: function() {
-      const { namespace } = AuthActionTypes
-      return this.$store.getters[`${namespace}/getUser`]
+      const { namespace, AUTH_GET_USER } = AuthTypes
+      return this.$store.getters[`${namespace}/${AUTH_GET_USER}`]
     },
   },
   render: function(createElement) {

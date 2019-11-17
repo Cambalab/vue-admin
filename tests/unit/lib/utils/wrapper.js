@@ -2,10 +2,10 @@ const nextTick = wrapper => {
   return new Promise(resolve => wrapper.vm.$nextTick(resolve))
 }
 
-const findButtonByName = ({ wrapper, name }) => {
-  return wrapper.find(`button[name="${name}"]`)
+const findElemByName = ({ wrapper, el, name }) => {
+  return wrapper.find(`${el}[name="${name}"]`)
 }
 
 const findRef = ({ wrapper, ref }) => wrapper.find({ ref })
 
-export { findButtonByName, findRef, nextTick }
+export { findElemByName, findRef, nextTick }

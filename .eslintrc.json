@@ -19,5 +19,10 @@
   ],
   "parserOptions": {
     "parser": "babel-eslint"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*.{js,json,vue}"]
+    }
+  ]
 }

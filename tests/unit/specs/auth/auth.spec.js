@@ -7,7 +7,7 @@ import UI_NAMES from '@constants/ui.element.names'
 import UI_CONTENT from '@constants/ui.content.default'
 import UNIT_CONSTANTS from '@unit/lib/constants'
 import authFixture from '@unit/fixtures/auth'
-import { findButtonByName, findRef, nextTick } from '@unit/lib/utils/wrapper'
+import { findElemByName, findRef, nextTick } from '@unit/lib/utils/wrapper'
 
 describe('AuthLayout.vue', () => {
   const subject = 'AuthLayout'
@@ -34,7 +34,7 @@ describe('AuthLayout.vue', () => {
   }
 
   beforeEach(() => {
-    propsData = authFixture.props
+    propsData = authFixture({ username, password }).props
     vuetify = new Vuetify()
     vaPropSpy = {
       login: jest.spyOn(propsData.va, 'login'),
@@ -81,7 +81,7 @@ describe('AuthLayout.vue', () => {
   it('should render a submit button with a submit text label', () => {
     const buttonText = UI_CONTENT.AUTH_LABEL_SIGN_IN_BUTTON
     const buttonName = UI_NAMES.AUTH_SIGN_IN_BUTTON
-    const button = findButtonByName({ wrapper, name: buttonName })
+    const button = findElemByName({ wrapper, el: 'button', name: buttonName })
 
     expect(button.text()).toBe(buttonText)
   })
@@ -113,7 +113,7 @@ describe('AuthLayout.vue', () => {
     const textFieldName = UI_NAMES.AUTH_USERNAME_INPUT
     const buttonName = UI_NAMES.AUTH_SIGN_IN_BUTTON
     const errorMessage = UI_CONTENT.AUTH_ALERT_EMAIL_REQUIRED
-    const button = findButtonByName({ wrapper, name: buttonName })
+    const button = findElemByName({ wrapper, el: 'button', name: buttonName })
     const textField = findRef({ wrapper, ref: textFieldName })
 
     await textField.vm.focus()
@@ -133,7 +133,7 @@ describe('AuthLayout.vue', () => {
     const textFieldName = UI_NAMES.AUTH_PASSWORD_INPUT
     const buttonName = UI_NAMES.AUTH_SIGN_IN_BUTTON
     const errorMessage = UI_CONTENT.AUTH_ALERT_PASSWORD_REQUIRED
-    const button = findButtonByName({ wrapper, name: buttonName })
+    const button = findElemByName({ wrapper, el: 'button', name: buttonName })
     const textField = findRef({ wrapper, ref: textFieldName })
 
     await textField.vm.focus()
@@ -153,7 +153,7 @@ describe('AuthLayout.vue', () => {
     const textFieldName = UI_NAMES.AUTH_USERNAME_INPUT
     const buttonName = UI_NAMES.AUTH_SIGN_IN_BUTTON
     const errorMessage = UI_CONTENT.AUTH_ALERT_INVALID_EMAIL
-    const button = findButtonByName({ wrapper, name: buttonName })
+    const button = findElemByName({ wrapper, el: 'button', name: buttonName })
     const textField = findRef({ wrapper, ref: textFieldName })
 
     textField.vm.$emit('input', value)
@@ -186,5 +186,49 @@ describe('AuthLayout.vue', () => {
     expect(vaPropSpy.login).toHaveBeenCalledTimes(1)
     expect(wrapper.vm.valid).toBe(true)
     expect(button.vm.disabled).toBe(false)
+    expect(wrapper.vm.snackbar).toBe(false)
+    expect(wrapper.vm.snackbarText).toBe('')
   })
+
+  it('should trigger an error snackbar on wrong username submit', async () => {
+    const _username = `w120n6${username}`
+    shouldTriggerAnErrorSnackbarOnWrongCredentialsSubmit({
+      username: _username,
+      password,
+    })
+  })
+
+  it('should trigger an error snackbar on wrong password submit', async () => {
+    const _password = `w120n6${password}`
+    shouldTriggerAnErrorSnackbarOnWrongCredentialsSubmit({
+      username,
+      password: _password,
+    })
+  })
+
+  async function shouldTriggerAnErrorSnackbarOnWrongCredentialsSubmit({
+    username,
+    password,
+  }) {
+    const usernameTextFieldName = UI_NAMES.AUTH_USERNAME_INPUT
+    const passwordTextFieldName = UI_NAMES.AUTH_PASSWORD_INPUT
+    const buttonName = UI_NAMES.AUTH_SIGN_IN_BUTTON
+    const usernameTextField = findRef({ wrapper, ref: usernameTextFieldName })
+    const passwordTextField = findRef({ wrapper, ref: passwordTextFieldName })
+    const button = findRef({ wrapper, ref: buttonName })
+    const wrongCredentialsText = UI_CONTENT.AUTH_SNACKBAR_INVALID_USER_PASSWORD
+
+    usernameTextField.vm.$emit('input', username)
+    await nextTick(wrapper)
+    passwordTextField.vm.$emit('input', password)
+    await nextTick(wrapper)
+    button.vm.$emit('click')
+    await nextTick(wrapper)
+
+    expect(wrapper.vm.valid).toBe(true)
+    expect(vaPropSpy.login).toHaveBeenCalledTimes(1)
+    expect(button.vm.disabled).toBe(false)
+    expect(wrapper.vm.snackbar).toBe(true)
+    expect(wrapper.vm.snackbarText).toBe(wrongCredentialsText)
+  }
 })

@@ -1,5 +1,5 @@
 <script>
-import AuthActionTypes from '@va-auth/types'
+import AuthTypes from '@va-auth/types'
 
 export default {
   name: 'Unauthenticated',
@@ -12,8 +12,15 @@ export default {
   methods: {
     login: function(username, password) {
       const params = { username, password }
-      const { namespace, AUTH_LOGIN_REQUEST } = AuthActionTypes
-      this.$store.dispatch(`${namespace}/${AUTH_LOGIN_REQUEST}`, params)
+      const { namespace, AUTH_LOGIN_REQUEST, AUTH_GET_ERROR } = AuthTypes
+      return new Promise((resolve, reject) => {
+        this.$store
+          .dispatch(`${namespace}/${AUTH_LOGIN_REQUEST}`, params)
+          .then(() =>
+            resolve(this.$store.getters[`${namespace}/${AUTH_GET_ERROR}`])
+          )
+          .catch(err => reject(err))
+      })
     },
   },
   render: function(createElement) {

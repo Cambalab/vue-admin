@@ -2,7 +2,7 @@
   <!-- If you want to use your own custom unauthorized page you just have to provide it like:  -->
   <!-- <Admin :authProvider="authProvider" :unauthorized="UnauthorizedCustomView">             -->
   <Admin
-    :authLayout="AuthCustomView"
+    
     :authProvider="authProvider"
     :sidebar="CustomSidebar"
     :unauthorized="UnauthorizedCustomView">

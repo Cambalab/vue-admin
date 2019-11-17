@@ -1,6 +1,6 @@
 {
   "name": "vue-admin-js",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "An open source frontend Framework for building admin applications running in the browser, using ES6, Vue.js and Vuetify.js",
   "author": "Camba <info@camba.coop>",
   "scripts": {
@@ -39,9 +39,11 @@
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-vue": "^5.0.0",
+    "eslint-plugin-vue": "^5.2.3",
     "fibers": "^4.0.1",
+    "husky": "^3.0.9",
     "joi": "^14.3.1",
+    "lint-staged": "^9.4.2",
     "material-design-icons-iconfont": "^5.0.1",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
@@ -56,6 +58,17 @@
     "vuetify-loader": "^1.2.2",
     "vuex": "^3.0.1",
     "vuex-crud": "^0.3.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,json,vue}": [
+      "npm run lint:autofix",
+      "git add"
+    ]
   },
   "directories": {
     "doc": "https://github.com/Cambalab/vue-admin/blob/develop/Docs"

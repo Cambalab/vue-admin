@@ -19,6 +19,7 @@ export default {
   AUTH_USERNAME_INPUT: 'va-login-username',
   AUTH_PASSWORD_INPUT: 'va-login-password',
   AUTH_SIGN_IN_BUTTON: 'va-login-submit-button',
+  AUTH_SNACKBAR: 'va-login-snackbar',
 
   /**
    * Custom Auth component

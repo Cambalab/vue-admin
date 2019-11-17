@@ -20,6 +20,8 @@ export default {
   AUTH_ALERT_EMAIL_REQUIRED: 'E-mail is required',
   AUTH_ALERT_PASSWORD_REQUIRED: 'Password is required',
   AUTH_ALERT_INVALID_EMAIL: 'E-mail must be valid',
+  AUTH_SNACKBAR_INVALID_USER_PASSWORD: 'The user or password is incorrect',
+  AUTH_SNACKBAR_CLOSE: 'Close',
 
   /**
    * Auth component
