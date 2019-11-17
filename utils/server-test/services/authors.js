@@ -1,31 +1,40 @@
-const Ipsum = require("bavaria-ipsum");
-const randomDate = require("../utils/random-date-generator")
+const { generateModel } = require('fake-data-generator')
 
-module.exports = function (app) {
-
-  const ipsum = new Ipsum();
-
-  const startDate  = new Date(1970, 1, 1, 0, 0, 0, 0);
-  const finishDate = new Date(1980, 1, 1, 0, 0, 0, 0);
-
-  const formatDate = aIsoDate => {
-    return aIsoDate.toISOString()
+module.exports = function(app) {
+  const model = {
+    config: {
+      locale: 'en',
+    },
+    model: {
+      type: 'Object',
+      value: {
+        id: {
+          type: 'randomNumberBetween',
+          value: [1, 2500000],
+        },
+        name: {
+          type: 'faker',
+          value: 'name.firstName',
+        },
+        lastname: {
+          type: 'faker',
+          value: 'name.lastName',
+        },
+        birthdate: {
+          type: 'faker',
+          value: 'date.between',
+          options: ['1970-01-01', '1996-12-31'],
+        },
+      },
+    },
   }
 
-  const generateRandomAuthor = id => {
-    return {
-      id,
-      name: ipsum.generateWord(),
-      lastname: ipsum.generateWord(),
-      birthdate: formatDate(randomDate(startDate, finishDate))
-    };
-  }
-
-  const authors = [
-    generateRandomAuthor(1),
-    generateRandomAuthor(2),
-    generateRandomAuthor(3)
-  ];
+  const authors = generateModel({
+    amountArg: 40,
+    modelArg: model,
+    inputType: 'object',
+    outputType: 'object',
+  })
 
   app.get("/api/authors", (req, res) => {
     res.json(authors);
