@@ -9,7 +9,7 @@ import { DefaultSidebar } from '@components/UiComponents'
 import alertsModule from '@store/modules/alerts'
 import entitiesModule from '@store/modules/entities'
 import requestsModule from '@store/modules/requests'
-import resourceModule from '@store/modules/resource'
+import resourceModule from '@store/modules/resources'
 
 /**
  * Defaults - Default attributes for the Admin component

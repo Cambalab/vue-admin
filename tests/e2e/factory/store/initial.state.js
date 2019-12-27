@@ -25,6 +25,10 @@ export default () => {
     replaceError: null,
     updateError: null,
   }
+  // Vuex Initial State for alerts
+  const initialAlertsState = {
+    isVisible: false,
+  }
   // Vuex Initial State for auth
   const initialAuthState = {
     error: '',
@@ -62,6 +66,7 @@ export default () => {
 
   return {
     ...initResourcesState(initialResources),
+    alerts: initialAlertsState,
     auth: initialAuthState,
     entities: initialEntitiesState,
     resources: initialResourcesState,

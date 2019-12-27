@@ -48,6 +48,7 @@ import {
   TextField,
   Spinner,
 } from '@components/UiComponents'
+import { Types as RequestsTypes } from '@store/modules/requests'
 
 export default {
   name: 'Show',
@@ -117,7 +118,8 @@ export default {
       'route', // vuex-router-sync
     ]),
     isLoading() {
-      return this.$store.getters['requests/isLoading']
+      const { namespace, REQUESTS_IS_LOADING } = RequestsTypes
+      return this.$store.getters[`${namespace}/${REQUESTS_IS_LOADING}`]
     },
   },
   methods: {

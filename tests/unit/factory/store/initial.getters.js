@@ -1,4 +1,6 @@
 import { initialResourcesRoutes } from './common.utils'
+import { Types as EntitiesTypes } from '@store/modules/resources'
+import { Types as ResourcesTypes } from '@store/modules/resources'
 
 /**
  * Annonymous Function - Creates a simualtion of initial vuex crud getters
@@ -17,12 +19,19 @@ export default ({ snapshot = 'default', initialResources }) => {
   }
 
   // Vuex initial entities getters should be added here
+  const { namespace: entitiesNamespace, ENTITIES_GET_ENTITY } = EntitiesTypes
   const entitiesCrud = {
-    'entities/getEntity': () => {},
+    [`${entitiesNamespace}/${ENTITIES_GET_ENTITY}`]: () => {},
   }
   // Vuex initial resources getters should be added here
+  const {
+    namespace: resourcesNamespace,
+    RESOURCES_GET_ALL_ROUTES,
+  } = ResourcesTypes
   const resourcesGetters = {
-    'resources/all': () => initialResourcesRoutes(initialResources),
+    [`${resourcesNamespace}/${RESOURCES_GET_ALL_ROUTES}`]: () => {
+      return initialResourcesRoutes(initialResources)
+    },
   }
 
   /**

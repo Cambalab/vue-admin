@@ -1,4 +1,5 @@
 import Router from '@router'
+import { Types as EntitiesTypes } from '@store/modules/entities'
 
 /**
  * getEntityForm - Given a resource name and a form type, calls the store to get the
@@ -91,7 +92,8 @@ export const updateEntity = ({
   resourceName,
   formType,
 }) => {
-  const moduleName = 'entities/updateForm'
+  const { namespace, ENTITIES_UPDATE_FORM } = EntitiesTypes
+  const moduleName = `${namespace}/${ENTITIES_UPDATE_FORM}`
   const entity = resourceName
   store.commit(moduleName, { formType, value, resourceKey, entity })
 }
@@ -105,7 +107,8 @@ export const updateEntity = ({
  */
 
 export const initEntity = ({ store, resourceName, formType }) => {
-  const moduleName = 'entities/initForm'
+  const { namespace, ENTITIES_CREATE_FORM } = EntitiesTypes
+  const moduleName = `${namespace}/${ENTITIES_CREATE_FORM}`
   const entity = resourceName
   store.commit(moduleName, { formType, entity })
 }

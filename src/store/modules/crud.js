@@ -1,4 +1,5 @@
 import createCrudModule, { client } from 'vuex-crud'
+import { Types as RequestsTypes } from '@store/modules/requests'
 
 /**
  * Crud Module - Given a set of data, creates a vuex crud module and calls
@@ -22,8 +23,9 @@ export default ({
     const rootUrl = `${apiUrl}${resourceName}/`
     return id ? `${rootUrl}${id}` : rootUrl
   }
-  const setLoading = isLoading => () =>
-    store.commit('requests/setLoading', { isLoading })
+  const { namespace: requestsNamespace, REQUESTS_SET_LOADING } = RequestsTypes
+  const mutation = `${requestsNamespace}/${REQUESTS_SET_LOADING}`
+  const setLoading = isLoading => () => store.commit(mutation, { isLoading })
 
   // Requests Interceptors
   const successCall = injectedLogic => requestOrResponse => {

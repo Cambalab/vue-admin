@@ -3,9 +3,10 @@ import resourceFixture from '../fixtures/resource/magazines'
 import Resource from '@components/Resource/src/Resource'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
-import { shallowMount, createLocalVue } from '@vue/test-utils'
 import ERROR_MESSAGES from '@constants/error.messages'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import { validateSchema } from '@validators'
+import { Types as ResourcesTypes } from '@store/modules/resources'
 
 describe('Resource.vue', () => {
   const subject = 'Resource'
@@ -94,7 +95,8 @@ describe('Resource.vue', () => {
   it('should call store commit', () => {
     // Exercise: mounts the subject instance
     mountSubject()
-    const methodName = 'resources/addRoute'
+    const { namespace, RESOURCES_ADD_ROUTE } = ResourcesTypes
+    const methodName = `${namespace}/${RESOURCES_ADD_ROUTE}`
     const { storeMethods } = resourceFixture.methods
     const { params } = storeMethods[methodName]
     expect(storeSpy.addRoute).toHaveBeenCalledTimes(1)

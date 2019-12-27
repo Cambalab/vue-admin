@@ -90,11 +90,25 @@ describe('Admin.vue', () => {
     mountSubject()
 
     const {
-      args: { entitiesModule },
+      args: { alertsModule },
     } = adminFixture
 
     expect(storeSpy.registerModule).toHaveBeenNthCalledWith(
       1,
+      'alerts',
+      alertsModule
+    )
+  })
+
+  it('[Entities Module] - store should call registerModule on beforeCreate', () => {
+    mountSubject()
+
+    const {
+      args: { entitiesModule },
+    } = adminFixture
+
+    expect(storeSpy.registerModule).toHaveBeenNthCalledWith(
+      2,
       'entities',
       entitiesModule
     )
@@ -108,7 +122,7 @@ describe('Admin.vue', () => {
     } = adminFixture
 
     expect(storeSpy.registerModule).toHaveBeenNthCalledWith(
-      2,
+      3,
       'requests',
       requestsModule
     )
@@ -122,7 +136,7 @@ describe('Admin.vue', () => {
     } = adminFixture
 
     expect(storeSpy.registerModule).toHaveBeenNthCalledWith(
-      3,
+      4,
       'resources',
       resourceModule
     )
@@ -133,7 +147,7 @@ describe('Admin.vue', () => {
     mountSubject()
 
     expect(storeSpy.registerModule).toHaveBeenNthCalledWith(
-      4,
+      5,
       'auth',
       authModule
     )
