@@ -7,6 +7,7 @@ import defaults from './defaults'
 const {
   props,
   args: {
+    alertsModule,
     createSiteRoutes,
     createUnauthenticatedRoutes,
     entitiesModule,
@@ -52,6 +53,7 @@ export default {
     Unauthenticated,
   },
   beforeCreate() {
+    this.$store.registerModule('alerts', alertsModule)
     this.$store.registerModule('entities', entitiesModule)
     this.$store.registerModule('requests', requestsModule)
     this.$store.registerModule('resources', resourceModule)

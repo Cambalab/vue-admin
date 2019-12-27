@@ -6,6 +6,7 @@ import {
   UnauthorizedLayout,
 } from '@components/Layouts'
 import { DefaultSidebar } from '@components/UiComponents'
+import alertsModule from '@store/modules/alerts'
 import entitiesModule from '@store/modules/entities'
 import requestsModule from '@store/modules/requests'
 import resourceModule from '@store/modules/resource'
@@ -59,6 +60,7 @@ export default () => {
       unauthorized,
     },
     args: {
+      alertsModule,
       createSiteRoutes,
       createUnauthenticatedRoutes,
       entitiesModule,
