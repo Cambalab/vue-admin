@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import Alerts from '@components/Admin/src/Alerts'
 import { shallowMount } from '@vue/test-utils'
+import alertsStore from '@store/modules/alerts'
 
 describe('Alerts.vue', () => {
   Vue.config.silent = true
@@ -29,7 +30,11 @@ describe('Alerts.vue', () => {
   beforeEach(() => {
     const routes = [{}]
     mockedRouter = new VueRouter(routes)
-    mockedStore = new Vuex.Store({})
+    mockedStore = new Vuex.Store({
+      modules: {
+        alerts: alertsStore,
+      },
+    })
     mocks = { $store: mockedStore, $router: mockedRouter }
     storeSpy = {
       subscribe: jest.spyOn(mocks.$store, 'subscribe'),
