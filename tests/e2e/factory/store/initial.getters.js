@@ -52,9 +52,13 @@ export default () => {
   }
 
   // Vuex alert getters
-  const { namespace: alertsNamespace, ALERTS_GET_STATUS } = AlertTypes
+  const { namespace: alertsNamespace, ALERTS_GET_SNACKBAR_STATUS } = AlertTypes
   const alertsGetters = {
-    [`${alertsNamespace}/${ALERTS_GET_STATUS}`]: false,
+    [`${alertsNamespace}/${ALERTS_GET_SNACKBAR_STATUS}`]: {
+      color: '',
+      isVisible: false,
+      text: '',
+    },
   }
 
   // Vuex ui getters

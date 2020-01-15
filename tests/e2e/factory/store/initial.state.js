@@ -27,7 +27,9 @@ export default () => {
   }
   // Vuex Initial State for alerts
   const initialAlertsState = {
+    color: '',
     isVisible: false,
+    text: '',
   }
   // Vuex Initial State for auth
   const initialAuthState = {
