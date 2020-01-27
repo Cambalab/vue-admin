@@ -22,8 +22,9 @@ export default {
   AUTH_ALERT_INVALID_EMAIL: 'E-mail must be valid',
   AUTH_SNACKBAR_INVALID_USER_PASSWORD: 'The user or password is incorrect',
   AUTH_SNACKBAR_LOGIN_SUCCESS: {
-    with: ({ username }) => `Succesful login. Welcome ${username}.`,
+    with: ({ username }) => `Welcome ${username}.`,
   },
+  AUTH_SNACKBAR_SUCCESS_COLOR: 'success',
   AUTH_SNACKBAR_CLOSE: 'Close',
 
   /**
