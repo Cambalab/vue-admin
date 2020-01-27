@@ -20,7 +20,7 @@ export default {
     [Types.ALERTS_HIDE_SNACKBAR](state) {
       state.snackbar.color = ''
       state.snackbar.text = ''
-      state.isVisible = false
+      state.snackbar.isVisible = false
     },
     [Types.ALERTS_SHOW_SNACKBAR](state, { color, text }) {
       state.snackbar.color = color
