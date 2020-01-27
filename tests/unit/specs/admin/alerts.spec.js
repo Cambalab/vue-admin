@@ -8,7 +8,7 @@ import alertsStore, { Types as AlertTypes } from '@store/modules/alerts'
 import AuthTypes from '@va-auth/types'
 import authStore from '@va-auth/store'
 import Factory from '@unit/factory'
-import { findRef, nextTick } from '@unit/lib/utils/wrapper'
+import { findRef } from '@unit/lib/utils/wrapper'
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 

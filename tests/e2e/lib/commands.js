@@ -4,7 +4,7 @@ import UI_NAMES from '../../../src/constants/ui.element.names'
 import { createUrlWithResource, createElementQueryWith } from './helpers'
 const {
   namespace: authNamespace,
-  AUTH_LOGIN_REQUEST
+  AUTH_LOGIN_REQUEST,
 } = require('../../../src/va-auth/src/types')
 
 const storePath = 'app.$store'
