@@ -9,7 +9,7 @@
     <v-btn
       color="white"
       text
-      @click="hideSnackbar"
+      @click="hideSnackbar()"
       :ref="UI_NAMES.AUTH_SNACKBAR_BUTTON"
     >
       <strong>{{ UI_CONTENT.AUTH_SNACKBAR_CLOSE }}</strong>
@@ -31,10 +31,6 @@ export default {
         const getter = `${namespace}/${ALERTS_GET_SNACKBAR_STATUS}`
         return this.$store.getters[getter]
       },
-      set() {
-        const { namespace, ALERTS_HIDE_SNACKBAR } = AlertTypes
-        this.$store.commit(`${namespace}/${ALERTS_HIDE_SNACKBAR}`)
-      },
     },
   },
   data() {
@@ -42,7 +38,8 @@ export default {
   },
   methods: {
     hideSnackbar() {
-      this.snackbar.isVisible = false
+      const { namespace, ALERTS_HIDE_SNACKBAR } = AlertTypes
+      this.$store.commit(`${namespace}/${ALERTS_HIDE_SNACKBAR}`)
     },
   },
 }
