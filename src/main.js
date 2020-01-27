@@ -6,6 +6,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import vuetify from '@plugins/vuetify'
+import { subscriptionsPlugin } from '@plugins/vuex'
 
 Vue.config.productionTip = false
 
@@ -16,7 +17,9 @@ const router = new VueRouter(routes)
 import App from '@demo/App.vue'
 
 Vue.use(Vuex)
-const store = new Vuex.Store({})
+const store = new Vuex.Store({
+  plugins: [subscriptionsPlugin],
+})
 
 const app = new Vue({
   router,
