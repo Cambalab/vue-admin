@@ -1,10 +1,10 @@
 <p align="center">
   <a target="_blank" rel="noopener noreferrer">
-    <img width="140" src="public/logo.png" alt="Vue Admin logo" />
+    <img width="140" src="public/logo.png" alt="Vue-Admin logo" />
   </a>
 </p>
 
-<h4 align="center">Vue Admin is desgined to let you easily build admin applications for the browser using Vue, Javascript and REST services.</h4>
+<h4 align="center">Vue-Admin is desgined to let you easily build admin applications for the browser using Vue, Javascript and REST services.</h4>
 
 <p align="center">
   <a href="https://travis-ci.com/Cambalab/vue-admin"><img src="https://travis-ci.com/Cambalab/vue-admin.svg?branch=develop" alt="Build Status"></a>
@@ -22,10 +22,10 @@
 
 ## About the library
 
-Given a simple configuration to Vue-Admin components, this library connects your backend and interprets your services as frontend resources from which **crud** views are automatically created and associated with a route.  
+Given a simple configuration to Vue-Admin components, this library connects your backend and interprets your services as frontend resources from which **CRUD** views are automatically created and associated with a route.  
 Vue-Admin also lets you create custom views to provide other kind of information to the site (measures, landings, etc).
 
-**Vue admin provides:**
+**Vue-Admin provides:**
 +   **create**, **read**, **update** and **delete** views for each declared resource.
 +   customizable **homepage**.
 +   **navigation** between views.
@@ -178,7 +178,7 @@ Some of the custom components examples can be found in the [**magazines views**]
 
 Nothing could make us happier than the community involvement into this framework, so if you feel like contributing or just sharing an idea for us to improve the library, please do not hesitate to [**fork vue-admin-js**](https://github.com/Cambalab/vue-admin) from our repository, comment or open an issue with the available labels.
 
-> *If you're going to submit a pull request to vue-admin make sure it targets the `develop` branch and uses our Pull Request template.*
+> *If you're going to submit a pull request to Vue-Admin make sure it targets the `develop` branch and uses our Pull Request template.*
 
 ## Starting a new project
 
