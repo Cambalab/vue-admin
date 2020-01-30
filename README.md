@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h4 align="center">Vue-Admin is desgined to let you easily build admin applications for the browser using Vue, Javascript and REST services.</h4>
+<h4 align="center">Vue-Admin is designed to let developers build frontend administration applications that run in the browser in a very easy way using Vue, Javascript and REST services.</h4>
 
 <p align="center">
   <a href="https://travis-ci.com/Cambalab/vue-admin"><img src="https://travis-ci.com/Cambalab/vue-admin.svg?branch=develop" alt="Build Status"></a>
