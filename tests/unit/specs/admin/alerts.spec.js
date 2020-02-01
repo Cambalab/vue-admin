@@ -20,6 +20,11 @@ describe('Alerts.vue', () => {
     ALERTS_SHOW_SNACKBAR,
     ALERTS_HIDE_SNACKBAR,
   } = AlertTypes
+  const {
+    namespace: authNamespace,
+    AUTH_LOGIN_SUCCESS,
+    AUTH_LOGIN_FAILURE,
+  } = AuthTypes
   // Configures Vue instance
   Vue.config.silent = true
   Vue.use(Vuetify)
@@ -44,10 +49,28 @@ describe('Alerts.vue', () => {
     })
   }
 
-  function commitSuccesfulLoginMutation(username) {
-    const { namespace, AUTH_LOGIN_SUCCESS } = AuthTypes
-    subjectWrapper.vm.$store.commit(`${namespace}/${AUTH_LOGIN_SUCCESS}`, {
-      email: username,
+  function commitAuthMutation(mutation, args) {
+    subjectWrapper.vm.$store.commit(mutation, { email: args })
+  }
+
+  function findSnackbar() {
+    return findRef({
+      wrapper: subjectWrapper,
+      ref: UI_NAMES.AUTH_SNACKBAR,
+    })
+  }
+
+  function findSnackbarButton() {
+    return findRef({
+      wrapper: subjectWrapper,
+      ref: UI_NAMES.AUTH_SNACKBAR_BUTTON,
+    })
+  }
+
+  function findSnackbarText() {
+    return findRef({
+      wrapper: subjectWrapper,
+      ref: UI_NAMES.SNACKBAR_TEXT,
     })
   }
 
@@ -74,55 +97,56 @@ describe('Alerts.vue', () => {
     })
     const expectedSnackbarButtonText = UI_CONTENT.AUTH_SNACKBAR_CLOSE
     // Login excercise
-    commitSuccesfulLoginMutation(username)
+    commitAuthMutation(`${authNamespace}/${AUTH_LOGIN_SUCCESS}`, username)
     // Finds the alert elements
-    const alert = findRef({
-      wrapper: subjectWrapper,
-      ref: UI_NAMES.AUTH_SNACKBAR,
-    })
-    const alertButton = findRef({
-      wrapper: subjectWrapper,
-      ref: UI_NAMES.AUTH_SNACKBAR_BUTTON,
-    })
-    const snackbarText = findRef({
-      wrapper: subjectWrapper,
-      ref: UI_NAMES.SNACKBAR_TEXT,
-    })
+    const snackbar = findSnackbar()
+    const snackbarButton = findSnackbarButton()
+    const snackbarText = findSnackbarText()
     // Assertions
-    expect(alert.props('value')).toBe(true)
+    expect(snackbar.props('value')).toBe(true)
     expect(snackbarText.text()).toBe(expectedSnackbarText)
-    expect(alertButton.text()).toBe(expectedSnackbarButtonText)
+    expect(snackbarButton.text()).toBe(expectedSnackbarButtonText)
   })
 
-  it('when a user click the close button an alert is hidden', async () => {
+  it('when a user authenticates with wrong credentials an alert is visible', () => {
+    mountSubject()
+    // Setup
+    const { username } = Factory.createCredentials()
+    const expectedSnackbarText = UI_CONTENT.AUTH_SNACKBAR_INVALID_USER_PASSWORD
+    const expectedSnackbarButtonText = UI_CONTENT.AUTH_SNACKBAR_CLOSE
+    // Login excercise
+    commitAuthMutation(`${authNamespace}/${AUTH_LOGIN_FAILURE}`, username)
+    // Finds the alert elements
+    const snackbar = findSnackbar()
+    const snackbarButton = findSnackbarButton()
+    const snackbarText = findSnackbarText()
+    // Assertions
+    expect(snackbar.props('value')).toBe(true)
+    expect(snackbarText.text()).toBe(expectedSnackbarText)
+    expect(snackbarButton.text()).toBe(expectedSnackbarButtonText)
+  })
+
+  it('when a user clicks the alert close button an alert is hidden', async () => {
     mountSubject()
     // Setup
     const { username } = Factory.createCredentials()
     const expectedSnackbarText = ''
     const expectedSnackbarButtonText = UI_CONTENT.AUTH_SNACKBAR_CLOSE
     // Login excercise
-    commitSuccesfulLoginMutation(username)
+    commitAuthMutation(`${authNamespace}/${AUTH_LOGIN_SUCCESS}`, username)
     // Finds the alert elements
-    const alert = findRef({
-      wrapper: subjectWrapper,
-      ref: UI_NAMES.AUTH_SNACKBAR,
-    })
-    const alertButton = findRef({
-      wrapper: subjectWrapper,
-      ref: UI_NAMES.AUTH_SNACKBAR_BUTTON,
-    })
-    const snackbarText = findRef({
-      wrapper: subjectWrapper,
-      ref: UI_NAMES.SNACKBAR_TEXT,
-    })
-    await alertButton.vm.$emit('click')
+    const snackbar = findSnackbar()
+    const snackbarButton = findSnackbarButton()
+    const snackbarText = findSnackbarText()
+    // Excercise, clicks the close button
+    await snackbarButton.vm.$emit('click')
     // Assertions
-    expect(alert.props('value')).toBe(false)
-    expect(alertButton.text()).toBe(expectedSnackbarButtonText)
+    expect(snackbar.props('value')).toBe(false)
+    expect(snackbarButton.text()).toBe(expectedSnackbarButtonText)
     expect(snackbarText.text()).toBe(expectedSnackbarText)
   })
 
-  it('when a user logs in an [AUTH_SHOW_SNACKBAR] action is triggered', () => {
+  it('[Vuex] when a user logs in an [AUTH_SHOW_SNACKBAR] action is triggered', () => {
     mountSubject()
     // Setup
     const { username } = Factory.createCredentials()
@@ -130,7 +154,7 @@ describe('Alerts.vue', () => {
       username,
     })
     // Login excercise
-    commitSuccesfulLoginMutation(username)
+    commitAuthMutation(`${authNamespace}/${AUTH_LOGIN_SUCCESS}`, username)
     // Gets the alert's store values
     const getter = `${alertsNamespace}/${ALERTS_GET_SNACKBAR_STATUS}`
     const alertState = subjectWrapper.vm.$store.getters[getter]
@@ -147,22 +171,19 @@ describe('Alerts.vue', () => {
     expect(storeSpy.commit).toHaveBeenNthCalledWith(2, mutationCommit, args)
   })
 
-  it('when a user closes a snackbar an [AUTH_HIDE_SNACKBAR] action is triggered', async () => {
+  it('[Vuex] when a user clicks the alert close button an [AUTH_HIDE_SNACKBAR] action is triggered', async () => {
     mountSubject()
     // Login excercise
     const { username } = Factory.createCredentials()
-    commitSuccesfulLoginMutation(username)
+    commitAuthMutation(`${authNamespace}/${AUTH_LOGIN_SUCCESS}`, username)
     // Gets the alert's store values
     const getter = `${alertsNamespace}/${ALERTS_GET_SNACKBAR_STATUS}`
     const hideSnackbarMutation = `${alertsNamespace}/${ALERTS_HIDE_SNACKBAR}`
     const alertState = subjectWrapper.vm.$store.getters[getter]
     // Finds the alert elements
-    const alertButton = findRef({
-      wrapper: subjectWrapper,
-      ref: UI_NAMES.AUTH_SNACKBAR_BUTTON,
-    })
-    // Closes the snackbar
-    await alertButton.vm.$emit('click')
+    const snackbarButton = findSnackbarButton()
+    // Excercise, clicks the close button
+    await snackbarButton.vm.$emit('click')
     // Assertions
     expect(alertState.color).toBe('')
     expect(alertState.text).toBe('')
