@@ -25,6 +25,7 @@ export default {
     with: ({ username }) => `Welcome ${username}.`,
   },
   AUTH_SNACKBAR_SUCCESS_COLOR: 'teal',
+  AUTH_SNACKBAR_FAILURE_COLOR: 'error',
   AUTH_SNACKBAR_CLOSE: 'Close',
 
   /**
