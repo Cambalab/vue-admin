@@ -24,7 +24,7 @@ export default {
   AUTH_SNACKBAR_LOGIN_SUCCESS: {
     with: ({ username }) => `Welcome ${username}.`,
   },
-  AUTH_SNACKBAR_SUCCESS_COLOR: 'success',
+  AUTH_SNACKBAR_SUCCESS_COLOR: 'teal',
   AUTH_SNACKBAR_CLOSE: 'Close',
 
   /**
