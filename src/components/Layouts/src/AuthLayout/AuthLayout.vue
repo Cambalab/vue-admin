@@ -118,12 +118,7 @@ export default {
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
-        this.va.login(this.username, this.password).then(err => {
-          if (err && err.response.status === 401) {
-            this.snackbarText = UI_CONTENT.AUTH_SNACKBAR_INVALID_USER_PASSWORD
-            this.snackbar = true
-          }
-        })
+        this.va.login(this.username, this.password)
       }
     },
   },

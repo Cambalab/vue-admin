@@ -12,15 +12,8 @@ export default {
   methods: {
     login: function(username, password) {
       const params = { username, password }
-      const { namespace, AUTH_LOGIN_REQUEST, AUTH_GET_ERROR } = AuthTypes
-      return new Promise((resolve, reject) => {
-        this.$store
-          .dispatch(`${namespace}/${AUTH_LOGIN_REQUEST}`, params)
-          .then(() =>
-            resolve(this.$store.getters[`${namespace}/${AUTH_GET_ERROR}`])
-          )
-          .catch(err => reject(err))
-      })
+      const { namespace, AUTH_LOGIN_REQUEST } = AuthTypes
+      this.$store.dispatch(`${namespace}/${AUTH_LOGIN_REQUEST}`, params)
     },
   },
   render: function(createElement) {
