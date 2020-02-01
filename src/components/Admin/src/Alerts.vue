@@ -9,7 +9,7 @@
     <v-btn
       color="white"
       text
-      @click="hideSnackbar()"
+      @click="hideSnackbar"
       :ref="UI_NAMES.AUTH_SNACKBAR_BUTTON"
     >
       <strong>{{ UI_CONTENT.AUTH_SNACKBAR_CLOSE }}</strong>
