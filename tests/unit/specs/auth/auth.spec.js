@@ -186,49 +186,5 @@ describe('AuthLayout.vue', () => {
     expect(vaPropSpy.login).toHaveBeenCalledTimes(1)
     expect(wrapper.vm.valid).toBe(true)
     expect(button.vm.disabled).toBe(false)
-    expect(wrapper.vm.snackbar).toBe(false)
-    expect(wrapper.vm.snackbarText).toBe('')
   })
-
-  it('should trigger an error snackbar on wrong username submit', async () => {
-    const _username = `w120n6${username}`
-    shouldTriggerAnErrorSnackbarOnWrongCredentialsSubmit({
-      username: _username,
-      password,
-    })
-  })
-
-  it('should trigger an error snackbar on wrong password submit', async () => {
-    const _password = `w120n6${password}`
-    shouldTriggerAnErrorSnackbarOnWrongCredentialsSubmit({
-      username,
-      password: _password,
-    })
-  })
-
-  async function shouldTriggerAnErrorSnackbarOnWrongCredentialsSubmit({
-    username,
-    password,
-  }) {
-    const usernameTextFieldName = UI_NAMES.AUTH_USERNAME_INPUT
-    const passwordTextFieldName = UI_NAMES.AUTH_PASSWORD_INPUT
-    const buttonName = UI_NAMES.AUTH_SIGN_IN_BUTTON
-    const usernameTextField = findRef({ wrapper, ref: usernameTextFieldName })
-    const passwordTextField = findRef({ wrapper, ref: passwordTextFieldName })
-    const button = findRef({ wrapper, ref: buttonName })
-    const wrongCredentialsText = UI_CONTENT.AUTH_SNACKBAR_INVALID_USER_PASSWORD
-
-    usernameTextField.vm.$emit('input', username)
-    await nextTick(wrapper)
-    passwordTextField.vm.$emit('input', password)
-    await nextTick(wrapper)
-    button.vm.$emit('click')
-    await nextTick(wrapper)
-
-    expect(wrapper.vm.valid).toBe(true)
-    expect(vaPropSpy.login).toHaveBeenCalledTimes(1)
-    expect(button.vm.disabled).toBe(false)
-    expect(wrapper.vm.snackbar).toBe(true)
-    expect(wrapper.vm.snackbarText).toBe(wrongCredentialsText)
-  }
 })
