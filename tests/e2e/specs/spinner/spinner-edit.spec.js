@@ -1,5 +1,6 @@
-const Factory = require('../../factory')
-const UI_NAMES = require('../../../../src/constants/ui.element.names')
+import Factory from '../../factory'
+import UI_NAMES from '../../../../src/constants/ui.element.names'
+import { Types as RequestsTypes } from '../../../../src/store/modules/requests'
 
 describe('Spinner on a Edit View Test', () => {
   const resourceName = 'articles'
@@ -28,8 +29,10 @@ describe('Spinner on a Edit View Test', () => {
   })
 
   it('The spinner should not be visualized when the store property isLoading is set to false', () => {
+    const { namespace, REQUESTS_SET_LOADING } = RequestsTypes
+    const mutation = `${namespace}/${REQUESTS_SET_LOADING}`
     const isLoading = false
-    cy.getStore().invoke('commit', 'requests/setLoading', { isLoading })
+    cy.getStore().invoke('commit', mutation, { isLoading })
 
     const spinnerContainer = cy.getElement({
       constant: UI_NAMES.SPINNER_CONTAINER,
@@ -41,8 +44,10 @@ describe('Spinner on a Edit View Test', () => {
   })
 
   it('The spinner should be visualized when the store property isLoading is set to true', () => {
+    const { namespace, REQUESTS_SET_LOADING } = RequestsTypes
+    const mutation = `${namespace}/${REQUESTS_SET_LOADING}`
     const isLoading = true
-    cy.getStore().invoke('commit', 'requests/setLoading', { isLoading })
+    cy.getStore().invoke('commit', mutation, { isLoading })
 
     const spinnerContainer = cy.getElement({
       constant: UI_NAMES.SPINNER_CONTAINER,

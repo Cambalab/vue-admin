@@ -1,5 +1,6 @@
 <script>
 import { VApp } from 'vuetify/lib'
+import AlertsWrapper from './Alerts'
 import Admin from './Admin'
 import createAuthModule from '@va-auth/store'
 
@@ -36,10 +37,10 @@ export default {
       _options
     )
     const props = Object.assign({}, context.props, { options })
-
     const admin = createElement(Admin, { props }, context.slots().default)
+    const alerts = createElement(AlertsWrapper)
 
-    return createElement(VApp, {}, [admin])
+    return createElement(VApp, {}, [admin, alerts])
   },
 }
 </script>

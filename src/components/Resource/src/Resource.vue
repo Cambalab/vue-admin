@@ -1,7 +1,8 @@
 <script>
-import { createCrudModule } from '@store/modules'
 import createRouteBindings from '@router/route.bindings'
 import defaults from './defaults'
+import { createCrudModule } from '@store/modules'
+import { Types as ResourcesTypes } from '@store/modules/resources'
 
 export default {
   name: 'Resource',
@@ -55,7 +56,9 @@ export default {
   },
   methods: {
     addRoute: function(path, name, addedRouteCallback) {
-      const resourceName = 'resources/addRoute'
+      const { namespace, RESOURCES_ADD_ROUTE } = ResourcesTypes
+      const resourceName = `${namespace}/${RESOURCES_ADD_ROUTE}`
+
       return this.$store.commit(resourceName, {
         path,
         name,

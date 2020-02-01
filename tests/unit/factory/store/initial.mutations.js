@@ -1,3 +1,5 @@
+import { Types as ResourcesTypes } from '@store/modules/resources'
+
 /**
  * Annonymous Function - Creates a simualtion of initial vuex crud mutations
  *
@@ -12,8 +14,11 @@ export default ({ snapshot = 'default' }) => {
     default: initDefaultMutations,
     Resource: initMutationsForResource,
   }
+
+  // Vuex initial resources mutations should be added here
+  const { namespace: resourcesNamespace, RESOURCES_ADD_ROUTE } = ResourcesTypes
   const resourcesMutations = {
-    'resources/addRoute': (state, args) => {
+    [`${resourcesNamespace}/${RESOURCES_ADD_ROUTE}`]: (state, args) => {
       args.addedRouteCallback && args.addedRouteCallback()
     },
   }

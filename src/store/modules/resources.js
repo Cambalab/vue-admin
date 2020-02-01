@@ -1,10 +1,21 @@
+export const Types = {
+  namespace: 'resources',
+
+  RESOURCES_ADD_ROUTE: 'RESOURCES_ADD_ROUTE',
+
+  RESOURCES_GET_ALL_ROUTES: 'RESOURCES_GET_ALL_ROUTES',
+}
+
 export default {
   namespaced: true,
   state: {
     routes: [],
   },
   mutations: {
-    addRoute({ routes }, { path, name, addedRouteCallback }) {
+    [Types.RESOURCES_ADD_ROUTE](
+      { routes },
+      { path, name, addedRouteCallback }
+    ) {
       let matchingPathRouteIndex
       let newRoute = { path, name }
       routes.forEach(
@@ -20,6 +31,6 @@ export default {
     },
   },
   getters: {
-    all: state => state.routes,
+    [Types.RESOURCES_GET_ALL_ROUTES]: state => state.routes,
   },
 }

@@ -1,5 +1,7 @@
 import Factory from '../../factory'
 import AuthTypes from '../../../../src/va-auth/src/types'
+import { Types as EntitiesTypes } from '../../../../src/store/modules/entities'
+import { Types as ResourcesTypes } from '../../../../src/store/modules/resources'
 
 describe('Vuex Store Getters', () => {
   const getStore = () => cy.getStore()
@@ -37,8 +39,9 @@ describe('Vuex Store Getters', () => {
       .should('have.keys', Object.keys(initialGetters))
   })
 
-  it('Attribute {resources/all} should have been initialised', () => {
-    const attribute = 'resources/all'
+  it('Attribute {resources/RESOURCES_GET_ALL_ROUTES} should have been initialised', () => {
+    const { namespace, RESOURCES_GET_ALL_ROUTES } = ResourcesTypes
+    const attribute = `${namespace}/${RESOURCES_GET_ALL_ROUTES}`
     const getters = `getters.${attribute}`
     getStore()
       .its(getters)
@@ -60,10 +63,12 @@ describe('Vuex Store Getters', () => {
   })
 
   it('{Entities} getters should have been initialised', () => {
+    const { namespace, ENTITIES_GET_ENTITY } = EntitiesTypes
+    const getter = `${namespace}/${ENTITIES_GET_ENTITY}`
     getStore()
       .its('getters')
       .should(getters => {
-        expect(getters['entities/getEntity']).to.be.empty
+        expect(getters[getter]).to.be.empty
       })
   })
 
