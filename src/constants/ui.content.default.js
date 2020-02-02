@@ -35,9 +35,12 @@ export default {
   SNACKBAR_CREATE_ELEMENT_SUCCESS_TEXT: 'The element was created successfully',
   SNACKBAR_DELETE_ELEMENT_SUCCESS_TEXT: 'The element was deleted successfully',
   SNACKBAR_UPDATE_ELEMENT_SUCCESS_TEXT: 'The element was updated successfully',
-  SNACKBAR_CREATE_ELEMENT_ERROR_TEXT: 'There was an error while trying to create the element',
-  SNACKBAR_DELETE_ELEMENT_ERROR_TEXT: 'There was an error while trying to delete the element',
-  SNACKBAR_UPDATE_ELEMENT_ERROR_TEXT: 'There was an error while trying to update the element',
+  SNACKBAR_CREATE_ELEMENT_ERROR_TEXT:
+    'There was an error while trying to create the element',
+  SNACKBAR_DELETE_ELEMENT_ERROR_TEXT:
+    'There was an error while trying to delete the element',
+  SNACKBAR_UPDATE_ELEMENT_ERROR_TEXT:
+    'There was an error while trying to update the element',
 
   // Colors
   SNACKBAR_PRIMARY_COLOR: 'primary',
