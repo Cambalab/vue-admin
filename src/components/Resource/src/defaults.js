@@ -1,4 +1,6 @@
 import { handleEmptyProp, handleSchemaValidation } from '@handlers/error/src'
+import { Types as AlertTypes } from '@store/modules/alerts'
+import UI_CONTENT from '@constants/ui.content.default'
 
 /**
  * Defaults - Default attributes for the Resource component
@@ -33,6 +35,54 @@ export default () => {
     }
   }
 
+  const _subscriptions = store => {
+    const { namespace: alertsNamespace, ALERTS_SHOW_SNACKBAR } = AlertTypes
+    return {
+      onCreateSuccess: () => {
+        const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
+        store.commit(mutationCommit, {
+          color: UI_CONTENT.SNACKBAR_SUCCESS_COLOR,
+          text: UI_CONTENT.SNACKBAR_CREATE_ELEMENT_SUCCESS_TEXT,
+        })
+      },
+      onDestroySuccess: () => {
+        const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
+        store.commit(mutationCommit, {
+          color: UI_CONTENT.SNACKBAR_SUCCESS_COLOR,
+          text: UI_CONTENT.SNACKBAR_DELETE_ELEMENT_SUCCESS_TEXT,
+        })
+      },
+      onUpdateSuccess: () => {
+        const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
+        store.commit(mutationCommit, {
+          color: UI_CONTENT.SNACKBAR_SUCCESS_COLOR,
+          text: UI_CONTENT.SNACKBAR_UPDATE_ELEMENT_SUCCESS_TEXT,
+        })
+      },
+      onCreateError: () => {
+        const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
+        store.commit(mutationCommit, {
+          color: UI_CONTENT.SNACKBAR_ERROR_COLOR,
+          text: UI_CONTENT.SNACKBAR_CREATE_ELEMENT_ERROR_TEXT,
+        })
+      },
+      onDestroyError: () => {
+        const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
+        store.commit(mutationCommit, {
+          color: UI_CONTENT.SNACKBAR_ERROR_COLOR,
+          text: UI_CONTENT.SNACKBAR_DELETE_ELEMENT_ERROR_TEXT,
+        })
+      },
+      onUpdateError: () => {
+        const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
+        store.commit(mutationCommit, {
+          color: UI_CONTENT.SNACKBAR_ERROR_COLOR,
+          text: UI_CONTENT.SNACKBAR_UPDATE_ELEMENT_ERROR_TEXT,
+        })
+      },
+    }
+  }
+
   /**
    * Resource default props
    */
@@ -43,6 +93,7 @@ export default () => {
   const redirect = _redirect
   const resourceIdName = 'id'
   const userPermissionsField = 'permissions'
+  const subscriptions = _subscriptions
 
   /**
    * Resource default validations
@@ -64,6 +115,7 @@ export default () => {
       apiUrl,
       redirect,
       parseResponses,
+      subscriptions,
     },
     validate: {
       redirect: validateRedirect,
