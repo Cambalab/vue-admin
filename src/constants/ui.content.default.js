@@ -32,15 +32,22 @@ export default {
   },
 
   SNACKBAR_CLOSE_TEXT: 'Close',
+
+  // Success messages
   SNACKBAR_CREATE_ELEMENT_SUCCESS_TEXT: 'The element was created successfully',
   SNACKBAR_DELETE_ELEMENT_SUCCESS_TEXT: 'The element was deleted successfully',
   SNACKBAR_UPDATE_ELEMENT_SUCCESS_TEXT: 'The element was updated successfully',
+  // Error messages
   SNACKBAR_CREATE_ELEMENT_ERROR_TEXT:
-    'There was an error while trying to create the element',
+    'There was a connection error while trying to create the element',
   SNACKBAR_DELETE_ELEMENT_ERROR_TEXT:
-    'There was an error while trying to delete the element',
+    'There was a connection error while trying to delete the element',
   SNACKBAR_UPDATE_ELEMENT_ERROR_TEXT:
-    'There was an error while trying to update the element',
+    'There was a connection error while trying to update the element',
+  SNACKBAR_FETCH_LIST_ERROR_TEXT:
+    'There was a connection error while retrieving the elements',
+  SNACKBAR_FETCH_SINGLE_ERROR_TEXT:
+    'There was a connection error while retrieving the element. Information may not be up to date.',
 
   // Colors
   SNACKBAR_PRIMARY_COLOR: 'primary',
