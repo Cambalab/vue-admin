@@ -42,6 +42,10 @@ export default {
       type: Object,
       default: defaults().props.parseResponses,
     },
+    subscriptions: {
+      type: Function,
+      default: defaults().props.subscriptions,
+    },
   },
   created: function() {
     if (!this.storeHasModule(this.name)) {
@@ -51,6 +55,7 @@ export default {
         resourceIdName: this.resourceIdName,
         parseResponses: this.parseResponses,
         store: this.$store,
+        ...this.subscriptions(this.$store, this.name),
       })
     }
   },
