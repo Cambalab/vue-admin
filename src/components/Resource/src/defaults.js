@@ -73,6 +73,20 @@ export default () => {
           text: UI_CONTENT.SNACKBAR_DELETE_ELEMENT_ERROR_TEXT,
         })
       },
+      onFetchListError: () => {
+        const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
+        store.commit(mutationCommit, {
+          color: UI_CONTENT.SNACKBAR_ERROR_COLOR,
+          text: UI_CONTENT.SNACKBAR_FETCH_LIST_ERROR_TEXT,
+        })
+      },
+      onFetchSingleError: () => {
+        const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
+        store.commit(mutationCommit, {
+          color: UI_CONTENT.SNACKBAR_INFO_COLOR,
+          text: UI_CONTENT.SNACKBAR_FETCH_SINGLE_ERROR_TEXT,
+        })
+      },
       onUpdateError: () => {
         const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
         store.commit(mutationCommit, {
