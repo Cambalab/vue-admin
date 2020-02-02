@@ -12,7 +12,7 @@
       @click="hideSnackbar"
       :ref="UI_NAMES.AUTH_SNACKBAR_BUTTON"
     >
-      <strong>{{ UI_CONTENT.AUTH_SNACKBAR_CLOSE }}</strong>
+      <strong>{{ UI_CONTENT.SNACKBAR_CLOSE_TEXT }}</strong>
     </v-btn>
   </v-snackbar>
 </template>

@@ -95,7 +95,7 @@ describe('Alerts.vue', () => {
     const expectedSnackbarText = UI_CONTENT.AUTH_SNACKBAR_LOGIN_SUCCESS.with({
       username,
     })
-    const expectedSnackbarButtonText = UI_CONTENT.AUTH_SNACKBAR_CLOSE
+    const expectedSnackbarButtonText = UI_CONTENT.SNACKBAR_CLOSE_TEXT
     // Login excercise
     commitAuthMutation(`${authNamespace}/${AUTH_LOGIN_SUCCESS}`, username)
     // Finds the alert elements
@@ -113,7 +113,7 @@ describe('Alerts.vue', () => {
     // Setup
     const { username } = Factory.createCredentials()
     const expectedSnackbarText = UI_CONTENT.AUTH_SNACKBAR_INVALID_USER_PASSWORD
-    const expectedSnackbarButtonText = UI_CONTENT.AUTH_SNACKBAR_CLOSE
+    const expectedSnackbarButtonText = UI_CONTENT.SNACKBAR_CLOSE_TEXT
     // Login excercise
     commitAuthMutation(`${authNamespace}/${AUTH_LOGIN_FAILURE}`, username)
     // Finds the alert elements
@@ -131,7 +131,7 @@ describe('Alerts.vue', () => {
     // Setup
     const { username } = Factory.createCredentials()
     const expectedSnackbarText = ''
-    const expectedSnackbarButtonText = UI_CONTENT.AUTH_SNACKBAR_CLOSE
+    const expectedSnackbarButtonText = UI_CONTENT.SNACKBAR_CLOSE_TEXT
     // Login excercise
     commitAuthMutation(`${authNamespace}/${AUTH_LOGIN_SUCCESS}`, username)
     // Finds the alert elements
@@ -160,11 +160,11 @@ describe('Alerts.vue', () => {
     const alertState = subjectWrapper.vm.$store.getters[getter]
     const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
     const args = {
-      color: UI_CONTENT.AUTH_SNACKBAR_SUCCESS_COLOR,
+      color: UI_CONTENT.SNACKBAR_SUCCESS_COLOR,
       text: UI_CONTENT.AUTH_SNACKBAR_LOGIN_SUCCESS.with({ username }),
     }
     // Assertions
-    expect(alertState.color).toBe(UI_CONTENT.AUTH_SNACKBAR_SUCCESS_COLOR)
+    expect(alertState.color).toBe(UI_CONTENT.SNACKBAR_SUCCESS_COLOR)
     expect(alertState.isVisible).toBe(true)
     expect(alertState.text).toBe(expectedSnackbarText)
     expect(storeSpy.commit).toHaveBeenCalledTimes(2)

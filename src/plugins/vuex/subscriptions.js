@@ -14,7 +14,7 @@ const loginAlert = store => mutation => {
   if (mutation.type === mutationSubscription) {
     const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
     const args = {
-      color: UI_CONTENT.AUTH_SNACKBAR_SUCCESS_COLOR,
+      color: UI_CONTENT.SNACKBAR_SUCCESS_COLOR,
       text: username =>
         UI_CONTENT.AUTH_SNACKBAR_LOGIN_SUCCESS.with({ username }),
     }
@@ -29,7 +29,7 @@ const failedAuthentication = store => mutation => {
   if (mutation.type === mutationSubscription) {
     const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
     const args = {
-      color: UI_CONTENT.AUTH_SNACKBAR_FAILURE_COLOR,
+      color: UI_CONTENT.SNACKBAR_ERROR_COLOR,
       text: UI_CONTENT.AUTH_SNACKBAR_INVALID_USER_PASSWORD,
     }
     store.commit(mutationCommit, args)
