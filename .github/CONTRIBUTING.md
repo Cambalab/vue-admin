@@ -25,13 +25,13 @@ Hi! We're really excited that you are interested in contributing to Vue-Admin. B
 +   Make sure `npm run test` passes. (see [**development setup**](#development-setup))
 
 +   If adding a new feature:
-  +   Add accompanying test case (at the moment a unit test would be enough).
-  +   Provide a convincing reason to add this feature. Ideally, you should open a suggestion issue first and have it approved before working on it.
+    +   Add accompanying test case (at the moment a unit test would be enough).
+    +   Provide a convincing reason to add this feature. Ideally, you should open a suggestion issue first and have it approved before working on it.
 
 +   If fixing bug:
-  +   If you are resolving a special issue, please follow the branch naming convention mentioned above.
-  +   Provide a detailed description of the bug in the PR. Live demo preferred.
-  +   Add appropriate test coverage if applicable.
+    +   If you are resolving a special issue, please follow the branch naming convention mentioned above.
+    +   Provide a detailed description of the bug in the PR. Live demo preferred.
+    +   Add appropriate test coverage if applicable.
 
 ## Development Setup
 
