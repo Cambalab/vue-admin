@@ -16,11 +16,11 @@ Hi! We're really excited that you are interested in contributing to Vue-Admin. B
 
 +  The `master` branch is just a snapshot of the latest stable release. All development should be done in dedicated branches. **Do not submit PRs against the `master` branch.**
 
-+  Checkout a topic branch from the relevant branch, e.g. `develop`, and merge back against that branch. Please follow this convention for the new branch: `issueNumber-githubUsernaame-commit-title`
++  Checkout a topic branch from the relevant branch, e.g. `develop`, and merge back against that branch. Please follow this convention for the new branch: `issueNumber-githubUsernaame-commitTitle`.
 
 +  Most of the contributed work should generally target the `src` folder.
 
-+  It's OK to have multiple small commits as you work on the PR - We may squash them before merging if necessary
++  It's OK to have multiple small commits as you work on the PR - We may squash them before merging if necessary.
 
 +   Make sure `npm run test` passes. (see [**development setup**](#development-setup))
 
