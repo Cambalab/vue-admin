@@ -25,6 +25,9 @@ module.exports = {
   testMatch: [
     '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)',
   ],
+  collectCoverageFrom: ['**/src/**/*.(js|jsx|ts|tsx|vue)'],
+  coverageDirectory: 'tests/unit/coverage',
+  coverageReporters: ['text', 'text-summary', 'html', 'json', 'json-summary'],
   transformIgnorePatterns: ['node_modules/(?!(vuetify)/)'],
   testURL: 'http://localhost/',
 }

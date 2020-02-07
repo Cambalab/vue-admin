@@ -14,6 +14,8 @@
     "release:minor": "npm version minor && npm publish",
     "release:patch": "npm version patch && npm publish",
     "serve": "vue-cli-service serve",
+    "test": "npm run lint && npm run test:coverage && npm run test:e2e -- --headless",
+    "test:coverage": "vue-cli-service test:unit --coverage",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit"
   },
