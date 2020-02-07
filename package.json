@@ -34,6 +34,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "bavaria-ipsum": "^1.0.3",
+    "codecov": "^3.6.5",
     "core-js": "^2.6.5",
     "cypress": "^3.4.0",
     "cypress-dark": "^1.7.13",
