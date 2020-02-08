@@ -11,6 +11,7 @@ import {
 import Admin from '@components/Admin'
 import AuthTypes from '@va-auth/types'
 import Resource from '@components/Resource'
+import { Types as AlertTypes } from '@store/modules/alerts'
 import { UnauthorizedLayout } from '@components/Layouts'
 import { name, description, version } from '../package.json'
 
@@ -64,5 +65,6 @@ export {
   SidebarAction,
   SidebarHeading,
   // Exports Types
+  AlertTypes,
   AuthTypes,
 }
