@@ -1,5 +1,39 @@
 # Change Log
 
+## [v0.0.8](https://github.com/Cambalab/vue-admin/tree/v0.0.8) (2020-02-08)
+[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.7...v0.0.8)
+
+**Implemented enhancements:**
+
+- Configure automatic test coverage report [\#204](https://github.com/Cambalab/vue-admin/issues/204)
+- As a user I want to provide my own subscriptions to the Resource Alert system [\#200](https://github.com/Cambalab/vue-admin/issues/200)
+- Refactor the authlayout snackbar to use the Alerts system [\#198](https://github.com/Cambalab/vue-admin/issues/198)
+- Add contribution guidelines [\#193](https://github.com/Cambalab/vue-admin/issues/193)
+- Add code of conduct [\#192](https://github.com/Cambalab/vue-admin/issues/192)
+- As a User I want to be notified when I successfully log in [\#190](https://github.com/Cambalab/vue-admin/issues/190)
+- Update npm prepublish script to prepare [\#185](https://github.com/Cambalab/vue-admin/issues/185)
+- Add a coverage npm script [\#147](https://github.com/Cambalab/vue-admin/issues/147)
+- Add Image of the app running to Readme [\#37](https://github.com/Cambalab/vue-admin/issues/37)
+- Package.json: replaces prepublish script to prepare [\#208](https://github.com/Cambalab/vue-admin/pull/208) ([sgobotta](https://github.com/sgobotta))
+- 184 consider npm audit checks [\#207](https://github.com/Cambalab/vue-admin/pull/207) ([sgobotta](https://github.com/sgobotta))
+- 200 as a user i want to provide my own subscriptions to the resource alert system [\#206](https://github.com/Cambalab/vue-admin/pull/206) ([sgobotta](https://github.com/sgobotta))
+- 204 configure automatic test coverage report [\#205](https://github.com/Cambalab/vue-admin/pull/205) ([sgobotta](https://github.com/sgobotta))
+
+**Closed issues:**
+
+- Update contributing documentation [\#202](https://github.com/Cambalab/vue-admin/issues/202)
+- Consider npm audit checks / autofixes to be added to CI [\#184](https://github.com/Cambalab/vue-admin/issues/184)
+- Let me install it with npm from github [\#28](https://github.com/Cambalab/vue-admin/issues/28)
+
+**Merged pull requests:**
+
+- 202 update contributing documentation [\#203](https://github.com/Cambalab/vue-admin/pull/203) ([sgobotta](https://github.com/sgobotta))
+- 198 refactor the authlayout snackbar to use the alerts system [\#199](https://github.com/Cambalab/vue-admin/pull/199) ([sgobotta](https://github.com/sgobotta))
+- 190 as a user i want to be notified when i successfully log in [\#196](https://github.com/Cambalab/vue-admin/pull/196) ([sgobotta](https://github.com/sgobotta))
+- Uses "Vue-Admin" as project name across Readme [\#195](https://github.com/Cambalab/vue-admin/pull/195) ([tehuel](https://github.com/tehuel))
+- Adds Contributor Covenant v2.0 [\#194](https://github.com/Cambalab/vue-admin/pull/194) ([sgobotta](https://github.com/sgobotta))
+- 0.0.7 [\#191](https://github.com/Cambalab/vue-admin/pull/191) ([sgobotta](https://github.com/sgobotta))
+
 ## [v0.0.7](https://github.com/Cambalab/vue-admin/tree/v0.0.7) (2019-11-17)
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.6...v0.0.7)
 
@@ -20,7 +54,9 @@
 - 161 replace server author services specific data generators with fake data generator [\#189](https://github.com/Cambalab/vue-admin/pull/189) ([sgobotta](https://github.com/sgobotta))
 - Feedback on failing authentication [\#188](https://github.com/Cambalab/vue-admin/pull/188) ([jejoivanic](https://github.com/jejoivanic))
 - Add demo gif [\#186](https://github.com/Cambalab/vue-admin/pull/186) ([glmaljkovich](https://github.com/glmaljkovich))
+- Chore/add linting to pre commit hook [\#183](https://github.com/Cambalab/vue-admin/pull/183) ([C3-TKO](https://github.com/C3-TKO))
 - 178 as a user i want to use auth types to access the auth store module [\#182](https://github.com/Cambalab/vue-admin/pull/182) ([sgobotta](https://github.com/sgobotta))
+- README.md: adds credentials information for the demo app [\#177](https://github.com/Cambalab/vue-admin/pull/177) ([sgobotta](https://github.com/sgobotta))
 - 0.0.6 [\#174](https://github.com/Cambalab/vue-admin/pull/174) ([sgobotta](https://github.com/sgobotta))
 - List Component: Adds the ability to navigate on row click [\#170](https://github.com/Cambalab/vue-admin/pull/170) ([DanielOrmeno](https://github.com/DanielOrmeno))
 
@@ -57,8 +93,6 @@
 
 **Merged pull requests:**
 
-- Chore/add linting to pre commit hook [\#183](https://github.com/Cambalab/vue-admin/pull/183) ([C3-TKO](https://github.com/C3-TKO))
-- README.md: adds credentials information for the demo app [\#177](https://github.com/Cambalab/vue-admin/pull/177) ([sgobotta](https://github.com/sgobotta))
 - 172 as a show action a custom title can be provided [\#173](https://github.com/Cambalab/vue-admin/pull/173) ([sgobotta](https://github.com/sgobotta))
 - 3 as a create action a default title should be used [\#171](https://github.com/Cambalab/vue-admin/pull/171) ([sgobotta](https://github.com/sgobotta))
 - 2 as an edit actions a default title should be used [\#169](https://github.com/Cambalab/vue-admin/pull/169) ([sgobotta](https://github.com/sgobotta))
