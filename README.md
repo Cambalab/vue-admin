@@ -268,13 +268,9 @@ Please make sure to read the [**Contributing Guide**](https://github.com/Cambala
 
 [**GNU General Public License version 3**](https://opensource.org/licenses/GPL-3.0)
 
----
+# <Divider>
+
 <p align="center">
-  <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">
-    <img class="margin" width="20" src="public/camba_icon.png" />
-  </a>
-  <strong>With :green_heart: :purple_heart: :heart: by <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">Cambá Coop</a> :earth_americas: Buenos Aires, Argentina</strong>
-  <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">
-    <img class="margin" width="20" src="public/camba_icon.png" />
-  </a>
+  <strong>👩‍💻 with :green_heart: :purple_heart: :heart: by <a href="https://camba.coop" target="_blank" rel="noopener noreferrer"><img width="20" src="http://camba.coop/assets/signature/no_text_logo.png" /> cambá.coop</a> :earth_americas: Buenos Aires, Argentina
+  </strong>
 </p>
