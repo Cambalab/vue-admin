@@ -2,7 +2,10 @@
 import Factory from '../factory'
 import UI_NAMES from '../../../src/constants/ui.element.names'
 import { createUrlWithResource, createElementQueryWith } from './helpers'
-const { AUTH_LOGIN_REQUEST } = require('../../../src/va-auth/src/types')
+const {
+  namespace: authNamespace,
+  AUTH_LOGIN_REQUEST,
+} = require('../../../src/va-auth/src/types')
 
 const storePath = 'app.$store'
 
@@ -140,7 +143,7 @@ export const getStore = () => cy.window().its(storePath)
 
 export const authenticate = args => {
   getStore().then(store => {
-    store.dispatch(`auth/${AUTH_LOGIN_REQUEST}`, args)
+    store.dispatch(`${authNamespace}/${AUTH_LOGIN_REQUEST}`, args)
   })
 }
 

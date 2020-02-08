@@ -7,7 +7,7 @@ const errorFooter =
 // Component doc paths should be added here
 const componentsDocs = {
   Admin: '{docsUrl}/Admin/Admin.md#props',
-  Resource: '{docsUrl}/Resource.md#resource-props',
+  Resource: '{docsUrl}/Resource/Resource.md#props',
   DateInput: '{docsUrl}/Ui-Components/DateInput.md',
 }
 

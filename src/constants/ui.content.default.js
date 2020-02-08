@@ -20,8 +20,43 @@ export default {
   AUTH_ALERT_EMAIL_REQUIRED: 'E-mail is required',
   AUTH_ALERT_PASSWORD_REQUIRED: 'Password is required',
   AUTH_ALERT_INVALID_EMAIL: 'E-mail must be valid',
-  AUTH_SNACKBAR_INVALID_USER_PASSWORD: 'The user or password is incorrect',
-  AUTH_SNACKBAR_CLOSE: 'Close',
+
+  /**
+   * Snackbar
+   */
+
+  // Text
+  AUTH_SNACKBAR_INVALID_USER_PASSWORD: 'The username or password is invalid',
+  AUTH_SNACKBAR_LOGIN_SUCCESS: {
+    with: ({ username }) => `Welcome ${username}.`,
+  },
+
+  SNACKBAR_CLOSE_TEXT: 'Close',
+
+  // Success messages
+  SNACKBAR_CREATE_ELEMENT_SUCCESS_TEXT: 'The element was created successfully',
+  SNACKBAR_DELETE_ELEMENT_SUCCESS_TEXT: 'The element was deleted successfully',
+  SNACKBAR_UPDATE_ELEMENT_SUCCESS_TEXT: 'The element was updated successfully',
+  // Error messages
+  SNACKBAR_CREATE_ELEMENT_ERROR_TEXT:
+    'There was a connection error while trying to create the element',
+  SNACKBAR_DELETE_ELEMENT_ERROR_TEXT:
+    'There was a connection error while trying to delete the element',
+  SNACKBAR_UPDATE_ELEMENT_ERROR_TEXT:
+    'There was a connection error while trying to update the element',
+  SNACKBAR_FETCH_LIST_ERROR_TEXT:
+    'There was a connection error while retrieving the elements',
+  SNACKBAR_FETCH_SINGLE_ERROR_TEXT:
+    'There was a connection error while retrieving the element. Information may not be up to date.',
+
+  // Colors
+  SNACKBAR_PRIMARY_COLOR: 'primary',
+  SNACKBAR_SECONDARY_COLOR: 'secondary',
+  SNACKBAR_ACCENT_COLOR: 'accent',
+  SNACKBAR_ERROR_COLOR: 'error',
+  SNACKBAR_INFO_COLOR: 'info',
+  SNACKBAR_SUCCESS_COLOR: 'success',
+  SNACKBAR_WARNING_COLOR: 'warning',
 
   /**
    * Auth component

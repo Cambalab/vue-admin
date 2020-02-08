@@ -55,17 +55,6 @@
           <component :is="authFooter" />
         </div>
       </v-flex>
-      <v-snackbar
-        :name="UI_NAMES.AUTH_SNACKBAR"
-        :ref="UI_NAMES.AUTH_SNACKBAR"
-        v-model="snackbar"
-        color="error"
-      >
-        {{ snackbarText }}
-        <v-btn color="white" text @click="snackbar = false">
-          <strong>{{ UI_CONTENT.AUTH_SNACKBAR_CLOSE }}</strong>
-        </v-btn>
-      </v-snackbar>
     </v-layout>
   </div>
 </template>
@@ -110,20 +99,13 @@ export default {
       password: '',
       UI_NAMES,
       UI_CONTENT,
-      snackbar: false,
-      snackbarText: '',
     }
   },
 
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
-        this.va.login(this.username, this.password).then(err => {
-          if (err && err.response.status === 401) {
-            this.snackbarText = UI_CONTENT.AUTH_SNACKBAR_INVALID_USER_PASSWORD
-            this.snackbar = true
-          }
-        })
+        this.va.login(this.username, this.password)
       }
     },
   },

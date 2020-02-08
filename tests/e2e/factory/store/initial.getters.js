@@ -1,5 +1,9 @@
 import { initialResourcesRoutes } from './common.utils'
 import AuthTypes from '../../../../src/va-auth/src/types'
+import { Types as AlertTypes } from '../../../../src/store/modules/alerts'
+import { Types as EntitiesTypes } from '../../../../src/store/modules/entities'
+import { Types as RequestsTypes } from '../../../../src/store/modules/requests'
+import { Types as ResourcesTypes } from '../../../../src/store/modules/resources'
 
 /**
  * Anonymous Function - Creates a simualtion of initial vuex crud getters
@@ -9,28 +13,37 @@ import AuthTypes from '../../../../src/va-auth/src/types'
 export default () => {
   // Initial vuex crud resources should be added here
   const initialResources = ['articles', 'magazines', 'authors']
+
   // Vuex initial entities getters should be added here
+  const { namespace: entitiesNamespace, ENTITIES_GET_ENTITY } = EntitiesTypes
   const entitiesCrud = {
-    'entities/getEntity': {},
+    [`${entitiesNamespace}/${ENTITIES_GET_ENTITY}`]: {},
   }
+
   // Vuex initial resources getters should be added here
+  const {
+    namespace: resourcesNamespace,
+    RESOURCES_GET_ALL_ROUTES,
+  } = ResourcesTypes
   const resourcesGetters = {
-    'resources/all': initialResourcesRoutes(initialResources),
+    [`${resourcesNamespace}/${RESOURCES_GET_ALL_ROUTES}`]: initialResourcesRoutes(
+      initialResources
+    ),
   }
 
   // Vuex auth getters
   const {
-    namespace,
+    namespace: authNamespace,
     AUTH_GET_STATUS,
     AUTH_GET_USER,
     AUTH_IS_AUTHENTICATED,
     AUTH_GET_ERROR,
   } = AuthTypes
   const authGetters = {
-    [`${namespace}/${AUTH_GET_STATUS}`]: 'idle',
-    [`${namespace}/${AUTH_GET_USER}`]: '',
-    [`${namespace}/${AUTH_IS_AUTHENTICATED}`]: false,
-    [`${namespace}/${AUTH_GET_ERROR}`]: {
+    [`${authNamespace}/${AUTH_GET_STATUS}`]: 'idle',
+    [`${authNamespace}/${AUTH_GET_USER}`]: '',
+    [`${authNamespace}/${AUTH_IS_AUTHENTICATED}`]: false,
+    [`${authNamespace}/${AUTH_GET_ERROR}`]: {
       response: {
         status: 401,
         message: 'Invalid user or password',
@@ -38,9 +51,20 @@ export default () => {
     },
   }
 
+  // Vuex alert getters
+  const { namespace: alertsNamespace, ALERTS_GET_SNACKBAR_STATUS } = AlertTypes
+  const alertsGetters = {
+    [`${alertsNamespace}/${ALERTS_GET_SNACKBAR_STATUS}`]: {
+      color: '',
+      isVisible: false,
+      text: '',
+    },
+  }
+
   // Vuex ui getters
+  const { namespace: requestsNamespace, REQUESTS_IS_LOADING } = RequestsTypes
   const requestGetters = {
-    'requests/isLoading': false,
+    [`${requestsNamespace}/${REQUESTS_IS_LOADING}`]: false,
   }
   /**
    * initResourcesCrud - Given a list of resources, creates mocked vuex crud
@@ -62,6 +86,7 @@ export default () => {
   }
 
   return {
+    ...alertsGetters,
     ...authGetters,
     ...initResourcesCrud(initialResources),
     ...entitiesCrud,

@@ -1,15 +1,17 @@
 <p align="center">
   <a target="_blank" rel="noopener noreferrer">
-    <img width="140" src="public/logo.png" alt="Vue Admin logo" />
+    <img width="140" src="public/logo.png" alt="Vue-Admin logo" />
   </a>
 </p>
 
-<h4 align="center">Vue Admin is desgined to let you easily build admin applications for the browser using Vue, Javascript and REST services.</h4>
+<h4 align="center">Vue-Admin is designed to let developers build frontend administration applications that run in the browser in a very easy way using Vue, Javascript and REST services.</h4>
 
 <p align="center">
   <a href="https://travis-ci.com/Cambalab/vue-admin"><img src="https://travis-ci.com/Cambalab/vue-admin.svg?branch=develop" alt="Build Status"></a>
+  <a href="https://codecov.io/gh/Cambalab/vue-admin"><img src="https://codecov.io/gh/Cambalab/vue-admin/branch/master/graph/badge.svg" alt="Build Status"></a>
   <a href="https://www.npmjs.com/package/vue-admin-js"><img src="https://img.shields.io/npm/v/vue-admin-js.svg" alt="Version"></a>
-  <a href="https://www.npmjs.com/package/vue-admin-js"><img src="https://img.shields.io/npm/l/vue-admin-js.svg" alt="License"></a>
+  <a href="https://github.com/Cambalab/vue-admin/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/vue-admin-js.svg" alt="License"></a>
+  <a href="https://github.com/Cambalab/vue-admin/blob/master/.github/CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" alt="License"></a>
 </p>
 
 ## Introduction
@@ -22,10 +24,10 @@
 
 ## About the library
 
-Given a simple configuration to Vue-Admin components, this library connects your backend and interprets your services as frontend resources from which **crud** views are automatically created and associated with a route.  
+Given a simple configuration to Vue-Admin components, this library connects your backend and interprets your services as frontend resources from which **CRUD** views are automatically created and associated with a route.  
 Vue-Admin also lets you create custom views to provide other kind of information to the site (measures, landings, etc).
 
-**Vue admin provides:**
+**Vue-Admin provides:**
 +   **create**, **read**, **update** and **delete** views for each declared resource.
 +   customizable **homepage**.
 +   **navigation** between views.
@@ -174,12 +176,6 @@ For a complete example take a look at the [**demo files**](/demo)
 
 Some of the custom components examples can be found in the [**magazines views**](/demo/components/magazines)
 
-## Contributing and Future features
-
-Nothing could make us happier than the community involvement into this framework, so if you feel like contributing or just sharing an idea for us to improve the library, please do not hesitate to [**fork vue-admin-js**](https://github.com/Cambalab/vue-admin) from our repository, comment or open an issue with the available labels.
-
-> *If you're going to submit a pull request to vue-admin make sure it targets the `develop` branch and uses our Pull Request template.*
-
 ## Starting a new project
 
 *Using the official Vue cli*
@@ -233,23 +229,23 @@ User with **guest** permissions
 > **username:** user@camba.coop  
 > **password:** 123456
 
-## Running the tests and other scripts
+## Scripts: tests, lint, build
 
-**We use the `vue-cli-service` to run tests, lint and build**
+**We use the `vue-cli-service` to run tests, lint checking and the library build.**
 
-> All of the above are used by the travis continuous integration
+> All of the above are used by the travis continuous integration.
+
+***unit tests***
+```bash
+# in the root of the project run the unit tests script
+npm run test:unit
+```
 
 ***end to end tests***
 ```bash
 # go to the root of the project to run the e2e tests script
 # there's no need to run the test server, we use the Cypress server
 npm run test:e2e
-```
-
-***unit tests***
-```bash
-# in the root of the project run the unit tests script
-npm run test:unit
 ```
 
 ***lint service***
@@ -264,13 +260,17 @@ npm run lint
 npm run build
 ```
 
----
+## Contribution
+
+Please make sure to read the [**Contributing Guide**](https://github.com/Cambalab/vue-admin/blob/master/.github/CONTRIBUTING.md) before making a pull request.
+
+## License
+
+[**GNU General Public License version 3**](https://opensource.org/licenses/GPL-3.0)
+
+# <Divider>
+
 <p align="center">
-  <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">
-    <img class="margin" width="20" src="public/camba_icon.png" />
-  </a>
-  <strong>With :green_heart: :purple_heart: :heart: by <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">Cambá Coop</a> :earth_americas: Buenos Aires, Argentina</strong>
-  <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">
-    <img class="margin" width="20" src="public/camba_icon.png" />
-  </a>
+  <strong>👩‍💻 with :green_heart: :purple_heart: :heart: by <a href="https://camba.coop" target="_blank" rel="noopener noreferrer"><img width="20" src="http://camba.coop/assets/signature/no_text_logo.png" /> cambá.coop</a> :earth_americas: Buenos Aires, Argentina
+  </strong>
 </p>

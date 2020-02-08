@@ -1,7 +1,8 @@
 <script>
-import { createCrudModule } from '@store/modules'
 import createRouteBindings from '@router/route.bindings'
 import defaults from './defaults'
+import { createCrudModule } from '@store/modules'
+import { Types as ResourcesTypes } from '@store/modules/resources'
 
 export default {
   name: 'Resource',
@@ -41,6 +42,10 @@ export default {
       type: Object,
       default: defaults().props.parseResponses,
     },
+    subscriptions: {
+      type: Function,
+      default: defaults().props.subscriptions,
+    },
   },
   created: function() {
     if (!this.storeHasModule(this.name)) {
@@ -50,12 +55,15 @@ export default {
         resourceIdName: this.resourceIdName,
         parseResponses: this.parseResponses,
         store: this.$store,
+        ...this.subscriptions(this.$store, this.name),
       })
     }
   },
   methods: {
     addRoute: function(path, name, addedRouteCallback) {
-      const resourceName = 'resources/addRoute'
+      const { namespace, RESOURCES_ADD_ROUTE } = ResourcesTypes
+      const resourceName = `${namespace}/${RESOURCES_ADD_ROUTE}`
+
       return this.$store.commit(resourceName, {
         path,
         name,

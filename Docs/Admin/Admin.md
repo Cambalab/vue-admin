@@ -1,6 +1,7 @@
 # `Admin`
 
-`Admin` is one of the core components, receives many of the properties provided by a user and sends them to the correspondent sub-components. Some of those properties are not required. When those properties are not provided, the `Admin` component will use a set of default ones.  
+`Admin` is one of the core components, receives many of the properties provided by a user and sends them to the correspondent sub-components. Some of those properties are not required. When those properties are not provided, the `Admin` component will use a set of default ones.
+
 It's main responsibility is to create an authentication route and store modules, decide whether a user is authenticated or not and finally render the proper component, given an authentication scenario.
 Communication to the store match the structure provided in the `authModule` (e.g.: `@va-auth/store`) and `@va-auth/types`.
 

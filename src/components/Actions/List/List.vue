@@ -96,6 +96,7 @@ import {
   Spinner,
   DateInput,
 } from '@components/UiComponents'
+import { Types as RequestsTypes } from '@store/modules/requests'
 
 export default {
   name: 'List',
@@ -230,7 +231,8 @@ export default {
       return this.va.getList()
     },
     isLoading() {
-      return this.$store.getters['requests/isLoading']
+      const { namespace, REQUESTS_IS_LOADING } = RequestsTypes
+      return this.$store.getters[`${namespace}/${REQUESTS_IS_LOADING}`]
     },
   },
   methods: {

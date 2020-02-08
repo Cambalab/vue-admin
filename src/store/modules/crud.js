@@ -1,4 +1,5 @@
 import createCrudModule, { client } from 'vuex-crud'
+import { Types as RequestsTypes } from '@store/modules/requests'
 
 /**
  * Crud Module - Given a set of data, creates a vuex crud module and calls
@@ -17,13 +18,32 @@ export default ({
   resourceIdName,
   parseResponses,
   store,
+  onFetchListStart = () => {},
+  onFetchListSuccess = () => {},
+  onFetchListError = () => {},
+  onFetchSingleStart = () => {},
+  onFetchSingleSuccess = () => {},
+  onFetchSingleError = () => {},
+  onCreateStart = () => {},
+  onCreateSuccess = () => {},
+  onCreateError = () => {},
+  onUpdateStart = () => {},
+  onUpdateSuccess = () => {},
+  onUpdateError = () => {},
+  onReplaceStart = () => {},
+  onReplaceSuccess = () => {},
+  onReplaceError = () => {},
+  onDestroyStart = () => {},
+  onDestroySuccess = () => {},
+  onDestroyError = () => {},
 }) => {
   const customUrlFn = id => {
     const rootUrl = `${apiUrl}${resourceName}/`
     return id ? `${rootUrl}${id}` : rootUrl
   }
-  const setLoading = isLoading => () =>
-    store.commit('requests/setLoading', { isLoading })
+  const { namespace: requestsNamespace, REQUESTS_SET_LOADING } = RequestsTypes
+  const mutation = `${requestsNamespace}/${REQUESTS_SET_LOADING}`
+  const setLoading = isLoading => () => store.commit(mutation, { isLoading })
 
   // Requests Interceptors
   const successCall = injectedLogic => requestOrResponse => {
@@ -45,6 +65,26 @@ export default ({
     resource: resourceName,
     customUrlFn,
     idAttribute: resourceIdName,
+    // Store mutation callbacks
+    onFetchListStart,
+    onFetchListSuccess,
+    onFetchListError,
+    onFetchSingleStart,
+    onFetchSingleSuccess,
+    onFetchSingleError,
+    onCreateStart,
+    onCreateSuccess,
+    onCreateError,
+    onUpdateStart,
+    onUpdateSuccess,
+    onUpdateError,
+    onReplaceStart,
+    onReplaceSuccess,
+    onReplaceError,
+    onDestroyStart,
+    onDestroySuccess,
+    onDestroyError,
+    // Parse response callbacks
     ...parseResponses,
   })
   store.registerModule(resourceName, module)
