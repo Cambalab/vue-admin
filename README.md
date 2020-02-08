@@ -8,6 +8,7 @@
 
 <p align="center">
   <a href="https://travis-ci.com/Cambalab/vue-admin"><img src="https://travis-ci.com/Cambalab/vue-admin.svg?branch=develop" alt="Build Status"></a>
+  <a href="https://codecov.io/gh/Cambalab/vue-admin"><img src="https://codecov.io/gh/Cambalab/vue-admin/branch/master/graph/badge.svg" alt="Build Status"></a>
   <a href="https://www.npmjs.com/package/vue-admin-js"><img src="https://img.shields.io/npm/v/vue-admin-js.svg" alt="Version"></a>
   <a href="https://github.com/Cambalab/vue-admin/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/vue-admin-js.svg" alt="License"></a>
   <a href="https://github.com/Cambalab/vue-admin/blob/master/.github/CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" alt="License"></a>
@@ -267,13 +268,9 @@ Please make sure to read the [**Contributing Guide**](https://github.com/Cambala
 
 [**GNU General Public License version 3**](https://opensource.org/licenses/GPL-3.0)
 
----
+# <Divider>
+
 <p align="center">
-  <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">
-    <img class="margin" width="20" src="public/camba_icon.png" />
-  </a>
-  <strong>With :green_heart: :purple_heart: :heart: by <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">Cambá Coop</a> :earth_americas: Buenos Aires, Argentina</strong>
-  <a href="https://camba.coop" target="_blank" rel="noopener noreferrer">
-    <img class="margin" width="20" src="public/camba_icon.png" />
-  </a>
+  <strong>👩‍💻 with :green_heart: :purple_heart: :heart: by <a href="https://camba.coop" target="_blank" rel="noopener noreferrer"><img width="20" src="http://camba.coop/assets/signature/no_text_logo.png" /> cambá.coop</a> :earth_americas: Buenos Aires, Argentina
+  </strong>
 </p>
