@@ -8,6 +8,7 @@
 
 <p align="center">
   <a href="https://travis-ci.com/Cambalab/vue-admin"><img src="https://travis-ci.com/Cambalab/vue-admin.svg?branch=develop" alt="Build Status"></a>
+  <a href="https://codecov.io/gh/Cambalab/vue-admin"><img src="https://codecov.io/gh/Cambalab/vue-admin/branch/master/graph/badge.svg" alt="Build Status"></a>
   <a href="https://www.npmjs.com/package/vue-admin-js"><img src="https://img.shields.io/npm/v/vue-admin-js.svg" alt="Version"></a>
   <a href="https://github.com/Cambalab/vue-admin/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/vue-admin-js.svg" alt="License"></a>
   <a href="https://github.com/Cambalab/vue-admin/blob/master/.github/CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" alt="License"></a>
