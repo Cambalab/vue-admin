@@ -1,5 +1,17 @@
 # Change Log
 
+## [v0.0.9](https://github.com/Cambalab/vue-admin/tree/v0.0.9) (2020-02-09)
+[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.8...v0.0.9)
+
+**Fixed bugs:**
+
+- The Admin component ignores custom unauthorized layouts [\#210](https://github.com/Cambalab/vue-admin/issues/210)
+
+**Merged pull requests:**
+
+- 210 the admin component ignores custom unauthorized layouts [\#211](https://github.com/Cambalab/vue-admin/pull/211) ([sgobotta](https://github.com/sgobotta))
+- 0.0.8 [\#209](https://github.com/Cambalab/vue-admin/pull/209) ([sgobotta](https://github.com/sgobotta))
+
 ## [v0.0.8](https://github.com/Cambalab/vue-admin/tree/v0.0.8) (2020-02-08)
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.7...v0.0.8)
 
