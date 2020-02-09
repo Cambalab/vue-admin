@@ -13,7 +13,7 @@ const {
     entitiesModule,
     requestsModule,
     resourceModule,
-    unauthorizedRoutes,
+    createUnauthorizedRoutes,
   },
 } = defaults()
 
@@ -62,6 +62,7 @@ export default {
     const { namespace } = AuthTypes
     const { authModule } = this.options
     const unauthenticatedRoutes = createUnauthenticatedRoutes(this.authLayout)
+    const unauthorizedRoutes = createUnauthorizedRoutes(this.unauthorized)
     const siteRoutes = createSiteRoutes({ homeLayout: this.homeLayout })
 
     this.$store.registerModule(namespace, authModule)
