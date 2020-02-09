@@ -55,7 +55,6 @@ describe('Admin.vue', () => {
       authModule: createAuthModule({ client: authProvider }),
     }
     propsData = {
-      authProvider,
       options,
     }
     routerSpy = {
@@ -83,7 +82,8 @@ describe('Admin.vue', () => {
     expect(props.homeLayout).toMatchObject(adminFixture.props.homeLayout)
     expect(props.sidebar).toMatchObject(adminFixture.props.sidebar)
     expect(props.title).toMatch(adminFixture.props.title)
-    expect(props.unauthorized).toMatchObject(adminFixture.props.unauthorized)
+    expect(props.unauthorized)
+      .toMatchObject(adminFixture.props.unauthorized)
   })
 
   it('[Entities Module] - store should call registerModule on beforeCreate', () => {
@@ -157,14 +157,15 @@ describe('Admin.vue', () => {
     mountSubject()
 
     const {
-      props: { authLayout, homeLayout },
+      props: { authLayout, homeLayout, unauthorized },
       args: {
         createUnauthenticatedRoutes,
         createSiteRoutes,
-        unauthorizedRoutes,
+        createUnauthorizedRoutes,
       },
     } = adminFixture
     const unauthenticatedRoutes = createUnauthenticatedRoutes(authLayout)
+    const unauthorizedRoutes = createUnauthorizedRoutes(unauthorized)
     const siteRoutes = createSiteRoutes({ homeLayout })
     const args = [
       ...siteRoutes,

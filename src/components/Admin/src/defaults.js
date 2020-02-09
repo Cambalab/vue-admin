@@ -22,7 +22,7 @@ export default () => {
   const homeLayout = HomeLayout
   const sidebar = DefaultSidebar
   const title = UI_CONTENT.MAIN_TOOLBAR_TITLE
-  const unauthorizedLayout = UnauthorizedLayout
+  const unauthorized = UnauthorizedLayout
 
   const createUnauthenticatedRoutes = anAuthLayout => [
     {
@@ -38,7 +38,7 @@ export default () => {
     {
       path: '/unauthorized',
       name: 'unauthorized',
-      component: anUnauthorizedLayout || unauthorizedLayout,
+      component: anUnauthorizedLayout || unauthorized,
     },
   ]}
 
@@ -58,7 +58,7 @@ export default () => {
       homeLayout,
       sidebar,
       title,
-      unauthorizedLayout,
+      unauthorized,
     },
     args: {
       alertsModule,
