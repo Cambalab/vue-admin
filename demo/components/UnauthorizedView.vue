@@ -2,10 +2,7 @@
   <UnauthorizedLayout>
     <h2 slot="title">You do not have permissions for accessing this view</h2>
     <div slot="text">
-      <p>If you think you should be allowed to see this view, please contact the page administrator.</p>
-      <v-btn class="m-0" color="success" v-on:click="goBack">
-          BACK
-      </v-btn>
+      <p>If you think you should be allowed to see this view, please contact the page administrator</p>
     </div>
   </UnauthorizedLayout>
 </template>

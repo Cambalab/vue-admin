@@ -8,7 +8,7 @@ import { Types } from '@store/modules/resources'
 const { namespace, RESOURCES_ADD_ROUTE } = Types
 
 export default {
-  props: {
+  props: Object.assign({}, defaults().props, {
     name: 'magazines',
     apiUrl: 'http://localhost:8888',
     resourceIdName: defaults().props.resourceIdName,
@@ -19,7 +19,7 @@ export default {
     show: ShowMagazines,
     redirect: defaults().props.redirect(),
     parseResponses: defaults().props.parseResponses(),
-  },
+  }),
   methods: {
     storeMethods: {
       [`${namespace}/${RESOURCES_ADD_ROUTE}`]: {

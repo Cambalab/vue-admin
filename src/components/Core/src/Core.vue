@@ -12,7 +12,6 @@ export default {
     const {
       props: { layout, title, sidebar, va },
     } = context
-
     return createElement(
       layout,
       {
