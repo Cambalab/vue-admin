@@ -22,30 +22,31 @@ export default () => {
   const homeLayout = HomeLayout
   const sidebar = DefaultSidebar
   const title = UI_CONTENT.MAIN_TOOLBAR_TITLE
-  const unauthorized = UnauthorizedLayout
+  const unauthorizedLayout = UnauthorizedLayout
 
-  const createUnauthenticatedRoutes = authLayout => [
+  const createUnauthenticatedRoutes = anAuthLayout => [
     {
       path: '/login',
       name: 'login',
-      component: authLayout || AuthLayout,
+      component: anAuthLayout || authLayout,
       props: {},
     },
   ]
 
-  const unauthorizedRoutes = [
+  const createUnauthorizedRoutes = anUnauthorizedLayout => {
+    return [
     {
       path: '/unauthorized',
       name: 'unauthorized',
-      component: UnauthorizedLayout,
+      component: anUnauthorizedLayout || unauthorizedLayout,
     },
-  ]
+  ]}
 
-  const createSiteRoutes = ({ homeLayout }) => [
+  const createSiteRoutes = ({ homeLayout: aHomeLayout }) => [
     {
       path: '/',
       name: 'home',
-      component: homeLayout || HomeLayout,
+      component: aHomeLayout || homeLayout,
       props: {},
     },
   ]
@@ -57,7 +58,7 @@ export default () => {
       homeLayout,
       sidebar,
       title,
-      unauthorized,
+      unauthorizedLayout,
     },
     args: {
       alertsModule,
@@ -66,7 +67,7 @@ export default () => {
       entitiesModule,
       requestsModule,
       resourceModule,
-      unauthorizedRoutes,
+      createUnauthorizedRoutes,
     },
   }
 }
