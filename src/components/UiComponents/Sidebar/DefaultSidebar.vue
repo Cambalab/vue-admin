@@ -1,5 +1,6 @@
 <template>
   <Sidebar>
+    <SidebarHeading />
     <template v-for="(item, index) in menuItems">
       <SidebarNode
         v-if="item.children"
@@ -37,7 +38,14 @@
 </template>
 
 <script>
-import { Sidebar, SidebarNode, SidebarLink, SidebarAction } from '../Sidebar'
+import defaults from './defaults'
+import {
+  Sidebar,
+  SidebarNode,
+  SidebarLink,
+  SidebarAction,
+  SidebarHeading
+} from '../Sidebar'
 
 export default {
   name: 'DefaultSidebar',
@@ -46,22 +54,19 @@ export default {
     SidebarNode,
     SidebarLink,
     SidebarAction,
+    SidebarHeading,
   },
   props: {
     va: Object,
+    subscriptions: {
+      type: Array,
+      default: () => defaults().props.subscriptions
+    }
   },
   data() {
     return {
       menuItems: [
-        {
-          click: () => {},
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          title: 'Resources',
-          children: [],
-          model: {},
-          value: true,
-        },
+        ...defaults().data.menuItems,
         {
           click: () => this.va.logout(),
           icon: 'power_settings_new',
@@ -76,14 +81,12 @@ export default {
   methods: {
     // Listen to addRoutes mutations
     mapCurrentRegisteredRoutes() {
-      let whitelist = ['resources/addRoute']
-      this.$store.subscribe((mutation, state) => {
-        if (whitelist.includes(mutation.type)) {
-          const currentRoutes = state.resources.routes.map(route => {
-            return { icon: 'list', title: route.name, link: route.path }
+      this.subscriptions.forEach(subscription => {
+        this.$store.subscribe(
+          subscription(currentRoutes => {
+            this.menuItems[0].children = currentRoutes
           })
-          this.menuItems[0].children = currentRoutes
-        }
+        )
       })
     },
   },
