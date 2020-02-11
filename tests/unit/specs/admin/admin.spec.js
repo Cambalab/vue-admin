@@ -9,8 +9,8 @@ import createAuthModule from '@va-auth/store'
 import { shallowMount } from '@vue/test-utils'
 import { nextTick } from '@unit/lib/utils/wrapper'
 
-import Factory from '../../factory'
-import adminFixture from '../../fixtures/admin'
+import Factory from '@unit/factory'
+import adminFixture from '@unit/fixtures/admin'
 
 describe('Admin.vue', () => {
   const subject = 'Admin'
