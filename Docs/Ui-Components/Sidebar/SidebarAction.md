@@ -27,8 +27,22 @@ Here you can find an example on how to use this component:
 </script>
 ```
 
-### `SidebarAction` props
+## props
 
--   `title`: A String that will be displayed as a title inside the sidebar item for this action.
--   `action`: A Function that will be executed when the Action item is clicked.
--   `icon`: A String representing the name of the [Material Icon](https://cdn.materialdesignicons.com/3.8.95/) to prepend in the Action item.
+### title
+
++   **Type:** `String` *(optional)*
+
++   **Description:** A String that will be displayed as a title inside the sidebar item for this action.
+
+### action
+
++   **Type:** `Function` *(optional)*
+
++   **Description:** A Function that will be executed when the `SidebarAction` item is clicked.
+
+### icon
+
++   **Type:** `String` *(optional*)
+
++   **Description:** A String representing the name of a [Material Icon](https://cdn.materialdesignicons.com/3.8.95/) to prepend in the `SidebarAction` item.

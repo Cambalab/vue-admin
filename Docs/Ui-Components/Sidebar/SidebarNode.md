@@ -20,8 +20,22 @@ Here you can find an example on how to use this component:
 </template>
 ```
 
-### `<SidebarNode>` props
+## props
 
--   `title`: A String that will be displayed as title inside the sidebar item.
--   `icon`: A String representing the name of the [Material Icon](https://cdn.materialdesignicons.com/3.8.95/) to prepend in the Action item when the group is being displayed.
--   `icon-alt`: A String representing the name of the [Material Icon](https://cdn.materialdesignicons.com/3.8.95/) to prepend in the Action item when the group is being displayed.
+### title
+
++   **Type:** `String` *(optional)*
+
++   **Description:** A `String` that will be displayed as title inside the sidebar item.
+
+### icon
+
++   **Type:** `String` *(optional)*
+
++   **Description:** A `String` representing the name of the [Material Icon](https://cdn.materialdesignicons.com/3.8.95/) to prepend in the Action item when the group is being displayed.
+
+### iconAlt
+
++   **Type:** `String` *(optional)*
+
++   **Description:** A `String` representing the name of the [Material Icon](https://cdn.materialdesignicons.com/3.8.95/) to prepend in the Action item when the group is being displayed.
