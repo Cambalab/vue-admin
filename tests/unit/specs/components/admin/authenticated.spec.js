@@ -6,7 +6,7 @@ import Factory from '@unit/factory'
 import AuthTypes from '@va-auth/types'
 import authStore from '@va-auth/store'
 import { shallowMount } from '@vue/test-utils'
-import { Authenticated as authenticatedFixture } from '../../fixtures/admin'
+import { Authenticated as authenticatedFixture } from '@unit/fixtures/admin'
 
 describe('Authenticated.vue', () => {
   const subject = 'Authenticated'
