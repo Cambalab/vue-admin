@@ -1,19 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Vuetify from 'vuetify'
+import defaults, {
+  sidebarHeadingDefaults,
+} from '@components/UiComponents/Sidebar/defaults'
+import SimpleSidebar from '@components/UiComponents/Sidebar/SimpleSidebar'
+import {
+  Sidebar,
+  SidebarAction,
+  SidebarHeading,
+  SidebarLink,
+  SidebarNode,
+} from '@components/UiComponents/Sidebar'
+import Factory from '@unit/factory'
 import createAuthModule from '@va-auth/store'
 import resourcesModule, {
   Types as ResourcesTypes,
 } from '@store/modules/resources'
-import defaults from '@components/UiComponents/Sidebar/defaults'
-import DefaultSidebar from '@components/UiComponents/Sidebar/DefaultSidebar'
-import {
-  Sidebar,
-  SidebarNode,
-  SidebarLink,
-  SidebarAction,
-} from '@components/UiComponents/Sidebar'
-import Factory from '@unit/factory'
 import AuthTypes from '@va-auth/types'
 import { nextTick } from '@unit/lib/utils/wrapper'
 import { mount } from '@vue/test-utils'
@@ -27,6 +30,7 @@ describe('Sidebar', () => {
   let subjectWrapper
   // stubs
   let vuetify
+  let propsData
   // mocks
   let mocks
   let mockedStore
@@ -35,16 +39,9 @@ describe('Sidebar', () => {
 
   // Mounts the component
   function mountSubject() {
-    const { namespace: authNamespace, AUTH_LOGOUT_REQUEST } = AuthTypes
-    const actionName = `${authNamespace}/${AUTH_LOGOUT_REQUEST}`
-
-    subjectWrapper = mount(DefaultSidebar, {
+    subjectWrapper = mount(SimpleSidebar, {
       mocks,
-      propsData: {
-        va: {
-          logout: () => mockedStore.dispatch(actionName)
-        }
-      },
+      propsData,
       vuetify,
     })
   }
@@ -61,6 +58,19 @@ describe('Sidebar', () => {
     })
     mocks = {
       $store: mockedStore,
+    }
+    propsData = {
+      va: {
+        getUser: () => {
+          const { namespace, AUTH_GET_USER } = AuthTypes
+          return this.$store.getters[`${namespace}/${AUTH_GET_USER}`]
+        },
+        logout: () => {
+          const { namespace: authNamespace, AUTH_LOGOUT_REQUEST } = AuthTypes
+          const actionName = `${authNamespace}/${AUTH_LOGOUT_REQUEST}`
+          mockedStore.dispatch(actionName)
+        }
+      }
     }
     storeSpy = {
       dispatch: jest.spyOn(mocks.$store, 'dispatch'),
@@ -80,6 +90,34 @@ describe('Sidebar', () => {
     expect(sidebarLayout.exists()).toBe(true)
     expect(sidebarNodeLayout.exists()).toBe(true)
     expect(sidebarActionLayout.exists()).toBe(true)
+  })
+
+  describe('SidebarHeading', () => {
+    it('has default props', () => {
+      mountSubject()
+
+      const sidebarHeading = subjectWrapper.find(SidebarHeading)
+      const sidebarHeadingProps = sidebarHeading.props()
+
+      expect(sidebarHeadingProps.avatar).toBe(sidebarHeadingDefaults().props.avatar)
+      expect(sidebarHeadingProps.avatarProps).toMatchObject(sidebarHeadingDefaults().props.avatarProps)
+      expect(sidebarHeadingProps.title).toMatch(sidebarHeadingDefaults().props.title)
+      expect(sidebarHeadingProps.subTitle).toMatch(sidebarHeadingDefaults().props.subTitle)
+    })
+  })
+
+  describe('SidebarNode', () => {
+    it('has default props', () => {
+      mountSubject()
+
+      const sidebarNode = subjectWrapper.find(SidebarNode)
+      const sidebarNodeProps = sidebarNode.props()
+      const defaultMenuItem = defaults().data.menuItems[0]
+
+      expect(sidebarNodeProps.title).toMatch(defaultMenuItem.title)
+      expect(sidebarNodeProps.icon).toMatch(defaultMenuItem.icon)
+      expect(sidebarNodeProps.iconAlt).toMatch(defaultMenuItem['icon-alt'])
+    })
   })
 
   it('should render SidebarLink when children are present in menuItems', () => {
