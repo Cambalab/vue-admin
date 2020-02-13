@@ -43,4 +43,22 @@ describe('AppLayout', () => {
           const { namespace: authNamespace, AUTH_LOGOUT_REQUEST } = AuthTypes
           const actionName = `${authNamespace}/${AUTH_LOGOUT_REQUEST}`
           mockedStore.dispatch(actionName)
-        }Ap
+        }
+      }
+    }
+    vuetify = new Vuetify()
+    mockedStore = new Vuex.Store({})
+    mocks = {
+      $store: mockedStore,
+    }
+  })
+
+  it('should have props', () => {
+    mountSubject()
+    const appLayoutProps = subjectWrapper.props()
+
+    expect(appLayoutProps.sidebar).toBe(propsData.sidebar)
+    expect(appLayoutProps.title).toMatch(propsData.title)
+    expect(appLayoutProps.va).toBe(propsData.va)
+  })
+})
