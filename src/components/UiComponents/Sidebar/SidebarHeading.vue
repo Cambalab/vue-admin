@@ -11,6 +11,7 @@
     </v-list-item-content>
   </v-list-item>
 </template>
+
 <script>
 import { sidebarHeadingDefaults } from './defaults'
 

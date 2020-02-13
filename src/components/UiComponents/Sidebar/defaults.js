@@ -2,7 +2,7 @@ import { VListItemAvatar, VAvatar, VIcon } from 'vuetify/lib'
 import { Types as ResourcesTypes } from '@store/modules/resources'
 
 /**
- * Defaults - Default attributes for the DefaultSidebar view
+ * Defaults - Default attributes for the SimpleSidebar view
  *
  * @return {Object} An object containing props and methods
  */
