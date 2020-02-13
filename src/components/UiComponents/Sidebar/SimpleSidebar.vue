@@ -48,7 +48,7 @@ import {
 } from '../Sidebar'
 
 export default {
-  name: 'DefaultSidebar',
+  name: 'SimpleSidebar',
   components: {
     Sidebar,
     SidebarNode,
