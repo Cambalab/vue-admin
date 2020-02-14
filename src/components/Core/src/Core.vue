@@ -3,7 +3,7 @@ export default {
   functional: true,
   name: 'Core',
   props: {
-    layout: {},
+    layout: Object,
     title: String,
     sidebar: Object,
     va: Object,

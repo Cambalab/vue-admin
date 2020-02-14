@@ -4,7 +4,6 @@
   <Admin
     
     :authProvider="authProvider"
-    :sidebar="CustomSidebar"
     :unauthorized="UnauthorizedCustomView">
     <!-- Articles Resource -->
     <Resource

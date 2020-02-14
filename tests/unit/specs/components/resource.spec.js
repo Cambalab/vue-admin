@@ -1,5 +1,5 @@
-import Factory from '../factory'
-import resourceFixture from '../fixtures/resource/magazines'
+import Factory from '@unit/factory'
+import resourceFixture from '@unit/fixtures/resource/magazines'
 import Resource from '@components/Resource/src/Resource'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'

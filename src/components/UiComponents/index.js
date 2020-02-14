@@ -1,5 +1,5 @@
 import DateInput from './DateInput'
-import DefaultSidebar from './Sidebar/DefaultSidebar'
+import SimpleSidebar from './Sidebar/SimpleSidebar'
 import DeleteButton from './DeleteButton'
 import EditButton from './EditButton'
 import Input from './Input'
@@ -15,7 +15,7 @@ import {
 
 export {
   DateInput,
-  DefaultSidebar,
+  SimpleSidebar,
   DeleteButton,
   EditButton,
   Input,

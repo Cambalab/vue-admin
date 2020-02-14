@@ -4,7 +4,7 @@ import defaults, {
   authenticatedDefaults,
   unauthenticatedDefaults,
 } from '@components/Admin/src/defaults'
-import { DefaultSidebar } from '@components/UiComponents'
+import { SimpleSidebar } from '@components/UiComponents'
 
 export default {
   props: {
@@ -18,7 +18,7 @@ export default {
 export const Authenticated = {
   props: {
     layout: AppLayout,
-    sidebar: DefaultSidebar,
+    sidebar: SimpleSidebar,
     title: 'A toolbar text',
     unauthorized: UnauthorizedLayout,
   },

@@ -11,19 +11,20 @@
     </v-list-item-content>
   </v-list-item>
 </template>
+
 <script>
-import defaults from './defaults'
+import { sidebarHeadingDefaults } from './defaults'
 
 export default {
   name: 'SidebarHeading',
   props: {
     avatar: {
       type: Object,
-      default: () => defaults().props.avatar,
+      default: () => sidebarHeadingDefaults().props.avatar,
     },
     avatarProps: {
       type: Object,
-      default: () => defaults().props.avatarProps,
+      default: () => sidebarHeadingDefaults().props.avatarProps,
     },
     title: {
       type: String,
@@ -31,7 +32,7 @@ export default {
     },
     subTitle: {
       type: String,
-      default: defaults().props.subTitle,
+      default: sidebarHeadingDefaults().props.subTitle,
     },
   },
 }
