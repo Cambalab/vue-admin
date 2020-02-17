@@ -15,6 +15,7 @@
       </slot>
       <v-btn
         :name="NAME_BUTTON_GO_BACK"
+        :ref="NAME_BUTTON_GO_BACK"
         class="m-0"
         color="success"
         v-on:click="goBack"
