@@ -2,16 +2,16 @@
   <v-card>
     <v-card-title>
       <slot name="title">
-        <h2 :name="NAME_UNAUTHORIZED_HEADER_CONTAINER">
-          {{ UNAUTHORIZED_HEADER_CONTENT }}
-        </h2>
+        <TextField type="h5" :name="NAME_UNAUTHORIZED_HEADER_CONTAINER"
+          :value="UNAUTHORIZED_HEADER_CONTENT"
+        />
       </slot>
     </v-card-title>
     <v-card-text>
       <slot name="text">
-        <p :name="NAME_UNAUTHORIZED_MESSAGE_CONTAINER">
-          {{ UNAUTHORIZED_MESSAGE_CONTENT }}
-        </p>
+        <TextField type="p" :name="NAME_UNAUTHORIZED_MESSAGE_CONTAINER"
+          :value="UNAUTHORIZED_MESSAGE_CONTENT"
+        />
       </slot>
       <v-btn
         :name="NAME_BUTTON_GO_BACK"
@@ -24,11 +24,17 @@
     </v-card-text>
   </v-card>
 </template>
+
 <script>
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
+import { TextField } from '@components/UiComponents'
+
 export default {
   name: 'UnauthorizedLayout',
+  components: {
+    TextField,
+  },
   data: () => {
     return {
       NAME_UNAUTHORIZED_HEADER_CONTAINER:
