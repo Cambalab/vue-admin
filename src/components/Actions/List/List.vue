@@ -47,18 +47,18 @@
             <td
               class="text-xs-left"
               v-for="field in fields"
-              :key="keys.elementField(label(field), index)"
-              :name="names.elementField(label(field), index)"
+              :key="keys.elementField(field.label, index)"
+              :name="names.elementField(field.label, index)"
             >
               <component
                 :name="
-                  label(field) === resourceIdName
-                    ? names.elementField(label(field))
-                    : names.elementField(label(field), index)
+                  field.label === resourceIdName
+                    ? names.elementField(field.label)
+                    : names.elementField(field.label, index)
                 "
-                :is="type(field)"
-                v-bind:value="item[label(field)]"
-                v-bind="args(field)"
+                :is="field.tag"
+                v-bind:value="item[field.label]"
+                v-bind="field"
               />
             </td>
             <td>
@@ -211,10 +211,10 @@ export default {
       const newHeaders = []
       this.fields.forEach(field => {
         newHeaders.push({
-          text: field.headerText || this.label(field),
+          text: field.headerText || field.label,
           align: field.alignHeader || 'left',
           sortable: field.sortable || false,
-          value: this.label(field),
+          value: field.label,
           width: field.width || '',
         })
       })
@@ -236,16 +236,6 @@ export default {
     },
   },
   methods: {
-    type(field) {
-      return field.type || 'TextField'
-    },
-    label(field) {
-      return field.label || field
-    },
-    args(field) {
-      const args = typeof field === 'string' ? { label: field } : field
-      return args
-    },
     onCreateClick() {
       this.$router.push({ name: `${this.resourceName}/create` })
     },

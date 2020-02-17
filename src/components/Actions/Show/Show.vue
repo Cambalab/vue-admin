@@ -24,12 +24,12 @@
           v-if="resourceShow !== undefined"
         >
           <component
-            :name="names.containerField(label(field))"
+            :name="names.containerField(field.label)"
             v-for="field in fields"
-            :key="names.containerField(label(field))"
-            :is="type(field)"
-            v-bind:value="resourceShow[label(field)]"
-            v-bind="args(field)"
+            :key="names.containerField(field.label)"
+            :is="field.tag"
+            v-bind:value="resourceShow[field.label]"
+            v-bind="field"
           />
         </v-card-text>
       </v-card>
@@ -125,16 +125,6 @@ export default {
   methods: {
     fetchData() {
       return this.va.fetchEntity()
-    },
-    type(field) {
-      return field.type || 'TextField'
-    },
-    label(field) {
-      return field.label || field
-    },
-    args(field) {
-      const args = typeof field === 'string' ? { label: field } : field
-      return args
     },
   },
   watch: {

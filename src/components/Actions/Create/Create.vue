@@ -11,13 +11,13 @@
         <v-layout wrap>
           <v-flex xs8>
             <component
-              :name="names.containerField(label(field))"
-              :ref="names.containerField(label(field))"
+              :name="names.containerField(field.label)"
+              :ref="names.containerField(field.label)"
               v-for="field in fields"
-              :key="names.containerField(label(field))"
-              :is="type(field)"
-              v-bind="args(field)"
-              @change="storeValue($event, label(field))"
+              :key="names.containerField(field.label)"
+              :is="field.tag"
+              v-bind="field"
+              @change="storeValue($event, field.label)"
             >
             </component>
           </v-flex>
@@ -113,32 +113,12 @@ export default {
   mounted: function() {
     this.va.initEntity()
   },
-
   methods: {
     storeValue(value, resourceKey) {
       this.va.updateEntity({ resourceKey, value })
     },
-
     submit() {
       this.va.submitEntity()
-    },
-
-    type(field) {
-      return field.type || 'Input'
-    },
-
-    key(label) {
-      return `${this.resourceName}_${label}`
-    },
-
-    label(field) {
-      return field.label || field
-    },
-
-    args(field) {
-      const args =
-        typeof field === 'string' ? { label: field, placeHolder: field } : field
-      return args
     },
   },
 }
