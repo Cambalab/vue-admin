@@ -1,8 +1,8 @@
 <template>
   <Edit title="Edit Article">
-    <input source="id" placeHolder="Id" />
-    <input source="title" placeHolder="Title" />
-    <input source="content" placeHolder="Content" />
+    <Input source="id" placeHolder="Id" />
+    <Input source="title" placeHolder="Title" />
+    <Input source="content" placeHolder="Content" />
   </Edit>
 </template>
 

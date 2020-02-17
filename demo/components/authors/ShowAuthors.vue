@@ -1,9 +1,9 @@
 <template>
   <Show>
-    <h3 source="id" />
-    <h2 source="name" />
-    <h2 source="lastname" />
-    <p source="birthdate" type="TextField" :parse="parse" />
+    <TextField type="h3" source="id" />
+    <TextField type="h2" source="name" />
+    <TextField type="h2" source="lastname" />
+    <TextField source="birthdate" :parse="parse" />
   </Show>
 </template>
 

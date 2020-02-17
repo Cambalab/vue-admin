@@ -4,7 +4,8 @@
   <Admin
     
     :authProvider="authProvider"
-    :unauthorized="UnauthorizedCustomView">
+    :unauthorized="UnauthorizedCustomView"
+  >
     <!-- Articles Resource -->
     <Resource
       name="articles" :resourceIdName="resourceIdName"

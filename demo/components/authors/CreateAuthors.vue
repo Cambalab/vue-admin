@@ -1,8 +1,8 @@
 <template>
   <Create>
-    <input source="name" placeHolder="Name" />
-    <input source="lastname" placeHolder="Last name" />
-    <input source="birthdate" placeholder="Birthdate" type="DateInput"
+    <Input source="name" placeHolder="Name" />
+    <Input source="lastname" placeHolder="Last name" />
+    <DateInput source="birthdate" placeholder="Birthdate"
       :vDatePickerProps="vDatePickerProps"
       :vMenuProps="vMenuProps"
       :parse="parseDate"

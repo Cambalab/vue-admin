@@ -1,17 +1,18 @@
 <template>
   <UnauthorizedLayout>
-    <h2 slot="title">You do not have permissions for accessing this view</h2>
-    <div slot="text">
-      <p>If you think you should be allowed to see this view, please contact the page administrator</p>
-    </div>
+    <TextField slot="title" type="h5" value="You do not have permissions for accessing this view" />
+    <TextField slot="text" value="If you think you should be allowed to see this content, please contact the page administrator" />
   </UnauthorizedLayout>
 </template>
 <script>
 import { UnauthorizedLayout } from '@components/Layouts'
+import { TextField } from '@components/UiComponents'
+
 export default {
   name: 'UnauthorizedView',
   components: {
-    UnauthorizedLayout
+    UnauthorizedLayout,
+    TextField
   },
   methods: {
     goBack () {
