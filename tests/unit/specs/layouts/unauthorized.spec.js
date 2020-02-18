@@ -33,12 +33,20 @@ describe('Unauthorized.vue', () => {
   let routerSpy
   // stubs
   let vuetify
+  let _window
 
   function mountSubject() {
     subjectWrapper = shallowMount(UnauthorizedLayout, {
       mocks,
       slots,
       vuetify,
+    })
+  }
+
+  const findSubmitButton = () => {
+    return findRef({
+      wrapper: subjectWrapper,
+      ref: BUTTON_GO_BACK_NAME,
     })
   }
 
@@ -49,28 +57,34 @@ describe('Unauthorized.vue', () => {
     mocks = { $router: mockedRouter }
     routerSpy = {
       push: jest.spyOn(mocks.$router, 'push'),
+      go: jest.spyOn(mocks.$router, 'go'),
     }
     slots = {
       title: {
-        render: (createElement) => {
+        render: createElement => {
           return createElement(TextField, {
             type: 'h5',
             name: UNAUTHORIZED_HEADER_CONTAINER,
-            value: UNAUTHORIZED_HEADER
+            value: UNAUTHORIZED_HEADER,
           })
-        }
+        },
       },
       text: {
-        render: (createElement) => {
+        render: createElement => {
           return createElement(TextField, {
             type: 'h5',
             name: UNAUTHORIZED_MESSAGE_CONTAINER,
-            value: UNAUTHORIZED_MESSAGE
+            value: UNAUTHORIZED_MESSAGE,
           })
-        }
-      }
+        },
+      },
     }
     vuetify = new Vuetify()
+    _window = Object.create(window)
+  })
+
+  afterEach(() => {
+    subjectWrapper = {}
   })
 
   it('should render a [title] named slot', () => {
@@ -88,14 +102,29 @@ describe('Unauthorized.vue', () => {
   it('should render an action button', () => {
     mountSubject()
 
-    const actionButton = findRef({
-      wrapper: subjectWrapper,
-      ref: BUTTON_GO_BACK_NAME
-    })
-    actionButton.vm.$emit('click')
+    const actionButton = findSubmitButton()
 
     expect(actionButton.text()).toMatch(BUTTON_GO_BACK_CONTENT)
+  })
+
+  it('should call router [push] action on button click', () => {
+    mountSubject()
+
+    const actionButton = findSubmitButton()
+    actionButton.vm.$emit('click')
+
     expect(routerSpy.push).toHaveBeenCalledTimes(1)
     expect(routerSpy.push).toHaveBeenCalledWith('/')
+  })
+
+  it('should call router [go] action on button click', () => {
+    mountSubject()
+
+    const actionButton = findSubmitButton()
+    _window.history.pushState({}, 'aTitle', '')
+    actionButton.vm.$emit('click')
+
+    expect(routerSpy.go).toHaveBeenCalledTimes(1)
+    expect(routerSpy.go).toHaveBeenCalledWith(-1)
   })
 })
