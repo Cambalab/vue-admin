@@ -2,14 +2,18 @@
   <v-card>
     <v-card-title>
       <slot name="title">
-        <TextField type="h5" :name="NAME_UNAUTHORIZED_HEADER_CONTAINER"
+        <TextField
+          type="h5"
+          :name="NAME_UNAUTHORIZED_HEADER_CONTAINER"
           :value="UNAUTHORIZED_HEADER_CONTENT"
         />
       </slot>
     </v-card-title>
     <v-card-text>
       <slot name="text">
-        <TextField type="p" :name="NAME_UNAUTHORIZED_MESSAGE_CONTAINER"
+        <TextField
+          type="p"
+          :name="NAME_UNAUTHORIZED_MESSAGE_CONTAINER"
           :value="UNAUTHORIZED_MESSAGE_CONTENT"
         />
       </slot>
