@@ -82,8 +82,7 @@ describe('Admin.vue', () => {
     expect(props.homeLayout).toMatchObject(adminFixture.props.homeLayout)
     expect(props.sidebar).toMatchObject(adminFixture.props.sidebar)
     expect(props.title).toMatch(adminFixture.props.title)
-    expect(props.unauthorized)
-      .toMatchObject(adminFixture.props.unauthorized)
+    expect(props.unauthorized).toMatchObject(adminFixture.props.unauthorized)
   })
 
   it('[Entities Module] - store should call registerModule on beforeCreate', () => {

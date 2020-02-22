@@ -44,17 +44,17 @@ describe('Authenticated.vue', () => {
       modules: {
         auth: Object.assign(
           {},
-          authStore({ client: () => new Promise(()=> {}) }),
+          authStore({ client: () => new Promise(() => {}) }),
           {
             state: {
               error: '',
               isAuthenticated: true,
               status: 'idle',
               user,
-            }
+            },
           }
         ),
-      }
+      },
     })
     mocks = { $store: mockedStore, $router: mockedRouter }
     propsData = {

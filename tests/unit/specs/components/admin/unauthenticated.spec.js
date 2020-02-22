@@ -39,8 +39,8 @@ describe('Unauthenticated.vue', () => {
     mockedRouter = new VueRouter(routes)
     mockedStore = new Vuex.Store({
       modules: {
-        auth: authStore({ client: () => new Promise(()=> {}) })
-      }
+        auth: authStore({ client: () => new Promise(() => {}) }),
+      },
     })
     mocks = { $store: mockedStore, $router: mockedRouter }
     propsData = {
@@ -85,6 +85,9 @@ describe('Unauthenticated.vue', () => {
     subjectWrapper.vm.login(username, password)
 
     expect(storeSpy.dispatch).toHaveBeenCalledTimes(1)
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(action, { username, password })
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(action, {
+      username,
+      password,
+    })
   })
 })

@@ -22,7 +22,6 @@ import { nextTick } from '@unit/lib/utils/wrapper'
 import { mount } from '@vue/test-utils'
 
 describe('Sidebar', () => {
-
   Vue.use(Vuetify)
   Vue.use(Vuex)
   Vue.config.silent = true
@@ -54,7 +53,7 @@ describe('Sidebar', () => {
       modules: {
         auth: createAuthModule({ client: authProvider }),
         resources: resourcesModule,
-      }
+      },
     })
     mocks = {
       $store: mockedStore,
@@ -69,8 +68,8 @@ describe('Sidebar', () => {
           const { namespace: authNamespace, AUTH_LOGOUT_REQUEST } = AuthTypes
           const actionName = `${authNamespace}/${AUTH_LOGOUT_REQUEST}`
           mockedStore.dispatch(actionName)
-        }
-      }
+        },
+      },
     }
     storeSpy = {
       dispatch: jest.spyOn(mocks.$store, 'dispatch'),
@@ -99,10 +98,18 @@ describe('Sidebar', () => {
       const sidebarHeading = subjectWrapper.find(SidebarHeading)
       const sidebarHeadingProps = sidebarHeading.props()
 
-      expect(sidebarHeadingProps.avatar).toBe(sidebarHeadingDefaults().props.avatar)
-      expect(sidebarHeadingProps.avatarProps).toMatchObject(sidebarHeadingDefaults().props.avatarProps)
-      expect(sidebarHeadingProps.title).toMatch(sidebarHeadingDefaults().props.title)
-      expect(sidebarHeadingProps.subTitle).toMatch(sidebarHeadingDefaults().props.subTitle)
+      expect(sidebarHeadingProps.avatar).toBe(
+        sidebarHeadingDefaults().props.avatar
+      )
+      expect(sidebarHeadingProps.avatarProps).toMatchObject(
+        sidebarHeadingDefaults().props.avatarProps
+      )
+      expect(sidebarHeadingProps.title).toMatch(
+        sidebarHeadingDefaults().props.title
+      )
+      expect(sidebarHeadingProps.subTitle).toMatch(
+        sidebarHeadingDefaults().props.subTitle
+      )
     })
   })
 
@@ -127,7 +134,7 @@ describe('Sidebar', () => {
     menuItemsWithChildren[0].children.push({
       icon: 'list',
       title: 'magazines',
-      link: '/magazines'
+      link: '/magazines',
     })
 
     subjectWrapper.setData({
@@ -188,7 +195,7 @@ describe('Sidebar', () => {
     mockedStore.commit(mutationName, {
       path: '/magazines',
       name: 'magazines',
-      addedRouteCallback: () => {}
+      addedRouteCallback: () => {},
     })
 
     expect(subjectWrapper.vm.menuItems[0].children).toHaveLength(1)

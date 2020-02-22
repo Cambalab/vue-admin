@@ -44,7 +44,7 @@ import {
   SidebarNode,
   SidebarLink,
   SidebarAction,
-  SidebarHeading
+  SidebarHeading,
 } from '../Sidebar'
 
 export default {
@@ -60,8 +60,8 @@ export default {
     va: Object,
     subscriptions: {
       type: Array,
-      default: () => defaults().props.subscriptions
-    }
+      default: () => defaults().props.subscriptions,
+    },
   },
   data() {
     return {

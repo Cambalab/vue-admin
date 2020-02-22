@@ -20,7 +20,7 @@ export const createUser = args => {
   const _args = {
     username: 'dev@camba.coop',
     id: '234567',
-    permissions: ['admin']
+    permissions: ['admin'],
   }
   return Object.assign({}, _args, args)
 }

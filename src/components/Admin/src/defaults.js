@@ -35,12 +35,13 @@ export default () => {
 
   const createUnauthorizedRoutes = anUnauthorizedLayout => {
     return [
-    {
-      path: '/unauthorized',
-      name: 'unauthorized',
-      component: anUnauthorizedLayout || unauthorized,
-    },
-  ]}
+      {
+        path: '/unauthorized',
+        name: 'unauthorized',
+        component: anUnauthorizedLayout || unauthorized,
+      },
+    ]
+  }
 
   const createSiteRoutes = ({ homeLayout: aHomeLayout }) => [
     {

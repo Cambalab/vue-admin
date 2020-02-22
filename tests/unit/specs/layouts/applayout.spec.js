@@ -43,8 +43,8 @@ describe('AppLayout', () => {
           const { namespace: authNamespace, AUTH_LOGOUT_REQUEST } = AuthTypes
           const actionName = `${authNamespace}/${AUTH_LOGOUT_REQUEST}`
           mockedStore.dispatch(actionName)
-        }
-      }
+        },
+      },
     }
     vuetify = new Vuetify()
     mockedStore = new Vuex.Store({})

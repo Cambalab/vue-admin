@@ -35,8 +35,8 @@ describe('Core', () => {
       stubs,
       vuetify,
       slots: {
-        default: [resourceWrapper]
-      }
+        default: [resourceWrapper],
+      },
     })
   }
 
@@ -60,8 +60,8 @@ describe('Core', () => {
           const { namespace: authNamespace, AUTH_LOGOUT_REQUEST } = AuthTypes
           const actionName = `${authNamespace}/${AUTH_LOGOUT_REQUEST}`
           mockedStore.dispatch(actionName)
-        }
-      }
+        },
+      },
     }
     stubs = ['router-view']
     vuetify = new Vuetify()
@@ -69,20 +69,18 @@ describe('Core', () => {
     // Stubs wrapper
     resourceWrapper = {
       render(createElement) {
-        return createElement(
-          Resource, {
-            props: {
-              name: resourceFixture.props.name,
-              apiUrl: resourceFixture.props.apiUrl,
-              create: resourceFixture.props.create,
-              edit: resourceFixture.props.edit,
-              list: resourceFixture.props.list,
-              show: resourceFixture.props.show,
-              subscriptions: resourceFixture.props.subscriptions,
-            }
-          }
-        )
-      }
+        return createElement(Resource, {
+          props: {
+            name: resourceFixture.props.name,
+            apiUrl: resourceFixture.props.apiUrl,
+            create: resourceFixture.props.create,
+            edit: resourceFixture.props.edit,
+            list: resourceFixture.props.list,
+            show: resourceFixture.props.show,
+            subscriptions: resourceFixture.props.subscriptions,
+          },
+        })
+      },
     }
   })
 
