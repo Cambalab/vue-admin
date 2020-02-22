@@ -16,12 +16,12 @@ const { formatDate, parseDate } = dateUtils
 export default {
   name: 'ShowAuthors',
   components: {
-    Show
+    Show,
   },
   methods: {
     parse(date) {
       return formatDate(parseDate(date))
-    }
-  }
+    },
+  },
 }
 </script>

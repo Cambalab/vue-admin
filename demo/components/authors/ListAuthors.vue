@@ -1,18 +1,10 @@
 <template>
   <List>
-    <TextField source="id"
-      :sortable="true"
-      headerText="ID"
-    />
-    <TextField source="name"
-      :sortable="true"
-      headerText="Name"
-    />
-    <TextField source="lastname"
-      :sortable="true"
-      headerText="Last name"
-    />
-    <TextField source="birthdate"
+    <TextField source="id" :sortable="true" headerText="ID" />
+    <TextField source="name" :sortable="true" headerText="Name" />
+    <TextField source="lastname" :sortable="true" headerText="Last name" />
+    <TextField
+      source="birthdate"
       :sortable="true"
       headerText="Birthdate"
       :parse="parse"
@@ -34,7 +26,7 @@ export default {
   methods: {
     parse(date) {
       return formatDate(parseDate(date))
-    }
-  }
+    },
+  },
 }
 </script>
