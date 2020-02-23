@@ -44,7 +44,7 @@ import { mapState } from 'vuex'
 import {
   DeleteButton,
   EditButton,
-  TextInput,
+  TextField,
   SimpleText,
   Spinner,
 } from '@components/UiComponents'
@@ -70,7 +70,7 @@ export default {
     },
   },
   components: {
-    TextInput,
+    TextField,
     SimpleText,
     DeleteButton,
     EditButton,

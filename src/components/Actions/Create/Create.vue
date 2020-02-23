@@ -41,7 +41,7 @@ import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from 'vuex'
 import {
-  TextInput,
+  TextField,
   SimpleText,
   Spinner,
   DateInput,
@@ -51,7 +51,7 @@ import { Types as RequestsTypes } from '@store/modules/requests'
 export default {
   name: 'Create',
   components: {
-    TextInput,
+    TextField,
     SimpleText,
     Spinner,
     DateInput,

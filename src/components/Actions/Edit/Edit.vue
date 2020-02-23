@@ -43,7 +43,7 @@ import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from 'vuex'
 import {
-  TextInput,
+  TextField,
   SimpleText,
   Spinner,
   DateInput,
@@ -70,7 +70,7 @@ export default {
     },
   },
   components: {
-    TextInput,
+    TextField,
     SimpleText,
     Spinner,
     DateInput,

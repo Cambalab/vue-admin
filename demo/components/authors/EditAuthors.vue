@@ -1,8 +1,8 @@
 <template>
   <Edit>
-    <TextInput source="id" placeHolder="Id" />
-    <TextInput source="name" placeHolder="Name" />
-    <TextInput source="lastname" placeHolder="Last name" />
+    <TextField source="id" placeHolder="Id" />
+    <TextField source="name" placeHolder="Name" />
+    <TextField source="lastname" placeHolder="Last name" />
     <DateInput
       source="birthdate"
       placeholder="Birthdate"

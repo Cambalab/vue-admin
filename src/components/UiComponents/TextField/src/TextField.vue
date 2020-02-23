@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'TextInput',
+  name: 'TextField',
   props: {
     placeHolder: {
       type: String,

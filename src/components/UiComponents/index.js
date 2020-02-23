@@ -2,7 +2,7 @@ import DateInput from './DateInput'
 import SimpleSidebar from './Sidebar/SimpleSidebar'
 import DeleteButton from './DeleteButton'
 import EditButton from './EditButton'
-import TextInput from './TextInput'
+import TextField from './TextField'
 import SimpleText from './SimpleText'
 import Spinner from './Spinner'
 import {
@@ -18,7 +18,7 @@ export {
   SimpleSidebar,
   DeleteButton,
   EditButton,
-  TextInput,
+  TextField,
   SimpleText,
   Spinner,
   Sidebar,
