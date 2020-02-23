@@ -1,4 +1,4 @@
-import DateInput from './DateInput'
+import DateField from './DateField'
 import SimpleSidebar from './Sidebar/SimpleSidebar'
 import DeleteButton from './DeleteButton'
 import EditButton from './EditButton'
@@ -14,7 +14,7 @@ import {
 } from './Sidebar'
 
 export {
-  DateInput,
+  DateField,
   SimpleSidebar,
   DeleteButton,
   EditButton,

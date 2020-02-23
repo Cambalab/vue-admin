@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import { mount } from '@vue/test-utils'
-import DateInput from '@components/UiComponents/DateInput'
+import DateField from '@components/UiComponents/DateField'
 import ERROR_MESSAGES from '@constants/error.messages'
 import dateInputFixture from '@unit/fixtures/ui-components/date.input.js'
 
-describe('DateInput.vue', () => {
-  const subject = 'DateInput'
-  // Initialises the vue instance and DateInput dependencies
+describe('DateField.vue', () => {
+  const subject = 'DateField'
+  // Initialises the vue instance and DateField dependencies
   Vue.use(Vuetify)
   Vue.config.silent = true
 
@@ -84,7 +84,7 @@ describe('DateInput.vue', () => {
 
   // Mounts the component
   function mountSubject() {
-    subjectWrapper = mount(DateInput, {
+    subjectWrapper = mount(DateField, {
       propsData,
       vuetify,
     })

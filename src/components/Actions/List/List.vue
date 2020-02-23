@@ -94,7 +94,7 @@ import {
   TextField,
   SimpleText,
   Spinner,
-  DateInput,
+  DateField,
 } from '@components/UiComponents'
 import { Types as RequestsTypes } from '@store/modules/requests'
 
@@ -131,7 +131,7 @@ export default {
     },
   },
   components: {
-    DateInput,
+    DateField,
     DeleteButton,
     EditButton,
     TextField,

@@ -2,7 +2,7 @@
   <Create>
     <TextField source="name" placeHolder="Name" />
     <TextField source="lastname" placeHolder="Last name" />
-    <DateInput
+    <DateField
       source="birthdate"
       placeholder="Birthdate"
       :vDatePickerProps="vDatePickerProps"

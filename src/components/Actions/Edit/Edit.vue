@@ -46,7 +46,7 @@ import {
   TextField,
   SimpleText,
   Spinner,
-  DateInput,
+  DateField,
 } from '@components/UiComponents'
 import { Types as RequestsTypes } from '@store/modules/requests'
 
@@ -73,7 +73,7 @@ export default {
     TextField,
     SimpleText,
     Spinner,
-    DateInput,
+    DateField,
   },
   data() {
     const resourceName = this.resourceName
