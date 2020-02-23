@@ -1,9 +1,9 @@
 <template>
   <List>
-    <TextField source="id" :sortable="true" headerText="ID" />
-    <TextField source="name" :sortable="true" headerText="Name" />
-    <TextField source="lastname" :sortable="true" headerText="Last name" />
-    <TextField
+    <SimpleText source="id" :sortable="true" headerText="ID" />
+    <SimpleText source="name" :sortable="true" headerText="Name" />
+    <SimpleText source="lastname" :sortable="true" headerText="Last name" />
+    <SimpleText
       source="birthdate"
       :sortable="true"
       headerText="Birthdate"

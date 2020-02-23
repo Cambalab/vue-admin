@@ -5,7 +5,7 @@ import UnauthorizedLayout from '@components/Layouts/src/UnauthorizedLayout'
 import { shallowMount } from '@vue/test-utils'
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
-import { TextField } from '@components/UiComponents'
+import { SimpleText } from '@components/UiComponents'
 import { findRef } from '@unit/lib/utils/wrapper'
 
 describe('Unauthorized.vue', () => {
@@ -62,7 +62,7 @@ describe('Unauthorized.vue', () => {
     slots = {
       title: {
         render: createElement => {
-          return createElement(TextField, {
+          return createElement(SimpleText, {
             type: 'h5',
             name: UNAUTHORIZED_HEADER_CONTAINER,
             value: UNAUTHORIZED_HEADER,
@@ -71,7 +71,7 @@ describe('Unauthorized.vue', () => {
       },
       text: {
         render: createElement => {
-          return createElement(TextField, {
+          return createElement(SimpleText, {
             type: 'h5',
             name: UNAUTHORIZED_MESSAGE_CONTAINER,
             value: UNAUTHORIZED_MESSAGE,

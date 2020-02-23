@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'TextField',
+  name: 'SimpleText',
   props: {
     parse: {
       type: Function,

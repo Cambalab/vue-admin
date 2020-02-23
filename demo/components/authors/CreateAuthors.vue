@@ -1,7 +1,7 @@
 <template>
   <Create>
-    <Input source="name" placeHolder="Name" />
-    <Input source="lastname" placeHolder="Last name" />
+    <TextInput source="name" placeHolder="Name" />
+    <TextInput source="lastname" placeHolder="Last name" />
     <DateInput
       source="birthdate"
       placeholder="Birthdate"

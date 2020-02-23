@@ -1,13 +1,13 @@
 <template>
   <List title="Articles">
-    <TextField
+    <SimpleText
       source="id"
       :sortable="true"
       headerText="Id"
       alignHeader="left"
       alignContent="left"
     />
-    <TextField
+    <SimpleText
       source="title"
       :sortable="true"
       headerText="Title"
@@ -15,7 +15,7 @@
       alignContent="left"
       width="400px"
     />
-    <TextField
+    <SimpleText
       source="content"
       :sortable="true"
       headerText="Content"

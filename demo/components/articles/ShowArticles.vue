@@ -1,8 +1,8 @@
 <template>
   <Show title="Article">
-    <TextField type="h2" source="id" />
-    <TextField type="h3" source="title" />
-    <TextField source="content" />
+    <SimpleText type="h2" source="id" />
+    <SimpleText type="h3" source="title" />
+    <SimpleText source="content" />
   </Show>
 </template>
 

@@ -91,8 +91,8 @@ import UI_ELEMENTS from '@constants/ui.elements.props'
 import {
   DeleteButton,
   EditButton,
-  Input,
-  TextField,
+  TextInput,
+  SimpleText,
   Spinner,
   DateInput,
 } from '@components/UiComponents'
@@ -134,8 +134,8 @@ export default {
     DateInput,
     DeleteButton,
     EditButton,
-    Input,
-    TextField,
+    TextInput,
+    SimpleText,
     Spinner,
   },
   data() {

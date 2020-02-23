@@ -5,11 +5,11 @@
 
 <script>
 export default {
-  name: 'Input',
+  name: 'TextInput',
   props: {
     placeHolder: {
       type: String,
-      default: 'Input',
+      default: '',
     },
     value: [String, Number],
     name: {
