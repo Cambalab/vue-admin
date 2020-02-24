@@ -44,3 +44,47 @@ export const showFixture = () => {
     state,
   }
 }
+
+export const createFixture = () => {
+  const props = ({ resourceName = 'resource', utils }) => {
+    return {
+      fields: [
+        {
+          placeHolder: 'a resource name',
+          label: 'resourceName',
+          tag: 'TextField',
+        },
+        {
+          placeHolder: 'a fields array',
+          label: 'fields',
+          tag: 'TextField',
+        },
+        {
+          placeHolder: 'a va object',
+          label: 'va',
+          tag: 'TextField',
+        },
+      ],
+      resourceName,
+      title: 'My Resource',
+      va: {
+        ...utils,
+      },
+    }
+  }
+  const state = () => {
+    return {
+      entities: {
+        '1': {
+          resourceName: 'the name of a resource',
+          fields: 'children nodes used in the Show component',
+          va: 'an object containing methods',
+        },
+      },
+    }
+  }
+  return {
+    props,
+    state,
+  }
+}
