@@ -1,5 +1,4 @@
-import createCrudModule, { client } from 'vuex-crud'
-import { Types as RequestsTypes } from '@store/modules/requests'
+import createCrudModule from 'vuex-crud'
 
 export const Types = {
   VUEX_CRUD_FETCH_SINGLE: 'fetchSingle',
@@ -16,7 +15,6 @@ export const Types = {
  * @param {Object} parseResponses An object containing a parseSingle function
  * and a parseList function to be used by Vuex Crud.
  * @param {Object} state A representation of an initial state
- * @param {Object} store The global Vuex store object
  * @param {Function} onFetchListStart Callback for collection GET start
  * @param {Function} onFetchListSuccess Callback for collection GET success
  * @param {Function} onFetchListError Callback for collection GET error
@@ -42,7 +40,6 @@ export default ({
   resourceIdName,
   parseResponses,
   state = {},
-  store,
   onFetchListStart = () => {},
   onFetchListSuccess = () => {},
   onFetchListError = () => {},
@@ -66,25 +63,6 @@ export default ({
     const rootUrl = `${apiUrl}${resourceName}/`
     return id ? `${rootUrl}${id}` : rootUrl
   }
-  const { namespace: requestsNamespace, REQUESTS_SET_LOADING } = RequestsTypes
-  const mutation = `${requestsNamespace}/${REQUESTS_SET_LOADING}`
-  const setLoading = isLoading => () => store.commit(mutation, { isLoading })
-
-  // Requests Interceptors
-  const successCall = injectedLogic => requestOrResponse => {
-    injectedLogic()
-    return requestOrResponse
-  }
-  const errorCall = injectedLogic => error => {
-    injectedLogic()
-    return Promise.reject(error)
-  }
-
-  client.interceptors.request.use(successCall(setLoading(true)))
-  client.interceptors.response.use(
-    successCall(setLoading(false)),
-    errorCall(setLoading(false))
-  )
 
   const module = createCrudModule({
     resource: resourceName,
