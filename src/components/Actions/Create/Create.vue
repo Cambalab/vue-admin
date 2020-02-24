@@ -7,7 +7,7 @@
       </h3>
     </v-card-title>
     <v-form>
-      <v-card-text>
+      <v-card-text :name="names.containerFields">
         <v-layout wrap>
           <v-flex xs8>
             <component
@@ -89,6 +89,10 @@ export default {
           view,
           field,
         }),
+      containerFields: UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
+        resourceName,
+        view,
+      }),
       submitButton: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
         resourceName,
         view,
@@ -104,7 +108,6 @@ export default {
     }
     return { content, names }
   },
-
   computed: {
     ...mapState([
       'route', // vuex-router-sync
@@ -114,7 +117,6 @@ export default {
       return this.$store.getters[`${namespace}/${REQUESTS_IS_LOADING}`]
     },
   },
-
   mounted: function() {
     this.va.initEntity()
   },
