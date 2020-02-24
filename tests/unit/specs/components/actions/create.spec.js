@@ -6,7 +6,7 @@ import Create from '@components/Actions/Create/Create'
 import resourceDefaults from '@components/Resource/src/defaults'
 import UI_NAMES from '@constants/ui.element.names'
 import UI_CONTENT from '@constants/ui.content.default'
-// import { Types as CrudTypes } from '@store/modules/crud'
+import { Types as CrudTypes } from '@store/modules/crud'
 import { Types as EntitiesTypes } from '@store/modules/entities'
 import entitiesModule from '@store/modules/entities'
 import requestsModule from '@store/modules/requests'
@@ -83,6 +83,18 @@ describe('Show.vue', () => {
       wrapper: findFieldsContainer(),
       el: 'textfield-stub',
       name: fieldName,
+    })
+  }
+
+  function findSubmitButton() {
+    const buttonName = UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
+      resourceName,
+      view,
+    })
+    return findElemByName({
+      wrapper: findFieldsContainer(),
+      el: 'v-btn-stub',
+      name: buttonName,
     })
   }
 
@@ -186,13 +198,10 @@ describe('Show.vue', () => {
     expect(titleCard.text()).toMatch(titleName)
   })
 
-  it('should render fields with empty valules', () => {
+  it('should render fields with empty values', () => {
     mountSubject()
 
     const { fields } = propsData
-    // const state = mockedState.entities[mockedRouterPushParams.id]
-    /* eslint-disable no-console */
-    console.log(subjectWrapper.html())
 
     fields.forEach(f => {
       const field = findField(f.label)
@@ -200,5 +209,64 @@ describe('Show.vue', () => {
       expect(field.exists()).toBe(true)
       expect(value).toMatch('')
     })
+  })
+
+  it('should commit mutations on storeValue when a text field is updated', () => {
+    mountSubject()
+
+    const { fields } = propsData
+
+    // It's necessary to count the mutation triggered during the Create mounted
+    // life cycle hook
+    const onMountedMutation = 1
+    fields.forEach((f, index) => {
+      const field = findField(f.label)
+      const { entities } = createFixture().state()
+      const newValue = entities['1'][f.label]
+      field.vm.$emit('change', newValue)
+
+      const { namespace, ENTITIES_UPDATE_FORM } = EntitiesTypes
+      const mutation = `${namespace}/${ENTITIES_UPDATE_FORM}`
+      const mutationArgs = {
+        formType: 'createForm',
+        entity: resourceName,
+        value: newValue,
+        resourceKey: f.label,
+      }
+      const times = onMountedMutation + (index + 1)
+
+      expect(storeSpy.commit).toHaveBeenCalledTimes(times)
+      expect(storeSpy.commit).toHaveBeenNthCalledWith(
+        times,
+        mutation,
+        mutationArgs
+      )
+    })
+  })
+
+  it('should render a submit button', () => {
+    mountSubject()
+
+    const submitButton = findSubmitButton()
+    const submitButtonText = UI_CONTENT.CREATE_SUBMIT_BUTTON
+
+    expect(submitButton.exists()).toBe(true)
+    expect(submitButton.text()).toMatch(submitButtonText)
+  })
+
+  it('should dispatch an action when the submit button is clicked', () => {
+    mountSubject()
+
+    const submitButton = findSubmitButton()
+    const currentEntity =
+      subjectWrapper.vm.$store.state.entities['createForm'][resourceName]
+    const { VUEX_CRUD_PUT } = CrudTypes
+    const action = `${resourceName}/${VUEX_CRUD_PUT}`
+    const actionArgs = { data: currentEntity }
+
+    submitButton.vm.$emit('click')
+
+    expect(storeSpy.dispatch).toHaveBeenCalledTimes(1)
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(action, actionArgs)
   })
 })
