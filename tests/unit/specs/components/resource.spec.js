@@ -8,6 +8,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils'
 import { validateSchema } from '@validators'
 import { Types as ResourcesTypes } from '@store/modules/resources'
 import alertsModule, { Types as AlertTypes } from '@store/modules/alerts'
+import requestsModule from '@store/modules/requests'
 import UI_CONTENT from '@constants/ui.content.default'
 
 describe('Resource.vue', () => {
@@ -88,6 +89,7 @@ describe('Resource.vue', () => {
     mockedStore = new Vuex.Store({
       modules: {
         alerts: alertsModule,
+        requests: requestsModule,
       },
       mutations: dummyStore.mutations,
     })
