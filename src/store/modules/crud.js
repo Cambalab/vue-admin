@@ -3,6 +3,7 @@ import createCrudModule from 'vuex-crud'
 export const Types = {
   VUEX_CRUD_FETCH_SINGLE: 'fetchSingle',
   VUEX_CRUD_GET_RESOURCE_BY_ID: 'byId',
+  VUEX_CRUD_PUT: 'create',
 }
 
 /**
