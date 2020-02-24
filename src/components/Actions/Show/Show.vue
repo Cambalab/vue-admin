@@ -11,10 +11,12 @@
           </v-card-title>
           <v-spacer />
           <EditButton
+            :name="names.editButton"
             :resourceId="$route.params.id"
             :resourceName="resourceName"
           />
           <DeleteButton
+            :name="names.deleteButton"
             :resourceId="$route.params.id"
             :resourceName="resourceName"
           />
@@ -92,6 +94,14 @@ export default {
           field,
         }),
       containerFields: UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
+        resourceName,
+        view,
+      }),
+      deleteButton: UI_NAMES.RESOURCE_VIEW_ACTIONS_DELETE_BUTTON.with({
+        resourceName,
+        view,
+      }),
+      editButton: UI_NAMES.RESOURCE_VIEW_ACTIONS_EDIT_BUTTON.with({
         resourceName,
         view,
       }),
