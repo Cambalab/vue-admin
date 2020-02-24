@@ -11,7 +11,10 @@ export default {
       type: String,
       default: '',
     },
-    value: [String, Number],
+    value: {
+      type: [String, Number],
+      default: '',
+    },
     name: {
       type: String,
       default: 'va-input',
