@@ -32,6 +32,7 @@ describe('AuthLayout.vue', () => {
   }
 
   beforeEach(() => {
+    AuthLayout.install(Vue)
     propsData = authFixture({ username, password }).props
     vuetify = new Vuetify()
     vaPropSpy = {
