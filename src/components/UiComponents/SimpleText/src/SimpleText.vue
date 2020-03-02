@@ -20,7 +20,7 @@ export default {
     },
     value: {
       type: [String, Number],
-      default: 'Empty content',
+      default: '',
     },
   },
   data() {
