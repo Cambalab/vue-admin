@@ -11,7 +11,6 @@ import { Unauthenticated as unauthenticatedFixture } from '@unit/fixtures/admin'
 describe('Unauthenticated.vue', () => {
   const subject = 'Unauthenticated'
 
-  Vue.config.silent = true
   Vue.use(Vuex)
 
   // subject

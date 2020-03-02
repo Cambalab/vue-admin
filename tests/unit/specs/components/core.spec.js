@@ -14,7 +14,6 @@ describe('Core', () => {
   Vue.use(VueRouter)
   Vue.use(Vuetify)
   Vue.use(Vuex)
-  Vue.config.silent = true
 
   let subjectWrapper
   // stubs

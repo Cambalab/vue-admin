@@ -167,8 +167,8 @@ describe('List.vue', () => {
       path: `/${resourceName}/create`,
     }
 
-    // This should be replaced by triggering a click event from the create
-    // button, when Vuetify2's table supports the Vue Wrapper - @sgobotta
+    // FIXME: This should be replaced by triggering a click event from the
+    // create button, when Vuetify2's table supports the Vue Wrapper - @sgobotta
     subjectWrapper.vm.onCreateClick()
 
     expect(routerSpy.push).toHaveBeenCalledTimes(1)
@@ -188,8 +188,8 @@ describe('List.vue', () => {
       path: `/${resourceName}/show/${id}`,
     }
 
-    // This should be replaced by triggering a click event from a selected row,
-    // when Vuetify2's table supports the Vue Wrapper - @sgobotta
+    // FIXME: This should be replaced by triggering a click event from a
+    // selected row, when Vuetify2's table supports the Vue Wrapper - @sgobotta
     subjectWrapper.vm.onRowClicked(id)
 
     expect(routerSpy.push).toHaveBeenCalledTimes(1)
@@ -204,8 +204,8 @@ describe('List.vue', () => {
       push: jest.spyOn(subjectWrapper.vm.$router, 'push'),
     }
 
-    // This should be replaced by triggering a click event from a selected row,
-    // when Vuetify2's table supports the Vue Wrapper - @sgobotta
+    // FIXME: This should be replaced by triggering a click event from a
+    // selected row, when Vuetify2's table supports the Vue Wrapper - @sgobotta
     subjectWrapper.vm.onRowClicked()
 
     expect(routerSpy.push).toHaveBeenCalledTimes(0)

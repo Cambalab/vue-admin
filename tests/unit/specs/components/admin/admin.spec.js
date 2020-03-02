@@ -15,7 +15,6 @@ import adminFixture from '@unit/fixtures/admin'
 describe('Admin.vue', () => {
   const subject = 'Admin'
 
-  Vue.config.silent = true
   Vue.use(Vuex)
 
   // subject

@@ -9,7 +9,6 @@ describe('DateField.vue', () => {
   const subject = 'DateField'
   // Initialises the vue instance and DateField dependencies
   Vue.use(Vuetify)
-  Vue.config.silent = true
 
   let vuetify
   let subjectWrapper

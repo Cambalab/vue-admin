@@ -5,7 +5,6 @@ import { mount } from '@vue/test-utils'
 
 describe('HomeLayout', () => {
   Vue.use(Vuetify)
-  Vue.config.silent = true
 
   let subjectWrapper
   // stubs

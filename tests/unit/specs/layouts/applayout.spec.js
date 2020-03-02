@@ -9,7 +9,6 @@ import { mount } from '@vue/test-utils'
 describe('AppLayout', () => {
   Vue.use(Vuetify)
   Vue.use(Vuex)
-  Vue.config.silent = true
 
   let subjectWrapper
   // stubs

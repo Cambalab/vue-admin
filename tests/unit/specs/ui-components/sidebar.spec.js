@@ -24,7 +24,6 @@ import { mount } from '@vue/test-utils'
 describe('Sidebar', () => {
   Vue.use(Vuetify)
   Vue.use(Vuex)
-  Vue.config.silent = true
 
   let subjectWrapper
   // stubs
@@ -42,6 +41,7 @@ describe('Sidebar', () => {
       mocks,
       propsData,
       vuetify,
+      stubs: ['router-link'],
     })
   }
 

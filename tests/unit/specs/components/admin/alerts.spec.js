@@ -26,7 +26,6 @@ describe('Alerts.vue', () => {
     AUTH_LOGIN_FAILURE,
   } = AuthTypes
   // Configures Vue instance
-  Vue.config.silent = true
   Vue.use(Vuetify)
   Vue.use(Vuex)
 

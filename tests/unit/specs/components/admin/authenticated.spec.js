@@ -11,7 +11,6 @@ import { Authenticated as authenticatedFixture } from '@unit/fixtures/admin'
 describe('Authenticated.vue', () => {
   const subject = 'Authenticated'
 
-  Vue.config.silent = true
   Vue.use(Vuex)
 
   // subject
