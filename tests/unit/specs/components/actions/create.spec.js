@@ -16,7 +16,7 @@ import { createFixture } from '@unit/fixtures/actions'
 import { findElemByName } from '@unit/lib/utils/wrapper'
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 
-describe('Show.vue', () => {
+describe('Create.vue', () => {
   const localVue = createLocalVue()
 
   localVue.use(VueRouter)
