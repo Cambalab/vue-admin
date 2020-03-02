@@ -2,7 +2,11 @@ import Router from '@router'
 import { Types as EntitiesTypes } from '@store/modules/entities'
 import { Types as CrudTypes } from '@store/modules/crud'
 
-const { VUEX_CRUD_FETCH_SINGLE, VUEX_CRUD_GET_RESOURCE_BY_ID } = CrudTypes
+const {
+  VUEX_CRUD_FETCH_LIST,
+  VUEX_CRUD_FETCH_SINGLE,
+  VUEX_CRUD_GET_RESOURCE_BY_ID,
+} = CrudTypes
 
 /**
  * getEntityForm - Given a resource name and a form type, calls the store to get the
@@ -59,7 +63,7 @@ export const fetchEntity = ({ resourceName, store, router }) => {
  * @return {Array} A 'resourceName' list from the Vuex Crud store
  */
 export const fetchList = ({ resourceName, store }) => {
-  const moduleName = `${resourceName}/fetchList`
+  const moduleName = `${resourceName}/${VUEX_CRUD_FETCH_LIST}`
   return store.dispatch(moduleName)
 }
 
