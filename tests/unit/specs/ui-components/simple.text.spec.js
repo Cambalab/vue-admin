@@ -8,6 +8,7 @@ describe('SimpleText.vue', () => {
   Vue.use(Vuetify)
   const vuetify = new Vuetify()
 
+  let defaultProps
   let propsData
   let subjectWrapper
 
@@ -20,7 +21,8 @@ describe('SimpleText.vue', () => {
 
   beforeEach(() => {
     SimpleText.install(Vue)
-    const { parse, type } = defaults().props
+    defaultProps = defaults().props
+    const { parse, type } = defaultProps
     propsData = {
       parse,
       type,
@@ -47,8 +49,10 @@ describe('SimpleText.vue', () => {
     mountSubject()
 
     // Asserts to the post-mounting generated props by default
-    expect(subjectWrapper.vm._props.type).toMatch('p')
-    expect(subjectWrapper.vm._props.value).toMatch('')
+    const { type, value } = defaultProps
+
+    expect(subjectWrapper.vm._props.type).toMatch(type)
+    expect(subjectWrapper.vm._props.value).toMatch(value)
   })
 
   it('should render a parsed content', () => {
