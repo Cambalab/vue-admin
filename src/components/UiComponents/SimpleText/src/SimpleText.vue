@@ -7,12 +7,22 @@
 </template>
 
 <script>
+export const defaults = () => {
+  return {
+    props: {
+      parse: value => value,
+      type: 'p',
+      value: '',
+    },
+  }
+}
+
 export default {
   name: 'SimpleText',
   props: {
     parse: {
       type: Function,
-      default: value => value,
+      default: defaults().props.parse,
     },
     type: {
       type: String,
