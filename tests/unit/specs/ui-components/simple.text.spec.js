@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { SimpleText } from '@components/UiComponents'
+import { defaults } from '@components/UiComponents/SimpleText/src/SimpleText'
 import Vuetify from 'vuetify'
 import { shallowMount } from '@vue/test-utils'
 
@@ -18,11 +19,11 @@ describe('SimpleText.vue', () => {
   }
 
   beforeEach(() => {
+    SimpleText.install(Vue)
+    const { parse, type } = defaults().props
     propsData = {
-      parse: something => {
-        return something
-      },
-      type: 'p',
+      parse,
+      type,
       value: 'Im an empty content',
     }
   })
@@ -48,5 +49,13 @@ describe('SimpleText.vue', () => {
     // Asserts to the post-mounting generated props by default
     expect(subjectWrapper.vm._props.type).toMatch('p')
     expect(subjectWrapper.vm._props.value).toMatch('')
+  })
+
+  it('should render a parsed content', () => {
+    mountSubject()
+
+    const value = subjectWrapper.vm.parse(propsData.value)
+
+    expect(subjectWrapper.text()).toMatch(value)
   })
 })
