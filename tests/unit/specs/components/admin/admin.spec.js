@@ -15,7 +15,6 @@ import adminFixture from '@unit/fixtures/admin'
 describe('Admin.vue', () => {
   const subject = 'Admin'
 
-  Vue.config.silent = true
   Vue.use(Vuex)
 
   // subject
@@ -82,8 +81,7 @@ describe('Admin.vue', () => {
     expect(props.homeLayout).toMatchObject(adminFixture.props.homeLayout)
     expect(props.sidebar).toMatchObject(adminFixture.props.sidebar)
     expect(props.title).toMatch(adminFixture.props.title)
-    expect(props.unauthorized)
-      .toMatchObject(adminFixture.props.unauthorized)
+    expect(props.unauthorized).toMatchObject(adminFixture.props.unauthorized)
   })
 
   it('[Entities Module] - store should call registerModule on beforeCreate', () => {

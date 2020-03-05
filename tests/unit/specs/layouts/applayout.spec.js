@@ -9,7 +9,6 @@ import { mount } from '@vue/test-utils'
 describe('AppLayout', () => {
   Vue.use(Vuetify)
   Vue.use(Vuex)
-  Vue.config.silent = true
 
   let subjectWrapper
   // stubs
@@ -43,8 +42,8 @@ describe('AppLayout', () => {
           const { namespace: authNamespace, AUTH_LOGOUT_REQUEST } = AuthTypes
           const actionName = `${authNamespace}/${AUTH_LOGOUT_REQUEST}`
           mockedStore.dispatch(actionName)
-        }
-      }
+        },
+      },
     }
     vuetify = new Vuetify()
     mockedStore = new Vuex.Store({})

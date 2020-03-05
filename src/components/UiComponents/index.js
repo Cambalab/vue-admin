@@ -1,9 +1,9 @@
-import DateInput from './DateInput'
+import DateField from './DateField'
 import SimpleSidebar from './Sidebar/SimpleSidebar'
 import DeleteButton from './DeleteButton'
 import EditButton from './EditButton'
-import Input from './Input'
 import TextField from './TextField'
+import SimpleText from './SimpleText'
 import Spinner from './Spinner'
 import {
   Sidebar,
@@ -14,12 +14,12 @@ import {
 } from './Sidebar'
 
 export {
-  DateInput,
+  DateField,
   SimpleSidebar,
   DeleteButton,
   EditButton,
-  Input,
   TextField,
+  SimpleText,
   Spinner,
   Sidebar,
   SidebarLink,

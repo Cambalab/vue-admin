@@ -1,12 +1,12 @@
 import { handleEmptyProp } from '@handlers/error/src'
 
 /**
- * Defaults - Default attributes for the DateInput component
+ * Defaults - Default attributes for the DateField component
  *
  * @return {Object} An object containing props and methods
  */
 export default () => {
-  const component = 'DateInput'
+  const component = 'DateField'
 
   function _vDatePickerProps() {
     return { noTitle: true }
@@ -17,7 +17,7 @@ export default () => {
   }
 
   /**
-   * DateInput default props
+   * DateField default props
    */
   const disabled = false
   const format = handleEmptyProp({ prop: 'format', at: component })

@@ -1,4 +1,4 @@
-import defaults from '@components/UiComponents/DateInput/src/defaults'
+import defaults from '@components/UiComponents/DateField/src/defaults'
 
 export default {
   props: {

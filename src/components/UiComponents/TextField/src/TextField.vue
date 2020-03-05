@@ -4,17 +4,30 @@
 </template>
 
 <script>
+export const defaults = () => {
+  return {
+    props: {
+      placeHolder: '',
+      value: '',
+      name: 'va-text-field',
+    },
+  }
+}
+
 export default {
-  name: 'Input',
+  name: 'TextField',
   props: {
     placeHolder: {
       type: String,
-      default: 'Input',
+      default: defaults().props.placeHolder,
     },
-    value: [String, Number],
+    value: {
+      type: [String, Number],
+      default: defaults().props.value,
+    },
     name: {
       type: String,
-      default: 'va-input',
+      default: defaults().props.name,
     },
   },
   data() {
@@ -27,6 +40,5 @@ export default {
       this.$emit('change', newVal)
     },
   },
-  computed: {},
 }
 </script>

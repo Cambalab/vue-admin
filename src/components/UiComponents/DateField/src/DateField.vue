@@ -25,7 +25,7 @@ import defaults from './defaults'
 import ELEMENTS_PROPS from '@constants/ui.elements.props'
 
 export default {
-  name: 'DateInput',
+  name: 'DateField',
   props: {
     disabled: {
       type: Boolean,

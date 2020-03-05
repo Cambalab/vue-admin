@@ -1,9 +1,9 @@
 <template>
   <Show>
-    <h3 source="id" />
-    <h2 source="name" />
-    <h2 source="lastname" />
-    <p source="birthdate" type="TextField" :parse="parse" />
+    <SimpleText type="h3" source="id" />
+    <SimpleText type="h2" source="name" />
+    <SimpleText type="h2" source="lastname" />
+    <SimpleText source="birthdate" :parse="parse" />
   </Show>
 </template>
 
@@ -16,12 +16,12 @@ const { formatDate, parseDate } = dateUtils
 export default {
   name: 'ShowAuthors',
   components: {
-    Show
+    Show,
   },
   methods: {
     parse(date) {
       return formatDate(parseDate(date))
-    }
-  }
+    },
+  },
 }
 </script>

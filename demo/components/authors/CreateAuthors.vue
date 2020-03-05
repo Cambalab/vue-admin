@@ -1,8 +1,10 @@
 <template>
   <Create>
-    <input source="name" placeHolder="Name" />
-    <input source="lastname" placeHolder="Last name" />
-    <input source="birthdate" placeholder="Birthdate" type="DateInput"
+    <TextField source="name" placeHolder="Name" />
+    <TextField source="lastname" placeHolder="Last name" />
+    <DateField
+      source="birthdate"
+      placeholder="Birthdate"
       :vDatePickerProps="vDatePickerProps"
       :vMenuProps="vMenuProps"
       :parse="parseDate"
@@ -19,7 +21,7 @@ import dateUtils from '@demo/utils/dates'
 export default {
   name: 'CreateAuthors',
   components: {
-    Create
+    Create,
   },
   data() {
     const { parseDate, formatDate } = dateUtils
@@ -27,16 +29,16 @@ export default {
       vDatePickerProps: {
         locale: 'en-us',
         type: 'date',
-        noTitle: true
+        noTitle: true,
       },
       vMenuProps: {
         nudgeRight: 0,
-        closeOnContentClick: true
+        closeOnContentClick: true,
       },
       readonly: true,
       parseDate,
-      formatDate
+      formatDate,
     }
-  }
+  },
 }
 </script>

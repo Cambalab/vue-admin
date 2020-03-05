@@ -8,6 +8,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils'
 import { validateSchema } from '@validators'
 import { Types as ResourcesTypes } from '@store/modules/resources'
 import alertsModule, { Types as AlertTypes } from '@store/modules/alerts'
+import requestsModule from '@store/modules/requests'
 import UI_CONTENT from '@constants/ui.content.default'
 
 describe('Resource.vue', () => {
@@ -87,9 +88,10 @@ describe('Resource.vue', () => {
     // Configures a Vuex Store instance
     mockedStore = new Vuex.Store({
       modules: {
-        alerts: alertsModule
+        alerts: alertsModule,
+        requests: requestsModule,
       },
-      mutations: dummyStore.mutations
+      mutations: dummyStore.mutations,
     })
     // Configures Router app dependency with the Store as used in the
     // route.bindings module
@@ -145,12 +147,11 @@ describe('Resource.vue', () => {
   })
 
   describe('subscriptions prop', () => {
-
     it('when (onCreateSuccess) is called an [ALERTS_SHOW_SNACKBAR] is triggered', () => {
       shouldCallSubscriptionWith(
         'onCreateSuccess',
         UI_CONTENT.SNACKBAR_SUCCESS_COLOR,
-        UI_CONTENT.SNACKBAR_CREATE_ELEMENT_SUCCESS_TEXT,
+        UI_CONTENT.SNACKBAR_CREATE_ELEMENT_SUCCESS_TEXT
       )
     })
 
@@ -158,7 +159,7 @@ describe('Resource.vue', () => {
       shouldCallSubscriptionWith(
         'onDestroySuccess',
         UI_CONTENT.SNACKBAR_SUCCESS_COLOR,
-        UI_CONTENT.SNACKBAR_DELETE_ELEMENT_SUCCESS_TEXT,
+        UI_CONTENT.SNACKBAR_DELETE_ELEMENT_SUCCESS_TEXT
       )
     })
 
@@ -166,7 +167,7 @@ describe('Resource.vue', () => {
       shouldCallSubscriptionWith(
         'onUpdateSuccess',
         UI_CONTENT.SNACKBAR_SUCCESS_COLOR,
-        UI_CONTENT.SNACKBAR_UPDATE_ELEMENT_SUCCESS_TEXT,
+        UI_CONTENT.SNACKBAR_UPDATE_ELEMENT_SUCCESS_TEXT
       )
     })
 
@@ -174,7 +175,7 @@ describe('Resource.vue', () => {
       shouldCallSubscriptionWith(
         'onCreateError',
         UI_CONTENT.SNACKBAR_ERROR_COLOR,
-        UI_CONTENT.SNACKBAR_CREATE_ELEMENT_ERROR_TEXT,
+        UI_CONTENT.SNACKBAR_CREATE_ELEMENT_ERROR_TEXT
       )
     })
 
@@ -182,7 +183,7 @@ describe('Resource.vue', () => {
       shouldCallSubscriptionWith(
         'onDestroyError',
         UI_CONTENT.SNACKBAR_ERROR_COLOR,
-        UI_CONTENT.SNACKBAR_DELETE_ELEMENT_ERROR_TEXT,
+        UI_CONTENT.SNACKBAR_DELETE_ELEMENT_ERROR_TEXT
       )
     })
 
@@ -190,7 +191,7 @@ describe('Resource.vue', () => {
       shouldCallSubscriptionWith(
         'onFetchListError',
         UI_CONTENT.SNACKBAR_ERROR_COLOR,
-        UI_CONTENT.SNACKBAR_FETCH_LIST_ERROR_TEXT,
+        UI_CONTENT.SNACKBAR_FETCH_LIST_ERROR_TEXT
       )
     })
 
@@ -198,7 +199,7 @@ describe('Resource.vue', () => {
       shouldCallSubscriptionWith(
         'onFetchSingleError',
         UI_CONTENT.SNACKBAR_INFO_COLOR,
-        UI_CONTENT.SNACKBAR_FETCH_SINGLE_ERROR_TEXT,
+        UI_CONTENT.SNACKBAR_FETCH_SINGLE_ERROR_TEXT
       )
     })
 
@@ -206,7 +207,7 @@ describe('Resource.vue', () => {
       shouldCallSubscriptionWith(
         'onUpdateError',
         UI_CONTENT.SNACKBAR_ERROR_COLOR,
-        UI_CONTENT.SNACKBAR_UPDATE_ELEMENT_ERROR_TEXT,
+        UI_CONTENT.SNACKBAR_UPDATE_ELEMENT_ERROR_TEXT
       )
     })
   })

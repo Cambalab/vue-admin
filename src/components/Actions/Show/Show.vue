@@ -11,10 +11,12 @@
           </v-card-title>
           <v-spacer />
           <EditButton
+            :name="names.editButton"
             :resourceId="$route.params.id"
             :resourceName="resourceName"
           />
           <DeleteButton
+            :name="names.deleteButton"
             :resourceId="$route.params.id"
             :resourceName="resourceName"
           />
@@ -24,12 +26,12 @@
           v-if="resourceShow !== undefined"
         >
           <component
-            :name="names.containerField(label(field))"
+            :name="names.containerField(field.label)"
             v-for="field in fields"
-            :key="names.containerField(label(field))"
-            :is="type(field)"
-            v-bind:value="resourceShow[label(field)]"
-            v-bind="args(field)"
+            :key="names.containerField(field.label)"
+            :is="field.tag"
+            v-bind:value="resourceShow[field.label]"
+            v-bind="field"
           />
         </v-card-text>
       </v-card>
@@ -44,8 +46,8 @@ import { mapState } from 'vuex'
 import {
   DeleteButton,
   EditButton,
-  Input,
   TextField,
+  SimpleText,
   Spinner,
 } from '@components/UiComponents'
 import { Types as RequestsTypes } from '@store/modules/requests'
@@ -70,8 +72,8 @@ export default {
     },
   },
   components: {
-    Input,
     TextField,
+    SimpleText,
     DeleteButton,
     EditButton,
     Spinner,
@@ -92,6 +94,14 @@ export default {
           field,
         }),
       containerFields: UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
+        resourceName,
+        view,
+      }),
+      deleteButton: UI_NAMES.RESOURCE_VIEW_ACTIONS_DELETE_BUTTON.with({
+        resourceName,
+        view,
+      }),
+      editButton: UI_NAMES.RESOURCE_VIEW_ACTIONS_EDIT_BUTTON.with({
         resourceName,
         view,
       }),
@@ -125,16 +135,6 @@ export default {
   methods: {
     fetchData() {
       return this.va.fetchEntity()
-    },
-    type(field) {
-      return field.type || 'TextField'
-    },
-    label(field) {
-      return field.label || field
-    },
-    args(field) {
-      const args = typeof field === 'string' ? { label: field } : field
-      return args
     },
   },
   watch: {

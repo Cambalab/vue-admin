@@ -27,16 +27,16 @@ export default () => {
         })
         action(currentRoutes)
       }
-    }
+    },
   ]
 
   return {
     data: {
-      menuItems
+      menuItems,
     },
     props: {
-      subscriptions
-    }
+      subscriptions,
+    },
   }
 }
 

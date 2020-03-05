@@ -12,8 +12,6 @@ import { findElemByName, findRef, nextTick } from '@unit/lib/utils/wrapper'
 describe('AuthLayout.vue', () => {
   const subject = 'AuthLayout'
   Vue.use(Vuetify)
-  // Silences warnings from vuetify prop mutations
-  Vue.config.silent = true
 
   let propsData
   let wrapper
@@ -34,6 +32,7 @@ describe('AuthLayout.vue', () => {
   }
 
   beforeEach(() => {
+    AuthLayout.install(Vue)
     propsData = authFixture({ username, password }).props
     vuetify = new Vuetify()
     vaPropSpy = {

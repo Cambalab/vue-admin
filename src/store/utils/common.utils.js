@@ -1,5 +1,12 @@
 import Router from '@router'
 import { Types as EntitiesTypes } from '@store/modules/entities'
+import { Types as CrudTypes } from '@store/modules/crud'
+
+const {
+  VUEX_CRUD_FETCH_LIST,
+  VUEX_CRUD_FETCH_SINGLE,
+  VUEX_CRUD_GET_RESOURCE_BY_ID,
+} = CrudTypes
 
 /**
  * getEntityForm - Given a resource name and a form type, calls the store to get the
@@ -26,8 +33,8 @@ export const getEntityForm = ({ resourceName, formType, store }) => {
  * @return {Object} A 'resourceName' entity.
  */
 export const getEntity = ({ resourceName, store, router }) => {
-  const { id } = router.history.current.params
-  const moduleName = `${resourceName}/byId`
+  const { id } = router.history.current.params // isnt't this too coupled to 'id'? - @sgobotta
+  const moduleName = `${resourceName}/${VUEX_CRUD_GET_RESOURCE_BY_ID}`
   return store.getters[moduleName](id)
 }
 
@@ -42,8 +49,8 @@ export const getEntity = ({ resourceName, store, router }) => {
  * @return {Object} The fetched entity.
  */
 export const fetchEntity = ({ resourceName, store, router }) => {
-  const { id } = router.history.current.params
-  const moduleName = `${resourceName}/fetchSingle`
+  const { id } = router.history.current.params // isnt't this too coupled to 'id'? - @sgobotta
+  const moduleName = `${resourceName}/${VUEX_CRUD_FETCH_SINGLE}`
   return store.dispatch(moduleName, { id })
 }
 
@@ -56,7 +63,7 @@ export const fetchEntity = ({ resourceName, store, router }) => {
  * @return {Array} A 'resourceName' list from the Vuex Crud store
  */
 export const fetchList = ({ resourceName, store }) => {
-  const moduleName = `${resourceName}/fetchList`
+  const moduleName = `${resourceName}/${VUEX_CRUD_FETCH_LIST}`
   return store.dispatch(moduleName)
 }
 

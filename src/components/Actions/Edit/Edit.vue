@@ -12,13 +12,13 @@
           <v-flex xs8>
             <span v-if="entity">
               <component
-                :name="names.containerField(label(field))"
                 v-for="field in fields"
-                :key="names.containerField(label(field))"
-                :is="type(field)"
-                v-bind="args(field)"
-                :value="entity[label(field)]"
-                @change="storeValue($event, label(field))"
+                :name="names.containerField(field.label)"
+                :key="names.containerField(field.label)"
+                :is="field.tag"
+                v-bind="field"
+                :value="entity[field.label]"
+                @change="storeValue($event, field.label)"
               >
               </component>
             </span>
@@ -42,7 +42,12 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from 'vuex'
-import { Input, TextField, Spinner, DateInput } from '@components/UiComponents'
+import {
+  TextField,
+  SimpleText,
+  Spinner,
+  DateField,
+} from '@components/UiComponents'
 import { Types as RequestsTypes } from '@store/modules/requests'
 
 export default {
@@ -50,7 +55,7 @@ export default {
   props: {
     resourceName: {
       type: String,
-      default: null,
+      required: true,
     },
     fields: {
       type: Array,
@@ -65,10 +70,10 @@ export default {
     },
   },
   components: {
-    Input,
     TextField,
+    SimpleText,
     Spinner,
-    DateInput,
+    DateField,
   },
   data() {
     const resourceName = this.resourceName
@@ -123,26 +128,12 @@ export default {
     },
     storeValues() {
       this.fields.forEach(field => {
-        const label = this.label(field)
+        const { label } = field
         this.storeValue(this.entity[label], label)
       })
     },
     submit() {
       this.va.submitEntity()
-    },
-    type(field) {
-      return field.type || 'Input'
-    },
-    key(label) {
-      return `${this.resourceName}_${label}`
-    },
-    label(field) {
-      return field.label || field
-    },
-    args(field) {
-      const args =
-        typeof field === 'string' ? { label: field, placeHolder: field } : field
-      return args
     },
   },
   created() {

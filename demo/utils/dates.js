@@ -14,5 +14,5 @@ function formatDate(date) {
 
 export default {
   parseDate,
-  formatDate
+  formatDate,
 }

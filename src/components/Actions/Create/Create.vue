@@ -7,17 +7,17 @@
       </h3>
     </v-card-title>
     <v-form>
-      <v-card-text>
+      <v-card-text :name="names.containerFields">
         <v-layout wrap>
           <v-flex xs8>
             <component
-              :name="names.containerField(label(field))"
-              :ref="names.containerField(label(field))"
+              :name="names.containerField(field.label)"
+              :ref="names.containerField(field.label)"
               v-for="field in fields"
-              :key="names.containerField(label(field))"
-              :is="type(field)"
-              v-bind="args(field)"
-              @change="storeValue($event, label(field))"
+              :key="names.containerField(field.label)"
+              :is="field.tag"
+              v-bind="field"
+              @change="storeValue($event, field.label)"
             >
             </component>
           </v-flex>
@@ -40,16 +40,21 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 import { mapState } from 'vuex'
-import { Input, TextField, Spinner, DateInput } from '@components/UiComponents'
+import {
+  TextField,
+  SimpleText,
+  Spinner,
+  DateField,
+} from '@components/UiComponents'
 import { Types as RequestsTypes } from '@store/modules/requests'
 
 export default {
   name: 'Create',
   components: {
-    Input,
     TextField,
+    SimpleText,
     Spinner,
-    DateInput,
+    DateField,
   },
   props: {
     resourceName: {
@@ -84,6 +89,10 @@ export default {
           view,
           field,
         }),
+      containerFields: UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
+        resourceName,
+        view,
+      }),
       submitButton: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
         resourceName,
         view,
@@ -99,7 +108,6 @@ export default {
     }
     return { content, names }
   },
-
   computed: {
     ...mapState([
       'route', // vuex-router-sync
@@ -109,36 +117,15 @@ export default {
       return this.$store.getters[`${namespace}/${REQUESTS_IS_LOADING}`]
     },
   },
-
   mounted: function() {
     this.va.initEntity()
   },
-
   methods: {
     storeValue(value, resourceKey) {
       this.va.updateEntity({ resourceKey, value })
     },
-
     submit() {
       this.va.submitEntity()
-    },
-
-    type(field) {
-      return field.type || 'Input'
-    },
-
-    key(label) {
-      return `${this.resourceName}_${label}`
-    },
-
-    label(field) {
-      return field.label || field
-    },
-
-    args(field) {
-      const args =
-        typeof field === 'string' ? { label: field, placeHolder: field } : field
-      return args
     },
   },
 }

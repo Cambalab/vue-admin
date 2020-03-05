@@ -49,7 +49,7 @@ export default {
   },
   created: function() {
     if (!this.storeHasModule(this.name)) {
-      createCrudModule({
+      const { namespace, module } = createCrudModule({
         apiUrl: this.apiUrl,
         resourceName: this.name,
         resourceIdName: this.resourceIdName,
@@ -57,6 +57,7 @@ export default {
         store: this.$store,
         ...this.subscriptions(this.$store, this.name),
       })
+      this.$store.registerModule(namespace, module)
     }
   },
   methods: {

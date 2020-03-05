@@ -1,5 +1,6 @@
 import { handleEmptyProp, handleSchemaValidation } from '@handlers/error/src'
 import { Types as AlertTypes } from '@store/modules/alerts'
+import { Types as RequestsTypes } from '@store/modules/requests'
 import UI_CONTENT from '@constants/ui.content.default'
 
 /**
@@ -45,25 +46,18 @@ export default () => {
           text: UI_CONTENT.SNACKBAR_CREATE_ELEMENT_SUCCESS_TEXT,
         })
       },
-      onDestroySuccess: () => {
-        const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
-        store.commit(mutationCommit, {
-          color: UI_CONTENT.SNACKBAR_SUCCESS_COLOR,
-          text: UI_CONTENT.SNACKBAR_DELETE_ELEMENT_SUCCESS_TEXT,
-        })
-      },
-      onUpdateSuccess: () => {
-        const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
-        store.commit(mutationCommit, {
-          color: UI_CONTENT.SNACKBAR_SUCCESS_COLOR,
-          text: UI_CONTENT.SNACKBAR_UPDATE_ELEMENT_SUCCESS_TEXT,
-        })
-      },
       onCreateError: () => {
         const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
         store.commit(mutationCommit, {
           color: UI_CONTENT.SNACKBAR_ERROR_COLOR,
           text: UI_CONTENT.SNACKBAR_CREATE_ELEMENT_ERROR_TEXT,
+        })
+      },
+      onDestroySuccess: () => {
+        const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
+        store.commit(mutationCommit, {
+          color: UI_CONTENT.SNACKBAR_SUCCESS_COLOR,
+          text: UI_CONTENT.SNACKBAR_DELETE_ELEMENT_SUCCESS_TEXT,
         })
       },
       onDestroyError: () => {
@@ -80,11 +74,40 @@ export default () => {
           text: UI_CONTENT.SNACKBAR_FETCH_LIST_ERROR_TEXT,
         })
       },
+      onFetchSingleStart: () => {
+        const {
+          namespace: requestsNamespace,
+          REQUESTS_SET_LOADING,
+        } = RequestsTypes
+        const mutation = `${requestsNamespace}/${REQUESTS_SET_LOADING}`
+        store.commit(mutation, { isLoading: true })
+      },
+      onFetchSingleSuccess: () => {
+        const {
+          namespace: requestsNamespace,
+          REQUESTS_SET_LOADING,
+        } = RequestsTypes
+        const mutation = `${requestsNamespace}/${REQUESTS_SET_LOADING}`
+        store.commit(mutation, { isLoading: false })
+      },
       onFetchSingleError: () => {
         const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
         store.commit(mutationCommit, {
           color: UI_CONTENT.SNACKBAR_INFO_COLOR,
           text: UI_CONTENT.SNACKBAR_FETCH_SINGLE_ERROR_TEXT,
+        })
+        const {
+          namespace: requestsNamespace,
+          REQUESTS_SET_LOADING,
+        } = RequestsTypes
+        const mutation = `${requestsNamespace}/${REQUESTS_SET_LOADING}`
+        store.commit(mutation, { isLoading: false })
+      },
+      onUpdateSuccess: () => {
+        const mutationCommit = `${alertsNamespace}/${ALERTS_SHOW_SNACKBAR}`
+        store.commit(mutationCommit, {
+          color: UI_CONTENT.SNACKBAR_SUCCESS_COLOR,
+          text: UI_CONTENT.SNACKBAR_UPDATE_ELEMENT_SUCCESS_TEXT,
         })
       },
       onUpdateError: () => {

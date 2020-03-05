@@ -11,7 +11,6 @@ import { Authenticated as authenticatedFixture } from '@unit/fixtures/admin'
 describe('Authenticated.vue', () => {
   const subject = 'Authenticated'
 
-  Vue.config.silent = true
   Vue.use(Vuex)
 
   // subject
@@ -44,17 +43,17 @@ describe('Authenticated.vue', () => {
       modules: {
         auth: Object.assign(
           {},
-          authStore({ client: () => new Promise(()=> {}) }),
+          authStore({ client: () => new Promise(() => {}) }),
           {
             state: {
               error: '',
               isAuthenticated: true,
               status: 'idle',
               user,
-            }
+            },
           }
         ),
-      }
+      },
     })
     mocks = { $store: mockedStore, $router: mockedRouter }
     propsData = {
