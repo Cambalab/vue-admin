@@ -16,7 +16,7 @@ import UI_NAMES from '@constants/ui.element.names'
 export const defaults = () => {
   return {
     props: {
-      isLoading: true,
+      isLoading: false,
       name: UI_NAMES.SPINNER_CONTAINER,
       vProps: {
         color: 'success',
