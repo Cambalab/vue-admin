@@ -1,13 +1,14 @@
 <template>
-  <div v-if="loading">
-    <v-container :id="name" pos-absolute fill-height progress-bar-container>
-      <v-progress-circular
-        class="progress-bar text-xs-center"
-        v-bind="vProps"
-      />
-      <div class="bg fill-height pos-absolute bg-progress-bar"></div>
-    </v-container>
-  </div>
+  <v-container
+    :id="name"
+    pos-absolute
+    fill-height
+    progress-bar-container
+    v-if="loading"
+  >
+    <v-progress-circular class="progress-bar text-xs-center" v-bind="vProps" />
+    <div class="bg fill-height pos-absolute bg-progress-bar"></div>
+  </v-container>
 </template>
 <script>
 import UI_NAMES from '@constants/ui.element.names'
@@ -43,6 +44,7 @@ export default {
   },
   computed: {
     loading() {
+      // return true
       return this.isLoading
     },
   },
