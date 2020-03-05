@@ -1,16 +1,10 @@
 <template>
   <div v-if="loading">
-    <v-container
-      :id="UI_NAMES.SPINNER_CONTAINER"
-      pos-absolute
-      fill-height
-      progress-bar-container
-    >
+    <v-container :id="name" pos-absolute fill-height progress-bar-container>
       <v-progress-circular
         class="progress-bar text-xs-center"
-        indeterminate
-        color="green"
-      ></v-progress-circular>
+        v-bind="vProps"
+      />
       <div class="bg fill-height pos-absolute bg-progress-bar"></div>
     </v-container>
   </div>
@@ -18,20 +12,39 @@
 <script>
 import UI_NAMES from '@constants/ui.element.names'
 
+export const defaults = () => {
+  return {
+    props: {
+      isLoading: true,
+      name: UI_NAMES.SPINNER_CONTAINER,
+      vProps: {
+        color: 'success',
+        indeterminate: true,
+      },
+    },
+  }
+}
+
 export default {
   name: 'Spinner',
   props: {
-    spin: Boolean,
+    name: {
+      type: String,
+      default: defaults().props.name,
+    },
+    isLoading: {
+      type: Boolean,
+      default: defaults().props.isLoading,
+    },
+    vProps: {
+      type: Object,
+      default: () => defaults().props.vProps,
+    },
   },
   computed: {
     loading() {
-      return this.spin
+      return this.isLoading
     },
-  },
-  data() {
-    return {
-      UI_NAMES,
-    }
   },
 }
 </script>
