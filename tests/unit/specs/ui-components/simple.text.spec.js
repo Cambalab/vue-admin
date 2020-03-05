@@ -1,7 +1,8 @@
 import Vue from 'vue'
+import Vuetify from 'vuetify'
 import { SimpleText } from '@components/UiComponents'
 import { defaults } from '@components/UiComponents/SimpleText/src/SimpleText'
-import Vuetify from 'vuetify'
+import Factory from '@unit/factory'
 import { shallowMount } from '@vue/test-utils'
 
 describe('SimpleText.vue', () => {
@@ -22,10 +23,10 @@ describe('SimpleText.vue', () => {
   beforeEach(() => {
     SimpleText.install(Vue)
     defaultProps = defaults().props
-    const { parse, type } = defaultProps
+
     propsData = {
-      parse,
-      type,
+      parse: value => value,
+      type: 'p',
       value: 'Im an empty content',
     }
   })
@@ -45,12 +46,18 @@ describe('SimpleText.vue', () => {
 
   it('should use default props when none were provided', () => {
     delete propsData.type
+    delete propsData.parse
     delete propsData.value
     mountSubject()
 
     // Asserts to the post-mounting generated props by default
-    const { type, value } = defaultProps
+    const { parse, type, value } = defaultProps
 
+    const response = Factory.resource.responses.getSingle()
+
+    expect(subjectWrapper.vm._props.parse(response)).toMatchObject(
+      parse(response)
+    )
     expect(subjectWrapper.vm._props.type).toMatch(type)
     expect(subjectWrapper.vm._props.value).toMatch(value)
   })
