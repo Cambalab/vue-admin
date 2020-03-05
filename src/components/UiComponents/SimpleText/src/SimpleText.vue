@@ -26,11 +26,11 @@ export default {
     },
     type: {
       type: String,
-      default: 'p',
+      default: defaults().props.type,
     },
     value: {
       type: [String, Number],
-      default: '',
+      default: defaults().props.value,
     },
   },
   data() {
