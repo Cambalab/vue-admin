@@ -101,7 +101,7 @@ const magazinesRedirect = articlesRedirect
 const authorsRedirect = articlesRedirect
 
 // The name of the id attribute
-const resourceIdName = 'id'
+export const resourceIdName = 'id'
 
 // The name of the permissions field
 const userPermissionsField = 'permissions'
