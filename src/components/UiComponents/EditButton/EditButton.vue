@@ -21,25 +21,43 @@
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 
+export const defaults = () => {
+  return {
+    props: {
+      name: UI_NAMES.EDIT_BUTTON,
+      vBtnProps: {},
+      vIconProps: {},
+      resourceIdName: 'id',
+    },
+  }
+}
+
 export default {
   name: 'EditButton',
-
   props: {
     name: {
       type: String,
-      default: 'va-edit-button',
+      default: defaults().props.name,
     },
     resourceId: {
       type: [Number, String],
+      required: true,
+    },
+    resourceIdName: {
+      type: String,
+      default: defaults().props.resourceIdName,
     },
     resourceName: {
       type: String,
+      required: true,
     },
-    buttonProps: {
+    vBtnProps: {
       type: Object,
+      default: () => defaults().props.vBtnProps,
     },
-    iconProps: {
+    vIconProps: {
       type: Object,
+      default: () => defaults().props.vIconProps,
     },
   },
   data() {
