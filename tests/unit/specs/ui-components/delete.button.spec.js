@@ -56,7 +56,18 @@ describe('DeleteButton.vue', () => {
         small: true,
       },
     }
-    mockedRouter = new VueRouter({ routes: [] })
+    const routes = [
+      {
+        path: `/${resourceName}/`,
+        name: `${resourceName}`,
+        component: {
+          name: 'ListView',
+          render: h => h('div'),
+        },
+        props: propsData,
+      },
+    ]
+    mockedRouter = new VueRouter({ routes })
     mockedStore = new Vuex.Store({})
     const { namespace, module } = Factory.createCrudModule({
       resourceName,
@@ -118,16 +129,26 @@ describe('DeleteButton.vue', () => {
     expect(props.vIconProps).toMatchObject(vIconProps)
   })
 
-  it('when onDelete is clicked an action is dispatched', () => {
+  it('when onEdit is called an action is dispatched', () => {
     mountSubject()
+
+    const routerSpy = {
+      push: jest.spyOn(subjectWrapper.vm.$router, 'push'),
+    }
 
     subjectWrapper.vm.onDelete()
     const { VUEX_CRUD_DELETE } = CrudTypes
     const actionName = `${resourceName}/${VUEX_CRUD_DELETE}`
 
+    const routerArgs = {
+      path: `/${resourceName}`,
+    }
+
     expect(storeSpy.dispatch).toHaveBeenCalledTimes(1)
     expect(storeSpy.dispatch).toHaveBeenCalledWith(actionName, {
       [resourceIdName]: resourceId,
     })
+    expect(routerSpy.push).toHaveBeenCalledTimes(1)
+    expect(routerSpy.push).toHaveBeenCalledWith(routerArgs)
   })
 })
