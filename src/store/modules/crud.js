@@ -6,6 +6,7 @@ export const Types = {
   VUEX_CRUD_GET_RESOURCE_BY_ID: 'byId',
   VUEX_CRUD_PUT: 'create',
   VUEX_CRUD_UPDATE: 'update',
+  VUEX_CRUD_DELETE: 'destroy',
 }
 
 /**
