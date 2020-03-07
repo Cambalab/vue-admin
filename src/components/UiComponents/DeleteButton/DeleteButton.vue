@@ -2,7 +2,7 @@
   <v-tooltip bottom>
     <template v-slot:activator="{ on }">
       <v-btn
-        v-bind="buttonProps"
+        v-bind="vProps"
         :name="names.deleteButton"
         @click.stop="onDelete()"
         icon
@@ -18,6 +18,14 @@
 </template>
 
 <script>
+export const defaults = () => {
+  return {
+    props: {
+      name: 'va-delete-button',
+    },
+  }
+}
+
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
 
@@ -26,19 +34,20 @@ export default {
   props: {
     name: {
       type: String,
-      default: 'va-delete-button',
+      default: defaults().props.name,
     },
     resourceId: {
       type: [Number, String],
+      required: true,
     },
     resourceName: {
       type: String,
-      default: null,
+      required: true,
     },
-    buttonProps: {
+    vBtnProps: {
       type: Object,
     },
-    iconProps: {
+    vIconProps: {
       type: Object,
     },
   },

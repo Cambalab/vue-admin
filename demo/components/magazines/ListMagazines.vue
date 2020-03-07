@@ -58,8 +58,8 @@
                 resourceName="magazines"
               />
               <DeleteButton
-                :iconProps="iconProps"
-                :buttonProps="buttonProps"
+                :vBtnProps="buttonProps"
+                :vIconProps="iconProps"
                 :name="names.deleteButtonName(index)"
                 :resourceId="item.id"
                 resourceName="magazines"
