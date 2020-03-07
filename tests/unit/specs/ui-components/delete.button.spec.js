@@ -1,47 +1,73 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
+import Vuex from 'vuex'
 import { DeleteButton } from '@components/UiComponents'
 import { defaults } from '@components/UiComponents/DeleteButton/DeleteButton'
-// import { findElemByName } from '@unit/lib/utils/wrapper'
-import { shallowMount } from '@vue/test-utils'
+import { Types as CrudTypes } from '@store/modules/crud'
+import Factory from '@unit/factory'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 
 describe('DeleteButton.vue', () => {
+  const localVue = createLocalVue()
+  localVue.use(VueRouter)
+  localVue.use(Vuex)
   Vue.use(Vuetify)
   const vuetify = new Vuetify()
 
   let defaultProps
+  let mockedRouter
+  let mockedStore
+  let mocks
   let propsData
+  let resourceId
+  let resourceIdName
+  let resourceName
+  let storeSpy
   let subjectWrapper
 
   function mountSubject() {
     subjectWrapper = shallowMount(DeleteButton, {
+      localVue,
+      mocks,
       propsData,
+      router: mockedRouter,
       vuetify,
     })
   }
 
-  // function findDeleteButton({ name }) {
-  //   return findElemByName({
-  //     wrapper: subjectWrapper,
-  //     el: 'v-container-stub',
-  //     name: name,
-  //   })
-  // }
-
   beforeEach(() => {
     DeleteButton.install(Vue)
+
     defaultProps = defaults().props
+    resourceIdName = 'id'
+    resourceId = '1'
+    resourceName = 'myResource'
 
     propsData = {
       name: 'a-custom-name',
-      resourceId: '1',
-      resourceName: 'myResource',
+      resourceId: resourceId,
+      resourceName: resourceName,
       vBtnProps: {
         small: true,
       },
       vIconProps: {
         small: true,
       },
+    }
+    mockedRouter = new VueRouter({ routes: [] })
+    mockedStore = new Vuex.Store({})
+    const { namespace, module } = Factory.createCrudModule({
+      resourceName,
+      store: mockedStore,
+    })
+    mockedStore.registerModule(namespace, module)
+    mocks = {
+      $store: mockedStore,
+      router: mockedRouter,
+    }
+    storeSpy = {
+      dispatch: jest.spyOn(mocks.$store, 'dispatch'),
     }
   })
 
@@ -79,5 +105,18 @@ describe('DeleteButton.vue', () => {
     expect(props.name).toMatch(name)
     expect(props.vBtnProps).toMatchObject(vBtnProps)
     expect(props.vIconProps).toMatchObject(vIconProps)
+  })
+
+  it('when onDelete is clicked an action is dispatched', () => {
+    mountSubject()
+
+    subjectWrapper.vm.onDelete()
+    const { VUEX_CRUD_DELETE } = CrudTypes
+    const actionName = `${resourceName}/${VUEX_CRUD_DELETE}`
+
+    expect(storeSpy.dispatch).toHaveBeenCalledTimes(1)
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(actionName, {
+      [resourceIdName]: resourceId,
+    })
   })
 })
