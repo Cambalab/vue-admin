@@ -74,6 +74,7 @@
                 :vIconProps="iconProps"
                 :name="names.deleteButton(index)"
                 :resourceId="item[resourceIdName]"
+                :resourceIdName="resourceIdName"
                 :resourceName="resourceName"
               />
             </td>

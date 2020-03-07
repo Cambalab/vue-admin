@@ -28,6 +28,7 @@ export const defaults = () => {
       name: UI_NAMES.DELETE_BUTTON,
       vBtnProps: {},
       vIconProps: {},
+      resourceIdName: 'id',
     },
   }
 }
@@ -42,6 +43,10 @@ export default {
     resourceId: {
       type: [Number, String],
       required: true,
+    },
+    resourceIdName: {
+      type: String,
+      default: defaults().props.resourceIdName,
     },
     resourceName: {
       type: String,
@@ -72,7 +77,8 @@ export default {
     onDelete() {
       const { VUEX_CRUD_DELETE } = CrudTypes
       const actionName = `${this.resourceName}/${VUEX_CRUD_DELETE}`
-      this.$store.dispatch(actionName, { id: this.resourceId })
+      const { resourceIdName } = this
+      this.$store.dispatch(actionName, { [resourceIdName]: this.resourceId })
       return this.$router.push({ path: `/${this.resourceName}` })
     },
   },
