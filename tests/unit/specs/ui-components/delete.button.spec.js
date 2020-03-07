@@ -46,8 +46,9 @@ describe('DeleteButton.vue', () => {
 
     propsData = {
       name: 'a-custom-name',
-      resourceId: resourceId,
-      resourceName: resourceName,
+      resourceId,
+      resourceIdName,
+      resourceName,
       vBtnProps: {
         small: true,
       },
@@ -78,11 +79,19 @@ describe('DeleteButton.vue', () => {
   it('should have props', () => {
     mountSubject()
 
-    const { name, resourceId, resourceName, vBtnProps, vIconProps } = propsData
+    const {
+      name,
+      resourceId,
+      resourceIdName,
+      resourceName,
+      vBtnProps,
+      vIconProps,
+    } = propsData
     const props = subjectWrapper.props()
 
     expect(props.name).toMatch(name)
     expect(props.resourceId).toMatch(resourceId)
+    expect(props.resourceIdName).toMatch(resourceIdName)
     expect(props.resourceName).toMatch(resourceName)
     expect(props.vBtnProps).toMatchObject(vBtnProps)
     expect(props.vIconProps).toMatchObject(vIconProps)
@@ -90,12 +99,13 @@ describe('DeleteButton.vue', () => {
 
   it('should have default props', () => {
     delete propsData.name
+    delete propsData.resourceIdName
     delete propsData.vBtnProps
     delete propsData.vIconProps
     mountSubject()
 
     const { resourceId, resourceName } = propsData
-    const { name, vBtnProps, vIconProps } = defaultProps
+    const { name, resourceIdName, vBtnProps, vIconProps } = defaultProps
     const props = subjectWrapper.props()
 
     // Given props were received
@@ -103,6 +113,7 @@ describe('DeleteButton.vue', () => {
     expect(props.resourceName).toMatch(resourceName)
     // Default props exists
     expect(props.name).toMatch(name)
+    expect(props.resourceIdName).toMatch(resourceIdName)
     expect(props.vBtnProps).toMatchObject(vBtnProps)
     expect(props.vIconProps).toMatchObject(vIconProps)
   })
