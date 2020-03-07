@@ -97,6 +97,7 @@ export default ({
         component,
         props: {
           resourceName,
+          resourceIdName,
           // This could be refactored into a vue mixin, check #52 - @sgobotta
           va: {
             ...utils,

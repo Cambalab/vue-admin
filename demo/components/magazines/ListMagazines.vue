@@ -58,10 +58,11 @@
                 resourceName="magazines"
               />
               <DeleteButton
-                :iconProps="iconProps"
-                :buttonProps="buttonProps"
+                :vBtnProps="buttonProps"
+                :vIconProps="iconProps"
                 :name="names.deleteButtonName(index)"
                 :resourceId="item.id"
+                :resourceIdName="resourceIdName"
                 resourceName="magazines"
               />
             </td>
@@ -76,6 +77,7 @@
 import UI_NAMES from '@constants/ui.element.names'
 import { rowsPerPage } from '../../constants'
 import { DeleteButton, EditButton } from '@components/UiComponents'
+import { resourceIdName } from '../../App'
 
 export default {
   name: 'ListMagazines',
@@ -136,6 +138,7 @@ export default {
       iconProps: {
         small: true,
       },
+      resourceIdName,
     }
   },
   computed: {

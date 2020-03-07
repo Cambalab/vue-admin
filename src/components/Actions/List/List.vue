@@ -70,10 +70,11 @@
                 :resourceName="resourceName"
               />
               <DeleteButton
-                :iconProps="iconProps"
-                :buttonProps="buttonProps"
+                :vBtnProps="buttonProps"
+                :vIconProps="iconProps"
                 :name="names.deleteButton(index)"
                 :resourceId="item[resourceIdName]"
+                :resourceIdName="resourceIdName"
                 :resourceName="resourceName"
               />
             </td>

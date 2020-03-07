@@ -130,6 +130,7 @@ export default {
    * Other Buttons
    */
   BUTTON_GO_BACK: 'va-go-back-button',
+  DELETE_BUTTON: 'va-delete-button',
 
   /**
    * Default Spinner

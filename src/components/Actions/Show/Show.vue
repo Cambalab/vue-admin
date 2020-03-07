@@ -18,6 +18,7 @@
           <DeleteButton
             :name="names.deleteButton"
             :resourceId="$route.params.id"
+            :resourceIdName="resourceIdName"
             :resourceName="resourceName"
           />
         </v-toolbar>
@@ -55,6 +56,10 @@ import { Types as RequestsTypes } from '@store/modules/requests'
 export default {
   name: 'Show',
   props: {
+    resourceIdName: {
+      type: String,
+      required: true,
+    },
     resourceName: {
       type: String,
       required: true,

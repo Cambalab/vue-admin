@@ -22,6 +22,7 @@ export const showFixture = () => {
         },
       ],
       resourceName,
+      resourceIdName: 'id',
       title: 'My Resource',
       va: {
         ...utils,
