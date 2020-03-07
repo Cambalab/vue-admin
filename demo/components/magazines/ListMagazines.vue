@@ -51,8 +51,8 @@
             </td>
             <td class="text-xs-center">
               <EditButton
-                :iconProps="iconProps"
-                :buttonProps="buttonProps"
+                :vBtnProps="buttonProps"
+                :vIconProps="iconProps"
                 :name="names.editButtonName(index)"
                 :resourceId="item.id"
                 resourceName="magazines"

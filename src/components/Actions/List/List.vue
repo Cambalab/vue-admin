@@ -63,8 +63,8 @@
             </td>
             <td>
               <EditButton
-                :iconProps="iconProps"
-                :buttonProps="buttonProps"
+                :vBtnProps="buttonProps"
+                :vIconProps="iconProps"
                 :name="names.editButton(index)"
                 :resourceId="item[resourceIdName]"
                 :resourceName="resourceName"
