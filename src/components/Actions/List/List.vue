@@ -1,6 +1,6 @@
 <template>
   <v-card :name="names.viewContainer">
-    <Spinner :spin="isLoading"></Spinner>
+    <Spinner :isLoading="isLoading"></Spinner>
 
     <v-data-table
       :headers="headers"

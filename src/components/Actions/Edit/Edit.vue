@@ -1,6 +1,6 @@
 <template>
   <v-card :name="names.viewContainer">
-    <Spinner :spin="isLoading"></Spinner>
+    <Spinner :isLoading="isLoading"></Spinner>
     <v-card-title primary-title :name="names.titleContainer">
       <h3 class="headline mb-0 text-capitalize">
         {{ content.title }}
