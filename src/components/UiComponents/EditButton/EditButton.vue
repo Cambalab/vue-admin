@@ -2,13 +2,13 @@
   <v-tooltip bottom>
     <template v-slot:activator="{ on }">
       <v-btn
-        v-bind="buttonProps"
+        v-bind="vBtnProps"
         :name="name"
         @click.stop="onEdit()"
         icon
         v-on="on"
       >
-        <v-icon v-bind="iconProps">{{
+        <v-icon v-bind="vIconProps">{{
           UI_CONTENT.RESOURCE_EDIT_BUTTON
         }}</v-icon>
       </v-btn>
