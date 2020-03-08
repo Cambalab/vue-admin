@@ -2,13 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
 import Vuex from 'vuex'
-import { DeleteButton } from '@components/UiComponents'
-import { defaults } from '@components/UiComponents/DeleteButton/DeleteButton'
-import { Types as CrudTypes } from '@store/modules/crud'
+import { EditButton } from '@components/UiComponents'
+import { defaults } from '@components/UiComponents/EditButton/EditButton'
 import Factory from '@unit/factory'
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 
-describe('DeleteButton.vue', () => {
+describe('EditButton.vue', () => {
   const localVue = createLocalVue()
   localVue.use(VueRouter)
   localVue.use(Vuex)
@@ -23,11 +22,11 @@ describe('DeleteButton.vue', () => {
   let resourceId
   let resourceIdName
   let resourceName
-  let storeSpy
   let subjectWrapper
+  let view = 'edit'
 
   function mountSubject() {
-    subjectWrapper = shallowMount(DeleteButton, {
+    subjectWrapper = shallowMount(EditButton, {
       localVue,
       mocks,
       propsData,
@@ -37,7 +36,7 @@ describe('DeleteButton.vue', () => {
   }
 
   beforeEach(() => {
-    DeleteButton.install(Vue)
+    EditButton.install(Vue)
 
     defaultProps = defaults().props
     resourceIdName = 'id'
@@ -58,10 +57,10 @@ describe('DeleteButton.vue', () => {
     }
     const routes = [
       {
-        path: `/${resourceName}/`,
-        name: `${resourceName}`,
+        path: `/${resourceName}/${view}/`,
+        name: `${resourceName}/${view}`,
         component: {
-          name: 'ListView',
+          name: 'EditView',
           render: h => h('div'),
         },
         props: propsData,
@@ -77,9 +76,6 @@ describe('DeleteButton.vue', () => {
     mocks = {
       $store: mockedStore,
       router: mockedRouter,
-    }
-    storeSpy = {
-      dispatch: jest.spyOn(mocks.$store, 'dispatch'),
     }
   })
 
@@ -129,25 +125,20 @@ describe('DeleteButton.vue', () => {
     expect(props.vIconProps).toMatchObject(vIconProps)
   })
 
-  it('when onEdit is called an action is dispatched', () => {
+  it('when onEdit is called a router action is triggered', () => {
     mountSubject()
 
     const routerSpy = {
       push: jest.spyOn(subjectWrapper.vm.$router, 'push'),
     }
 
-    subjectWrapper.vm.onDelete()
-    const { VUEX_CRUD_DELETE } = CrudTypes
-    const actionName = `${resourceName}/${VUEX_CRUD_DELETE}`
-
+    subjectWrapper.vm.onEdit()
     const routerArgs = {
-      path: `/${resourceName}`,
+      name: `${resourceName}/${view}`,
+      params: { [resourceIdName]: resourceId },
+      path: `/${resourceName}/${view}`,
     }
 
-    expect(storeSpy.dispatch).toHaveBeenCalledTimes(1)
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(actionName, {
-      [resourceIdName]: resourceId,
-    })
     expect(routerSpy.push).toHaveBeenCalledTimes(1)
     expect(routerSpy.push).toHaveBeenCalledWith(routerArgs)
   })

@@ -131,6 +131,7 @@ export default {
    */
   BUTTON_GO_BACK: 'va-go-back-button',
   DELETE_BUTTON: 'va-delete-button',
+  EDIT_BUTTON: 'va-edit-button',
 
   /**
    * Default Spinner

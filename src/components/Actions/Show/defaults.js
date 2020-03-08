@@ -8,7 +8,7 @@ export default () => {
    * Show View default composer options
    */
   const composer = {
-    parentPropKeys: ['resourceName', 'redirect', 'va'],
+    parentPropKeys: ['resourceIdName', 'resourceName', 'redirect', 'va'],
     componentPropKeys: ['title'],
     childrenAdapter: { placeHolder: 'placeHolder', source: 'label' },
   }
