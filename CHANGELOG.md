@@ -1,6 +1,40 @@
-# Change Log
+# Changelog
+
+## [v0.0.10](https://github.com/Cambalab/vue-admin/tree/v0.0.10) (2021-03-31)
+
+[Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.9...v0.0.10)
+
+**Implemented enhancements:**
+
+- Actions and Ui Component [\#215](https://github.com/Cambalab/vue-admin/issues/215)
+- Improve unit tests: Sidebar component [\#213](https://github.com/Cambalab/vue-admin/issues/213)
+- 213 improve unit tests sidebar component [\#214](https://github.com/Cambalab/vue-admin/pull/214) ([sgobotta](https://github.com/sgobotta))
+- 204 configure automatic test coverage report [\#205](https://github.com/Cambalab/vue-admin/pull/205) ([sgobotta](https://github.com/sgobotta))
+
+**Closed issues:**
+
+- Implement Unit tests for the EditButton component [\#222](https://github.com/Cambalab/vue-admin/issues/222)
+- Implement Unit tests for the DeleteButton component [\#217](https://github.com/Cambalab/vue-admin/issues/217)
+- Implement unit tests for the Spinner component [\#216](https://github.com/Cambalab/vue-admin/issues/216)
+
+**Merged pull requests:**
+
+- Bump y18n from 3.2.1 to 3.2.2 [\#231](https://github.com/Cambalab/vue-admin/pull/231) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump elliptic from 6.5.0 to 6.5.4 [\#230](https://github.com/Cambalab/vue-admin/pull/230) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump axios from 0.18.1 to 0.21.1 [\#229](https://github.com/Cambalab/vue-admin/pull/229) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ini from 1.3.5 to 1.3.7 [\#228](https://github.com/Cambalab/vue-admin/pull/228) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump bcrypt from 3.0.4 to 5.0.0 in /utils/server-test [\#227](https://github.com/Cambalab/vue-admin/pull/227) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump http-proxy from 1.18.0 to 1.18.1 [\#226](https://github.com/Cambalab/vue-admin/pull/226) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump websocket-extensions from 0.1.3 to 0.1.4 [\#224](https://github.com/Cambalab/vue-admin/pull/224) ([dependabot[bot]](https://github.com/apps/dependabot))
+- 222 implement unit tests for the edit button component [\#223](https://github.com/Cambalab/vue-admin/pull/223) ([sgobotta](https://github.com/sgobotta))
+- 217 implement unit tests for the delete button component [\#221](https://github.com/Cambalab/vue-admin/pull/221) ([sgobotta](https://github.com/sgobotta))
+- 216 implement unit tests for the spinner component [\#220](https://github.com/Cambalab/vue-admin/pull/220) ([sgobotta](https://github.com/sgobotta))
+- 215 actions and ui component [\#219](https://github.com/Cambalab/vue-admin/pull/219) ([sgobotta](https://github.com/sgobotta))
+- 0.0.9 [\#212](https://github.com/Cambalab/vue-admin/pull/212) ([sgobotta](https://github.com/sgobotta))
+- 0.0.8 [\#209](https://github.com/Cambalab/vue-admin/pull/209) ([sgobotta](https://github.com/sgobotta))
 
 ## [v0.0.9](https://github.com/Cambalab/vue-admin/tree/v0.0.9) (2020-02-09)
+
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.8...v0.0.9)
 
 **Fixed bugs:**
@@ -10,9 +44,9 @@
 **Merged pull requests:**
 
 - 210 the admin component ignores custom unauthorized layouts [\#211](https://github.com/Cambalab/vue-admin/pull/211) ([sgobotta](https://github.com/sgobotta))
-- 0.0.8 [\#209](https://github.com/Cambalab/vue-admin/pull/209) ([sgobotta](https://github.com/sgobotta))
 
 ## [v0.0.8](https://github.com/Cambalab/vue-admin/tree/v0.0.8) (2020-02-08)
+
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.7...v0.0.8)
 
 **Implemented enhancements:**
@@ -29,7 +63,6 @@
 - Package.json: replaces prepublish script to prepare [\#208](https://github.com/Cambalab/vue-admin/pull/208) ([sgobotta](https://github.com/sgobotta))
 - 184 consider npm audit checks [\#207](https://github.com/Cambalab/vue-admin/pull/207) ([sgobotta](https://github.com/sgobotta))
 - 200 as a user i want to provide my own subscriptions to the resource alert system [\#206](https://github.com/Cambalab/vue-admin/pull/206) ([sgobotta](https://github.com/sgobotta))
-- 204 configure automatic test coverage report [\#205](https://github.com/Cambalab/vue-admin/pull/205) ([sgobotta](https://github.com/sgobotta))
 
 **Closed issues:**
 
@@ -47,6 +80,7 @@
 - 0.0.7 [\#191](https://github.com/Cambalab/vue-admin/pull/191) ([sgobotta](https://github.com/sgobotta))
 
 ## [v0.0.7](https://github.com/Cambalab/vue-admin/tree/v0.0.7) (2019-11-17)
+
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.6...v0.0.7)
 
 **Implemented enhancements:**
@@ -73,6 +107,7 @@
 - List Component: Adds the ability to navigate on row click [\#170](https://github.com/Cambalab/vue-admin/pull/170) ([DanielOrmeno](https://github.com/DanielOrmeno))
 
 ## [v0.0.6](https://github.com/Cambalab/vue-admin/tree/v0.0.6) (2019-10-07)
+
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.5...v0.0.6)
 
 **Implemented enhancements:**
@@ -122,6 +157,7 @@
 - 0.0.5 [\#143](https://github.com/Cambalab/vue-admin/pull/143) ([sgobotta](https://github.com/sgobotta))
 
 ## [v0.0.5](https://github.com/Cambalab/vue-admin/tree/v0.0.5) (2019-08-19)
+
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.4...v0.0.5)
 
 **Fixed bugs:**
@@ -163,9 +199,9 @@
 - 90 implement a 404 page for unauthorized routes [\#115](https://github.com/Cambalab/vue-admin/pull/115) ([jejoivanic](https://github.com/jejoivanic))
 - 20 - integrate travis ci dev [\#113](https://github.com/Cambalab/vue-admin/pull/113) ([glmaljkovich](https://github.com/glmaljkovich))
 - 79 improve demo app authors resource [\#111](https://github.com/Cambalab/vue-admin/pull/111) ([jejoivanic](https://github.com/jejoivanic))
-- 0.0.4 [\#109](https://github.com/Cambalab/vue-admin/pull/109) ([sgobotta](https://github.com/sgobotta))
 
 ## [v0.0.4](https://github.com/Cambalab/vue-admin/tree/v0.0.4) (2019-04-02)
+
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.3...v0.0.4)
 
 **Implemented enhancements:**
@@ -182,9 +218,9 @@
 - Updates index.js [\#108](https://github.com/Cambalab/vue-admin/pull/108) ([sgobotta](https://github.com/sgobotta))
 - 96 integrate views permissions to the route hooks [\#106](https://github.com/Cambalab/vue-admin/pull/106) ([sgobotta](https://github.com/sgobotta))
 - Test serer: fixes lost users from the whitelist [\#104](https://github.com/Cambalab/vue-admin/pull/104) ([sgobotta](https://github.com/sgobotta))
-- 0.0.3 [\#102](https://github.com/Cambalab/vue-admin/pull/102) ([sgobotta](https://github.com/sgobotta))
 
 ## [v0.0.3](https://github.com/Cambalab/vue-admin/tree/v0.0.3) (2019-03-31)
+
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.2...v0.0.3)
 
 **Implemented enhancements:**
@@ -237,31 +273,15 @@
 - 86 implement a login page with no functionality [\#87](https://github.com/Cambalab/vue-admin/pull/87) ([sgobotta](https://github.com/sgobotta))
 - Develop rebased [\#83](https://github.com/Cambalab/vue-admin/pull/83) ([sgobotta](https://github.com/sgobotta))
 - Develop rebase [\#82](https://github.com/Cambalab/vue-admin/pull/82) ([sgobotta](https://github.com/sgobotta))
-- 74 change vuetify banner from the demo app components [\#75](https://github.com/Cambalab/vue-admin/pull/75) ([sgobotta](https://github.com/sgobotta))
-- 72 as a user i can declare actions as children of a resource component [\#73](https://github.com/Cambalab/vue-admin/pull/73) ([sgobotta](https://github.com/sgobotta))
-- 63 refactor articles tests to use mocked api routes [\#71](https://github.com/Cambalab/vue-admin/pull/71) ([EstefiCamba](https://github.com/EstefiCamba))
-- 68 implement properties validation for the error handler child of 67 [\#70](https://github.com/Cambalab/vue-admin/pull/70) ([sgobotta](https://github.com/sgobotta))
-- 67 implement error handling for the resource component child of 64 [\#69](https://github.com/Cambalab/vue-admin/pull/69) ([sgobotta](https://github.com/sgobotta))
-- 64 implement a unit test for the resource component [\#66](https://github.com/Cambalab/vue-admin/pull/66) ([sgobotta](https://github.com/sgobotta))
-- 62 configure unit tests for vue components [\#65](https://github.com/Cambalab/vue-admin/pull/65) ([sgobotta](https://github.com/sgobotta))
-- Added the redirect prop in the demo App component [\#61](https://github.com/Cambalab/vue-admin/pull/61) ([EstefiCamba](https://github.com/EstefiCamba))
-- 59 refactor magazines tests to use mocked api routes [\#60](https://github.com/Cambalab/vue-admin/pull/60) ([sgobotta](https://github.com/sgobotta))
-- 57 implement e2e tests for the vuex store [\#58](https://github.com/Cambalab/vue-admin/pull/58) ([sgobotta](https://github.com/sgobotta))
-- 54 test to delete action [\#56](https://github.com/Cambalab/vue-admin/pull/56) ([EstefiCamba](https://github.com/EstefiCamba))
-- 39 test to edit view [\#51](https://github.com/Cambalab/vue-admin/pull/51) ([EstefiCamba](https://github.com/EstefiCamba))
-- Adds some aliases in the webpack configuration [\#50](https://github.com/Cambalab/vue-admin/pull/50) ([sgobotta](https://github.com/sgobotta))
-- 38 test to show view [\#48](https://github.com/Cambalab/vue-admin/pull/48) ([EstefiCamba](https://github.com/EstefiCamba))
-- Adds a favicon [\#47](https://github.com/Cambalab/vue-admin/pull/47) ([sgobotta](https://github.com/sgobotta))
-- Fixes no dynamic resourceName bug [\#45](https://github.com/Cambalab/vue-admin/pull/45) ([sgobotta](https://github.com/sgobotta))
-- 42 simple api injection proposal for custom user componentisation [\#43](https://github.com/Cambalab/vue-admin/pull/43) ([sgobotta](https://github.com/sgobotta))
-- 40 implement a use case with more resources [\#41](https://github.com/Cambalab/vue-admin/pull/41) ([sgobotta](https://github.com/sgobotta))
-- Base url has been reactored to the cypress.json [\#36](https://github.com/Cambalab/vue-admin/pull/36) ([sgobotta](https://github.com/sgobotta))
-- V0.0.1 [\#33](https://github.com/Cambalab/vue-admin/pull/33) ([sgobotta](https://github.com/sgobotta))
 
 ## [v0.0.2](https://github.com/Cambalab/vue-admin/tree/v0.0.2) (2018-12-17)
+
 [Full Changelog](https://github.com/Cambalab/vue-admin/compare/v0.0.1...v0.0.2)
 
 ## [v0.0.1](https://github.com/Cambalab/vue-admin/tree/v0.0.1) (2018-12-17)
+
+[Full Changelog](https://github.com/Cambalab/vue-admin/compare/4e4d4a8f4ff553ad2ff64daa8167c517315143ad...v0.0.1)
+
 **Closed issues:**
 
 - Remove not used widgets on Menu [\#23](https://github.com/Cambalab/vue-admin/issues/23)
@@ -283,4 +303,4 @@
 
 
 
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
