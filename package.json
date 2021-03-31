@@ -5,7 +5,8 @@
   "author": "Camba <info@camba.coop>",
   "scripts": {
     "build": "vue-cli-service build --target lib ./src/index.js",
-    "changelog": "github_changelog_generator && git add CHANGELOG.md && git commit -am \"Updates changelog\"",
+    "changelog": "npm run docker:changelog && git add CHANGELOG.md && git commit -am \"Updates changelog\"",
+    "docker:changelog": "docker run --env CHANGELOG_GITHUB_TOKEN=$CHANGELOG_GITHUB_TOKEN -it --rm -v $(pwd):/usr/local/src/your-app ferrarimarco/github-changelog-generator --user Cambalab --project vue-admin",
     "lint": "vue-cli-service lint --no-fix --max-warnings 0",
     "lint:autofix": "vue-cli-service lint",
     "prepare": "npm run build",
