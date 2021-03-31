@@ -5,7 +5,7 @@ import {
   HomeLayout,
   UnauthorizedLayout,
 } from '@components/Layouts'
-import { DefaultSidebar } from '@components/UiComponents'
+import { SimpleSidebar } from '@components/UiComponents'
 import alertsModule from '@store/modules/alerts'
 import entitiesModule from '@store/modules/entities'
 import requestsModule from '@store/modules/requests'
@@ -20,7 +20,7 @@ export default () => {
   const appLayout = AppLayout
   const authLayout = AuthLayout
   const homeLayout = HomeLayout
-  const sidebar = DefaultSidebar
+  const sidebar = SimpleSidebar
   const title = UI_CONTENT.MAIN_TOOLBAR_TITLE
   const unauthorized = UnauthorizedLayout
 
@@ -35,12 +35,13 @@ export default () => {
 
   const createUnauthorizedRoutes = anUnauthorizedLayout => {
     return [
-    {
-      path: '/unauthorized',
-      name: 'unauthorized',
-      component: anUnauthorizedLayout || unauthorized,
-    },
-  ]}
+      {
+        path: '/unauthorized',
+        name: 'unauthorized',
+        component: anUnauthorizedLayout || unauthorized,
+      },
+    ]
+  }
 
   const createSiteRoutes = ({ homeLayout: aHomeLayout }) => [
     {

@@ -2,13 +2,13 @@
   <v-tooltip bottom>
     <template v-slot:activator="{ on }">
       <v-btn
-        v-bind="buttonProps"
+        v-bind="vBtnProps"
         :name="names.deleteButton"
         @click.stop="onDelete()"
         icon
         v-on="on"
       >
-        <v-icon v-bind="iconProps">
+        <v-icon v-bind="vIconProps">
           {{ content.deleteButton }}
         </v-icon>
       </v-btn>
@@ -20,26 +20,45 @@
 <script>
 import UI_CONTENT from '@constants/ui.content.default'
 import UI_NAMES from '@constants/ui.element.names'
+import { Types as CrudTypes } from '@store/modules/crud'
+
+export const defaults = () => {
+  return {
+    props: {
+      name: UI_NAMES.DELETE_BUTTON,
+      vBtnProps: {},
+      vIconProps: {},
+      resourceIdName: 'id',
+    },
+  }
+}
 
 export default {
   name: 'DeleteButton',
   props: {
     name: {
       type: String,
-      default: 'va-delete-button',
+      default: defaults().props.name,
     },
     resourceId: {
       type: [Number, String],
+      required: true,
+    },
+    resourceIdName: {
+      type: String,
+      default: defaults().props.resourceIdName,
     },
     resourceName: {
       type: String,
-      default: null,
+      required: true,
     },
-    buttonProps: {
+    vBtnProps: {
       type: Object,
+      default: () => defaults().props.vBtnProps,
     },
-    iconProps: {
+    vIconProps: {
       type: Object,
+      default: () => defaults().props.vIconProps,
     },
   },
 
@@ -56,8 +75,10 @@ export default {
 
   methods: {
     onDelete() {
-      const resourceName = this.resourceName + '/destroy'
-      this.$store.dispatch(resourceName, { id: this.resourceId })
+      const { VUEX_CRUD_DELETE } = CrudTypes
+      const actionName = `${this.resourceName}/${VUEX_CRUD_DELETE}`
+      const { resourceIdName } = this
+      this.$store.dispatch(actionName, { [resourceIdName]: this.resourceId })
       return this.$router.push({ path: `/${this.resourceName}` })
     },
   },

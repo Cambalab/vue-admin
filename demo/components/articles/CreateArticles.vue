@@ -1,7 +1,7 @@
 <template>
   <Create title="Create Article">
-    <input source="title" placeHolder="Title" />
-    <input source="content" placeHolder="Content" />
+    <TextField source="title" placeHolder="Title" />
+    <TextField source="content" placeHolder="Content" />
   </Create>
 </template>
 

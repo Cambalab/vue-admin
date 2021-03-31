@@ -69,15 +69,15 @@ const adminOptions = {
 
 ### sidebar
 
-+   **Type:** `Object (optional)`
++   **Type:** `Object` *(optional)*
 
 +   **Details:** A sidebar component that used by the `appLayout` prop. If you want to use your own sidebar, you might want to take a look at the [**Sidebar docs**](../Ui-Components/Sidebar.md).
 
-+   **Default:** `DefaultSidebar`
++   **Default:** `SimpleSidebar`
 
 ### title
 
-+   **Type:** `String (optional)`
++   **Type:** `String` *(optional)*
 
 +   **Details:** a string used by the `appLayout` as the toolbar title
 
@@ -85,7 +85,7 @@ const adminOptions = {
 
 ### unauthorized
 
-+   **Type:** `Object (optional)`
++   **Type:** `Object` *(optional)*
 
 +   **Details:** A component that is used by the router whenever a user is not authorized to visit certain views.
 
@@ -95,7 +95,7 @@ const adminOptions = {
 
 ### appLayout
 
-+   **Type:** `Object (default)`
++   **Type:** `Object`
 
 +   **Details:** when a user is authenticated, `appLayout` is passed as prop to the `Authenticated` component.  
 

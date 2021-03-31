@@ -1,21 +1,12 @@
 <template>
   <List>
-    <p source="id"
-      :sortable="true"
-      headerText="ID"
-    />
-    <p source="name"
-      :sortable="true"
-      headerText="Name"
-    />
-    <p source="lastname"
-      :sortable="true"
-      headerText="Last name"
-    />
-    <a source="birthdate"
+    <SimpleText source="id" :sortable="true" headerText="ID" />
+    <SimpleText source="name" :sortable="true" headerText="Name" />
+    <SimpleText source="lastname" :sortable="true" headerText="Last name" />
+    <SimpleText
+      source="birthdate"
       :sortable="true"
       headerText="Birthdate"
-      type="TextField"
       :parse="parse"
     />
   </List>
@@ -30,12 +21,12 @@ const { formatDate, parseDate } = dateUtils
 export default {
   name: 'ListAuthors',
   components: {
-    List
+    List,
   },
   methods: {
     parse(date) {
       return formatDate(parseDate(date))
-    }
-  }
+    },
+  },
 }
 </script>

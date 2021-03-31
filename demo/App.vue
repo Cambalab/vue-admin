@@ -1,43 +1,52 @@
 <template>
   <!-- If you want to use your own custom unauthorized page you just have to provide it like:  -->
   <!-- <Admin :authProvider="authProvider" :unauthorized="UnauthorizedCustomView">             -->
-  <Admin
-    
-    :authProvider="authProvider"
-    :sidebar="CustomSidebar"
-    :unauthorized="UnauthorizedCustomView">
+  <Admin :authProvider="authProvider" :unauthorized="UnauthorizedCustomView">
     <!-- Articles Resource -->
     <Resource
-      name="articles" :resourceIdName="resourceIdName"
-      :userPermissionsField="userPermissionsField" :apiUrl="articlesApiUrl"
-      :redirect="articlesRedirect">
-      <View slot="list"   :component="ListArticles" :permissions="['admin']" />
-      <View slot="show"   :component="ShowArticles" :permissions="['admin']" />
-      <View slot="create" :component="CreateArticles" :permissions="['admin']" />
-      <View slot="edit"   :component="EditArticles" :isPublic="true" />
+      name="articles"
+      :resourceIdName="resourceIdName"
+      :userPermissionsField="userPermissionsField"
+      :apiUrl="articlesApiUrl"
+      :redirect="articlesRedirect"
+    >
+      <View slot="list" :component="ListArticles" :permissions="['admin']" />
+      <View slot="show" :component="ShowArticles" :permissions="['admin']" />
+      <View
+        slot="create"
+        :component="CreateArticles"
+        :permissions="['admin']"
+      />
+      <View slot="edit" :component="EditArticles" :isPublic="true" />
     </Resource>
     <!-- Magazines Resource -->
-    <Resource name="magazines" :resourceIdName="resourceIdName"
-      :apiUrl="magazinesApiUrl" :redirect="magazinesRedirect">
-      <View slot="list"   :component="ListMagazines" :isPublic="true" />
-      <View slot="show"   :component="ShowMagazines" :isPublic="true" />
+    <Resource
+      name="magazines"
+      :resourceIdName="resourceIdName"
+      :apiUrl="magazinesApiUrl"
+      :redirect="magazinesRedirect"
+    >
+      <View slot="list" :component="ListMagazines" :isPublic="true" />
+      <View slot="show" :component="ShowMagazines" :isPublic="true" />
       <View slot="create" :component="CreateMagazines" :isPublic="true" />
-      <View slot="edit"   :component="EditMagazines" :isPublic="true" />
+      <View slot="edit" :component="EditMagazines" :isPublic="true" />
     </Resource>
     <!-- Authors Resource -->
-    <Resource name="authors"
-      :resourceIdName="resourceIdName" :apiUrl="authorsApiUrl"
-      :redirect="authorsRedirect">
-      <View slot="list"   :component="ListAuthors"   :isPublic="true" />
-      <View slot="show"   :component="ShowAuthors"   :isPublic="true" />
+    <Resource
+      name="authors"
+      :resourceIdName="resourceIdName"
+      :apiUrl="authorsApiUrl"
+      :redirect="authorsRedirect"
+    >
+      <View slot="list" :component="ListAuthors" :isPublic="true" />
+      <View slot="show" :component="ShowAuthors" :isPublic="true" />
       <View slot="create" :component="CreateAuthors" :isPublic="true" />
-      <View slot="edit"   :component="EditAuthors"   :isPublic="true" />
+      <View slot="edit" :component="EditAuthors" :isPublic="true" />
     </Resource>
   </Admin>
 </template>
 
 <script>
-
 import Admin from '@components/Admin'
 import Resource from '@components/Resource'
 
@@ -85,14 +94,14 @@ const authProvider = createAxiosAdapter(client, {
 const articlesRedirect = {
   views: {
     create: 'list',
-    edit: 'show'
-  }
+    edit: 'show',
+  },
 }
-const magazinesRedirect = articlesRedirect;
-const authorsRedirect = articlesRedirect;
+const magazinesRedirect = articlesRedirect
+const authorsRedirect = articlesRedirect
 
 // The name of the id attribute
-const resourceIdName = 'id'
+export const resourceIdName = 'id'
 
 // The name of the permissions field
 const userPermissionsField = 'permissions'
@@ -115,9 +124,9 @@ const userPermissionsField = 'permissions'
 //   }
 // }
 
-const articlesApiUrl  = 'http://localhost:8888/api/'
+const articlesApiUrl = 'http://localhost:8888/api/'
 const magazinesApiUrl = 'http://localhost:8888/api/'
-const authorsApiUrl   = 'http://localhost:8888/api/'
+const authorsApiUrl = 'http://localhost:8888/api/'
 
 export default {
   name: 'App',
@@ -167,6 +176,6 @@ export default {
       // template and update the resourceIdName to '_id'. - sgobotta
       // parseResponses: parseFeathersResponses
     }
-  }
+  },
 }
 </script>

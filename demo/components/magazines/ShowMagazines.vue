@@ -23,12 +23,12 @@
                     disabled
                     label="Issue"
                   />
-                <v-text-field
-                  :name="names.containerField('publisher')"
-                  v-model="entity.publisher"
-                  disabled
-                  label="Publisher"
-                />
+                  <v-text-field
+                    :name="names.containerField('publisher')"
+                    v-model="entity.publisher"
+                    disabled
+                    label="Publisher"
+                  />
                 </v-flex>
               </v-layout>
             </v-container>
@@ -39,7 +39,6 @@
   </v-layout>
 </template>
 <script>
-
 /**
  * This is a custom component for creating magazines using a form, with a name,
  * issue number and a publisher.
@@ -59,19 +58,20 @@ export default {
     // shown below.
     va: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     // This is only needed for e2e demo tests
     const resourceName = 'magazines'
     const view = 'show'
     const names = {
-      containerField: (field) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-        resourceName,
-        view,
-        field
-      })
+      containerField: field =>
+        UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+          resourceName,
+          view,
+          field,
+        }),
     }
     return { names }
   },
@@ -83,8 +83,7 @@ export default {
     entity() {
       // getEntity gets initialised data from the store
       return this.va.getEntity()
-    }
-  }
-};
-
+    },
+  },
+}
 </script>

@@ -21,11 +21,11 @@
                     @input="storeValue($event, 'issue')"
                     label="Issue"
                   />
-                <v-text-field
-                  :name="names.elementField('publisher')"
-                  @input="storeValue($event, 'publisher')"
-                  label="Publisher"
-                />
+                  <v-text-field
+                    :name="names.elementField('publisher')"
+                    @input="storeValue($event, 'publisher')"
+                    label="Publisher"
+                  />
                 </v-flex>
               </v-layout>
             </v-container>
@@ -46,7 +46,6 @@
   </v-layout>
 </template>
 <script>
-
 /**
  * This is a custom component for creating magazines using a form, with a name,
  * issue number and a publisher.
@@ -66,26 +65,27 @@ export default {
     // shown below.
     va: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     // This is only needed for e2e demo tests
     const resourceName = 'magazines'
     const view = 'create'
     const names = {
-      elementField: (field) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-        resourceName,
-        view,
-        field
-      }),
+      elementField: field =>
+        UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+          resourceName,
+          view,
+          field,
+        }),
       submitButton: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
         resourceName,
-        view
-      })
+        view,
+      }),
     }
     return {
-      names
+      names,
     }
   },
   methods: {
@@ -99,19 +99,16 @@ export default {
       // Use this function when your 'magazines' entity is ready to be sent to
       // your apiUrl
       this.va.submitEntity()
-    }
+    },
   },
   mounted: function() {
     this.va.initEntity()
   },
 }
-
 </script>
 
 <style>
-
 .submit-button {
-  color: white !important
+  color: white !important;
 }
-
 </style>

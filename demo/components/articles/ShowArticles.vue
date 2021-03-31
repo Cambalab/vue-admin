@@ -1,7 +1,8 @@
 <template>
   <Show title="Article">
-    <h3 source="title" />
-    <p source="content" />
+    <SimpleText type="h2" source="id" />
+    <SimpleText type="h3" source="title" />
+    <SimpleText source="content" />
   </Show>
 </template>
 

@@ -49,7 +49,6 @@
   </v-layout>
 </template>
 <script>
-
 /**
  * This is a custom component for editing magazines using a form, with a name,
  * issue number and a publisher.
@@ -69,23 +68,24 @@ export default {
     // shown below.
     va: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     // This is only needed for e2e demo tests
     const resourceName = 'magazines'
     const view = 'edit'
     const names = {
-      containerField: (field) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
-        resourceName,
-        view,
-        field
-      }),
+      containerField: field =>
+        UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+          resourceName,
+          view,
+          field,
+        }),
       submitButton: UI_NAMES.RESOURCE_VIEW_SUBMIT_BUTTON.with({
         resourceName,
-        view
-      })
+        view,
+      }),
     }
     return { names }
   },
@@ -97,7 +97,7 @@ export default {
     entity() {
       // getEntity gets initialised data from the store
       return this.va.getEntity()
-    }
+    },
   },
   methods: {
     storeValue(value, resourceKey) {
@@ -110,16 +110,13 @@ export default {
       // Use this function when your 'magazines' entity is ready to be sent to
       // your apiUrl
       this.va.submitEntity()
-    }
-  }
-};
-
+    },
+  },
+}
 </script>
 
 <style>
-
 .submit-button {
-  color: white !important
+  color: white !important;
 }
-
 </style>

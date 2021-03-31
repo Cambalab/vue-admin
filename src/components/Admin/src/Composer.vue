@@ -23,8 +23,8 @@ export default {
       type: Object,
     },
     unauthorized: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   render(createElement, context) {
     // One of authProvider or an authModule are strictly required

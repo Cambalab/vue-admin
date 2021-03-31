@@ -8,7 +8,7 @@ const errorFooter =
 const componentsDocs = {
   Admin: '{docsUrl}/Admin/Admin.md#props',
   Resource: '{docsUrl}/Resource/Resource.md#props',
-  DateInput: '{docsUrl}/Ui-Components/DateInput.md',
+  DateField: '{docsUrl}/Ui-Components/DateField.md',
 }
 
 /**

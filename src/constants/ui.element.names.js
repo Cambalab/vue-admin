@@ -48,6 +48,16 @@ export default {
       `${resourceName}-${view}-actions-container`,
   },
 
+  RESOURCE_VIEW_ACTIONS_EDIT_BUTTON: {
+    with: ({ resourceName, view }) =>
+      `${resourceName}-${view}-actions-edit-button`,
+  },
+
+  RESOURCE_VIEW_ACTIONS_DELETE_BUTTON: {
+    with: ({ resourceName, view }) =>
+      `${resourceName}-${view}-actions-delete-button`,
+  },
+
   RESOURCE_VIEW_CONTAINER_TITLE: {
     with: ({ resourceName, view }) => `${resourceName}-${view}-container-title`,
   },
@@ -120,6 +130,8 @@ export default {
    * Other Buttons
    */
   BUTTON_GO_BACK: 'va-go-back-button',
+  DELETE_BUTTON: 'va-delete-button',
+  EDIT_BUTTON: 'va-edit-button',
 
   /**
    * Default Spinner

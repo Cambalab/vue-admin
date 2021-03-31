@@ -1,11 +1,6 @@
 <template>
   <v-card class="extra-margin">
-
-    <v-img
-      src="banner.png"
-      aspect-ratio="4"
-      max-height="300px"
-    />
+    <v-img src="banner.png" aspect-ratio="4" max-height="300px" />
 
     <v-data-table
       :headers="headers"
@@ -15,7 +10,6 @@
       :options.sync="options"
       :dark="true"
     >
-
       <template v-slot:top>
         <v-toolbar dark>
           <v-toolbar-title>Magazines</v-toolbar-title>
@@ -34,134 +28,145 @@
 
       <template v-slot:body="{ items }">
         <tbody>
-          <tr v-for="(item, index) in items"
+          <tr
+            v-for="(item, index) in items"
             :key="names.containerFields(item.id)"
             :name="names.containerFields(index)"
           >
             <td :name="names.elementField('id', index)">{{ item.id }}</td>
-            <td :name="names.elementField('name', index)"
-              class="text-xs-left"
-              >
+            <td :name="names.elementField('name', index)" class="text-xs-left">
               {{ item.name }}
             </td>
-            <td :name="names.elementField('issue', index)" class="text-xs-center">
+            <td
+              :name="names.elementField('issue', index)"
+              class="text-xs-center"
+            >
               {{ item.issue }}
             </td>
-            <td :name="names.elementField('publisher', index)" class="text-xs-right">
+            <td
+              :name="names.elementField('publisher', index)"
+              class="text-xs-right"
+            >
               {{ item.publisher }}
             </td>
             <td class="text-xs-center">
               <EditButton
-                :iconProps="iconProps"
-                :buttonProps="buttonProps"
+                :vBtnProps="buttonProps"
+                :vIconProps="iconProps"
                 :name="names.editButtonName(index)"
                 :resourceId="item.id"
                 resourceName="magazines"
               />
               <DeleteButton
-                :iconProps="iconProps"
-                :buttonProps="buttonProps"
+                :vBtnProps="buttonProps"
+                :vIconProps="iconProps"
                 :name="names.deleteButtonName(index)"
                 :resourceId="item.id"
+                :resourceIdName="resourceIdName"
                 resourceName="magazines"
               />
             </td>
           </tr>
         </tbody>
       </template>
-
     </v-data-table>
   </v-card>
 </template>
 
 <script>
-  import UI_NAMES from '@constants/ui.element.names'
-  import { rowsPerPage } from '../../constants'
-  import { DeleteButton, EditButton } from '@components/UiComponents'
+import UI_NAMES from '@constants/ui.element.names'
+import { rowsPerPage } from '../../constants'
+import { DeleteButton, EditButton } from '@components/UiComponents'
+import { resourceIdName } from '../../App'
 
-  export default {
-    name: 'ListMagazines',
-    props: {
-      // This prop will be assigned by Vue Admin for you to use the functions
-      // shown below.
-      va: {
-        type: Object,
-        required: true
-      }
+export default {
+  name: 'ListMagazines',
+  props: {
+    // This prop will be assigned by Vue Admin for you to use the functions
+    // shown below.
+    va: {
+      type: Object,
+      required: true,
     },
-    components: {
-      DeleteButton,
-      EditButton,
-    },
-    data() {
-      // This is only needed for e2e demo tests
-      const resourceName = 'magazines'
-      const view = 'list'
-      const names = {
-        containerFields: (index) => UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
+  },
+  components: {
+    DeleteButton,
+    EditButton,
+  },
+  data() {
+    // This is only needed for e2e demo tests
+    const resourceName = 'magazines'
+    const view = 'list'
+    const names = {
+      containerFields: index =>
+        UI_NAMES.RESOURCE_VIEW_CONTAINER_FIELDS.with({
           resourceName,
           view,
-          index
+          index,
         }),
-        elementField: (field, index) => UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
+      elementField: (field, index) =>
+        UI_NAMES.RESOURCE_VIEW_ELEMENT_FIELD.with({
           resourceName,
           view,
           field,
-          index
+          index,
         }),
-        editButtonName: (index) => UI_NAMES.RESOURCE_EDIT_BUTTON.with({
+      editButtonName: index =>
+        UI_NAMES.RESOURCE_EDIT_BUTTON.with({
           resourceName,
-          index
+          index,
         }),
-        deleteButtonName: (index) => UI_NAMES.RESOURCE_DELETE_BUTTON.with({
+      deleteButtonName: index =>
+        UI_NAMES.RESOURCE_DELETE_BUTTON.with({
           resourceName,
-          index
+          index,
         }),
-      }
-      return {
-        names,
-        footerProps: {
-          itemsPerPageText: 'Magazines per page'
-        },
-        options: {
-          pagination: {
-            itemsPerPage: rowsPerPage
-          }
-        },
-        buttonProps: {
-          small: true
-        },
-        iconProps: {
-          small: true
-        }
-      }
-    },
-    computed: {
-      headers: function() {
-        return [
-          { text: 'ID', align: 'left', sortable: true, value: 'id' },
-          { text: 'Name', value: 'name' },
-          { text: 'Issue', value: 'issue' },
-          { text: 'Publisher', value: 'publisher' },
-          { text: 'Actions', value: 'action', sortable: false, width: '160px' }
-        ]
-      },
-      magazines: function() {
-        return this.va.getList()
-      }
-    },
-    created() {
-      this.va.fetchList()
     }
-  }
+    return {
+      names,
+      footerProps: {
+        itemsPerPageText: 'Magazines per page',
+      },
+      options: {
+        pagination: {
+          itemsPerPage: rowsPerPage,
+        },
+      },
+      buttonProps: {
+        small: true,
+      },
+      iconProps: {
+        small: true,
+      },
+      resourceIdName,
+    }
+  },
+  computed: {
+    headers: function() {
+      return [
+        { text: 'ID', align: 'left', sortable: true, value: 'id' },
+        { text: 'Name', value: 'name' },
+        { text: 'Issue', value: 'issue' },
+        { text: 'Publisher', value: 'publisher' },
+        { text: 'Actions', value: 'action', sortable: false, width: '160px' },
+      ]
+    },
+    magazines: function() {
+      return this.va.getList()
+    },
+  },
+  created() {
+    this.va.fetchList()
+  },
+}
 </script>
 
 <style>
 .no-decoration {
-  text-decoration: none
+  text-decoration: none;
 }
 
 .extra-margin {
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
 </style>

@@ -4,6 +4,7 @@ import {
   updateEntity,
   getEntityForm,
 } from './common.utils'
+import { Types as CrudTypes } from '@store/modules/crud'
 
 /**
  * Create View Utils - A function used to create utilities
@@ -74,7 +75,8 @@ export default ({
      * @return {Promise} A pending promise.
      */
     submitEntity() {
-      const actionType = 'create'
+      const { VUEX_CRUD_PUT } = CrudTypes
+      const actionType = VUEX_CRUD_PUT
       const actionTypeParams = { data: this.getEntityForm() }
       submitEntity({
         resourceName,
