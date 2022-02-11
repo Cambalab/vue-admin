@@ -50,7 +50,7 @@
     "lint-staged": "^9.4.2",
     "material-design-icons-iconfont": "^5.0.1",
     "moment": "^2.24.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "prettier": "1.18.2",
     "sass": "^1.17.4",
     "sass-loader": "^7.1.0",
