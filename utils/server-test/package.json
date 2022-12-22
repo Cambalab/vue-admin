@@ -14,7 +14,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "fake-data-generator": "^0.1.10",
-    "jsonwebtoken": "^8.5.0"
+    "jsonwebtoken": "^9.0.0"
   },
   "author": "",
   "license": "ISC"
